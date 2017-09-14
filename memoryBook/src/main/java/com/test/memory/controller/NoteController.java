@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.activation.CommandMap;
 import javax.activation.MailcapCommandMap;
 import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -25,6 +27,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -34,6 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.memory.service.NoteService;
 import com.test.memory.vo.CategoryVO;
+import com.test.memory.vo.DragVO;
 import com.test.memory.vo.NoteVO;
 
 
@@ -230,76 +234,75 @@ public class NoteController {
 	}
 	@RequestMapping("/mailNote")
 	public Map<String, Object> mailNote(HttpServletRequest request, HttpSession m_session) throws Exception{
-	    String emailTo = request.getParameter("emailTo");
-	    int noteNo = Integer.parseInt(request.getParameter("noteNo"));
-	    int memberNo = Integer.parseInt(m_session.getAttribute("memberNo").toString());
-	   
-	    NoteVO note = new NoteVO();
-	    note.setNoteNo(noteNo);
-	    note.setMemberNo(memberNo);
-	    NoteVO noteVO = service.emailNote(note);
-	    
-	    String email = "scmtest@naver.com";
-	    String title = noteVO.getNoteTitle();
-	    String content = noteVO.getNoteContent();
-	    
-		try{
+		// 메일발송 데이터 입력
+		int noteNo = Integer.parseInt(request.getParameter("noteNo"));
+		int memberNo = Integer.parseInt(m_session.getAttribute("memberNo").toString());
+
+		NoteVO note = new NoteVO();
+		note.setNoteNo(noteNo);
+		note.setMemberNo(memberNo);
+		NoteVO noteVO = service.emailNote(note);
+
+		// 보내는 서버 주소
+		String host = "smtp.naver.com"; // here
+		// 메일 제목 설정
+		String subject = noteVO.getNoteTitle();
+		// 메일 내용 읽어오기
+		String content = noteVO.getNoteContent();
+		// 보내는 사람 이메일 주소
+		String from = "scmtest@naver.com"; // here
+		// 보내는사람 이름
+		String writer = m_session.getAttribute("name").toString(); // here
+		// 받는사람 이메일주소
+		String to = request.getParameter("emailTo"); // here
+
+		try {
 			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
 			fis = new FileInputStream(FILE_PATH + content);
-			
+
 			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
 			ois = new ObjectInputStream(fis);
-			
+
 			// 오브젝트 스트림으로부터 오브젝트를 읽어 String형으로 형변환
 			content = (String) ois.readObject();
-			} catch(Exception e) {
-				// e.printStackTrace();
-				System.out.println("[에러] 파일 읽기에 실패하였습니다.");
-			} finally {
-				closeStreams();
+		} catch (Exception e) {
+			// e.printStackTrace();
+			System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+		} finally {
+			closeStreams();
 		}
-	    
-        Properties props = new Properties();
-        props.setProperty("mail.transport.protocol", "smtp");
-        props.setProperty("mail.host", "smtp.naver.com");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.socketFactory.fallback", "false");
-        props.setProperty("mail.smtp.quitwait", "false");
-         
-        Authenticator auth = new Authenticator(){
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(email, "13adqezc");
-            }
-        };
-    
-        Session session = Session.getDefaultInstance(props,auth);
-         
-        MimeMessage message = new MimeMessage(session);
-        message.setSender(new InternetAddress(email));
-        message.setSubject("[Memory Book] " + title);
- 
-        message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
-         
-        Multipart mp = new MimeMultipart();
-        MimeBodyPart mbp1 = new MimeBodyPart();
-        mbp1.setContent(title+"<br>"+content, "text/html; charset=UTF-8");
-        mp.addBodyPart(mbp1);
- 
-         
-        MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
-        mc.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
-        mc.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
-        mc.addMailcap("text/plain;; x-java-content-handler=com.sun.mail.handlers.text_plain");
-        mc.addMailcap("multipart/*;; x-java-content-handler=com.sun.mail.handlers.multipart_mixed");
-        mc.addMailcap("message/rfc822;; x-java-content-handler=com.sun.mail.handlers.message_rfc822");
-        CommandMap.setDefaultCommandMap(mc);
-         
-        message.setContent(mp);
-         
-        Transport.send(message);
+
+		Properties props = new Properties();
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.host", host);
+		props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.port", "465");
+		props.put("mail.smtp.user", from);
+		props.put("mail.smtp.auth", "true");
+
+		Session session = Session.getDefaultInstance(props, new Authenticator() {
+			@Override
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("scmtest", "13adqezc");
+			}
+		});
+
+		Message message = new MimeMessage(session);
+
+		try {
+			StringBuffer sb = new StringBuffer();
+			sb.append(subject);
+			sb.append("<br>");
+			sb.append(content);
+			message.setFrom(new InternetAddress(from, MimeUtility.encodeText(writer, "UTF-8", "B")));
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.setSubject(subject);
+			message.setContent(sb.toString(), "text/html;charset=UTF-8");
+			Transport.send(message);
+		} catch (MessagingException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
         
     	Map<String, Object> msg = new HashMap<>();
 		msg.put("msg", "이메일 보내기 완료");
