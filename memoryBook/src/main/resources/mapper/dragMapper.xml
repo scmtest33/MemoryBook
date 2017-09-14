@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.test.memory.dao.DragMapper">
+
+	<resultMap type="dragVO" id="dragMap">
+		<result property="dragNo" column="drag_no" />
+		<result property="memberNo" column="mem_no" />
+		<result property="dragContent" column="drag_content" />
+		<result property="dragUrl" column="drag_url" />
+		<result property="dragUrlTitle" column="drag_url_title" />
+		<result property="dragRegDate" column="drag_reg_date" />
+		<result property="dragUpdateDate" column="drag_update_date" />
+	</resultMap>	
+	<!-- 드래그 등록 -->	
+	<insert id="insertDrag" parameterType="dragVO">
+		insert into t_drag values (
+			DRAG_NO.NEXTVAL, #{memberNo}, #{dragContent}, #{dragUrl, jdbcType=VARCHAR}, #{dragUrlTitle, jdbcType=VARCHAR}, SYSDATE, SYSDATE, 0
+		)
+	</insert>
+	<!-- 드래그 리스트 -->
+	<select id="dragList" parameterType="dragVO" resultMap="dragMap">
+		select *
+		  from t_drag
+		 where mem_no = #{memberNo}
+		 	<if test='searchWrd != "" and searchWrd != null '>
+				AND (
+						(drag_content LIKE '%'||#{searchWrd}||'%')
+					)
+			</if>
+		 
+		 order by drag_no desc
+	</select>
+	<!-- 드래그 삭제 -->
+	<delete id="deleteDrag" parameterType="int">
+		delete 
+		  from t_drag
+		 where drag_no = #{dragNo}
+	</delete>
+	<!-- 드래그 하나 선택 -->
+	<select id="selectDrag" parameterType="int" resultMap="dragMap">
+		select *
+		  from t_drag
+		 where drag_no = #{dragNo}
+	</select>
+	<!-- 드래그 디테일 -->
+	<select id="dragDetail" parameterType="int" resultMap="dragMap">
+		select drag_no,
+			   mem_no,
+		       drag_content,
+			   drag_url_title,
+			   drag_reg_date,
+			   drag_update_date
+		 from t_drag
+		 where drag_no = #{dragNo}
+	</select>
+	<!-- 이메일로 보낼 노트 -->
+	<select id="emailDrag" parameterType="DragVO" resultMap="dragMap">
+		select d.drag_no,
+			d.mem_no,
+			d.drag_content,
+			m.email,
+			d.drag_url_title,
+			d.drag_reg_date
+		   from t_drag d inner join t_member m
+		    on d.mem_no = m.mem_no 
+		 where d.drag_no = #{dragNo}
+	</select>
+</mapper>
+
