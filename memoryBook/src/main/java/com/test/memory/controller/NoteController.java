@@ -244,17 +244,17 @@ public class NoteController {
 		NoteVO noteVO = service.emailNote(note);
 
 		// 보내는 서버 주소
-		String host = "smtp.naver.com"; // here
+		String host = "smtp.naver.com";
 		// 메일 제목 설정
 		String subject = noteVO.getNoteTitle();
 		// 메일 내용 읽어오기
 		String content = noteVO.getNoteContent();
 		// 보내는 사람 이메일 주소
-		String from = "scmtest@naver.com"; // here
+		String from = m_session.getAttribute("email").toString();
 		// 보내는사람 이름
-		String writer = m_session.getAttribute("name").toString(); // here
+		String writer = m_session.getAttribute("name").toString();
 		// 받는사람 이메일주소
-		String to = request.getParameter("emailTo"); // here
+		String to = request.getParameter("emailTo");
 
 		try {
 			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
