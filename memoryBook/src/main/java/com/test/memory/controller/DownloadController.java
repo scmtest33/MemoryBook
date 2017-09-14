@@ -39,6 +39,8 @@ public class DownloadController {
 	
 	@Autowired
 	private NoteService service_n;
+	
+	@Autowired
 	private DragService service_d;
 	
 	@RequestMapping("/downloadNote")

@@ -26,7 +26,7 @@
 		 where mem_no = #{memberNo}
 		 	<if test='searchWrd != "" and searchWrd != null '>
 				AND (
-						(drag_content LIKE '%'||#{searchWrd}||'%')
+						(drag_url_title LIKE '%'||#{searchWrd}||'%')
 					)
 			</if>
 		 

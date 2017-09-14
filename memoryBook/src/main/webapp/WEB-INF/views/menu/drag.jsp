@@ -114,8 +114,8 @@
 							<div class="form-group has-feedback"
 								onkeydown="javascript:if(event.keyCode == 13) searchList_drag();">
 								<label for="search" class="sr-only">Search</label>
-									<input type="text" class="form-control" name="searchWrd_drag"
-									id="searchWrd_drag" placeholder="드래그 검색">
+									<input type="text" class="form-control" name="searchWrd"
+									id="searchWrd" placeholder="드래그 검색">
 									<span class="glyphicon glyphicon-search form-control-feedback"></span>
 							</div>
 						</div>
@@ -128,62 +128,24 @@
 				style='position: relative; width: 100%; height: 500px;'></div>
 		</div>
 	
-	<!-- profile modal -->
-	<div id="profileModal_drag" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">설정</h4>
-				</div>
-				<div class="modal-body">
-
-					<div class="container">
-						<h2>이메일 설정</h2>
-						<br>
-						<p>드래그 내용을 보낼 이메일을 설정해주세요 :)</p>
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="email">Email:</label> <input type="email"
-									class="form-control" id="email_drag" placeholder="Enter email">
-							</div>
-							<div class="form-group">
-								<label for="pwd">Password:</label> <input type="password"
-									class="form-control" id="pwd_drag" placeholder="Enter password">
-							</div>
-							<button type="submit" class="btn btn-default">설정</button>
-						</form>
-					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
 	<!-- 본문내용 끝 -->
 
 	<script>
 	//드래그 검색
 	function searchList_drag(){
-		var searchWrd_drag = $("#searchWrd_drag").val();
+		var searchWrd = $("#searchWrd").val();
 		var memberNo = ${memberNo};
 		$.ajax({
 			type: "POST",
 			url : "/memory/drag/dragList",
-			data: {"searchWrd_drag" : searchWrd_drag,
+			data: {"searchWrd" : searchWrd,
 				   "memberNo" : memberNo
 			 	},
 			dataType : "json"
 		})
 		.done(function (result) {
 			makeDragCards(result);
-			$("#searchWrd_drag").val("");
+			$("#searchWrd").val("");
 			return false;
 		})
 		.fail(function(jqXhr, textStatus, errorText){

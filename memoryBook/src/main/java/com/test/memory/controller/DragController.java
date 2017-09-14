@@ -173,6 +173,7 @@ public class DragController {
 	public List<DragVO> dragList(HttpServletRequest request, HttpSession session) throws Exception {
 		DragVO drag = new DragVO();
 		drag.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));
+		drag.setSearchWrd(request.getParameter("searchWrd_drag"));
 		
 		List<DragVO> dragList = service.dragList(drag);
 		for(DragVO n : dragList){
