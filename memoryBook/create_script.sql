@@ -36,7 +36,7 @@ create table t_drag(
 	drag_reg_date timestamp default SYSDATE,
 	drag_update_date timestamp,
 	drag_auth varchar2(1) default 0 not NULL,
-	CONSTRAINT MEM_NO_D FOREIGN KEY(mem_no) REFERENCES t_member(mem_no)
+	CONSTRAINT MEM_NO_D FOREIGN KEY(mem_no) REFERENCES t_member(mem_no) on delete cascade
 );
 
 --드래그 이미지 테이블
@@ -44,7 +44,7 @@ create table t_drag_img(
 	drag_img_no number(6) primary key,
 	drag_no number(6) not NULL,
 	drag_img_path varchar2(1000) not NULL,
-	CONSTRAINT DRAG_NO_D FOREIGN KEY(drag_no) REFERENCES t_drag(drag_no)
+	CONSTRAINT DRAG_NO_D FOREIGN KEY(drag_no) REFERENCES t_drag(drag_no) on delete cascade
 );
 
 --노트 테이블
@@ -68,7 +68,7 @@ create table t_note_img(
 	note_img_path varchar2(1000) not NULL,
 	note_img_width number(6),
 	note_img_height number(6),
-	CONSTRAINT NOTE_NO FOREIGN KEY(note_no) REFERENCES t_note(note_no)
+	CONSTRAINT NOTE_NO FOREIGN KEY(note_no) REFERENCES t_note(note_no) on delete cascade
 );
 
 --쪽지 테이블
