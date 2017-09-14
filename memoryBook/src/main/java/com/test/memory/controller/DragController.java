@@ -281,7 +281,7 @@ public class DragController {
 		//메일 내용 읽어오기
 		String content = dragVO.getDragContent();
 		//보내는 사람 이메일 주소
-		String from = m_session.getAttribute("email").toString(); 
+		String from = "scmtest@naver.com";
 		//보내는사람 이름
 		String writer = m_session.getAttribute("name").toString();
 		//받는사람 이메일주소

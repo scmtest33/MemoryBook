@@ -46,7 +46,7 @@
 						data-dismiss="modal">
 						<i class="fa fa-share"></i>보내기
 					</div>
-					<div class="btn btn-default" data-dismiss="modal">취소</div>
+					<div class="btn btn-default" data-dismiss="modal" onclick=mail_clear()>취소</div>
 				</div>
 			</div>
 
@@ -216,6 +216,9 @@
 	})
 	function saveDragNo(dragNo){
 		localStorage.setItem("emailDragNo",dragNo);
+	}
+	function mail_clear(){ //취소버튼 눌렀을때 메일주소 입력란 초기화
+		$("#email").val("");
 	}
 
 	//드래그 디테일
