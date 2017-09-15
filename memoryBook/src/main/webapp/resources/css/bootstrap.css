@@ -263,8 +263,8 @@ th {
 
 @font-face {
 	  font-family: 'FontPac';
-	  src: url('../fonts/Pacifico.eot');
-	  src: local(※), url('../fonts/Pacifico.eot?#iefix') format('embedded-opentype'), url('../fonts/Pacifico.woff') format('woff'), url('../fonts/Pacifico.ttf') format('truetype');
+	  src: url('../fonts/Pacific.eot');
+	  src: local(※), url('../fonts/Pacific.eot?#iefix') format('embedded-opentype'), url('../fonts/Pacific.woff') format('woff'), url('../fonts/Pacific.ttf') format('truetype');
 	  font-weight: normal;
 	  font-style: normal;
 }
