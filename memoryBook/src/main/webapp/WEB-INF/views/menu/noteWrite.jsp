@@ -25,17 +25,8 @@
 			<h3 class="tit_brunch">노트 작성</h3>
 
 			<p class="desc_brunch">
-				<span class="part">드래그 박스에서 원하는 항목을 클릭하여 글을 작성해보세요.<br></span>
+				<span class="part">편집창 아래 드래그 박스에서 원하는 항목을 클릭하여 글을 작성해보세요.<br></span>
 			</p>
-		</div>
-
-		<!-- 드래그바 -->
-		<div class="w3-sidebar w3-round sideDragBar">
-			<div class="sideDragBar_title">
-				<i class="fa fa-inbox w3-xlarge"></i> DRAGS
-			</div>
-			<!-- 드래그 리스트 -->
-			<div id="dragList"></div>
 		</div>
 
 		<!-- 입력창 -->
@@ -94,6 +85,14 @@
 					</tr>
 				</table>
 			</form>
+		</div>
+		
+		<div class="w3-sidebar w3-round sideDragBar">
+			<div class="sideDragBar_title">
+				<i class="fa fa-inbox w3-xlarge"></i> DRAGS
+			</div>
+			드래그 리스트
+			<div id="dragList_editor"></div>
 		</div>
 	</div>
 	<!-- 본문내용 끝 -->
@@ -191,97 +190,33 @@
     });
 	
 	// 드래그내용 입력시 필요한 드래그 리스트 출력
-    function makeDragListAll(result) {
+    function makeDragCards(result) {
     	var html = "";
-    	for (var i = 0; i < result.length; i++) {
+    	console.log(result.length)
+		for (var i = 0; i < result.length; i++) {
+			var drag = result[i];	
+			var dragNo = drag.dragNo;
+			html += "<div class='gallery' onclick='dragDetail("+drag.dragNo+")' style='box-shadow: 1px 2px 5px #bbb;' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"'>";
+			// 이미지 뿌리기
+			var dragContent = drag.dragContent;
+			if(dragContent.indexOf('<img') != -1) {
+				var dragImgSrc = dragContent.split('src="')[1].split('"')[0];
+				html += '<figure><img id="drag'+drag.dragNo+'" src="' + dragImgSrc + '" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
+			} else {
+				html += '<figure><img id="drag'+drag.dragNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
+			}
+			html += "	<div  class='desc'><p>" + drag.dragUrlTitle + "</p></div>";
+			html += "</div>";
 
-    		var drag = result[i];	
-    		var dragNo = drag.dragNo;
-    		
-    		html += "<div class='quote-box1 w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='drag"+ drag.dragNo+"'  >";
-    		html += "<p class='quotation-mark1' id='drag"+ drag.dragNo+"'> “ </p> ";
-    		html += "<br>";
-    		html += "<br>";
-    		html += "<div class='quote-text' style='overflow:auto;max-height:170px; font-size:15px;' id='drag"+ drag.dragNo+"'>";
-    		html += "		<p id='drag"+ drag.dragNo+"'>" + drag.dragContent.replace("amp;", "&") + "</p><br>";
-    		html += "</div>";
-    		html += " <hr>";
-    		html += " <div class='blog-post-actions'>";
-    		// 시간 뿌리기
-    		var date = new Date(drag.dragRegDate);
-    		var time = date.getFullYear() + "-" 
-    		         + (date.getMonth() + 1) + "-" 
-    		         + date.getDate() + " "
-    		         + date.getHours() + ":"
-    		         + date.getMinutes() + ":"
-    		         + date.getSeconds();
-    		html += "<p class='blog-post-bottom'>"+ time +"</p>";
-    		if(drag.dragUrlTitle != null){
-    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : "+ drag.dragUrlTitle +"</p>";
-    		}else {
-    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : 알 수 없음</p>";
-    		}
-    		html += "</div>";
-    		//시간 뿌리기 끝
-    		html += "</div>";
-    	}
-    	if (result.length == 0) {
-    		html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'>";
-    		html += "<h6>드래그가 없습니다.</h6>";
-    		html += "</div>";
-    	}
-    	$("#dragList").html(html);
+		}
+		if (result.length == 0) {
+			html += "<div class='gallery'>";
+			html += '	<img src="/memory/resources/img/D.png" alt="" width="300px" height="200px" >';
+			html += "	<div  class='desc'><p> 드래그가 없습니다. </p></div>";
+			html += "</div>";
+		}
+    	$("#dragList_editor").html(html);
     }
-	
-	// 드래그리스트 만들기
-	function makeDragList_mini() {
-		var memberNo = ${memberNo};
-		$.ajax({
-			type: "POST",
-			url : "/memory/drag/dragList",
-			data: {"memberNo" : memberNo},
-			dataType : "json"
-		})
-		.done(function (result) {
-			var html = "";
-			for (var i = 0; i < result.length; i++) {
-
-				var drag = result[i];	
-				var dragNo = drag.dragNo;
-				
-				console.log("드래그번호"+dragNo)
-				html += " <div class='quote-box w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"' >";
-//	 			html += " <blockquote class='quote-box'>;
-				html += " <p class='quotation-mark' onclick='dragDetail("+drag.dragNo+")'data-toggle='modal' data-target='#detailModal' > “ </p><br> ";
-				html += " <p class='quote-text' onclick='dragDetail("+drag.dragNo+")'data-toggle='modal' data-target='#detailModal'>" + drag.dragUrlTitle +" </p>";
-				html += " <hr>";
-				html += " <div class='blog-post-actions'>";
-				// 시간 뿌리기
-				var date = new Date(drag.dragRegDate);
-				var time = date.getFullYear() + "-" 
-				         + (date.getMonth() + 1) + "-" 
-				         + date.getDate() + " "
-				         + date.getHours() + ":"
-				         + date.getMinutes() + ":"
-				         + date.getSeconds();
-				html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
-				//시간 뿌리기 끝
-				html += "</div>";
-				html += "</div>";
-				
-		
-			}
-			if (result.length == 0) {
-				html += "<div class='container'>";
-				html += "<h6>등록 된 드래그가 없습니다.</h6>";
-				html += "</div>";
-			}
-			$("#dragList").html(html);
-		})
-		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
-		});
-	}
 	
     //노트에 드래그 입력하기.
     $("div[id^=drag]").click(function(event){
@@ -313,7 +248,6 @@
 		getMainCategory();
 		mainNoteList();
 		makeDragList();
-		makeDragList_mini();
 		$("#noteTitle").val("");
 		$(".nicEdit-main").html('');
 	}

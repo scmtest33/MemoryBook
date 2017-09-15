@@ -15,7 +15,7 @@ ul {
 	list-style: none;
 }
 
-/* 드래그 및 노트리스트 항목 */
+/* 드래그(에디터에서) 및 노트 섬네일리스트 항목 */
 div.gallery {
     margin: 5px;
     border: 1px solid #ccc;
@@ -51,16 +51,16 @@ div.sideDragBar_title {
 	font-size: 18px
 }
 div.sideDragBar {
+	overflow: auto;
 	background-color: white;
-	width: 200px;
-	height: 200px;
+	width: 976px;
+	height: 400px;
 	z-index: 102;
 }
 div.editor {
-	float:right;
 	position:relative;
 	z-index: 2;
-	width: 978px;
+	width: 976px;
 }
 /* .NICEDIT-PANELCONTAIN { */
 /*   HEIGHT: 43PX !IMPORTANT; */
@@ -84,8 +84,16 @@ div.editor {
 #content_drag img {
 	max-width: 100%;
 }
+#title span {
+	color: grey;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+a.btn_modal {
+	color: white;
+}
 
-/* 드래그 및 노트리스트 제목 */
+/* 드래그 및 노트리스트 */
 .tit_brunch {
     margin-top: 0;
     font-size: 40px;
@@ -93,17 +101,14 @@ div.editor {
     color: #1a1a1a;
     text-align: left;
 }
-
 .desc_brunch {
     width: 960px;
 /*     margin: 0 auto; */
 }
-
 body {
 	background: #fff;
 	color: #333;
 }
-
 body,th,td,input,select,textarea,button {
 	font-size:14px;
 	line-height:1.5;
@@ -129,25 +134,7 @@ body,th,td,input,select,textarea,button {
 	border: 1px solid #ddd;
 	border-bottom-color: transparent;
 }
-
-#daumForm {
-	width: 645px;
-}
-
-  .bg-1 { 
-      background-color: #1abc9c; /* Green */
-      color: #ffffff;
-  }
-  .bg-2 { 
-      background-color: #474e5d; /* Dark Blue */
-      color: #ffffff;
-  }
-  .bg-3 { 
-      background-color: #fff; /* White */
-      color: #555555;
-  }
-  
-  .gallery figure img {
+.gallery figure img {
 	-webkit-transform: scale(1);
 	transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
@@ -165,41 +152,23 @@ figure {
 	background: #fff;
 	overflow: hidden;
 }
-
 blockquote{
     border-left:none
 }
-
 .quote-badge{
     background-color: rgba(0, 0, 0, 0.2);   
 }
-
 .quote-box{
-    
     overflow: hidden;
     margin-top: -50px;
     padding-top: -100px;
     border-radius: 17px;
     background-color: #4ADFCC;
     margin-top: 25px;
-    color:white;
-    width: 90%;
-    box-shadow: 2px 2px 2px 2px #E0E0E0;
-    
-}
-
-.quote-box1{
-    overflow: hidden;
-    margin-top: -50px;
-    padding-top: -100px;
-    border-radius: 17px;
-    background-color: #fefeff;
-    margin-top: 25px;
-    color:gray;
+    color: white;
     width: 90%;
     box-shadow: 2px 2px 2px 2px #E0E0E0;
 }
-
 .quotation-mark{
     margin-top: -10px;
     font-weight: bold;
@@ -208,15 +177,12 @@ blockquote{
     font-family: "Times New Roman", Georgia, Serif;
 }
 .quotation-mark1{
-    
     margin-top: -10px;
     font-weight: bold;
     font-size:60px;
     color:gray;
     font-family: "Times New Roman", Georgia, Serif;
-    
 }
-
 .quote-text{
     font-size: 19px;
     margin-top: -65px;
@@ -224,17 +190,48 @@ blockquote{
 .quote-text *{
     font-size: 15px;
 }
-
 .quote-text img {
 	width: 90%;
 }
 
-#title span {
-	color: grey;
-	font-weight: bold;
-	margin-bottom: 20px;
+/* 드래그 리스트 항목 */
+div.dragList {
+    margin: 5px;
+    border: 2px solid #ccc;
+    float: left;
+    width: 290px;
+    height: 284px;
+}
+div.dragList:hover {
+    border: 1px solid #777;
+}
+div.dragList img {
+    width:178px; height:138px;
+}
+.dragTitle{
+    font-size: 19px;
+    margin: 5px;
+}
+.dragTitle *{
+    font-size: 15px;
+}
+.dragTitle img {
+	width: 90%;
+}
+.dragContent {
+	margin: 5px;
+	margin-top: -20px;
+	height: 200px;
+	overflow: auto;
+}
+.dragFooter {
+	margin: 5px;
 }
 
+/* 검색기능 */
+.search_window {
+  display: block
+}
 .search-form .form-group {
   float: right !important;
   transition: all 0.35s, border-radius 0s;
@@ -285,13 +282,8 @@ blockquote{
   left: initial;
   font-size: 14px;
 }
+
+/* 일반 버튼 */
 .btn-default {
     box-shadow: 1px 2px 5px #aaa;   
-}
-a.btn_note {
-	color: white;
-}
-
-a.btn_drag {
-	color: white;
 }

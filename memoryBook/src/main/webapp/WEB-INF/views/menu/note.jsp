@@ -262,7 +262,7 @@
 			$("#title").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
 			$("#date").html(time);
 			$("#content").html(content);
-			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_note'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_note'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_note'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_note'><i class='fa fa-download'></i></a></span></p>");
+			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_modal'><i class='fa fa-download'></i></a></span></p>");
 //	 		document.getElementById("editorBtnDiv").style.display = "none";
 			
 		})
@@ -454,14 +454,6 @@
 		$("#noteCardList").html(html);
 	}
 
-	//다음 검색 버튼 클릭 
-	// $("#daumSubmit").click(function(){
-//	     daumSearch.init();
-//	     daumSearch.search();
-//	     document.getElementById("daumView").style.display = "block";
-//	 	return false;
-	// })
-
 	// 에디터 열기
 	var editor_chk = false; // 드래그 입력시 에디터 on/off여부 체크
 	$("#noteWrite").click(function(e) {
@@ -552,7 +544,7 @@
 //	 	document.getElementById("daumView").style.display = "block";
 	// }
 
-	// 노트 에티터 뿌리기
+	// 노트 에디터 뿌리기
 	$("#editorOpenBtn").click(function() {
 		document.getElementById("noteView").style.display = "none";
 //	 	document.getElementById("searchView").style.display = "none";

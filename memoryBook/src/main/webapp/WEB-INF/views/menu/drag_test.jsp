@@ -96,7 +96,6 @@
 			    	success: function (result) {
 			    		alert("등록성공");
 			    		prevText = text;
-			    		makeDragList_mini();
 			    		makeDragList();
 			    		mainDragList();
 			    	},

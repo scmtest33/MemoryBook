@@ -35,7 +35,7 @@
 	<!-- reservation, make, cancel, myMeetings, absent 경로가 LoginInterceptor를 경유하도록 아래에 설정한다. -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/member/index/**" />
+			<mvc:mapping path="/index/**" />
 			<beans:ref bean="loginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

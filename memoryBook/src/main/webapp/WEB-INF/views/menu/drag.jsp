@@ -109,7 +109,7 @@
 			<p class="desc_brunch">
 				<span class="part">드래그를 공유해 보세요.<br></span>
 				<span class="part">
-					<div class="col-md-4 col-md-offset">
+					<div class="col-md-4 col-md-offset search_window">
 						<div action="" class="search-form">
 							<div class="form-group has-feedback"
 								onkeydown="javascript:if(event.keyCode == 13) searchList_drag();">
@@ -123,8 +123,8 @@
 				</span>
 		</div>
 		<br><br><br>
-			<!-- 드래그카드 뿌리기 -->
-		<div id="dragCardList" style='position: relative; width: 100%; height: 500px;'></div>
+			<!-- 드래그내용 뿌리기 -->
+		<div id="dragList" style='position: relative; width: 100%; height: 500px;'></div>
 		</div>
 	<!-- 본문내용 끝 -->
 
@@ -208,7 +208,7 @@
 			$("#title_drag").html("<span>[ 드래그 데이터  "+time2+" ]</span><h3>" + title +"</h3>");
 			$("#date_drag").html(time);
 			$("#content_drag").html(content);
-			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_drag'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_drag'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_drag'><i class='fa fa-download'></i></a></span></p>");
+			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_modal'><i class='fa fa-download'></i></a></span></p>");
 //	 		document.getElementById("editorBtnDiv").style.display = "none";
 			
 		})
@@ -227,58 +227,15 @@
 			dataType : "json"
 		})
 		.done(function (result) {
+			makeDragList(result);
 			makeDragCards(result);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
 			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
-
-	function makeDragCards(result) {
-		var html = "";
-		for (var i = 0; i < result.length; i++) {
-
-			var drag = result[i];	
-			var dragNo = drag.dragNo;
-			html += "<div class='gallery' onclick='dragDetail("+drag.dragNo+")' style='box-shadow: 1px 2px 5px #bbb;' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"' data-toggle='modal' data-target='#detailModal_drag'  >";
-			// 이미지 뿌리기
-			var dragContent = drag.dragContent;
-			if(dragContent.indexOf('<img') != -1) {
-				var dragImgSrc = dragContent.split('src="')[1].split('"')[0];
-				html += '<figure><img id="drag'+drag.dragNo+'" src="' + dragImgSrc + '" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
-			} else {
-				html += '<figure><img id="drag'+drag.dragNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
-			}
-			html += "	<div  class='desc'><p>" + drag.dragUrlTitle + "</p></div>";
-			html += "</div>";
-
-		}
-		if (result.length == 0) {
-			html += "<div class='gallery'>";
-			html += '	<img src="/memory/resources/img/D.png" alt="" width="300px" height="200px" >';
-			html += "	<div  class='desc'><p> 드래그가 없습니다. </p></div>";
-			html += "</div>";
-		}
-		$("#dragCardList").html(html);
-	}
-
-	//드래그 다운로드
-	function downloadDrag(dragNo){
-		var url = "/memory/download/downloadDrag?dragNo=" + dragNo;
-		$("#downloadDragPath").attr("href", url);
-	}
-
-	$("#downloadDragPath").click(function(){
-		$("#downloadDragModal").modal('hide');
-	})
-
-	// 검색 뒤로 가기
-	// function goBack() {
-//	 	document.getElementById("searchResult").style.display = "none";
-//	 	document.getElementById("daumView").style.display = "block";
-	// }
-
-	// 드래그리스트 만들기
+	
+	// 드래그리스트 자료 가져오기
 	function makeDragList() {
 		var memberNo = ${memberNo};
 		$.ajax({
@@ -290,17 +247,13 @@
 		.done(function (result) {
 			var html = "";
 			for (var i = 0; i < result.length; i++) {
-
 				var drag = result[i];	
 				var dragNo = drag.dragNo;
-				
 				console.log("드래그번호"+dragNo)
-				html += " <div class='quote-box w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"' >";
-//	 			html += " <blockquote class='quote-box'>;
-				html += " <p class='quotation-mark' onclick='dragDetail("+drag.dragNo+")'data-toggle='modal' data-target='#detailModal_drag' > “ </p><br> ";
-				html += " <p class='quote-text' onclick='dragDetail("+drag.dragNo+")'data-toggle='modal' data-target='#detailModal_drag'>" + drag.dragTitle +" </p>";
+				html += " <div class='dragList' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"' onclick='dragDetail("+drag.dragNo+")'data-toggle='modal' data-target='#detailModal_drag'>";
+				html += " <div class='dragTitle'>" + drag.dragUrlTitle +" </div>";
 				html += " <hr>";
-				html += " <div class='blog-post-actions'>";
+				html += " <div class='dragContent'>" + drag.dragContent +" </div>";
 				// 시간 뿌리기
 				var date = new Date(drag.dragRegDate);
 				var time = date.getFullYear() + "-" 
@@ -309,12 +262,10 @@
 				         + date.getHours() + ":"
 				         + date.getMinutes() + ":"
 				         + date.getSeconds();
-				html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
+				html += "<div class='dragFooter'>"+ time +"</div>";
 				//시간 뿌리기 끝
 				html += "</div>";
 				html += "</div>";
-				
-		
 			}
 			if (result.length == 0) {
 				html += "<div class='container'>";
@@ -326,6 +277,85 @@
 		.fail(function(jqXhr, textStatus, errorText){
 			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
+	}
+	
+	//드래그 리스트 생성
+	function makeDragListAll(result) {
+		var html = "";
+    	for (var i = 0; i < result.length; i++) {
+
+    		var drag = result[i];	
+    		var dragNo = drag.dragNo;
+    		
+    		html += "<div class='dragList' ondragstart='drag(event)' draggable='true' id='drag"+ drag.dragNo+"'  >";
+    		html += "<p class='quotation-mark1' id='drag"+ drag.dragNo+"'> “ </p> ";
+    		html += "<br>";
+    		html += "<br>";
+    		html += "<div class='quote-text' style='overflow:auto;max-height:170px; font-size:15px;' id='drag"+ drag.dragNo+"'>";
+    		html += "		<p id='drag"+ drag.dragNo+"'>" + drag.dragContent.replace("amp;", "&") + "</p><br>";
+    		html += "</div>";
+    		html += " <hr>";
+    		html += " <div class='blog-post-actions'>";
+    		// 시간 뿌리기
+    		var date = new Date(drag.dragRegDate);
+    		var time = date.getFullYear() + "-" 
+    		         + (date.getMonth() + 1) + "-" 
+    		         + date.getDate() + " "
+    		         + date.getHours() + ":"
+    		         + date.getMinutes() + ":"
+    		         + date.getSeconds();
+    		html += "<p class='blog-post-bottom'>"+ time +"</p>";
+    		if(drag.dragUrlTitle != null){
+    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : "+ drag.dragUrlTitle +"</p>";
+    		}else {
+    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : 알 수 없음</p>";
+    		}
+    		html += "</div>";
+    		//시간 뿌리기 끝
+    		html += "</div>";
+    	}
+    	if (result.length == 0) {
+    		html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'>";
+    		html += "<h6>드래그가 없습니다.</h6>";
+    		html += "</div>";
+    	}
+		$("#dragList").html(html);
+	}
+	
+	//드래그 다운로드
+	function downloadDrag(dragNo){
+		var url = "/memory/download/downloadDrag?dragNo=" + dragNo;
+		$("#downloadDragPath").attr("href", url);
+	}
+
+	$("#downloadDragPath").click(function(){
+		$("#downloadDragModal").modal('hide');
+	})
+
+	//드래그 내용 수정 및 수정내용을 노트에 등록
+	function updateDrag(dragNo){
+		localStorage.setItem("dragNoToUpdate",dragNo);
+    	document.getElementById("noteUpdateBtn").style.display = "block";
+		document.getElementById("noteSubmitBtn").style.display = "none"
+		$.ajax({
+			type: "POST",
+			url : "/memory/drag/dragDetail",
+			data: {"dragNo" : dragNo},
+			dataType : "json"
+		})
+		.done(function (result) {
+			var title = result.noteTitle;
+			var content = result.noteContent;
+			$("input[name=noteTitle]").val(title);
+			$(".nicEdit-main").html(content);
+			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo);
+			getCategory();
+			open_editor();
+		})
+		.fail(function(jqXhr, textStatus, errorText){
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+		});
+		
 	}
 
 	// 드래그 삭제
@@ -345,7 +375,6 @@
 				}).done(function (result){
 					alert(result.msg,'success');
 					makeDragList();
-					makeDragList_mini();
 					mainDragList();
 			});
 		}

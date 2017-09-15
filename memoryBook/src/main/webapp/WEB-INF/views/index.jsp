@@ -273,7 +273,7 @@
 	window.onload = function () {
 		mainNoteList(); //노트 리스트
 		mainDragList(); //드래그 리스트
-		makeDragList_mini(); //글 작성창 드래그 리스트
+		makeDragList(); //글 작성창 드래그 리스트
 		getMainCategory(); //카테고리 리스트
 		//노트 리스트 화면
 		document.getElementById("profileModal").style.display = "";
