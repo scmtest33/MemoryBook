@@ -189,7 +189,7 @@
 		editorCancelChk();
     });
 	
-	// 드래그내용 입력시 필요한 드래그 리스트 출력
+	// 드래그내용 입력시 필요한 드래그리스트 출력
     function makeDragCards(result) {
     	var html = "";
     	console.log(result.length)

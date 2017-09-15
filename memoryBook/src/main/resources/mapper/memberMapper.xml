@@ -21,12 +21,12 @@
 		DELETE FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{mem_pwd}
 	</delete>
 	
-	<!-- 	회원목록 -->
+	<!-- 회원목록 -->
 	<select id="getList" resultType="MemberVO">
 		SELECT * FROM T_MEMBER WHERE email !='admin'
 	</select>
 	
-	<!-- 	계정정지-->
+	<!-- 계정정지-->
 	<update id="click" parameterType="MemberVO">
 		UPDATE T_MEMBER SET 
 		<if test="approvalNum ==1">
@@ -38,7 +38,7 @@
 		WHERE NAME = #{name}
 	</update>
 	
-	<!--회원검색 -->
+	<!-- 회원검색 -->
 	<select id="findMember" parameterType="String" resultType="MemberVO">
 		SELECT name, email FROM T_MEMBER WHERE NAME LIKE '%'||#{name}||'%' or EMAIL LIKE '%'||#{email}||'%' order by mem_no desc
 		

@@ -33,65 +33,60 @@ function getList(){
 		url: "/memory/member/getList",
 		dataType: "json",
 		success: function(result){   		
-				var addTitle = "<tr><th>이름</th>";
-					addTitle+= "<th>이메일</th>";
-					addTitle+= "<th>접속가능여부</th></tr>";
-					$(".list").append(addTitle);
-					$(result).each(function(index, item) {
-						var addRow  = '<tr id="userList"><td id="name'+ index +'">' + item.name + '</td>';
-			                addRow += '<td id="email">' + item.email + '</td>';
-			               if(item.approvalNum == 0){
-			                   addRow +='<td class = "practice">' + '<img id = "normal'+index+'" src = "/memory/resources/img/open-lock.png">' + '</td>';
-			                }else{
-			                   addRow +='<td class = "practice">' + '<img id = "stop'+index+'" src = "/memory/resources/img/lock.png">' + '</td>';
-			                }
-							addRow += '</tr>';
-							$(".list").append(addRow);
-							
-							$("#stop"+index).click(function(){
-							var check = confirm("정말로 해제시키시겠습니까?");
-							if(check){
-								$.ajax({
-									url: "/memory/member/click",
-									dataType: "json",
-									type: "post",
-									data: {"name": item.name, "approvalNum" :item.approvalNum},
-									success: function(result){
-										if(result){
-											$(".list").empty();
-											getList();
-										}
-									}
-								});
+			var addTitle = "<tr><th>이름</th>";
+			addTitle+= "<th>이메일</th>";
+			addTitle+= "<th>접속가능여부</th></tr>";
+			$(".list").append(addTitle);
+			$(result).each(function(index, item) {
+				var addRow  = '<tr id="userList"><td id="name'+ index +'">' + item.name + '</td>';
+			    addRow += '<td id="email">' + item.email + '</td>';
+			    if(item.approvalNum == 0){
+					addRow +='<td class = "practice">' + '<img id = "normal'+index+'" src = "/memory/resources/img/open-lock.png">' + '</td>';
+			        } else {
+			        addRow +='<td class = "practice">' + '<img id = "stop'+index+'" src = "/memory/resources/img/lock.png">' + '</td>';
+			    }
+				addRow += '</tr>';
+				$(".list").append(addRow);
+				$("#stop"+index).click(function(){
+				var check = confirm("정말로 해제시키시겠습니까?");
+					if(check) {
+						$.ajax({
+							url: "/memory/member/click",
+							dataType: "json",
+							type: "post",
+							data: {"name": item.name, "approvalNum" :item.approvalNum},
+							success: function(result){
+								if(result){
+									$(".list").empty();
+									getList();
+								}
 							}
 						});
-							 $("#normal"+index).click(function(){
-								var check = confirm("정말로 정지시키시겠습니까?");
-									if(check){
-									$.ajax({
-										url: "/memory/member/click",
-										dataType: "json",
-										type: "post",
-										data: {"name": item.name,"approvalNum" :item.approvalNum},
-										success: function(result){
+					}
+				});
+					$("#normal"+index).click(function(){
+					var check = confirm("정말로 정지시키시겠습니까?");
+						if(check){
+							$.ajax({
+								url: "/memory/member/click",
+								dataType: "json",
+								type: "post",
+								data: {"name": item.name,"approvalNum" :item.approvalNum},
+								success: function(result){
 											if(result){
-												$(".list").empty();
-												getList();
+											$(".list").empty();
+											getList();
 											}
-											
 										}
-									});
-								}
-							}); 
-					});
-				}
+							});
+						}
+					}); 
+			});
+		}
 	});
 }
-
 </script>
-
 <table class="list">
-	
 </table>
 
 </body>

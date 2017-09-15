@@ -203,7 +203,7 @@
 			var time2 = date.getFullYear() + "-" 
 			         + (date.getMonth() + 1) + "-" 
 			         + date.getDate();         
-			//시간 뿌리기 끝
+			//시간뿌리기 끝
 //	 		document.getElementById("dragView").style.display = "block";
 			$("#title_drag").html("<span>[ 드래그 데이터  "+time2+" ]</span><h3>" + title +"</h3>");
 			$("#date_drag").html(time);

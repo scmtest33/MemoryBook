@@ -269,7 +269,7 @@
     	$("#wrapper").toggleClass("toggled");
     });
     
-	// 로딩 시 위치 지정
+	// 로딩 위치 지정
 	window.onload = function () {
 		mainNoteList(); //노트 리스트
 		mainDragList(); //드래그 리스트
