@@ -102,7 +102,7 @@
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item"><br><br><br>
-                            	<img src="/memory/resources/img/mainIcon/drag.png"><br><br>
+                            	<img src="/memory/resources/img/mainIcon/drag1.png"><br><br>
                                 <h2 class="service-content">
                                     <strong>드래그 저장 기능</strong>
                                 </h2>
@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item"><br><br><br>
-                                <img src="/memory/resources/img/mainIcon/note.png"><br><br>
+                                <img src="/memory/resources/img/mainIcon/note1.png"><br><br>
                                 <h2 class="service-content">
                                     <strong>노트 기능</strong>
                                 </h2>
@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item"><br><br><br>
-                                <img src="/memory/resources/img/mainIcon/friend.png"><br><br>
+                                <img src="/memory/resources/img/mainIcon/friend1.png"><br><br>
                                 <h2 class="service-content">
                                     <strong>친구 기능</strong>
                                 </h2>
@@ -132,7 +132,7 @@
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item"><br><br><br>
-                                <img src="/memory/resources/img/mainIcon/mindmap.png"><br><br>
+                                <img src="/memory/resources/img/mainIcon/mindmap1.png"><br><br>
                                 <h2 class="service-content">
                                     <strong>마인드 맵 기능</strong>
                                 </h2>
