@@ -38,7 +38,7 @@
 
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation  -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
     <nav id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -71,13 +71,8 @@
     <header id="top" class="header">
 	        <div class="text-vertical-center">
 	            <h1 class="title100">Memory Lane</h1>
-	            <p class="title101">더듬어 가는 기억</p>
-<!-- 	            <br> -->
-<!-- 	            <br> -->
-<!-- 	            <br> -->
-<!-- 	            <h3 class="title102">모든걸 기억해주는 당신만의 길을 만들어보세요</h3> -->
-<!-- 	            <br> -->
-<!-- 	            <a href="#about" class="btn btn-default btn-lg">Find Out More</a> -->
+	            <p class="title101">더듬어 걷는 기억</p>
+	            <a data-toggle="modal" data-target="#myModal" class="btn btn-default btn-lg">Login / Register</a>
 	        </div>
     </header>
 
@@ -106,55 +101,43 @@
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
+                            <div class="service-item"><br><br><br>
+                            	<img src="/memory/resources/img/mainIcon/drag1.png"><br><br>
+                                <h2 class="service-content">
+                                    <strong>드래그 저장 기능</strong>
+                                </h2>
+                                <p class="service-content2">정보 검색하던 사이트에서 내가 원하는 부분만 드래그하면 저장이 가능합니다.</p>
+<!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
+                            <div class="service-item"><br><br><br>
+                                <img src="/memory/resources/img/mainIcon/note1.png"><br><br>
+                                <h2 class="service-content">
+                                    <strong>노트 기능</strong>
+                                </h2>
+                                <p class="service-content2">내가 드래그한 내용을 나만의 방식으로 수정해 보세요.</p>
+<!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
+                            <div class="service-item"><br><br><br>
+                                <img src="/memory/resources/img/mainIcon/friend1.png"><br><br>
+                                <h2 class="service-content">
+                                    <strong>친구 기능</strong>
+                                </h2>
+                                <p class="service-content2">친구들과 함께 노트를 공유해 보세요.</p>
+<!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
+                            <div class="service-item"><br><br><br>
+                                <img src="/memory/resources/img/mainIcon/mindmap1.png"><br><br>
+                                <h2 class="service-content">
+                                    <strong>마인드 맵 기능</strong>
+                                </h2>
+                                <p class="service-content2">친구들과 마인드맵으로 회의, 계획을 짜보세요</p>
+<!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
                     </div>
@@ -166,75 +149,19 @@
         </div>
         <!-- /.container -->
     </section>
-
-    <!-- Callout -->
-    <aside class="callout">
-        <div class="text-vertical-center">
-            <h1>Vertically Centered Text</h1>
-        </div>
-    </aside>
 
     <!-- Portfolio -->
     <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h2>Our Work</h2>
-                    <hr class="small">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/memory/resources/img/portfolio-1.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/memory/resources/img/portfolio-2.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/memory/resources/img/portfolio-3.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="/memory/resources/img/portfolio-4.jpg">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.row (nested) -->
-                    <a href="#" class="btn btn-dark">View More Items</a>
-                </div>
-                <!-- /.col-lg-10 -->
-            </div>
-            <!-- /.row -->
+        <div class="portfolio_con">
+                    <h1 class="text001" align="right"><strong>크롬 확장 프로그램</strong></h1><br>
+                    <h2 class="text002" align="right"><strong>메모리 레인은 구글 확장 프로그램을 사용합니다.</strong></h2>
+                    <h2 class="text002" align="right"><strong>메모리 레인을 사용하기 위해 구글 확장프로그램을 설치해 주세요.</strong></h2>
+                    <a class="btn btn-default btn-lg" onclick="downloadUrl" id="downBtn">Download it now</a>
+                    
         </div>
         <!-- /.container -->
     </section>
 
-    <!-- Call to Action -->
-    <aside class="call-to-action bg-primary">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h3>The buttons below are impossible to resist.</h3>
-                    <a href="#" class="btn btn-lg btn-light">Click Me!</a>
-                    <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
-                </div>
-            </div>
-        </div>
-    </aside>
-    
-    
 		    <!-- Modal -->
 		  <div class="modal fade" id="myModal" role="dialog">
 		    <div class="modal-dialog">
@@ -334,11 +261,11 @@
 
 
     <!-- Footer -->
-    <footer>
+    <footer id="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>Start Bootstrap</strong>
+                    <h4><strong>MemoryLane</strong>
                     </h4>
                     <p>3481 Melrose Place
                         <br>Beverly Hills, CA 90210</p>
@@ -347,20 +274,7 @@
                         <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
                         </li>
                     </ul>
-                    <br>
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
-                        </li>
-                    </ul>
-                    <hr class="small">
-                    <p class="text-muted">Copyright &copy; Your Website 2014</p>
+                    <p class="text-muted">Copyright &copy; 잊지못해NotNull</p>
                 </div>
             </div>
         </div>
@@ -552,6 +466,10 @@
 	     	});
 	     	return false;
 	    });
+		//다운로드 링크주기
+// 	    function downloadUrl(){
+// 	    	window.open("https://chrome.google.com/webstore/detail/drag-note/hljfaipfmfnppbpkkdmdchehfpoehflh?utm_source=gmail", "_blank")
+// 	    };
     </script>
 
 </body>

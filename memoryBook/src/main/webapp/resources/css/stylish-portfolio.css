@@ -31,22 +31,22 @@ body {
 }
 
 .title100 {
-	font-size:25pt; 
-	font-weight:60; 
-	font-style: italic;
+	font-family: "FontPac";
+	font-size:25pt;
+	font-weight:normal;
 	line-height:2em;
-	color : #fff311;
-	font-family: "TmonMonsori";
+	color : #ffffff;
 }
 
 .title101{
+	font-family: "FontHoon";
 	padding-top:0;
-/* 	padding-left: 370px; */
-	margin-top:-21px;
+	padding-left: 310px;
+	margin-top:-24px;
 	font-weight: 300px;
 	font-size:20pt;
 	font-weight: 900;
-/* 	font-family: "Tium"; */
+	color : #ffffff;
 }
 
 .title102{
@@ -88,17 +88,17 @@ hr.small {
     max-width: 100px;
 }
 
-/* Side Menu */
+/* Side Menu  */
 
 #sidebar-wrapper {
-    z-index: 1000;
+   z-index: 1000;
     position: fixed;
     right: 0;
     width: 250px;
     height: 100%;
     transform: translateX(250px);
     overflow-y: auto;
-    background: #222;
+    background: #ffffff;
     -webkit-transition: all 0.4s ease 0s;
     -moz-transition: all 0.4s ease 0s;
     -ms-transition: all 0.4s ease 0s;
@@ -123,13 +123,14 @@ hr.small {
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #999;
+    font-size : 20px;
+    color: #000000;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
-    background: rgba(255,255,255,0.2);
+    background: rgba(86,169,2,0.8);
 }
 
 .sidebar-nav li a:active,
@@ -141,15 +142,19 @@ hr.small {
     height: 55px;
     font-size: 18px;
     line-height: 55px;
+    background: rgba(86,169,2,0.8);
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999;
+    font-size: 25px;
+    color: #000000;
+    font-family: "FontPac";
+    background: rgba(86,169,2,0.8);
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
+/*     color: #fff; */
+     background: rgba(86,169,2,0.8);
 }
 
 #menu-toggle {
@@ -180,7 +185,7 @@ hr.small {
     position: relative;
     width: 100%;
     height: 100%;
-    background: url(../img/road13.jpg) no-repeat center center scroll;
+    background: url(../img/mainImg/road66.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -196,9 +201,9 @@ hr.small {
 .about-text{
 	margin-bottom: 35px;
 	font-size: 35px;
-	font-weight: 300;
+	font-weight: 600;
 	line-height: 1.4;
-	font-family: "TmonMonsori";
+	font-family: "FontHoon";
 }
 
 .about-text2{
@@ -206,12 +211,13 @@ hr.small {
 	font-size: 20px;
 	font-weight: 300;
 	line-height: 1.4;
-/* 	font-family: "" */
+	font-family: "FontHoon";
 }
 /* Services */
 
 .services {
     padding: 50px 0;
+    background-color: #285943;
 }
 
 .service-item {
@@ -219,8 +225,17 @@ hr.small {
 }
 
 .service-text{
-	font-family: "Tium";
+	font-family: "FontHoon";
 	
+}
+
+.service-content{
+	font-family: "FontHoon";
+}
+
+.service-content2{
+	font-family: "FontHoon";
+	font-size: 20px;
 }
 
 /* Callout */
@@ -240,7 +255,15 @@ hr.small {
 /* Portfolio */
 
 .portfolio {
-    padding: 50px 0;
+    width: 100%;
+	height: 400px;
+    background: url(../img/mainImg/grass.jpg) no-repeat center center scroll;
+}
+
+.portfolio_con{
+	background-color: rgba(0, 0, 0, 0.3);	
+	padding: 20px;
+	padding-top: 80px;
 }
 
 .portfolio-item {
@@ -255,6 +278,23 @@ hr.small {
     opacity: 0.8;
 }
 
+.text001 {
+	font-family: "FontHoon";
+	font-size: 60px;
+	color:white;
+}
+
+.text002 {
+	font-family: "FontHoon";
+	font-size: 30px;
+	color:white;
+}
+
+#downBtn{
+	margin-top: 25px;
+	margin-left: 1300px;
+}
+
 /* Call to Action */
 
 .call-to-action {
@@ -263,22 +303,6 @@ hr.small {
 
 .call-to-action .btn {
     margin: 10px;
-}
-
-/* Map */
-
-.map {
-    height: 500px;
-}
-
-@media(max-width:768px) {
-    .map {
-        height: 75%;
-    }
-}
-
-.map iframe {
-    pointer-events: none;
 }
 
 /* Footer */
@@ -292,4 +316,20 @@ footer {
   position: fixed;
   bottom: 5px;
   right: 5px;
+}
+
+@font-face {
+	  font-family: 'FontOeg';
+	  src: url('../fonts/THE_Oegyeinseolmyeongse.eot');
+	  src: local(※), url('../fonts/THE_Oegyeinseolmyeongse.eot?#iefix') format('embedded-opentype'), url('../fonts/THE_Oegyeinseolmyeongse.woff') format('woff'), url('../fonts/THE_Oegyeinseolmyeongse.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
+}
+
+@font-face {
+	  font-family: 'FontHoon';
+	  src: url('../fonts/HoonMakdaeyunpil.eot');
+	  src: url('../fonts/HoonMakdaeyunpil.eot?#iefix') format('embedded-opentype'), url('../fonts/HoonMakdaeyunpil.woff') format('woff'), url('../fonts/HoonMakdaeyunpil.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
 }

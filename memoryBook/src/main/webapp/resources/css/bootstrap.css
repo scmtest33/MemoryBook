@@ -3,7 +3,7 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/*!  normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -260,6 +260,15 @@ th {
     border: 1px solid #ddd !important;
   }
 }
+
+@font-face {
+	  font-family: 'FontPac';
+	  src: url('../fonts/Pacific.eot');
+	  src: local(※), url('../fonts/Pacific.eot?#iefix') format('embedded-opentype'), url('../fonts/Pacific.woff') format('woff'), url('../fonts/Pacific.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
+}
+
 @font-face {
   font-family: 'Glyphicons Halflings';
 
