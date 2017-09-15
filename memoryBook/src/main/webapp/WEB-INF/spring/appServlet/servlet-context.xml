@@ -27,7 +27,7 @@
 	
 	<context:component-scan base-package="com.test.memory" />
 	
-		<!-- 로그인 인터셉터 정의 -->
+	<!-- 로그인 인터셉터 정의 -->
 	<beans:bean id="loginInterceptor" class="com.test.memory.interceptor.LoginInterceptor"></beans:bean>
 	
 	<!-- 로그인 인터셉터를 경유해서 처리할 경로들 지정 -->
