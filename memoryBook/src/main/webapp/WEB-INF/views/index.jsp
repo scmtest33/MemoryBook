@@ -114,7 +114,6 @@
                 </li>
             </ul>
         </div>
-        <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -123,11 +122,6 @@
                 <p>${name}님 This is main screen.</p>
                 <a class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
             </div>
-            
-            <div id="deleteZone" style="float:right;width:100px;height:100px" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<i class="fa fa-trash w3-xxlarge"></i>
-				<p>Delete</p>
-			</div>
             
 			<div id="profile">
 				<div class="container-fluid">

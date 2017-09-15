@@ -103,7 +103,9 @@
 	<!-- 메인뷰 -->
 	<div id="dragView" style="z-index: 7;">
 		<!-- 검색 -->
-		<div>
+		<div class="list_title">
+		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
+		</div>
 			<br>
 			<h3 class="tit_brunch">드래그 리스트</h3>
 			<p class="desc_brunch">
@@ -124,7 +126,7 @@
 		</div>
 		<br><br><br>
 			<!-- 드래그내용 뿌리기 -->
-		<div id="dragList" style='position: relative; width: 100%; height: 500px;'></div>
+		<div id="dragList"></div>
 		</div>
 	<!-- 본문내용 끝 -->
 
