@@ -71,7 +71,7 @@
     <header id="top" class="header">
 	        <div class="text-vertical-center">
 	            <h1 class="title100">Memory Lane</h1>
-	            <p class="title101">더듬어 가는 기억</p>
+	            <p class="title101">더듬어 걷는 기억</p>
 	            <a data-toggle="modal" data-target="#myModal" class="btn btn-default btn-lg">Login / Register</a>
 	        </div>
     </header>
