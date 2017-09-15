@@ -487,7 +487,7 @@
     		success : function(result) {
 	    	    		if(result == "true"){
 	    	    			alert("로그인 완료.")
-	    	    			location.href='/memory/member/index';
+	    	    			location.href='/memory/index';
 	    	    		}
 	    	    		else if(result == "stop"){
 	    	    			alert("계정이 정지되었습니다. 관지라에게 문의해주세요.")

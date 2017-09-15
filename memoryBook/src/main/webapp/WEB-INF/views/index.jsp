@@ -124,6 +124,11 @@
                 <a class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
             </div>
             
+            <div id="deleteZone" style="float:right;width:100px;height:100px" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<i class="fa fa-trash w3-xxlarge"></i>
+				<p>Delete</p>
+			</div>
+            
 			<div id="profile">
 				<div class="container-fluid">
 				<h1>Your Profile</h1>
@@ -185,22 +190,20 @@
 		      <!-- Modal content-->
 		      <div class="modal-content" style="width:400px;margin: 0 auto;">
 		        <div class="modal-header">
-		          <button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
-		          <br>
-		          <br>
-		          <h4 class="modal-title" id="dragNoteTitle" style="text-align: center;">Memory Lane Unregister</h4>
-		          <br>
+		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
+		        	<br><br>
+		        	<h4 class="modal-title" id="dragNoteTitle" style="text-align: center;">Memory Lane Unregister</h4>
+		        	<br>
 		        </div>
 		        <br>
 		        			        	
 		        <div class="modal-body" id="unregisterModal" >
 		          	
-		          	<form name="unregisterfrm" id="unregisterfrm" action="unregister" method="post">       
+		        <form name="unregisterfrm" id="unregisterfrm" action="/memory/member/unregister" method="post">       
 			    	<table id="loginInfo">
 			    		<tr>
 			    			<div class="form-group">
-			    			 <label for="loginEmail">Email:</label>
-			    			 <input type="text" class="form-control" id="email" name="email" placeholder="email을 다시 입력해주세요" required="required" autofocus="autofocus" />
+			    			탈퇴하실려면 비밀번호를 입력하세요.<br>탈퇴시 작성하신 노트,드래그,친구정보가 전부 삭제됩니다.
 			    			</div>
 			    		</tr>
 			    		<tr>
@@ -258,7 +261,7 @@
     
   //모달 취소버튼
     $("#cancleBtn").click(function (){
-    	location.href='/memory/member/index';
+    	location.href='/memory/index';
     });
     
     $("#menu-toggle").click(function(e){
@@ -500,6 +503,31 @@
 		} else {
 		chk_tf = false;
 		}
+	}
+    
+	// 드롭 허용
+	function allowDrop(ev) {
+		ev.preventDefault(); 
+		}
+
+	// 드래그 이벤트
+	function drag(ev) { 
+		ev.dataTransfer.setData("text", ev.target.id); 
+		} 
+
+	// 노트 및 드래그 삭제 드랍 이벤트
+	function drop(ev) {
+		ev.preventDefault();
+		var deleteId = ev.dataTransfer.getData("text"); 
+		var deleteNum = deleteId.substring(4);
+		if (deleteId.startsWith("d")){
+		 	deleteDrag(deleteNum);
+		} else if (deleteId.startsWith("c")){
+			deleteNum = deleteId.substring(8);
+			deleteCategory(deleteNum);
+		} else{
+		 	deleteNote(deleteNum);
+		} 
 	}
     </script>
 

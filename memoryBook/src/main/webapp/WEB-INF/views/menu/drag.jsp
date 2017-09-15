@@ -124,10 +124,8 @@
 		</div>
 		<br><br><br>
 			<!-- 드래그카드 뿌리기 -->
-			<div id="dragCardList"
-				style='position: relative; width: 100%; height: 500px;'></div>
+		<div id="dragCardList" style='position: relative; width: 100%; height: 500px;'></div>
 		</div>
-	
 	<!-- 본문내용 끝 -->
 
 	<script>
@@ -210,7 +208,7 @@
 			$("#title_drag").html("<span>[ 드래그 데이터  "+time2+" ]</span><h3>" + title +"</h3>");
 			$("#date_drag").html(time);
 			$("#content_drag").html(content);
-			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_drag'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_drag'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_drag'><i class='fa fa-download'></i></a></span></p>");
+			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_drag'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_drag'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_drag'><i class='fa fa-download'></i></a></span></p>");
 //	 		document.getElementById("editorBtnDiv").style.display = "none";
 			
 		})

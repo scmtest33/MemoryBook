@@ -30,10 +30,8 @@
 		</div>
 
 		<!-- 드래그바 -->
-		<div class="w3-sidebar w3-round"
-			style="background-color: white; width: 300px; z-index: 102;"
-			id="sideDragBar">
-			<div style="padding: 8px 25px; margin-top: 20px; text-align: center; font-size: 18px;">
+		<div class="w3-sidebar w3-round sideDragBar">
+			<div class="sideDragBar_title">
 				<i class="fa fa-inbox w3-xlarge"></i> DRAGS
 			</div>
 			<!-- 드래그 리스트 -->
@@ -41,31 +39,29 @@
 		</div>
 
 		<!-- 입력창 -->
-		<form name="noteFrm" id="noteFrm" method="POST"
-			enctype="multipart/form-data" style="z-index: 2; width: 1069px;">
-			<div>
-				<br>
+		<div class="editor">
+			<br>
+			<form name="noteFrm" id="noteFrm" method="POST"	enctype="multipart/form-data">
 				<table class='pull-left'>
 					<tr>
 						<td><label for="category">카테고리</label></td>
 						<td>&nbsp;&nbsp;</td>
-						<td><select name="category" id="category" class="form-control">
+						<td><select name="category" id="category"
+							class="form-control">
 						</select></td>
 						<td>&nbsp;&nbsp;</td>
-						<td>
-						<i class="fa fa-plus-circle w3-xlarge" onclick="showInput();" style="color: #ccc;"></i>
+						<td><i class="fa fa-plus-circle w3-xlarge"
+							onclick="showInput();" style="color: #ccc;"></i></td>
+						<td>&nbsp;&nbsp;</td>
+						<td><input type="text" id="categoryToAdd"
+							name="categoryToAdd" style="display: none;" /></td>
+						<td>&nbsp;&nbsp;</td>
+						<td><i id="Category1" style="display: none; color: #ccc;"
+							class="fa fa-check-circle w3-xlarge" onclick="addCategory();"></i>
 						</td>
 						<td>&nbsp;&nbsp;</td>
-						<td>
-				        	<input type ="text" id="categoryToAdd" name="categoryToAdd" style="display: none;" />
-						</td>
-						<td>&nbsp;&nbsp;</td>
-						<td>
-				        	<i id="Category1" style="display: none;color: #ccc;" class="fa fa-check-circle w3-xlarge" onclick="addCategory();"></i>
-						</td>
-						<td>&nbsp;&nbsp;</td>
-						<td>
-				        	<i id="Category2" style="display: none;color: #ccc;" class="fa fa-times-circle w3-xlarge" onclick="closeInput();"></i>
+						<td><i id="Category2" style="display: none; color: #ccc;"
+							class="fa fa-times-circle w3-xlarge" onclick="closeInput();"></i>
 						</td>
 					</tr>
 				</table>
@@ -73,34 +69,33 @@
 				<table>
 					<tr>
 						<td><input type="text" id="noteTitle" name="noteTitle"
-							style="width: 1069px;" placeholder="제목을 입력하세요" /></td>
+							style="width: 975px;" placeholder="제목을 입력하세요" /></td>
 					</tr>
 					<tr>
 						<td><textarea id="myNicEditor" name="myNicEditor" cols="150"
 								rows="20"></textarea></td>
 					</tr>
 				</table>
-			</div>
-			<table class='pull-right'>
-				<tr>
-					<td>
-						<div class="btn btn-default" style="width: 60px;"
-							id="noteSubmitBtn">저장</div>
-					</td>
-					<td>
-						<div class="btn btn-default" style="width: 60px;"
-							id="noteUpdateBtn" style="display: none;">수정</div>
-					</td>
-					<td>
-						<div class="btn btn-default" style="width: 60px;"
-							id="cancelBtn" style="display: none;">취소</div>
-					</td>
-				</tr>
-			</table>
-		</form>
-		<br><br><br><br><br>
+				<br>
+				<table class='pull-right'>
+					<tr>
+						<td>
+							<div class="btn btn-default" style="width: 60px;"
+								id="noteSubmitBtn">저장</div>
+						</td>
+						<td>
+							<div class="btn btn-default" style="width: 60px;"
+								id="noteUpdateBtn" style="display: none;">수정</div>
+						</td>
+						<td>
+							<div class="btn btn-default" style="width: 60px;" id="cancelBtn"
+								style="display: none;">취소</div>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
 	</div>
-
 	<!-- 본문내용 끝 -->
 
 	<script>

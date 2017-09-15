@@ -32,11 +32,6 @@ public class MemberController {
 			return service.join(vo);
 		}
 		
-		@RequestMapping(value = "index", method = RequestMethod.GET)
-		public String index() {
-			return "/index"; 
-		}
-		
 		@RequestMapping(value = "main", method = RequestMethod.GET)
 		public String main() {
 			return "main"; 
@@ -61,6 +56,30 @@ public class MemberController {
 			}
 		}
 		
+		
+		@RequestMapping(value = "login_ex", method = RequestMethod.POST)
+		@ResponseBody
+		public MemberVO login_ex(String email,String mem_pwd, HttpSession session, Model model) {
+			System.out.println(email);
+			MemberVO vo = new MemberVO();
+			vo.setEmail(email);
+			vo.setMem_pwd(mem_pwd);
+			MemberVO nvo = service.login(vo); 
+			if(nvo == null){
+				return null;
+			}
+			else if(nvo.getApprovalNum()==1){
+				return null;
+			}
+			else{
+				session.setAttribute("email", nvo.getEmail());
+				session.setAttribute("memberNo", nvo.getMem_no());
+				session.setAttribute("name", nvo.getName());
+				return nvo;
+			}
+		}
+		
+		
 		//로그아웃
 		@RequestMapping(value = "logout", method = RequestMethod.GET)
 		public String logout(HttpSession session) {
@@ -72,17 +91,13 @@ public class MemberController {
 		@RequestMapping(value = "unregister", method = RequestMethod.POST)
 		public String unregister(MemberVO vo, HttpSession session, Model model) {
 			String loginEmail = (String)session.getAttribute("email");
-			boolean checkResult = loginEmail.equals(vo.getEmail());
-			System.out.println(checkResult);
-			model.addAttribute("checkResult", checkResult);
-			if(checkResult){
-				boolean unregiResult = service.unregister(vo);
-				model.addAttribute("unregiResult", unregiResult);
-				if(unregiResult){
-					session.invalidate();
-					return "redirect:/";
-				}else return "redirect:/member/index";
-			}else return "redirect:/member/index";
+			vo.setEmail(loginEmail);
+			boolean unregiResult = service.unregister(vo);
+			model.addAttribute("unregiResult", unregiResult);
+			if(unregiResult){
+				session.invalidate();
+				return "redirect:/";
+			}else return "redirect:/index";
 		}
 		//리스트 출력
 		@RequestMapping(value = "getList", method = RequestMethod.GET)
