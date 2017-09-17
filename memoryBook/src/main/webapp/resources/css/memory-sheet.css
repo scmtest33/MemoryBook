@@ -15,6 +15,7 @@ ul {
 	list-style: none;
 }
 
+
 /* 드래그(에디터에서) 및 노트 섬네일리스트 항목 */
 div.gallery {
 	margin: 5px;
@@ -23,23 +24,19 @@ div.gallery {
 	width: 180px;
 	height: 180px;
 }
-
 div.gallery: hover {
 	border: 1px solid #777;
 }
-
 div.gallery img {
 	width: 178px;
 	height: 138px;
 }
-
 div.desc {
 	padding: 10px 20px 10px 20px;
 	text-align: center;
 	width: 178px !important;
 	height: 50px !important;
 }
-
 div.desc p {
 	width: 138px;
 	height: 20px;
@@ -54,7 +51,6 @@ div.sideDragBar_title {
 	text-align: center;
 	font-size: 18px
 }
-
 div.sideDragBar {
 	overflow: auto;
 	background-color: white;
@@ -62,12 +58,12 @@ div.sideDragBar {
 	height: 400px;
 	z-index: 102;
 }
-
 div.editor {
 	position: relative;
 	z-index: 2;
 	width: 976px;
 }
+
 /* .NICEDIT-PANELCONTAIN { */
 /*   HEIGHT: 43PX !IMPORTANT; */
 /* } */
@@ -80,30 +76,63 @@ div.editor {
 	background-color: white;
 }
 
+
 /* 드래그 및 노트 모달 */
 #searchResult img {
 	max-width: 100%;
 }
-
 #content img {
 	max-width: 100%;
 }
-
 #content_drag img {
 	max-width: 100%;
 }
-
-#title span {
+#title div {
 	color: grey;
 	font-weight: bold;
 	margin-bottom: 20px;
 }
-
 a.btn_modal {
 	color: white;
 }
 
+
+/* 노트 및 드래그 내용보기 모달 */
+.mail_modal_title{
+	color: #555555;
+}
+.modal_input{
+	box-shadow: 1px 2px 5px #bbb;
+}
+.modal_detail_title{
+	text-align: center;
+}
+.modal_detail_date{
+	text-align: right;
+}
+.modal_detail_content{
+	text-align: left;
+}
+.modal_detail_footer{
+	text-align: right;
+}
+
+
 /* 드래그 및 노트 리스트 */
+body {
+	background: #fff;
+	color: #333;
+}
+body, th, td, input, select, textarea, button {
+	font-size: 14px;
+	line-height: 1.5;
+}
+div.noteView{
+	z-index: 7;
+}
+div.dragView{
+	z-index: 7;
+}
 .tit_brunch {
 	margin-top: 0;
 	font-size: 40px;
@@ -111,39 +140,22 @@ a.btn_modal {
 	color: #1a1a1a;
 	text-align: left;
 }
-
 .desc_brunch {
 	width: 960px;
 	/*     margin: 0 auto; */
-}
-
-body {
-	background: #fff;
-	color: #333;
-}
-
-body, th, td, input, select, textarea, button {
-	font-size: 14px;
-	line-height: 1.5;
-}
-
-.desc_brunch {
 	padding-bottom: 16px;
 	margin-top: -3px;
 	font-size: 32px;
 	line-height: 46px;
 	color: #cacaca;
 }
-
 .desc_brunch, .tit_brunch {
 	font-family: "Nanum Myeongjo", sans-serif;
 	letter-spacing: -.05em;
 }
-
 .txt_brunch {
 	color: #dee4ec;
 }
-
 .nav-tabs>li.active>a: hover {
 	background-color: #F1F1F1;
 	color: #555;
@@ -151,19 +163,16 @@ body, th, td, input, select, textarea, button {
 	border: 1px solid #ddd;
 	border-bottom-color: transparent;
 }
-
 .gallery figure img {
 	-webkit-transform: scale(1);
 	transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 }
-
 .gallery figure: hover img {
 	-webkit-transform: scale(1.3);
 	transform: scale(1.3);
 }
-
 figure {
 	width: 178px;
 	height: 138px;
@@ -172,15 +181,12 @@ figure {
 	background: #fff;
 	overflow: hidden;
 }
-
 blockquote {
 	border-left: none
 }
-
 .quote-badge {
 	background-color: rgba(0, 0, 0, 0.2);
 }
-
 .quote-box {
 	overflow: hidden;
 	margin-top: -50px;
@@ -192,7 +198,6 @@ blockquote {
 	width: 90%;
 	box-shadow: 2px 2px 2px 2px #E0E0E0;
 }
-
 .quotation-mark {
 	margin-top: -10px;
 	font-weight: bold;
@@ -200,7 +205,6 @@ blockquote {
 	color: white;
 	font-family: "Times New Roman", Georgia, Serif;
 }
-
 .quotation-mark1 {
 	margin-top: -10px;
 	font-weight: bold;
@@ -208,21 +212,43 @@ blockquote {
 	color: gray;
 	font-family: "Times New Roman", Georgia, Serif;
 }
-
 .quote-text {
 	font-size: 19px;
 	margin-top: -65px;
 }
-
 .quote-text * {
 	font-size: 15px;
 }
-
+.quote-text-content {
+	overflow:auto;
+	max-height:170px;
+	font-size:15px;
+}
 .quote-text img {
 	width: 90%;
 }
 
-/* 드래그 리스트 항목 */
+
+/* 노트 카테고리 항목 */
+.category_list {
+	min-width:20px;
+}
+.category_list_2{
+	min-width:20px;
+	display:none;
+}
+
+
+/* 노트 및 드래그 리스트 항목 */
+div.List {
+	overflow: auto;
+	height: 600px;
+}
+div.noteCardList {
+	position: relative;
+	width: 100%;
+	height: 500px;
+}
 div.dragList {
 	margin: 5px;
 	border: 2px solid #ccc;
@@ -233,45 +259,42 @@ div.dragList {
 	background-color: #FFFFFB;
 	box-shadow: 2px 2px 2px 2px #E0E0E0;
 }
-
 div.dragList: hover {
 	border: 2px solid #777;
 }
-
 div.dragList img {
 	width: 178px;
 	height: 138px;
 }
-
 .dragTitle {
 	font-size: 19px;
 	margin: 5px;
 }
-
 .dragTitle * {
 	font-size: 15px;
 }
-
 .dragTitle img {
 	width: 90%;
 }
-
+.drag_URL {
+	font-style:italic;
+	font-size:12px;
+}
 .dragContent {
 	margin: 5px;
 	margin-top: -20px;
 	height: 200px;
 	overflow: auto;
 }
-
 .dragFooter {
 	margin: 5px;
 }
+
 
 /* 검색기능 */
 .search_window {
 	display: block
 }
-
 .search-form .form-group {
 	float: right !important;
 	transition: all 0.35s, border-radius 0s;
@@ -282,7 +305,6 @@ div.dragList img {
 	border-radius: 25px;
 	border: 1px solid #ccc;
 }
-
 .search-form .form-group input.form-control {
 	padding-right: 20px;
 	border: 0 none;
@@ -290,31 +312,25 @@ div.dragList img {
 	box-shadow: none;
 	display: block;
 }
-
 .search-form .form-group input.form-control: : -webkit-input-placeholder {
 	display: none;
 }
-
 .search-form .form-group input.form-control: -moz-placeholder {
 	/* Firefox 18- */
 	display: none;
 }
-
 .search-form .form-group input.form-control: : -moz-placeholder {
 	/* Firefox 19+ */
 	display: none;
 }
-
 .search-form .form-group input.form-control: -ms-input-placeholder {
 	display: none;
 }
-
 .search-form .form-group: hover, .search-form .form-group.hover {
 	width: 100%;
 	border-radius: 4px 25px 25px 4px;
 }
-
-.search-form .form-group span.form-control-feedback {
+.search-form .form-group div.form-control-feedback {
 	position: absolute;
 	top: -1px;
 	right: -2px;
@@ -329,6 +345,7 @@ div.dragList img {
 	font-size: 14px;
 }
 
+
 /* 삭제 아이콘 */
 .deleteZone {
 	margin-top: 30px;
@@ -339,14 +356,11 @@ div.dragList img {
 	background-size: 80px;
 }
 
-/* test */
-.list_title {
-/*  position: absolute; */
-	background-color: white;
-/* 	margin-bottom: 300px; */
-}
 
 /* 일반 버튼 */
 .btn-default {
 	box-shadow: 1px 2px 5px #aaa;
+}
+.noteWrite_btn {
+	width: 90px;
 }

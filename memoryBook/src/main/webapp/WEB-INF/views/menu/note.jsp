@@ -26,7 +26,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h2 class="modal-title">
-						<i class="fa fa-envelope" style="color: #555555;"></i> Share a
+						<i class="fa fa-envelope mail_modal_title"></i> Share a
 						note
 					</h2>
 				</div>
@@ -34,11 +34,8 @@
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;노트를 공유할 메일 주소를 입력해주세요.</p>
 				<div class="modal-body">
 					<div class="input-group">
-						<span class="input-group-addon"
-							style="box-shadow: 1px 2px 5px #bbb;"><i
-							class="fa fa-envelope"></i></span> <input id="email" type="text"
-							style="box-shadow: 1px 2px 5px #bbb;" class="form-control"
-							name="email" placeholder="받는 사람">
+						<span class="input-group-addon modal_input">
+						<i class="fa fa-envelope"></i></span> <input id="email" type="text" class="form-control modal_input" name="email" placeholder="받는 사람">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -79,30 +76,28 @@
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
-					<div id='title' class="w3-margin w3-padding"
-						style="text-align: center;"></div>
+					<div id='title' class="w3-margin w3-padding modal_detail_title"></div>
 				</div>
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-12">
-							<div id='date' class="w3-margin w3-padding"
-								style="text-align: right;"></div>
-							<div id='content' class="w3-margin w3-padding"
-								style="text-align: left;"></div>
+							<div id='date' class="w3-margin w3-padding modal_detail_date"></div>
+							<div id='content' class="w3-margin w3-padding modal_detail_content"></div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<span id='update' class="w3-margin w3-padding"
-						style="text-align: right;"> </span>
+					<span id='update' class="w3-margin w3-padding modal_detail_footer"> </span>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- 메인뷰 및 검색 -->
-	<div id="noteView" style="z-index: 7;">
+	<div id="noteView" class="noteView">
 		<!-- 검색 -->
-		<div>
+		<div class="list_title">
+		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
+		</div>
 			<br>
 			<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
 			<p class="desc_brunch">
@@ -111,19 +106,16 @@
 				<!-- 			<span class="part"><span class="txt_brunch">노트 속 간직하고 있는 글과 감성을.</span></span> -->
 				<span class="part">
 					<div class="col-md-4 col-md-offset">
-						<div action="" class="search-form">
-							<div class="form-group has-feedback"
-								onkeydown="javascript:if(event.keyCode == 13) searchList();">
-								<label for="search" class="sr-only">Search</label>
-									<input type="text" class="form-control" name="searchWrd"
-									id="searchWrd" placeholder="노트 검색">
-									<span class="glyphicon glyphicon-search form-control-feedback"></span>
-							</div>
-						</div>
+		           		 <div action="" class="search-form">
+		                	<div class="form-group has-feedback" onkeydown="javascript:if(event.keyCode == 13) searchList();">
+		            			<label for="search" class="sr-only">Search</label>
+		            			<input type="text" class="form-control" name="searchWrd" id="searchWrd" placeholder="노트 검색" >
+		              		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+		            		</div>
+		           		 </div>
 					</div>
 				</span>
-				<div class="btn btn-default" style="width: 90px;"
-							id="noteWrite">노트작성</div><br>
+				<div class="btn btn-default noteWrite_btn" id="noteWrite">노트작성</div><br>
 		</div>
 		<br><br><br>
 		<!-- 카테고리 선택 -->
@@ -133,10 +125,8 @@
 		<div class="tab-content">
 			<br>
 			<br>
-			<!-- 			<div id="categoryList" class="btn-group" style='position:relative; width:100%; height:60px;'></div> -->
 			<!-- 노트카드 뿌리기 -->
-			<div id="noteCardList"
-				style='position: relative; width: 100%; height: 500px;'></div>
+			<div id="noteCardList" class="noteCardList List"></div>
 		</div>
 	</div>
 	
@@ -366,18 +356,20 @@
 			for(var i = 0; i < categoryList.length; i++){
 				var category = categoryList[i];
 				var categoryNo = category.categoryNo;
-				html += "<li class='active' onclick='getNoteByCategoryNo("+category.categoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' aria-expanded='false' style='min-width:20px;'>"
+				html += "<li class='active' onclick='getNoteByCategoryNo("+category.categoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' aria-expanded='false' class='category_list'>"
 				html += "<a data-toggle='tab' ondblclick='categoryUpdate(event);' href='#' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' style='min-width:20px;'>"+category.categoryName+"</a>";
 				html += "<a data-toggle='tab' contenteditable='true' style='min-width:20px; display:none;' id='categoryUpdate"+category.categoryNo+"'>"+category.categoryName+"</a>";
+//				html += "<a data-toggle='tab' ondblclick='categoryUpdate(event);' href='#' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' class='category_list'>"+category.categoryName+"</a>";
+//				html += "<a data-toggle='tab' contenteditable='true' class='category_list_2' id='categoryUpdate"+category.categoryNo+"'>"+category.categoryName+"</a>";
 				html += "</li>";
 			}
 			$("#categoryList").html(html);
-//	 		document.getElementById("noteView").style.display = "none";
 		})
 		.fail(function(jqXhr, textStatus, errorText){
 			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
+	
 	//카테고리 수정
 	function categoryUpdate(event){
 		var categoryToUpdate = event.target.id;
@@ -386,6 +378,7 @@
 		document.getElementById(categoryToUpdate).style.display = "none";
 //	 	document.getElementById(categoryInput).style.display = "block";
 		$("#"+categoryInput).attr("style","display:block !important");
+		getMainCategory();
 	}
 
 	//메인에 카테고리 별로 리스트 뿌리기
@@ -432,7 +425,7 @@
 			var note = result[i];	
 			var noteNo = note.noteNo;
 			var categoryNo = note.categoryNo;
-			html += "<div class='gallery' onclick='noteDetail("+note.noteNo+")' style='box-shadow: 1px 2px 5px #bbb;' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal'  >";
+			html += "<div class='gallery' onclick='noteDetail("+note.noteNo+")' class='modal_input' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal'  >";
 			// 이미지 뿌리기
 			var noteContent = note.noteContent;
 			if(noteContent.indexOf('<img') != -1) {
@@ -441,7 +434,7 @@
 			} else {
 				html += '<figure><img id="note'+note.noteNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
 			}
-			html += "	<div  class='desc'><p>" + note.noteTitle + "</p></div>";
+			html += "<div class='desc'><p>" + note.noteTitle + "</p></div>";
 			html += "</div>";
 
 		}
@@ -586,28 +579,21 @@
 
 	//카테고리 삭제
 	function deleteCategory(categoryNo) {
-		alert({
-			  title: "확인",
-			  text: "카테고리와 해당 게시물을 모두 삭제하시겠어요?",
-			  type: "warning",
-			  showCancelButton: true,
-			  confirmButtonText: "네, 삭제해주세요 :)",
-			  cancelButtonText: "아니요!",
-			  closeOnConfirm: false
-			},
-			function(){
-				$.ajax({
-					url:"/memory/note/deleteCategory",
-					dataType:"json",
-					data: {"categoryNo":categoryNo},
-					type: "POST"
-					}).done(function (result){
-						alert(result.msg,'success');
-						mainNoteList();
-						getMainCategory();
-				});
-			}
-		);
+		var del_chk;
+		del_chk = confirm("정말 카테고리를 삭제하시겠습니까?\n(카테고리 삭제시 해당 카테고리의 게시물도 전부 삭제됩니다)");
+		
+		if (del_chk) {
+			$.ajax({
+				url:"/memory/note/deleteCategory",
+				dataType:"json",
+				data: {"categoryNo":categoryNo},
+				type: "POST"
+				}).done(function (result){
+					alert(result.msg,'success');
+					mainNoteList();
+					getMainCategory();
+			});
+		}
 	}	
 
 	// 카테고리 인풋창 열기
@@ -629,7 +615,6 @@
 
 	// 카테고리 추가
 	function addCategory(){
-		
 		var categoryName = $("#categoryToAdd").val();
 		var memberNo = ${memberNo};
 		

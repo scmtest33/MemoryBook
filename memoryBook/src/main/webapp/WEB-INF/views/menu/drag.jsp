@@ -26,7 +26,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h2 class="modal-title">
-						<i class="fa fa-envelope" style="color: #555555;"></i> Share a
+						<i class="fa fa-envelope" class="mail_modal_title"></i> Share a
 						drag
 					</h2>
 				</div>
@@ -34,11 +34,10 @@
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;드래그를 공유할 메일 주소를 입력해주세요.</p>
 				<div class="modal-body">
 					<div class="input-group">
-						<span class="input-group-addon"
-							style="box-shadow: 1px 2px 5px #bbb;"><i
-							class="fa fa-envelope"></i></span> <input id="email_drag" type="text"
-							style="box-shadow: 1px 2px 5px #bbb;" class="form-control"
-							name="email_drag" placeholder="받는 사람">
+						<div class="input-group-addon modal_input">
+							<i class="fa fa-envelope modal_input"></i>
+						</div>
+						<input id="email_drag" type="text" class="form-control modal_input" name="email_drag" placeholder="받는 사람">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -64,7 +63,7 @@
 					<br>
 					<h2>드래그를 다운로드 하겠습니까?</h2>
 					<br> <a id="downloadDragPath" class="btn btn-default">다운로드</a>
-					<div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
+					<input type="button" class="btn btn-default" data-dismiss="modal">취소
 				</div>
 			</div>
 		</div>
@@ -77,31 +76,27 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						<div aria-hidden="true">&times;</div><div class="sr-only">Close</div>
 					</button>
-					<div id='title_drag' class="w3-margin w3-padding"
-						style="text-align: center;"></div>
+					<div id='title_drag' class="w3-margin w3-padding modal_detail_title"></div>
 				</div>
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-12">
-							<div id='date_drag' class="w3-margin w3-padding"
-								style="text-align: right;"></div>
-							<div id='content_drag' class="w3-margin w3-padding"
-								style="text-align: left;"></div>
+							<div id='date_drag' class="w3-margin w3-padding modal_detail_date"></div>
+							<div id='content_drag' class="w3-margin w3-padding modal_detail_content"></div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<span id='update_drag' class="w3-margin w3-padding"
-						style="text-align: right;"> </span>
+					<div id='update_drag' class="w3-margin w3-padding modal_detail_footer"> </div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- 메인뷰 -->
-	<div id="dragView" style="z-index: 7;">
+	<div id="dragView" class="dragView;">
 		<!-- 검색 -->
 		<div class="list_title">
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -109,8 +104,8 @@
 			<br>
 			<h3 class="tit_brunch">드래그 리스트</h3>
 			<p class="desc_brunch">
-				<span class="part">드래그를 공유해 보세요.<br></span>
-				<span class="part">
+				<div class="part">드래그를 공유해 보세요.<br></div>
+				<div class="part">
 					<div class="col-md-4 col-md-offset search_window">
 						<div action="" class="search-form">
 							<div class="form-group has-feedback"
@@ -118,16 +113,16 @@
 								<label for="search" class="sr-only">Search</label>
 									<input type="text" class="form-control" name="searchWrd"
 									id="searchWrd" placeholder="드래그 검색">
-									<span class="glyphicon glyphicon-search form-control-feedback"></span>
+									<div class="glyphicon glyphicon-search form-control-feedback"></div>
 							</div>
 						</div>
 					</div>
-				</span>
+				</div>
 		</div>
 		<br><br><br>
 			<!-- 드래그내용 뿌리기 -->
-		<div id="dragList"></div>
 		</div>
+		<div id="dragList" class="List"></div>
 	<!-- 본문내용 끝 -->
 
 	<script>
@@ -207,10 +202,10 @@
 			         + date.getDate();         
 			//시간뿌리기 끝
 //	 		document.getElementById("dragView").style.display = "block";
-			$("#title_drag").html("<span>[ 드래그 데이터  "+time2+" ]</span><h3>" + title +"</h3>");
+			$("#title_drag").html("<div>[ 드래그 데이터  "+time2+" ]</div><h3>" + title +"</h3>");
 			$("#date_drag").html(time);
 			$("#content_drag").html(content);
-			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_modal'><i class='fa fa-download'></i></a></span></p>");
+			$("#update_drag").html("<div class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateDrag("+dragNo+");'></i></a></div>&nbsp;<div class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></div>&nbsp;<div class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></div>&nbsp;<div class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_modal'><i class='fa fa-download'></i></a></div></p>");
 //	 		document.getElementById("editorBtnDiv").style.display = "none";
 			
 		})
@@ -293,7 +288,7 @@
     		html += "<p class='quotation-mark1' id='drag"+ drag.dragNo+"'> “ </p> ";
     		html += "<br>";
     		html += "<br>";
-    		html += "<div class='quote-text' style='overflow:auto;max-height:170px; font-size:15px;' id='drag"+ drag.dragNo+"'>";
+    		html += "<div class='quote-text quote-text-content' id='drag"+ drag.dragNo+"'>";
     		html += "		<p id='drag"+ drag.dragNo+"'>" + drag.dragContent.replace("amp;", "&") + "</p><br>";
     		html += "</div>";
     		html += " <hr>";
@@ -308,9 +303,9 @@
     		         + date.getSeconds();
     		html += "<p class='blog-post-bottom'>"+ time +"</p>";
     		if(drag.dragUrlTitle != null){
-    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : "+ drag.dragUrlTitle +"</p>";
+    			html += "<p class='blog-post-bottom pull-left' class='drag_URL'>출처 : "+ drag.dragUrlTitle +"</p>";
     		}else {
-    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : 알 수 없음</p>";
+    			html += "<p class='blog-post-bottom pull-left' class='drag_URL'>출처 : 알 수 없음</p>";
     		}
     		html += "</div>";
     		//시간 뿌리기 끝
