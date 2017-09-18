@@ -29,5 +29,7 @@ public interface NoteService {
 
 	public NoteVO emailNote(NoteVO note) throws Exception;
 
+	public List<CategoryVO> getFriendCategory(CategoryVO category);
+
 
 }

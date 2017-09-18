@@ -75,5 +75,9 @@ public class NoteServiceImpl implements NoteService{
 	public NoteVO emailNote(NoteVO note) throws Exception {
 		return dao.emailNote(note);
 	}
+	@Override
+	public List<CategoryVO> getFriendCategory(CategoryVO category) {
+		return dao.getFriendCategory(category.getMemberNo());
+	}
 		
 }

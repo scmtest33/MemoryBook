@@ -63,4 +63,8 @@
 		WHERE m.email = f.friend_Email and f.MEM_EMAIL = #{loginEmail}
 	</select>
 	
+	<select id="getFriendmemNo" resultType="Int" parameterType="String">
+		SELECT MEM_NO FROM T_MEMBER WHERE email = #{email}
+	</select>
+	
 </mapper>

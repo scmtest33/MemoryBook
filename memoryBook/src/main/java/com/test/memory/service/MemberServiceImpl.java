@@ -61,4 +61,9 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<FriendVO> getFriendList(String loginEmail) {
 		return dao.getFriendList(loginEmail);
 	}
+
+	@Override
+	public int getFriendmemNo(String email) {
+		return dao.getFriendmemNo(email);
+	}
 }

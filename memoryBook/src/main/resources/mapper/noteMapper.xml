@@ -101,6 +101,13 @@
 		  from t_category
 		 where mem_no = #{memberNo} order by category_name
 	</select>
+	
+	<!-- 카테고리 리스트 -->
+	<select id="getFriendCategory" parameterType="int" resultMap="categoryMap">
+		select *
+		  from t_category
+		 where mem_no = #{memberNo} order by category_name
+	</select>
 	<!-- 카테고리 등록 -->
 	<insert id="addCategory" parameterType="categoryVO" useGeneratedKeys="true" keyProperty="noteNo">
 		insert into t_category values (
