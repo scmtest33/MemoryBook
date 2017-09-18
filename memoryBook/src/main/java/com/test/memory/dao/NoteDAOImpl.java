@@ -81,5 +81,11 @@ public class NoteDAOImpl implements NoteDao{
 		NoteMapper mapper = sqlSession.getMapper(NoteMapper.class);
 		mapper.deleteCategory(categoryNo);	
 	}
+
+	@Override
+	public List<CategoryVO> getFriendCategory(int memberNo) {
+		NoteMapper mapper = sqlSession.getMapper(NoteMapper.class);
+		return mapper.getFriendCategory(memberNo);
+	}
 	
 }

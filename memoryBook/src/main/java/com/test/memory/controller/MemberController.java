@@ -142,6 +142,12 @@ public class MemberController {
 			String loginEmail = (String)session.getAttribute("email");
 			return service.getFriendList(loginEmail);
 		}
+		
+		@RequestMapping(value = "getFriendmemNo", method = RequestMethod.POST)
+		@ResponseBody
+		public int getFriendmemNo(String email, Model model) {
+			return service.getFriendmemNo(email);
+		}
 
 				
 }

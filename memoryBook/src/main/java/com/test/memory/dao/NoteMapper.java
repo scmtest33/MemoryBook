@@ -29,4 +29,6 @@ public interface NoteMapper {
 	public void deleteNote(int noteNo) throws Exception;
 
 	public void deleteCategory(int categoryNo) throws Exception;
+
+	public List<CategoryVO> getFriendCategory(int memberNo);
 }

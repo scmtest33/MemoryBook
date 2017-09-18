@@ -134,6 +134,41 @@ public class NoteController {
 		}
 		return noteList;
 	}
+	
+	@RequestMapping("/friendNoteList")
+	public List<NoteVO> friendNoteList(HttpServletRequest request, int friendNo) throws Exception {
+		
+		NoteVO note = new NoteVO();
+		note.setMemberNo(friendNo);
+
+		List<NoteVO> noteList = service.noteList(note);
+		for(NoteVO n : noteList){
+			try{
+				// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+				fis = new FileInputStream(FILE_PATH + n.getNoteContent());
+				
+				// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+				ois = new ObjectInputStream(fis);
+				
+				// 오브젝트 스트림으로부터 오브젝트를 읽어 String으로 형변환
+				String content = (String) ois.readObject();
+				n.setNoteContent(content);
+				} catch(Exception e) {
+					// e.printStackTrace();
+					System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+				} finally {
+					closeStreams();
+			}
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(n.getNoteRegDate());
+			n.setNoteRegDate(cal.getTime());
+		}
+		return noteList;
+	}
+	
+	
+	
+	
 	@RequestMapping("/noteCartegoryList")
 	public List<NoteVO> noteCartegoryList(HttpServletRequest request, HttpSession session) throws Exception {
 		NoteVO note = new NoteVO();
@@ -149,6 +184,22 @@ public class NoteController {
 		
 		return noteList;
 	}
+	@RequestMapping("/freindNoteCartegoryList")
+	public List<NoteVO> freindNoteCartegoryList(HttpServletRequest request, int freindNo) throws Exception {
+		NoteVO note = new NoteVO();
+		note.setCategoryNo(Integer.parseInt(request.getParameter("friendCategory")));
+		note.setMemberNo(freindNo);
+		
+		List<NoteVO> noteList = service.noteCartegoryList(note);
+		for(NoteVO n : noteList){
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(n.getNoteRegDate());
+			n.setNoteRegDate(cal.getTime());
+		}
+		
+		return noteList;
+	}
+	
 	@RequestMapping("/noteByDate")
 	public List<NoteVO> noteByDate(HttpServletRequest request, HttpSession session) throws Exception {
 		String date = request.getParameter("date");
@@ -230,6 +281,18 @@ public class NoteController {
 		List<CategoryVO> categoryList = service.getCategory(category);
 		Map<String, Object> msg = new HashMap<>();
 		msg.put("categoryList", categoryList);
+		return msg;
+	}
+	
+	@RequestMapping("/getFriendCategory")
+	public Map<String, Object> getFriendCategory(int friendNo) throws Exception {
+		System.out.println("친구넘버 : "+ friendNo);
+		CategoryVO category = new CategoryVO();
+		category.setMemberNo(friendNo);
+		
+		List<CategoryVO> friendCategory = service.getFriendCategory(category);
+		Map<String, Object> msg = new HashMap<>();
+		msg.put("friendCategory", friendCategory);
 		return msg;
 	}
 	@RequestMapping("/mailNote")

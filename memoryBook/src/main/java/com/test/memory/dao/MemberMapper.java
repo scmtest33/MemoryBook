@@ -15,4 +15,5 @@ public interface MemberMapper {
 	public int addFriend(FriendVO friend);
 	public int deleteFriend(FriendVO friend);
 	public ArrayList<FriendVO> getFriendList(String loginEmail);
+	public int getFriendmemNo(String email);
 }

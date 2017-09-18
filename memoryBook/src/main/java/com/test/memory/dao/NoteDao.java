@@ -30,4 +30,6 @@ public interface NoteDao {
 
 	public void deleteCategory(int categoryNo) throws Exception;
 
+	public List<CategoryVO> getFriendCategory(int memberNo);
+
 }
