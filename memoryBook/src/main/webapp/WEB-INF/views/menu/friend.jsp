@@ -17,10 +17,40 @@
 </head>
 
 <body>
+
+	<!-- 노트모달 -->
+	<div class="modal fade" id="friendDetailModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<div id='friendTitle' class="w3-margin w3-padding modal_detail_title"></div>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div id='friendDate' class="w3-margin w3-padding modal_detail_date"></div>
+							<div id='friendContent' class="w3-margin w3-padding modal_detail_content"></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<span id='update' class="w3-margin w3-padding modal_detail_footer"> </span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+<!-- 친구리스트 -->
 <table>
 	<tr id="friendList" >
 	</tr>
 </table>
+
+
 <br>
 <br>
 	<!-- 메인뷰 및 검색 -->
@@ -78,6 +108,38 @@ function friendList(){
 			}
 		})
 	}
+	
+
+//노트 디테일
+function friendNoteDetail(friendNoteNo){
+	$.ajax({
+		type: "POST",
+		url : "/memory/note/noteDetail",
+		data: {"noteNo" : friendNoteNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var title = result.noteTitle;
+		var content = result.noteContent;
+		// 시간 뿌리기
+		var date = new Date(result.noteRegDate);
+		var time = date.getFullYear() + "-" 
+		         + (date.getMonth() + 1) + "-" 
+		         + date.getDate() + " "
+		         + date.getHours() + ":"
+		         + date.getMinutes() + ":"
+		         + date.getSeconds();
+		//시간 뿌리기 끝
+		$("#friendTitle").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
+		$("#friendDate").html(time);
+		$("#friendContent").html(content);
+		
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+	});
+}
+	
 	//메인에 카테고리 뿌리기
 	function getMainFriendCategory(){
 		var friendNo = localStorage.getItem("friendNo");
@@ -90,13 +152,13 @@ function friendList(){
 		.done(function (result) {
 			var html = '<li class="active"><a data-toggle="tab" onclick="mainFriendNoteList()">전체</a></li>';
 			var friendCategory = result.friendCategory;
-			for(var i = 0; i < friendCategory.length; i++){
-				var friendCategory = friendCategory[i];
-				var friendCategoryNo = friendCategory.categoryNo;
-				html += "<li class='active' onclick='getNoteByFriendrCategoryNo("+friendCategory.categoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+friendCategory.categoryNo+"' aria-expanded='false' style='min-width:20px;'>"
-				html += "<a data-toggle='tab' ondblclick='categoryUpdate(event);' href='#' ondragstart='drag(event)' draggable='true' id='category"+friendCategory.categoryNo+"' style='min-width:20px;'>"+friendCategory.categoryName+"</a>";
-				html += "<a data-toggle='tab' contenteditable='true' style='min-width:20px; display:none;' id='categoryUpdate"+friendCategory.categoryNo+"'>"+friendCategory.categoryName+"</a>";
-				html += "</li>";
+			for(var i = 0; i < friendCategory.length; i++){				
+				var friendCategoryNo = friendCategory[i].categoryNo;
+				var friendCategoryName = friendCategory[i].categoryName;
+				html += "<li class='active' onclick='getNoteByFriendrCategoryNo("+friendCategoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+friendCategoryNo+"' aria-expanded='false' style='min-width:20px;'>"
+				html += "<a href='#' ondragstart='drag(event)' draggable='true' id='category"+friendCategoryNo+"' style='min-width:20px;'>"+friendCategoryName+"</a>";
+				html += "<a style='min-width:20px; display:none;' id='categoryUpdate"+friendCategoryNo+"'>"+friendCategoryName+"</a>";
+				html += "</li>"; 
 			}
 			$("#fNoteCategoryList").html(html);
 			
@@ -110,14 +172,14 @@ function friendList(){
 	
 
 	//메인에 카테고리 별로 리스트 뿌리기
-	function getNoteByFriendrCategoryNo(categoryNo){
-		var friendCategory = categoryNo;
+	function getNoteByFriendrCategoryNo(friendCategoryNo){
+		var friendCategoryNo = friendCategoryNo;
 		var friendNo = localStorage.getItem("friendNo");
 		$.ajax({
 			type: "POST",
 			url : "/memory/note/freindNoteCartegoryList",
 			data: {"friendNo" : friendNo,
-				   "friendCategory" : friendCategory		
+				   "friendCategoryNo" : friendCategoryNo		
 			},
 			dataType : "json"
 		})
@@ -150,20 +212,20 @@ function friendList(){
 	function makeFriendNoteCards(result) {
 		var html = "";
 		for (var i = 0; i < result.length; i++) {
-
 			var friendNote = result[i];	
 			var friendNoteNo = friendNote.noteNo;
 			var friendcategoryNo = friendNote.categoryNo;
-			html += "<div class='gallery' onclick='noteDetail("+friendNote.noteNo+")' style='box-shadow: 1px 2px 5px #bbb;' ondragstart='drag(event)' draggable='true' id='note"+friendNote.noteNo+"' data-toggle='modal' data-target='#detailModal'  >";
+			
+			html += "<div class='gallery' onclick='friendNoteDetail("+friendNoteNo+")' style='box-shadow: 1px 2px 5px #bbb;' ondragstart='drag(event)' draggable='true' id='note"+friendNoteNo+"' data-toggle='modal' data-target='#friendDetailModal'  >";
 			// 이미지 뿌리기
 			var friendNoteContent = friendNote.noteContent;
 			if(friendNoteContent.indexOf('<img') != -1) {
-				var friendnoteImgSrc = friendNoteContent.split('src="')[1].split('"')[0];
-				html += '<figure><img id="note'+ friendNote.noteNo+'" src="' +  friendNoteImgSrc + '" alt="" onclick="noteDetail('+ friendNote.noteNo+')" ></figure>';
+				var friendNoteImgSrc = friendNoteContent.split('src="')[1].split('"')[0];
+				html += '<figure><img id="note'+ friendNoteNo+'" src="' +  friendNoteImgSrc + '" alt="" onclick="friendNoteDetail('+ friendNoteNo+')" ></figure>';
 			} else {
-				html += '<figure><img id="note'+ friendNote.noteNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="noteDetail('+ friendNote.noteNo+')" ></figure>';
+				html += '<figure><img id="note'+ friendNoteNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="friendNoteDetail('+ friendNoteNo+')" ></figure>';
 			}
-			html += "	<div  class='desc'><p>" +  friendNote.noteTitle + "</p></div>";
+			html += "<div class='desc'><p>" +  friendNote.noteTitle + "</p></div>";
 			html += "</div>";
 
 		}

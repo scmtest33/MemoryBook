@@ -65,8 +65,10 @@
 								success: function(result){
 									if(result){
 										alert("친구가 삭제되었습니다.");
+										$("#friendList").empty();
 										$("#listTable").empty();
 										getFriendList();
+										friendList();
 									}else {
 										alert("친구삭제 실패")
 									}
@@ -113,7 +115,9 @@
 											alert("친구가 추가되었습니다.");
 											$("#table").empty();
 											$("#listTable").empty();
+											$("#friendList").empty();
 											getFriendList();
+											friendList();
 										}else {
 											alert("친구추가 실패")
 										}

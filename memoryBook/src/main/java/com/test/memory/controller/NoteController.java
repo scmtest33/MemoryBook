@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -136,10 +137,10 @@ public class NoteController {
 	}
 	
 	@RequestMapping("/friendNoteList")
-	public List<NoteVO> friendNoteList(HttpServletRequest request, int friendNo) throws Exception {
+	public List<NoteVO> friendNoteList(HttpServletRequest request) throws Exception {
 		
 		NoteVO note = new NoteVO();
-		note.setMemberNo(friendNo);
+		note.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
 
 		List<NoteVO> noteList = service.noteList(note);
 		for(NoteVO n : noteList){
@@ -185,10 +186,10 @@ public class NoteController {
 		return noteList;
 	}
 	@RequestMapping("/freindNoteCartegoryList")
-	public List<NoteVO> freindNoteCartegoryList(HttpServletRequest request, int freindNo) throws Exception {
+	public List<NoteVO> freindNoteCartegoryList(HttpServletRequest request) throws Exception {
 		NoteVO note = new NoteVO();
-		note.setCategoryNo(Integer.parseInt(request.getParameter("friendCategory")));
-		note.setMemberNo(freindNo);
+		note.setCategoryNo(Integer.parseInt(request.getParameter("friendCategoryNo")));
+		note.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
 		
 		List<NoteVO> noteList = service.noteCartegoryList(note);
 		for(NoteVO n : noteList){
@@ -216,8 +217,7 @@ public class NoteController {
 	}
 	@RequestMapping("/noteDetail")
 	public NoteVO noteDetail(String noteNo) throws Exception {
-		NoteVO n = service.noteDetail(Integer.parseInt(noteNo));
-		System.out.println(n);
+		NoteVO n= service.noteDetail(Integer.parseInt(noteNo));
 		try{
 			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
 			fis = new FileInputStream(FILE_PATH + n.getNoteContent());
@@ -285,10 +285,10 @@ public class NoteController {
 	}
 	
 	@RequestMapping("/getFriendCategory")
-	public Map<String, Object> getFriendCategory(int friendNo) throws Exception {
-		System.out.println("친구넘버 : "+ friendNo);
+	public Map<String, Object> getFriendCategory(HttpServletRequest request) throws Exception {
+		System.out.println("친구넘버 : "+ Integer.parseInt(request.getParameter("friendNo")));
 		CategoryVO category = new CategoryVO();
-		category.setMemberNo(friendNo);
+		category.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
 		
 		List<CategoryVO> friendCategory = service.getFriendCategory(category);
 		Map<String, Object> msg = new HashMap<>();
