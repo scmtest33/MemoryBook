@@ -240,6 +240,9 @@ blockquote {
 
 
 /* 노트 및 드래그 리스트 항목 */
+hr {
+	padding-bottom: 5px;
+}
 div.List {
 	overflow: auto;
 	height: 600px;
@@ -254,7 +257,7 @@ div.dragList {
 	border: 2px solid #ccc;
 	float: left;
 	width: 290px;
-	height: 284px;
+	height: 312px;
 	border-radius: 5px;
 	background-color: #FFFFFB;
 	box-shadow: 2px 2px 2px 2px #E0E0E0;
@@ -267,8 +270,10 @@ div.dragList img {
 	height: 138px;
 }
 .dragTitle {
+	height: 50px;
 	font-size: 19px;
 	margin: 5px;
+	overflow: auto;
 }
 .dragTitle * {
 	font-size: 15px;
