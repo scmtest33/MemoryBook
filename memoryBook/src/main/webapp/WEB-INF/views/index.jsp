@@ -248,6 +248,7 @@
     function logout(){
     	var result = confirm("로그아웃하시겠습니까?");
     	if(result){
+    		localStorage.clear();
     		location.href='/memory/member/logout';
     		alert("로그아웃완료");
     	}

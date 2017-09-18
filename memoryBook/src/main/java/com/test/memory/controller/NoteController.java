@@ -178,6 +178,22 @@ public class NoteController {
 		
 		List<NoteVO> noteList = service.noteCartegoryList(note);
 		for(NoteVO n : noteList){
+			try{
+				// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+				fis = new FileInputStream(FILE_PATH + n.getNoteContent());
+				
+				// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+				ois = new ObjectInputStream(fis);
+				
+				// 오브젝트 스트림으로부터 오브젝트를 읽어 String으로 형변환
+				String content = (String) ois.readObject();
+				n.setNoteContent(content);
+				} catch(Exception e) {
+					// e.printStackTrace();
+					System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+				} finally {
+					closeStreams();
+			}
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(n.getNoteRegDate());
 			n.setNoteRegDate(cal.getTime());
@@ -193,6 +209,22 @@ public class NoteController {
 		
 		List<NoteVO> noteList = service.noteCartegoryList(note);
 		for(NoteVO n : noteList){
+			try{
+				// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+				fis = new FileInputStream(FILE_PATH + n.getNoteContent());
+				
+				// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+				ois = new ObjectInputStream(fis);
+				
+				// 오브젝트 스트림으로부터 오브젝트를 읽어 String으로 형변환
+				String content = (String) ois.readObject();
+				n.setNoteContent(content);
+				} catch(Exception e) {
+					// e.printStackTrace();
+					System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+				} finally {
+					closeStreams();
+			}
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(n.getNoteRegDate());
 			n.setNoteRegDate(cal.getTime());
@@ -286,6 +318,7 @@ public class NoteController {
 	
 	@RequestMapping("/getFriendCategory")
 	public Map<String, Object> getFriendCategory(HttpServletRequest request) throws Exception {
+		//로그인시 처음에는 친구넘버 초기값이 클리어되어 있기때문에 에러발생 친구이름 클릭시 해결.  
 		System.out.println("친구넘버 : "+ Integer.parseInt(request.getParameter("friendNo")));
 		CategoryVO category = new CategoryVO();
 		category.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
