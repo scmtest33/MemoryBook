@@ -521,7 +521,7 @@
 			var title = result.noteTitle;
 			var content = result.noteContent;
 			$("input[name=noteTitle]").val(title);
-			$(".nicEdit-main").html(content);
+			CKEDITOR.instances.ckeditor.setData(content);
 			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo);
 			getCategory();
 			open_editor();

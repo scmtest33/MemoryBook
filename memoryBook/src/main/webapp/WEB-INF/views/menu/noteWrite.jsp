@@ -12,7 +12,7 @@
 <title>Simple Sidebar - Start Bootstrap Template</title>
 
 <script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
-<script src="/memory/resources/js/NicEdit-Korean/nicEdit.js" type="text/javascript"></script>
+<script src="/memory/resources/js/ckeditor/ckeditor.js"></script>
 <script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
 <script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
 </head>
@@ -63,8 +63,8 @@
 							style="width: 975px;" placeholder="제목을 입력하세요" /></td>
 					</tr>
 					<tr>
-						<td><textarea id="myNicEditor" name="myNicEditor" cols="150"
-								rows="20"></textarea></td>
+						<td><textarea class="ckeditor" id="ckeditor" name="ckeditor" cols="150"
+								rows="35"></textarea></td>
 					</tr>
 				</table>
 				<br>
@@ -100,9 +100,6 @@
 	<script>
 	// 글 쓰기/수정 로직 외 카테고리,리스트,삭제 등의 로직은 note.jsp에 있습니다. (로직은 note.jsp와 연동됩니다)
 	
-	// 에디터 가져오기
-	bkLib.onDomLoaded(nicEditors.allTextAreas);
-
 	// 노트 등록
 	$("#noteSubmitBtn").click(function() {
 		var frm = document.noteFrm;
@@ -119,20 +116,18 @@
 //	 		return;
 
 		var memNo = ${memberNo};
-		console.log("회원번호: "+memNo);
-		console.log("노트제목: "+$("input[name=noteTitle]").val());
-		console.log("노트내용: "+$(".nicEdit-main").html());
-		console.log("카테고리번호: "+$("#category").val());
+		var editor = CKEDITOR.instances.ckeditor.getData();
+		
 		$.ajax({
 			url : "/memory/note/note",
 			type : "POST",
-			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : $(".nicEdit-main").html(), "categoryNo" : $("#category").val()},
+			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor, "categoryNo" : $("#category").val()},
 		})
 		.done(function (result) {
 			alert(result.msg, "success");
 			mainNoteList();
 			$("input[name=noteTitle]").val("");
-			$(".nicEdit-main").html("");
+			$(".ckeditor").html("");
 			main_open();
 			console.log("정상작동");
 			editor_chk = false;
@@ -160,11 +155,12 @@
 //	 		return;
 
 		var memNo = ${memberNo};
-		console.log(localStorage.getItem("noteNoToUpdate"));
+		var editor = CKEDITOR.instances.ckeditor.getData();
+		
 		$.ajax({
 			url : "/memory/note/noteUpdate",
 			type : "POST",
-			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : $(".nicEdit-main").html(),
+			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor,
 				"categoryNo" : $("#category").val(), "noteNo" : localStorage.getItem("noteNoToUpdate")}
 		})
 		.done(function (result) {
@@ -172,7 +168,7 @@
 			mainNoteList();
 			noteDetail(result.noteNo);
 			$("input[name=noteTitle]").val("");
-			$(".nicEdit-main").html("");
+			CKEDITOR.instances.ckeditor.setData("");
 			$("#category").val("");
 			editor_chk = false;
 			main_open();
@@ -229,7 +225,7 @@
     			dataType: "json"
     		})
     		.done(function (result) {
-    			$(".nicEdit-main").append(result.dragContent.replace("amp;", "&") + "<br>");
+    			$(".ckeditor").append(result.dragContent.replace("amp;", "&") + "<br>");
     		})
     		.fail(function (jqXhr, textStatus, errorText) {
 //     			alert("오류 : " + errorText);
@@ -249,7 +245,7 @@
 		mainNoteList();
 		makeDragList();
 		$("#noteTitle").val("");
-		$(".nicEdit-main").html('');
+		CKEDITOR.instances.ckeditor.setData("");
 	}
     </script>
 </body>
