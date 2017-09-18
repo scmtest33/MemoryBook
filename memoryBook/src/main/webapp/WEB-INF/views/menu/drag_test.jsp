@@ -71,7 +71,7 @@
     			range.insertNode(span);
     	
     	var text = htmlContent; //결과값을 text변수에 삽입
-
+    	var dragUrlTitle = document.getElementsByTagName("title")[0].innerHTML.replace(/&/g, "&amp;");
     	//정규표현식을 통한 이미지 태그주소 저장 (미사용 로직, 공부용으로 백업)
 //    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png|JPG|GIF|PNG))\.\2)/gm;
 //    	var image_tag = text.match(pattern);
@@ -92,7 +92,7 @@
 				$.ajax({
 			    	url: "/memory/drag/registDrag",
 			    	type: "POST",	
-			    	data: {"dragContent": text},
+			    	data: {"dragContent": text, "DragUrlTitle": dragUrlTitle},
 			    	success: function (result) {
 			    		alert("등록성공");
 			    		prevText = text;
