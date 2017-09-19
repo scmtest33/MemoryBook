@@ -125,8 +125,7 @@
             
 			<div id="profile">
 				<div class="container-fluid">
-				<h1>Your Profile</h1>
-				<p>this is your profile</p>
+				<%@ include file="menu/profile.jsp" %>
 				</div>
 	        </div>
 	        
