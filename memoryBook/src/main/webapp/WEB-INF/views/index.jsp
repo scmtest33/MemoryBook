@@ -46,43 +46,43 @@
                 </li>
                 <li>
                     <a id="main" class="noteImg">
-                    	<img src="/memory/resources/img/indexImg/mainHover.png" class="indexImg1">
-      		        	<img src="/memory/resources/img/indexImg/main.png" class="indexImg2">
+                    	<img src="/memory/resources/img/indexImg/home_hover.png" class="indexImg1">
+      		        	<img src="/memory/resources/img/indexImg/home1.png" class="indexImg2">
 	                    Main
                     </a>
                 </li>
                 <li>
                     <a id="myProfile" class="noteImg">
-                    	<img src="/memory/resources/img/indexImg/profileHover.png" class="indexImg3">
-      		        	<img src="/memory/resources/img/indexImg/profile.png" class="indexImg4">
+                    	<img src="/memory/resources/img/indexImg/profile_hover.png" class="indexImg3">
+      		        	<img src="/memory/resources/img/indexImg/profile1.png" class="indexImg4">
 	                    Profile
                     </a>
                 </li>
                 <li>
                     <a id="drag" class="noteImg">
-                    	<img src="/memory/resources/img/indexImg/dragHover.png" class="indexImg5">
-      		        	<img src="/memory/resources/img/indexImg/drag.png" class="indexImg6">
+                    	<img src="/memory/resources/img/indexImg/drag_hover.png" class="indexImg5">
+      		        	<img src="/memory/resources/img/indexImg/drag1.png" class="indexImg6">
 					    My Drag
 					</a>
                 </li>
                 <li>
                     <a id="dragtest" class="noteImg">
-                	    <img src="/memory/resources/img/indexImg/dragHover.png" class="indexImg5">
-      		        	<img src="/memory/resources/img/indexImg/drag.png" class="indexImg6">
+                	    <img src="/memory/resources/img/indexImg/drag_hover.png" class="indexImg5">
+      		        	<img src="/memory/resources/img/indexImg/drag1.png" class="indexImg6">
 					    My Drag_test
 					</a>
                 </li>
                 <li>
       		        <a id="note" class="noteImg" >
-      		        	<img src="/memory/resources/img/indexImg/noteHover.png" class="indexImg7">
-      		        	<img src="/memory/resources/img/indexImg/note.png" class="indexImg8">
+      		        	<img src="/memory/resources/img/indexImg/note_hover.png" class="indexImg7">
+      		        	<img src="/memory/resources/img/indexImg/note1.png" class="indexImg8">
 					    My Note
 					</a>
                 </li>
                  <li>
                 	<a id="myFriend" class="noteImg">
-                		<img src="/memory/resources/img/indexImg/friendHover.png" class="indexImg9">
-      		        	<img src="/memory/resources/img/indexImg/friend.png" class="indexImg10">
+                		<img src="/memory/resources/img/indexImg/friend_hover.png" class="indexImg9">
+      		        	<img src="/memory/resources/img/indexImg/friend1.png" class="indexImg10">
 					    My Friend
 					</a>
                 </li>
@@ -93,16 +93,16 @@
                 </li>
                 <li>
                     <a onclick="logout()" class="noteImg">
-                	<img src="/memory/resources/img/indexImg/logoutHover.png" class="indexImg11">
-      		        <img src="/memory/resources/img/indexImg/logout.png" class="indexImg12">
+                	<img src="/memory/resources/img/indexImg/logout_hover.png" class="indexImg11">
+      		        <img src="/memory/resources/img/indexImg/logout1.png" class="indexImg12">
                     Logout
                     </a>
                 </li>
                 <c:if test="${email eq 'admin'}">
                 <li>
                 	<a id="user" class="noteImg">
-                	<img src="/memory/resources/img/indexImg/adminHover.png" class="indexImg13">
-      		        <img src="/memory/resources/img/indexImg/admin.png" class="indexImg14">
+                	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg13">
+      		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg14">
 					    UserList
 					</a>
                 </li>

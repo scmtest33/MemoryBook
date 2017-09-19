@@ -28,7 +28,7 @@ body {
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #ffffff;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -159,16 +159,18 @@ body {
     line-height: 70px;
 }
 
+/* 글자 */
 .sidebar-nav li a {
-    display: block;++
+    display: block;
     text-decoration: none;
-    color: #999999;
+    font-family: "FontOeg";
+    color: #000000;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0,0,0,0.2);
 }
 
 .sidebar-nav li a:active,
@@ -183,11 +185,12 @@ body {
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999999;
+    color: #000000;
+    font-family: "FontPac";
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
+    color: #008040;
     background: none;
 }
 
@@ -212,4 +215,28 @@ body {
         position: relative;
         margin-right: 0;
     }
+}
+
+@font-face {
+	  font-family: 'FontOeg';
+	  src: url('../fonts/THE_Oegyeinseolmyeongse.eot');
+	  src: local(※), url('../fonts/THE_Oegyeinseolmyeongse.eot?#iefix') format('embedded-opentype'), url('../fonts/THE_Oegyeinseolmyeongse.woff') format('woff'), url('../fonts/THE_Oegyeinseolmyeongse.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
+}
+
+@font-face {
+	  font-family: 'FontHoon';
+	  src: url('../fonts/HoonMakdaeyunpil.eot');
+	  src: url('../fonts/HoonMakdaeyunpil.eot?#iefix') format('embedded-opentype'), url('../fonts/HoonMakdaeyunpil.woff') format('woff'), url('../fonts/HoonMakdaeyunpil.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
+}
+
+@font-face {
+	  font-family: 'FontPac';
+	  src: url('../fonts/Pacific.eot');
+	  src: local(※), url('../fonts/Pacific.eot?#iefix') format('embedded-opentype'), url('../fonts/Pacific.woff') format('woff'), url('../fonts/Pacific.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
 }
