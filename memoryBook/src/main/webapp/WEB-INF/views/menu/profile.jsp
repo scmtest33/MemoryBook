@@ -39,16 +39,16 @@ $("#menu-toggle").click(function(e){
 	</script>
 	<table>
 		<tr>
-			<td>Name :</td>
-			<td>${sessionScope.name}</td>
+			<td><h2>Name : </h2></td>
+			<td><h2>${sessionScope.name}</h2></td>
 		</tr>
 		<tr>
-			<td>Email :</td>
-			<td>${sessionScope.email}</td>
+			<td><h2>Email : </h2></td>
+			<td><h2>${sessionScope.email}</h2></td>
 		</tr>
 		<tr>
-			<td>Information :</td>
-			<td>나만공개</td>
+			<td><h2>Information : </td>
+			<td><h2>나만공개</h2></td>
 		</tr>
 	</table>
 	<table>

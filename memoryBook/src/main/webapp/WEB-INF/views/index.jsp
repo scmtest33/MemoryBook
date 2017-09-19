@@ -107,11 +107,6 @@
 					</a>
                 </li>
                 </c:if>
-                <li>
-                    <a data-toggle="modal" data-target="#myModal_m" class="noteImg">
-      		        Unregister
-                    </a>
-                </li>
             </ul>
         </div>
 
@@ -175,56 +170,7 @@
 		  	</div>
 		</div>	
     </div>
-    <!-- /#wrapper -->
-	
-	<div class="modal fade" id="myModal_m" role="dialog">
-		    <div class="modal-dialog">
-		    
-		      <!-- Modal content-->
-		      <div class="modal-content" style="width:400px;margin: 0 auto;">
-		        <div class="modal-header">
-		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
-		        	<br><br>
-		        	<h4 class="modal-title" id="dragNoteTitle" style="text-align: center;">Memory Lane Unregister</h4>
-		        	<br>
-		        </div>
-		        <br>
-		        			        	
-		        <div class="modal-body" id="unregisterModal" >
-		          	
-		        <form name="unregisterfrm" id="unregisterfrm" action="/memory/member/unregister" method="post">       
-			    	<table id="loginInfo">
-			    		<tr>
-			    			<div class="form-group">
-			    			탈퇴하실려면 비밀번호를 입력하세요.<br>탈퇴시 작성하신 노트,드래그,친구정보가 전부 삭제됩니다.
-			    			</div>
-			    		</tr>
-			    		<tr>
-			    			<div class="form-group">
-							    <label for="loginPassword">Password:</label>
-							    <input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
-			    			</div>
-			    		</tr>
-					    <tr>
-					    	<td id="btns" colspan="2" style="width: 368px;">
-					    		<input type="submit" value="회원탈퇴" class="btn btn-default" style="width: 368px;background: #B2CCFF; margin: 0 auto;">
-<!-- 							    <button id="unregisterBtn" class="btn btn-default"  style="width: 368px;background: #B2CCFF; margin: 0 auto;">회원탈퇴</button>    -->
-					    	</td>
-					    </tr>
-					    <tr>
-					    	<td id="btns" colspan="2" style="width: 368px;">
-							    <div id="cancleBtn" class="btn btn-default"  style="width: 368px;background: #FFFFFF; margin: 0 auto;">취소</div>
-					    	</td>
-					    </tr>
-		    		</table>
-			    </form>
-		<!--           <div id="googleLoginDiv" align="center" class="g-signin2" data-onsuccess="onSignIn" style="width: 368px; text-align: center;"></div> -->
-		        </div>
-		      </div>
-		    </div>
-		  </div>
-    
-	
+   
     <!-- Bootstrap core JavaScript -->
     <script src="/memory/resources/js/jquery-3.2.1.js"></script>
     <script src="/memory/resources/js/popper.min.js"></script>
@@ -232,17 +178,7 @@
 
     <!-- Menu Toggle Script -->
     <script>
-    //탈퇴성공여부 로직(일단주석처리)
-//     $(function(){
-//     	if('${checkResult}' != null){
-// 	    	if('${checkResult}' == "false"){
-// 	    		alert("Email/PW를 체크해주세요");
-	    		
-// 	    	}else if ('${unregiResult}' == "false"){
-// 	    		alert("탈퇴실패");
-// 	    	}
-//     	}
-
+    
 	//로그아웃
     function logout(){
     	var result = confirm("로그아웃하시겠습니까?");

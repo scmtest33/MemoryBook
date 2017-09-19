@@ -166,7 +166,10 @@ public class NoteController {
 	public List<NoteVO> friendNoteList(HttpServletRequest request) throws Exception {
 		
 		NoteVO note = new NoteVO();
-		note.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
+		if(request.getParameter("friendNo")==""){
+			note.setMemberNo(0);
+		}else note.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
+
 
 		List<NoteVO> noteList = service.noteList(note);
 		for(NoteVO n : noteList){
@@ -228,8 +231,13 @@ public class NoteController {
 	@RequestMapping("/freindNoteCartegoryList")
 	public List<NoteVO> freindNoteCartegoryList(HttpServletRequest request) throws Exception {
 		NoteVO note = new NoteVO();
-		note.setCategoryNo(Integer.parseInt(request.getParameter("friendCategoryNo")));
-		note.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
+		if((request.getParameter("friendCategoryNo")=="")||(request.getParameter("friendNo")=="")){
+			note.setCategoryNo(0);
+			note.setMemberNo(0);
+		}else{
+			note.setCategoryNo(Integer.parseInt(request.getParameter("friendCategoryNo")));
+			note.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
+		}
 		
 		List<NoteVO> noteList = service.noteCartegoryList(note);
 		for(NoteVO n : noteList){
@@ -345,7 +353,9 @@ public class NoteController {
 		//로그인시 처음에는 친구넘버 초기값이 클리어되어 있기때문에 에러발생 친구이름 클릭시 해결.  
 		System.out.println("친구넘버 : "+ Integer.parseInt(request.getParameter("friendNo")));
 		CategoryVO category = new CategoryVO();
-		category.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
+		if(request.getParameter("friendNo")==""){
+			category.setMemberNo(0);
+		}else category.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
 		
 		List<CategoryVO> friendCategory = service.getFriendCategory(category);
 		Map<String, Object> msg = new HashMap<>();
