@@ -6,30 +6,40 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
+import javax.activation.CommandMap;
+import javax.activation.MailcapCommandMap;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +48,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.test.memory.service.NoteService;
 import com.test.memory.vo.CategoryVO;
+import com.test.memory.vo.DragVO;
 import com.test.memory.vo.NoteVO;
 
 
@@ -45,14 +56,15 @@ import com.test.memory.vo.NoteVO;
 @RequestMapping("/note")
 public class NoteController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
 	private FileInputStream fis;	//파일을 읽기위한
 	private FileOutputStream fos;	//파일을 쓰기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
 	private ObjectOutputStream oos;	//객체를 쓰기위한
 	private String FILE_PATH = "C:/data/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/memoryBook/src/main/webapp/data/";
+	private String IMG_FILE_PATH = FILE_PATH+"img_data/"; //이미지파일 저장경로
+	private String IMG_FILE_WPATH = "/data/img_data/"; //이미지파일 저장경로
+	private String FILE_PATH_WEB = "http://localhost:8888/memory/data/img_data/"; //이미지파일 태그경로
 	
 	@Autowired
 	private NoteService service;

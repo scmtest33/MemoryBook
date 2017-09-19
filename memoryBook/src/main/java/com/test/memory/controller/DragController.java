@@ -19,21 +19,24 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.activation.CommandMap;
+import javax.activation.MailcapCommandMap;
 import javax.imageio.ImageIO;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,8 +48,6 @@ import com.test.memory.vo.DragVO;
 @RestController
 @RequestMapping("/drag")
 public class DragController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	private FileInputStream fis;	//파일을 읽기위한 스트림
 	private FileOutputStream fos;	//파일을 쓰기위한 스트림

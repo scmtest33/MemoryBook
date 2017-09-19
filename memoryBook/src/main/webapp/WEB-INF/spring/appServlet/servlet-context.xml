@@ -12,15 +12,12 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-	
+
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Handles HTTP GET requests for /drag_img/** by efficiently serving up static data in the ${webappRoot}/data directory -->
 	<resources mapping="/data/**" location="c:\data" />
-	
-	<!-- CORS setting : https://spring.io/blog/2015/06/08/cors-support-in-spring-framework#xml-namespace -->
-    <beans:import resource="cors-config.xml" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

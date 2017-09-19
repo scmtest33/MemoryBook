@@ -16,8 +16,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,12 +29,12 @@ import com.test.memory.vo.NoteVO;
 @RequestMapping("/download")
 public class DownloadController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
 	private FileInputStream fis;	//파일을 읽기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
 	private String FILE_PATH = "C:/data/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
+	private String IMG_FILE_PATH = FILE_PATH+"img/"; //이미지파일 저장경로
+	private String FILE_PATH_WEB = "http://localhost:8888/memory/img_src/"; //이미지파일 태그경로
 	private String SAVE_PATH = "C:/savedata/";
 	
 	@Autowired
