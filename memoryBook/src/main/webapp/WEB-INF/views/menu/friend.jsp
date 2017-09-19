@@ -61,7 +61,7 @@
 	
 <br>
 	<!-- 메인뷰 및 검색 -->
-	<div id="noteView" style="z-index: 7;" >
+	<div id="viewList">
 		<div id="noteView2"></div>
 		<!-- 카테고리 선택 -->
 		<ul class="nav nav-tabs" id="fNoteCategoryList">
@@ -72,7 +72,7 @@
 			<br>
 			
 			<!-- 노트카드 뿌리기 -->
-			<div id="fNoteCardList" style='position: relative; width: 100%; height: 500px;'>
+			<div id="fNoteCardList" class="friendCardList">
 			
 			</div>
 		</div>
@@ -244,10 +244,10 @@ function friendNoteDetail(friendNoteNo){
 			for(var i = 0; i < friendCategory.length; i++){				
 				var friendCategoryNo = friendCategory[i].categoryNo;
 				var friendCategoryName = friendCategory[i].categoryName;
-				html += "<li class='active' onclick='getNoteByFriendrCategoryNo("+friendCategoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+friendCategoryNo+"' aria-expanded='false' style='min-width:20px;'>"
-				html += "<a href='#' ondragstart='drag(event)' draggable='true' id='category"+friendCategoryNo+"' style='min-width:20px;'>"+friendCategoryName+"</a>";
-				html += "<a style='min-width:20px; display:none;' id='categoryUpdate"+friendCategoryNo+"'>"+friendCategoryName+"</a>";
-				html += "</li>"; 
+				html += "<li class='active category_list' onclick='getNoteByFriendrCategoryNo("+friendCategoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+friendCategoryNo+"' aria-expanded='false'>"
+				html += "<a href='#' ondragstart='drag(event)' draggable='true' id='category"+friendCategoryNo+"' class='category_list'>"+friendCategoryName+"</a>";
+				html += "<a class='category_list_2' id='categoryUpdate"+friendCategoryNo+"'>"+friendCategoryName+"</a>";
+				html += "</li>";
 			}
 			$("#fNoteCategoryList").html(html);
 			
@@ -305,7 +305,7 @@ function friendNoteDetail(friendNoteNo){
 			var friendNoteNo = friendNote.noteNo;
 			var friendcategoryNo = friendNote.categoryNo;
 			
-			html += "<div class='gallery' onclick='friendNoteDetail("+friendNoteNo+")' style='box-shadow: 1px 2px 5px #bbb;' ondragstart='drag(event)' draggable='true' id='note"+friendNoteNo+"' data-toggle='modal' data-target='#friendDetailModal'  >";
+			html += "<div class='gallery' onclick='friendNoteDetail("+friendNoteNo+")' class='modal_input' ondragstart='drag(event)' draggable='true' id='note"+friendNoteNo+"' data-toggle='modal' data-target='#friendDetailModal'  >";
 			// 이미지 뿌리기
 			var friendNoteContent = friendNote.noteContent;
 			if(friendNoteContent.indexOf('<img') != -1) {

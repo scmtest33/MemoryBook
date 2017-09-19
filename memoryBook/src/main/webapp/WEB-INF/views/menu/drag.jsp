@@ -96,7 +96,7 @@
 	</div>
 
 	<!-- 메인뷰 -->
-	<div id="dragView" class="dragView;">
+	<div id="dragView" class="viewList">
 		<!-- 검색 -->
 		<div class="list_title">
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -122,7 +122,7 @@
 		<br><br><br>
 			<!-- 드래그내용 뿌리기 -->
 		</div>
-		<div id="dragList" class="List"></div>
+		<div id="dragView" class="cardList"></div>
 	<!-- 본문내용 끝 -->
 
 	<script>

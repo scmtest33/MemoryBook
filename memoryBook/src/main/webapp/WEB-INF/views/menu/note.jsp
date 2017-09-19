@@ -93,7 +93,7 @@
 		</div>
 	</div>
 	<!-- 메인뷰 및 검색 -->
-	<div id="noteView" class="noteView">
+	<div id="noteView" class="viewList">
 		<!-- 검색 -->
 		<div class="list_title">
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
