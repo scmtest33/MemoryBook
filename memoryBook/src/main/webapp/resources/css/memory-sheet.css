@@ -45,6 +45,9 @@ div.desc p {
 }
 
 /* 에디터 */
+div.editorView {
+	z-index: 2;
+}
 div.sideDragBar_title {
 	padding: 8px 25px;
 	margin-top: 20px;
@@ -63,19 +66,25 @@ div.editor {
 	z-index: 2;
 	width: 976px;
 }
-
-/* .NICEDIT-PANELCONTAIN { */
-/*   HEIGHT: 43PX !IMPORTANT; */
-/* } */
-.nicEdit-main {
-	width: 100% !important;
-	min-height: 410px !important;
-	/*   margin: 4px auto !important; */
-	padding: 6px 12px !important;
-	margin: 0 !important;
-	background-color: white;
+.noteTitle{
+	width: 975px;
 }
-
+.cate_open_btn{
+	color: #ccc;
+}
+.cate_btn_add{
+	display: none;
+}
+.cate_btns{
+	color: #ccc;
+	display: none;
+}
+.editor_btns{
+	width: 60px;
+}
+.editor_btns_hide{
+	display: none;
+}
 
 /* 드래그 및 노트 모달 */
 #searchResult img {

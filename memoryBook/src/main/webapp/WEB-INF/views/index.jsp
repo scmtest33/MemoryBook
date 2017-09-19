@@ -88,7 +88,7 @@
                 </li>
                 <li>
                 	<a id="searchFriend" class="noteImg">
-					    Friend Seach
+					    Friend Search
 					</a>
                 </li>
                 <li>
@@ -144,7 +144,7 @@
 	        
 			<div id='search'>
 				<div class="container-fluid">
-			  		<%@ include file="menu/seach.jsp" %>
+			  		<%@ include file="menu/search.jsp" %>
 			  	</div>
 		  	</div>
 		  	

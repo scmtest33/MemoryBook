@@ -19,7 +19,7 @@
 
 <body>
 	<!-- 에디터 -->
-	<div id="editorView" style="z-index: 2;">
+	<div id="editorView" class="editorView">
 		<div>
 			<br>
 			<h3 class="tit_brunch">노트 작성</h3>
@@ -41,18 +41,16 @@
 							class="form-control">
 						</select></td>
 						<td>&nbsp;&nbsp;</td>
-						<td><i class="fa fa-plus-circle w3-xlarge"
-							onclick="showInput();" style="color: #ccc;"></i></td>
+						<td><i class="fa fa-plus-circle w3-xlarge cate_close_btn"
+							onclick="showInput();" class="cate_open_btn"></i></td>
 						<td>&nbsp;&nbsp;</td>
 						<td><input type="text" id="categoryToAdd"
-							name="categoryToAdd" style="display: none;" /></td>
+							name="categoryToAdd" class="cate_btn_add" /></td>
 						<td>&nbsp;&nbsp;</td>
-						<td><i id="Category1" style="display: none; color: #ccc;"
-							class="fa fa-check-circle w3-xlarge" onclick="addCategory();"></i>
+						<td><i id="Category1" class="fa fa-check-circle w3-xlarge cate_btns" onclick="addCategory();"></i>
 						</td>
 						<td>&nbsp;&nbsp;</td>
-						<td><i id="Category2" style="display: none; color: #ccc;"
-							class="fa fa-times-circle w3-xlarge" onclick="closeInput();"></i>
+						<td><i id="Category2" class="fa fa-times-circle w3-xlarge cate_btns" onclick="closeInput();"></i>
 						</td>
 					</tr>
 				</table>
@@ -60,7 +58,7 @@
 				<table>
 					<tr>
 						<td><input type="text" id="noteTitle" name="noteTitle"
-							style="width: 975px;" placeholder="제목을 입력하세요" /></td>
+							class="noteTitle" placeholder="제목을 입력하세요" /></td>
 					</tr>
 					<tr>
 						<td><textarea class="ckeditor" id="ckeditor" name="ckeditor" cols="150"
@@ -71,16 +69,16 @@
 				<table class='pull-right'>
 					<tr>
 						<td>
-							<div class="btn btn-default" style="width: 60px;"
+							<div class="btn btn-default" class="editor_btns"
 								id="noteSubmitBtn">저장</div>
 						</td>
 						<td>
-							<div class="btn btn-default" style="width: 60px;"
-								id="noteUpdateBtn" style="display: none;">수정</div>
+							<div class="btn btn-default" class="editor_btns editor_btns_hide"
+								id="noteUpdateBtn">수정</div>
 						</td>
 						<td>
-							<div class="btn btn-default" style="width: 60px;" id="cancelBtn"
-								style="display: none;">취소</div>
+							<div class="btn btn-default" class="editor_btns editor_btns_hide" 
+								id="cancelBtn">취소</div>
 						</td>
 					</tr>
 				</table>
@@ -192,7 +190,7 @@
 		for (var i = 0; i < result.length; i++) {
 			var drag = result[i];	
 			var dragNo = drag.dragNo;
-			html += "<div class='gallery' onclick='dragDetail("+drag.dragNo+")' style='box-shadow: 1px 2px 5px #bbb;' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"'>";
+			html += "<div class='gallery' onclick='dragDetail("+drag.dragNo+")' class='modal_input' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"'>";
 			// 이미지 뿌리기
 			var dragContent = drag.dragContent;
 			if(dragContent.indexOf('<img') != -1) {
