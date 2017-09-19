@@ -117,7 +117,7 @@ public class NoteController {
 		return msg;
 	}
 	
-	//upload
+	//이미지 업로드
 	@RequestMapping(value="/note_img_upload", method=RequestMethod.POST)
 	public void ckeditorImageUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile file, @RequestParam MultipartFile upload) throws Exception {
 		response.setCharacterEncoding("UTF-8");

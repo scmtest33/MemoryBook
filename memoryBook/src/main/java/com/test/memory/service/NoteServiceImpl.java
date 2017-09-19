@@ -104,7 +104,7 @@ public class NoteServiceImpl implements NoteService{
 				System.out.println(callback);
 				printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
 			               + callback
-			               + ",alert('이미지 파일만 업로드가능합니다. [지원 확장자: jpg, jpeg, png, gif]')"
+			               + ",alert('이미지 파일만 올리실 수 있습니다. [지원 확장자: jpg, jpeg, png, gif]')"
 			               + ")</script>");
 				printWriter.flush();
 			}
