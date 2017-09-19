@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -93,6 +94,23 @@ public class NoteServiceImpl implements NoteService{
 			OutputStream out = null;
 			PrintWriter printWriter = null;	
 			String fileName = file.getOriginalFilename();
+			String imgFormat = fileName.substring(fileName.lastIndexOf(".") + 1);
+			//확장자 체크
+			if (!imgFormat.equals("jpg")&&!imgFormat.equals("JPG")&&!imgFormat.equals("jpeg")&&!imgFormat.equals("JPEG")
+					&&!imgFormat.equals("png")&&!imgFormat.equals("PNG")&&!imgFormat.equals("gif")&&!imgFormat.equals("GIF")) {
+			//이미지 파일이 아닌경우
+				printWriter = response.getWriter();
+				String callback = request.getParameter("CKEditorFuncNum");
+				System.out.println(callback);
+				printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
+			               + callback
+			               + ",alert('이미지 파일만 업로드가능합니다. [지원 확장자: jpg, jpeg, png, gif]')"
+			               + ")</script>");
+				printWriter.flush();
+			}
+			//이미지 파일이 맞는 경우
+			else {
+			fileName = UUID.randomUUID().toString(); //이미지 파일명 암호화 (이름 중복방지 포함)
 			byte[] bytes = file.getBytes();
 			String uploadPath = "c:\\data\\img_data" + "\\" + fileName; //실제 저장경로
 			System.out.println(uploadPath);
@@ -108,7 +126,8 @@ public class NoteServiceImpl implements NoteService{
 		               + fileUrl
 		               + "','이미지를 업로드 하였습니다.'"
 		               + ")</script>");
-		       printWriter.flush();
+		    printWriter.flush();
+			}
 	}
 		
 }

@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -61,6 +63,7 @@ public class NoteController {
 	private String FILE_PATH = "C:/data/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/memoryBook/src/main/webapp/data/";
 	private String IMG_FILE_PATH = FILE_PATH+"img_data/"; //이미지파일 저장경로
+	private String IMG_FILE_WPATH = "/data/img_data/"; //이미지파일 저장경로
 	private String FILE_PATH_WEB = "http://localhost:8888/memory/data/img_data/"; //이미지파일 태그경로
 	
 	@Autowired
@@ -115,8 +118,8 @@ public class NoteController {
 	}
 	
 	//upload
-	@RequestMapping(value="/upload", method=RequestMethod.POST)
-	public void ckeditorImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) throws     Exception {
+	@RequestMapping(value="/note_img_upload", method=RequestMethod.POST)
+	public void ckeditorImageUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile file, @RequestParam MultipartFile upload) throws Exception {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset-utf-8");
 
