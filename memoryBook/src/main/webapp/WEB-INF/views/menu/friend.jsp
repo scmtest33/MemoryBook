@@ -9,7 +9,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Simple Sidebar - Start Bootstrap Template </title>
+
+<title>MemoryLane </title>
+<link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
 
 <script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
 <script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
@@ -43,18 +45,24 @@
 		</div>
 	</div>
 	
-
-<!-- 친구리스트 -->
-<table>
-	<tr id="friendList" >
-	</tr>
-</table>
-
-
-<br>
+	<p class="friendTitle">친구들은 무슨 길을 걷고 있을까요?</p>	
+		
+	<button class="btn btn-primary" id="Friend_toggle">
+	  내친구 목록 확인하기
+	</button>
+	<div class="collapse" id="FriendList">
+	  <div class="well">
+	  	<table>
+			<tr id="friendList">
+			</tr>
+		</table>
+	  </div>
+	</div>	
+	
 <br>
 	<!-- 메인뷰 및 검색 -->
 	<div id="noteView" style="z-index: 7;" >
+		<div id="noteView2"></div>
 		<!-- 카테고리 선택 -->
 		<ul class="nav nav-tabs" id="fNoteCategoryList">
 
@@ -72,6 +80,10 @@
 	<!-- 본문내용 끝 -->
 
 	<script>
+	$("#Friend_toggle").click(function(){
+		$("#FriendList").toggle();
+	});
+	
 	//노트 검색
 	$(function(){
 		friendList();
@@ -79,15 +91,51 @@
 	
 	
 	//내 친구 목록 불러오기
+// function friendList(){
+// 		$.ajax ({
+// 			url: "/memory/member/getFriendList",
+// 			type: "POST",
+// 			success : function(result){
+// 				$(result).each(function(index, item) {
+// 					var addRow  = '<td id="fname'+index+'">'+item.name+'<td>'+"&nbsp;"+'</td>';
+// 					$("#friendList").append(addRow);
+// 					$("#fname"+index).click(function(){
+// 						$("#fNoteCategoryList").empty(); 
+// 						$("#fNoteCardList").empty(); 
+// 						$.ajax({
+// 							url: "/memory/member/getFriendmemNo",
+// 							dataType: "json",
+// 							type: "post",
+// 							data: {"email": item.friend_Email},
+// 							success: function(result){
+// 								localStorage.setItem("friendNo",result);
+// 								var friendNo = localStorage.getItem("friendNo");
+// 								getMainFriendCategory();
+// 								mainFriendNoteList();
+// 							}
+// 						});
+				
+// 					});
+// 				})
+// 			}
+// 		})
+// 	}
+	
 function friendList(){
-		$.ajax ({
-			url: "/memory/member/getFriendList",
-			type: "POST",
-			success : function(result){
-				$(result).each(function(index, item) {
-					var addRow  = '<td id="fname'+index+'">'+item.name+'<td>'+"&nbsp;"+'</td>';
+	$.ajax ({
+		url: "/memory/member/getFriendList",
+		type: "POST",
+		success : function(result){
+			$(result).each(function(index, item) {
+				var addRow  = '<tr id="flist"><td id="friendPhoto'+ index +'">' + item.photo + '</td>';
+					addRow += '<td id="friendName'+ index +'">' + item.name + '</td>';
+	                addRow += '<td id="friendEmail">' + item.friend_Email + '</td>';
+	                addRow +='<td class = "deleteFriend">' + '<img id = deleteF'+index+' src = "/memory/resources/img/cancel.png">' + '</td>';
+	                addRow += '</tr>';
 					$("#friendList").append(addRow);
-					$("#fname"+index).click(function(){
+// 					$("#friendPhoto"+index || "#friendName"+index).click(function(){
+					$("#friendName"+index).click(function(){
+						var friendNa = document.getElementById("friendName"+index).childNodes[0].nodeValue;
 						$("#fNoteCategoryList").empty(); 
 						$("#fNoteCardList").empty(); 
 						$.ajax({
@@ -96,17 +144,59 @@ function friendList(){
 							type: "post",
 							data: {"email": item.friend_Email},
 							success: function(result){
+								var html = '<p class="clickerName">'+friendNa+'님의 노트</p>';
+								$("#noteView2").html(html);
 								localStorage.setItem("friendNo",result);
+								var friendNo = localStorage.getItem("friendNo");
 								getMainFriendCategory();
 								mainFriendNoteList();
 							}
 						});
-				
 					});
-				})
-			}
-		})
-	}
+					
+					$("#friendPhoto"+index).click(function(){
+						var friendNa = document.getElementById("friendName"+index).childNodes[0].nodeValue;
+						$("#fNoteCategoryList").empty(); 
+						$("#fNoteCardList").empty(); 
+						$.ajax({
+							url: "/memory/member/getFriendmemNo",
+							dataType: "json",
+							type: "post",
+							data: {"email": item.friend_Email},
+							success: function(result){
+								var html = '<p class="clickerName">'+friendNa+'님의 노트</p>';
+								$("#noteView2").html(html);
+								localStorage.setItem("friendNo",result);
+								var friendNo = localStorage.getItem("friendNo");
+								getMainFriendCategory();
+								mainFriendNoteList();
+							}
+						});
+					});
+					
+					$("#deleteF"+index).click(function(){
+						$.ajax({
+							url: "/memory/member/deleteFriend",
+							dataType: "json",
+							type: "post",
+							data: {"friend_Email" : item.friend_Email},
+							success: function(result){
+								if(result){
+									alert("친구가 삭제되었습니다.");
+									$("#friendList").empty();
+									$("#listTable").empty();
+									getFriendList();
+									friendList();
+								}else {
+									alert("친구삭제 실패")
+								}
+							}
+						});
+					});
+			})
+		}
+	})
+}
 	
 
 //노트 디테일
@@ -135,7 +225,7 @@ function friendNoteDetail(friendNoteNo){
 		
 	})
 	.fail(function(jqXhr, textStatus, errorText){
-		alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 1번째");
+		alert("오류: " + errorText + "<br>" + "오류코드: " + status+"1");
 	});
 }
 	
@@ -165,7 +255,7 @@ function friendNoteDetail(friendNoteNo){
 			
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 2번째"); 
+			//alert("오류: " + errorText + "<br>" + "오류코드: " + status+"2"); 초기 친구노트 에러
 		});
 	}
 	
@@ -186,7 +276,7 @@ function friendNoteDetail(friendNoteNo){
 			makeFriendNoteCards(result);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 3번째");
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"3");
 		});
 	}
 
@@ -204,7 +294,7 @@ function friendNoteDetail(friendNoteNo){
 			getFriendCategory();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 4번째"); 
+			//alert("오류: " + errorText + "<br>" + "오류코드: " + status+"4"); 초기 친구노트 에러
 		});
 	}
 
@@ -253,7 +343,7 @@ function friendNoteDetail(friendNoteNo){
 			$("#"+selcat).attr("selected", "selected");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 5번째");
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"5");
 		});
 	}
     </script>

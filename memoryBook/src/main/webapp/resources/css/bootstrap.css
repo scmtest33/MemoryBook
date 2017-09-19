@@ -262,6 +262,22 @@ th {
 }
 
 @font-face {
+	  font-family: 'FontOeg';
+	  src: url('../fonts/THE_Oegyeinseolmyeongse.eot');
+	  src: local(※), url('../fonts/THE_Oegyeinseolmyeongse.eot?#iefix') format('embedded-opentype'), url('../fonts/THE_Oegyeinseolmyeongse.woff') format('woff'), url('../fonts/THE_Oegyeinseolmyeongse.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
+}
+
+@font-face {
+	  font-family: 'FontHoon';
+	  src: url('../fonts/HoonMakdaeyunpil.eot');
+	  src: url('../fonts/HoonMakdaeyunpil.eot?#iefix') format('embedded-opentype'), url('../fonts/HoonMakdaeyunpil.woff') format('woff'), url('../fonts/HoonMakdaeyunpil.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
+}
+
+@font-face {
 	  font-family: 'FontPac';
 	  src: url('../fonts/Pacific.eot');
 	  src: local(※), url('../fonts/Pacific.eot?#iefix') format('embedded-opentype'), url('../fonts/Pacific.woff') format('woff'), url('../fonts/Pacific.ttf') format('truetype');
@@ -6764,5 +6780,15 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+
+.friendTitle{
+	font-size: 50px;
+	font-family: "FontHoon";
+}
+
+.clickerName{
+	font-size: 37px;
+	font-family: "FontHoon";
 }
 /*# sourceMappingURL=bootstrap.css.map */
