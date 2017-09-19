@@ -127,7 +127,7 @@
 			alert(result.msg, "success");
 			mainNoteList();
 			$("input[name=noteTitle]").val("");
-			$(".ckeditor").html("");
+			CKEDITOR.instances.ckeditor.ㄴetData("");
 			main_open();
 			console.log("정상작동");
 			editor_chk = false;
