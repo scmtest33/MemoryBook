@@ -279,7 +279,7 @@
 		document.getElementById("noteView").style.height = screen.innerHeight +"px";
 		document.getElementById("noteEditor").style.display = "none";
 		$("#noteTitle").val("");
-		$(".nicEdit-main").html('');
+		CKEDITOR.instances.ckeditor.setData("");
 		
 		//노트 에디터
 		document.getElementById("editorView").style.width = (screen.innerWidth - 420) +"px";
@@ -490,7 +490,7 @@
 		if(chk) {
 		editor_chk = false;
 		$("#noteTitle").val('');
-		$(".nicEdit-main").html('');
+		CKEDITOR.instances.ckeditor.setData("");
     	document.getElementById("noteEditor").style.display = "none";
     	document.getElementById("profileModal").style.display = "";
     	document.getElementById("noteView").style.display = "";
