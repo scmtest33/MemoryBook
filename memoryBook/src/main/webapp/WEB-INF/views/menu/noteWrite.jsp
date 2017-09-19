@@ -225,7 +225,7 @@
     			dataType: "json"
     		})
     		.done(function (result) {
-    			$(".ckeditor").append(result.dragContent.replace("amp;", "&") + "<br>");
+    			CKEDITOR.instances.ckeditor.setData(CKEDITOR.instances.ckeditor.getData() + result.dragContent.replace("amp;", "&") + "<br>");
     		})
     		.fail(function (jqXhr, textStatus, errorText) {
 //     			alert("오류 : " + errorText);
