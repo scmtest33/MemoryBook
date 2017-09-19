@@ -97,7 +97,6 @@ function friendList(){
 							data: {"email": item.friend_Email},
 							success: function(result){
 								localStorage.setItem("friendNo",result);
-								var friendNo = localStorage.getItem("friendNo");
 								getMainFriendCategory();
 								mainFriendNoteList();
 							}
@@ -136,7 +135,7 @@ function friendNoteDetail(friendNoteNo){
 		
 	})
 	.fail(function(jqXhr, textStatus, errorText){
-		alert("오류: " + errorText + "<br>" + "오류코드: " + status+"1");
+		alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 1번째");
 	});
 }
 	
@@ -166,7 +165,7 @@ function friendNoteDetail(friendNoteNo){
 			
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			//alert("오류: " + errorText + "<br>" + "오류코드: " + status+"2"); 초기 친구노트 에러
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 2번째"); 
 		});
 	}
 	
@@ -187,7 +186,7 @@ function friendNoteDetail(friendNoteNo){
 			makeFriendNoteCards(result);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"3");
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 3번째");
 		});
 	}
 
@@ -205,7 +204,7 @@ function friendNoteDetail(friendNoteNo){
 			getFriendCategory();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			//alert("오류: " + errorText + "<br>" + "오류코드: " + status+"4"); 초기 친구노트 에러
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 4번째"); 
 		});
 	}
 
@@ -254,7 +253,7 @@ function friendNoteDetail(friendNoteNo){
 			$("#"+selcat).attr("selected", "selected");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"5");
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"친구jsp 5번째");
 		});
 	}
     </script>
