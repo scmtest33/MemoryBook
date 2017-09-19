@@ -37,5 +37,5 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	
 	// img upload
-	config.filebrowserUploadUrl = '/ckeditor/Upload.jsp';
+	config.filebrowserUploadUrl = '/memory/note/upload';
 };

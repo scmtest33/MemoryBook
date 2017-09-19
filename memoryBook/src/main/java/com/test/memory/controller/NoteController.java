@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -29,12 +30,19 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.test.memory.service.NoteService;
 import com.test.memory.vo.CategoryVO;
@@ -80,6 +88,7 @@ public class NoteController {
 		}
 		return msg;
 	}
+	
 	@RequestMapping("/noteUpdate")
 	public Map<String, Object> noteUpdate(NoteVO note, HttpServletRequest request, HttpSession session) throws Exception {
 		String modified = UUID.randomUUID().toString(); //수정 된 파일명 생성
@@ -104,6 +113,20 @@ public class NoteController {
 		}
 		return msg;
 	}
+	
+	//upload
+	@RequestMapping(value="/upload", method=RequestMethod.POST)
+	public void ckeditorImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) throws     Exception {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset-utf-8");
+
+		try {
+			service.ckeditorImageUpload(request, response, upload);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping("/noteList")
 	public List<NoteVO> noteList(HttpServletRequest request, HttpSession session) throws Exception {
 		
@@ -167,9 +190,6 @@ public class NoteController {
 		return noteList;
 	}
 	
-	
-	
-	
 	@RequestMapping("/noteCartegoryList")
 	public List<NoteVO> noteCartegoryList(HttpServletRequest request, HttpSession session) throws Exception {
 		NoteVO note = new NoteVO();
@@ -201,6 +221,7 @@ public class NoteController {
 		
 		return noteList;
 	}
+	
 	@RequestMapping("/freindNoteCartegoryList")
 	public List<NoteVO> freindNoteCartegoryList(HttpServletRequest request) throws Exception {
 		NoteVO note = new NoteVO();

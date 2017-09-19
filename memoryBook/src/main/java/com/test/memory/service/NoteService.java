@@ -2,6 +2,11 @@ package com.test.memory.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.test.memory.vo.CategoryVO;
 import com.test.memory.vo.NoteVO;
 
@@ -29,7 +34,8 @@ public interface NoteService {
 
 	public NoteVO emailNote(NoteVO note) throws Exception;
 
-	public List<CategoryVO> getFriendCategory(CategoryVO category);
+	public List<CategoryVO> getFriendCategory(CategoryVO category) throws Exception;
 
+	public void ckeditorImageUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile file) throws Exception;
 
 }
