@@ -10,13 +10,6 @@
 <meta name="author" content="">
 
 <title>Simple Sidebar - Start Bootstrap Template</title>
-
-<!-- Bootstrap core CSS -->
-<link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
-<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>

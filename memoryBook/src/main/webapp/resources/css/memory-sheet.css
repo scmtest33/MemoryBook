@@ -72,7 +72,7 @@ div.editor {
 .cate_open_btn{
 	color: #ccc;
 }
-.cate_btn_add{
+.cates_bt_add{
 	display: none;
 }
 .cate_btns{
@@ -136,7 +136,7 @@ body, th, td, input, select, textarea, button {
 	font-size: 14px;
 	line-height: 1.5;
 }
-div.viewList{
+div.	{
 	z-index: 7;
 }
 .tit_brunch {

@@ -27,6 +27,7 @@
     <!-- Custom styles for this template -->
     <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
 
+	<!-- 공용 스크립트 -->
 	<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
 	<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
 	<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>

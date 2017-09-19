@@ -9,11 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Simple Sidebar - Start Bootstrap Template </title>
-
-<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
-<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
-<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
+<title>드래그 리스트</title>
 </head>
 
 <body>
@@ -122,7 +118,7 @@
 		<br><br><br>
 			<!-- 드래그내용 뿌리기 -->
 		</div>
-		<div id="dragView" class="cardList"></div>
+		<div id="dragList" class="cardList"></div>
 	<!-- 본문내용 끝 -->
 
 	<script>

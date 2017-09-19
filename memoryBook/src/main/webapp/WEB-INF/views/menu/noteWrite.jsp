@@ -8,13 +8,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<title>Simple Sidebar - Start Bootstrap Template</title>
-
-<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
+<title>노트 작성</title>
 <script src="/memory/resources/js/ckeditor/ckeditor.js"></script>
-<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
-<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
 </head>
 
 <body>
