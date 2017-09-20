@@ -107,8 +107,8 @@
 	</div>
 	
 	<div class="noteEditor" id="noteEditor">
-				<br><br><br>
-			<%@ include file="noteWrite.jsp" %>
+		<br><br><br>
+		<%@ include file="noteWrite.jsp" %>
 	</div>
 
 	<!-- profile modal -->
