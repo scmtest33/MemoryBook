@@ -11,12 +11,12 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/")
 	public String home() {
 		return "main";
 	}
 	
-	@RequestMapping(value = "index", method = RequestMethod.GET)
+	@RequestMapping(value = "index")
 	public String index() {
 		return "/index"; 
 	}

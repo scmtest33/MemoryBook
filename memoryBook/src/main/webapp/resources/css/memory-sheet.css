@@ -24,7 +24,7 @@ div.gallery {
 	width: 180px;
 	height: 180px;
 }
-div.gallery: hover {
+div.gallery:hover {
 	border: 1px solid #777;
 }
 div.gallery img {
@@ -48,18 +48,17 @@ div.desc p {
 div.editorView {
 	z-index: 2;
 }
-div.sideDragBar_title {
-	padding: 8px 25px;
-	margin-top: 20px;
-	text-align: center;
-	font-size: 18px
-}
 div.sideDragBar {
 	overflow: auto;
 	background-color: white;
 	width: 976px;
-	height: 400px;
+	height: 250px;
 	z-index: 102;
+}
+div.sideDragBar_title {
+	padding: 8px 25px;
+	text-align: center;
+	font-size: 18px
 }
 div.editor {
 	position: relative;
@@ -72,7 +71,7 @@ div.editor {
 .cate_open_btn{
 	color: #ccc;
 }
-.cates_bt_add{
+.cate_btn_add{
 	display: none;
 }
 .cate_btns{
@@ -84,6 +83,9 @@ div.editor {
 }
 .editor_btns_hide{
 	display: none;
+}
+.editor_space{
+	margin-bottom: 15px;
 }
 
 /* 드래그 및 노트 모달 */
@@ -203,7 +205,7 @@ div.	{
 .txt_brunch {
 	color: #dee4ec;
 }
-.nav-tabs>li.active>a: hover {
+.nav-tabs>li.active>a:hover {
 	background-color: #F1F1F1;
 	color: #555;
 	cursor: default;
@@ -216,7 +218,7 @@ div.	{
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 }
-.gallery figure: hover img {
+.gallery figure:hover img {
 	-webkit-transform: scale(1.3);
 	transform: scale(1.3);
 }
@@ -309,7 +311,7 @@ div.dragList {
 	background-color: #FFFFFB;
 	box-shadow: 2px 2px 2px 2px #E0E0E0;
 }
-div.dragList: hover {
+div.dragList:hover {
 	border: 2px solid #777;
 }
 div.dragList img {
@@ -378,7 +380,7 @@ div.dragList img {
 .search-form .form-group input.form-control: -ms-input-placeholder {
 	display: none;
 }
-.search-form .form-group: hover, .search-form .form-group.hover {
+.search-form .form-group:hover, .search-form .form-group.hover {
 	width: 100%;
 	border-radius: 4px 25px 25px 4px;
 }
@@ -418,6 +420,7 @@ div.dragList img {
 
 /* 일반 버튼 */
 .btn-default {
+	width: auto;
 	box-shadow: 1px 2px 5px #aaa;
 }
 .noteSearch_btn {
@@ -437,4 +440,7 @@ div.dragList img {
 }
 .noteWrite_btn {
 	width: 90px;
+}
+.btn_space {
+	padding-right: 2px;
 }

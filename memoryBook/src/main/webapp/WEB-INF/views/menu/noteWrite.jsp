@@ -56,35 +56,33 @@
 							class="noteTitle" placeholder="제목을 입력하세요" /></td>
 					</tr>
 					<tr>
-						<td><textarea class="ckeditor" id="ckeditor" name="ckeditor" cols="150"
-								rows="35"></textarea></td>
+						<td><textarea class="ckeditor" id="ckeditor" name="ckeditor"></textarea></td>
 					</tr>
 				</table>
 				<br>
-				<table class='pull-right'>
+				<div class="btn btn-default editor_btns editor_btns_hide" id="listSW">드래그List</div>
+				<table class="pull-right editor_space">
 					<tr>
-						<td>
-							<div class="btn btn-default" class="editor_btns"
+						<td class="btn_space">
+							<div class="btn btn-default editor_btns"
 								id="noteSubmitBtn">저장</div>
 						</td>
-						<td>
-							<div class="btn btn-default" class="editor_btns editor_btns_hide"
+						<td class="btn_space">
+							<div class="btn btn-default editor_btns editor_btns_hide"
 								id="noteUpdateBtn">수정</div>
 						</td>
-						<td>
-							<div class="btn btn-default" class="editor_btns editor_btns_hide" 
+						<td class="btn_space">
+							<div class="btn btn-default editor_btns editor_btns_hide" 
 								id="cancelBtn">취소</div>
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
-		
-		<div class="w3-sidebar w3-round sideDragBar">
+		<div id="editorDraglist" class="w3-sidebar w3-round sideDragBar">
 			<div class="sideDragBar_title">
 				<i class="fa fa-inbox w3-xlarge"></i> DRAGS
 			</div>
-			드래그 리스트
 			<div id="dragList_editor"></div>
 		</div>
 	</div>
@@ -173,6 +171,11 @@
 		return false;
 	});
 	
+	//드래그 리스트 on/off
+	$("#listSW").click(function(e) {
+		$("#editorDraglist").toggle();
+    });
+	
 	//글 작성 및 수정취소
 	$("#cancelBtn").click(function(e) {
 		editorCancelChk();
@@ -181,7 +184,6 @@
 	// 드래그내용 입력시 필요한 드래그리스트 출력
     function makeDragCards(result) {
     	var html = "";
-    	console.log(result.length)
 		for (var i = 0; i < result.length; i++) {
 			var drag = result[i];	
 			var dragNo = drag.dragNo;
@@ -194,14 +196,14 @@
 			} else {
 				html += '<figure><img id="drag'+drag.dragNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
 			}
-			html += "	<div  class='desc'><p>" + drag.dragUrlTitle + "</p></div>";
+			html += "<div class='desc'><p>" + drag.dragUrlTitle + "</p></div>";
 			html += "</div>";
 
 		}
 		if (result.length == 0) {
 			html += "<div class='gallery'>";
-			html += '	<img src="/memory/resources/img/D.png" alt="" width="300px" height="200px" >';
-			html += "	<div  class='desc'><p> 드래그가 없습니다. </p></div>";
+			html += '<figure><img src="/memory/resources/img/D.png" alt="" width="300px" height="200px"></figure>';
+			html += "<div class='desc'><p> 드래그가 없습니다 </p></div>";
 			html += "</div>";
 		}
     	$("#dragList_editor").html(html);

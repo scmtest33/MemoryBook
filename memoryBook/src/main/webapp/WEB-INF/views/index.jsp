@@ -434,6 +434,9 @@
 		$("#noteTitle").val('');
 		CKEDITOR.instances.ckeditor.setData("");
     	document.getElementById("noteEditor").style.display = "none";
+    	document.getElementById("categoryToAdd").style.display = "none";
+    	document.getElementById("Category1").style.display = "none";
+    	document.getElementById("Category2").style.display = "none";
     	document.getElementById("profileModal").style.display = "";
     	document.getElementById("noteView").style.display = "";
     	document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
