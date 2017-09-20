@@ -396,6 +396,13 @@ div.dragList img {
 	left: initial;
 	font-size: 14px;
 }
+.searchInput{
+	float: left;
+	position: relative;
+	width: 33.33333333%;
+	min-height: 1px;
+	padding-right: 8px;
+}
 
 
 /* 삭제 아이콘 */
@@ -412,6 +419,21 @@ div.dragList img {
 /* 일반 버튼 */
 .btn-default {
 	box-shadow: 1px 2px 5px #aaa;
+}
+.noteSearch_btn {
+	width: auto;
+	padding: 4px;
+	display: inline-block;
+	margin-bottom: 0;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 4px;
 }
 .noteWrite_btn {
 	width: 90px;

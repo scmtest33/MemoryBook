@@ -80,18 +80,14 @@
 			<p class="desc_brunch">
 				<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span>
 				<!-- 검색 -->
-				<span class="part">
-					<div class="col-md-4 col-md-offset">
-		           		 <div action="" class="search-form">
-		                	<div class="form-group has-feedback" onkeydown="javascript:if(event.keyCode == 13) searchList();">
-		            			<label for="search" class="sr-only">Search</label>
-		            			<input type="text" class="form-control" name="searchWrd" id="searchWrd" placeholder="노트 검색" >
-		              		<span class="glyphicon glyphicon-search form-control-feedback"></span>
-		            		</div>
-		           		 </div>
-					</div>
-				</span>
-				<div class="btn btn-default noteWrite_btn" id="noteWrite">노트작성</div><br>
+				<div class="searchInput col-md-offset">
+					<div class="search-form">
+		            		<label for="search" class="sr-only">Search</label>
+		            		<input type="text" class="form-control" name="searchWrd" id="searchWrd" placeholder="노트 검색" onkeydown="javascript:if(event.keyCode == 13) searchList();">
+		        	</div>
+				</div>
+		<div class="btn-default noteSearch_btn" id="noteSearch_btn" onclick="searchList();"><img src="/memory/resources/img/search_icon.jpg"></div>
+		<div class="btn btn-default noteWrite_btn" id="noteWrite">노트작성</div><br>
 		</div>
 		<br><br><br>
 		<!-- 카테고리 선택 -->

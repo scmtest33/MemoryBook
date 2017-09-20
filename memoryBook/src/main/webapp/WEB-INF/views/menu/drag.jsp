@@ -85,8 +85,8 @@
 			</span>
 		</div>
 		<br><br><br>
-			<!-- 드래그내용 뿌리기 -->
 		</div>
+		<!-- 드래그내용 뿌리기 -->
 		<div id="dragList" class="cardList"></div>
 	<!-- 본문내용 끝 -->
 
