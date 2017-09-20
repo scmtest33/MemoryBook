@@ -191,9 +191,15 @@
     }
     
   //모달 취소버튼
-    $("#cancleBtn").click(function (){
+     $("#cancleBtn").click(function (){
     	location.href='/memory/index';
-    });
+    }); 
+     $("#cancleBtn1").click(function (){
+    	location.href='/memory/index';
+    }); 
+     $("#cancleBtn2").click(function (){
+    	location.href='/memory/index';
+    }); 
     
     $("#menu-toggle").click(function(e){
     	e.preventDefault();

@@ -20,14 +20,7 @@
 <script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
 </head>
 <script>
-$("#cancleBtn").click(function (){
-	location.href='/memory/index';
-});
 
-$("#menu-toggle").click(function(e){
-	e.preventDefault();
-	$("#wrapper").toggleClass("toggled");
-});
 
 
 </script>
@@ -54,17 +47,18 @@ $("#menu-toggle").click(function(e){
 	<table>
 		<tr>
 			<td>
-				<input type="button" value="Modify" onclick="">
+				<input type="button" value="Modify" data-toggle="modal" data-target="#myModal_Modify">
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="button" value="Unregister" data-toggle="modal" data-target="#myModal_m">
+				<input type="button" value="Unregister" data-toggle="modal" data-target="#myModal_Unregister">
 			</td>
 		</tr>
 	</table>
 	
-	<div class="modal fade" id="myModal_m" role="dialog">
+	
+	<div class="modal fade" id="myModal_Modify" role="dialog">
 		    <div class="modal-dialog">
 		    
 		      <!-- Modal content-->
@@ -72,15 +66,87 @@ $("#menu-toggle").click(function(e){
 		        <div class="modal-header">
 		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
 		        	<br><br>
-		        	<h4 class="modal-title" id="dragNoteTitle" style="text-align: center;">Memory Lane Unregister</h4>
+		        	<h4 class="modal-title" id="modifyTitle" style="text-align: center;">Memory Lane Modify</h4>
 		        	<br>
 		        </div>
 		        <br>
 		        			        	
-		        <div class="modal-body" id="unregisterModal" >
+		        <div class="modal-body" id="modifyBody" >
+		          	
+		        <form name="infoModify" id="infoModify" action="/memory/member/infoUpdate" method="post">       
+			    	<table>
+			    		<tr>
+			    			<div class="form-group">
+			    			회원님의 정보를 수정해보세요.
+			    			</div>
+			    		</tr>
+			    		<tr>
+			    			<div class="form-group">
+			    			<label for="email">Email</label>
+							    <input type="text" class="form-control" id="email" name="email" value="${email}" disabled="disabled" required="required"/>
+			    			</div>
+			    		</tr>
+			    		<tr>
+			    			<div class="form-group">
+			    			<label for="name">Name</label>
+							    <input type="text" class="form-control" id="name" name="name" value="${name}" placeholder="이름을 다시 입력해주세요" required="required"/>
+			    			</div>
+			    		</tr>
+			    		<tr>
+			    			<div class="form-group">
+			    			 <label for="password">password:</label>
+			    			 <input type="password" class="form-control" id="pwd1" name="pwd1" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
+			    			</div>
+			    		</tr>
+			    		<tr>
+			    			<div class="form-group">
+			    			 <label for="passwordConf">password:</label>
+			    			 <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="비밀번호를 확인하세요" required="" autofocus="" />
+			    			 <span id="checkPwd"></span>
+			    			</div>
+			    		</tr>
+			    		<tr>
+			    			<div class="form-group">
+			    			<label for="infomation">Infomation</label><br>
+			    			<input id="gender" name="gender" type="radio" value="0"> 전체 공개 &nbsp&nbsp&nbsp
+							<input id="gender" name="gender" type="radio" value="1"> 나만 공개
+							</div>   		
+			    		</tr>
+					    <tr>
+					    	<td id="btns" colspan="2" style="width: 368px;">
+					    		<input type="submit" value="수정" class="btn btn-default" style="width: 368px;background: #B2CCFF; margin: 0 auto;">
+					    	</td>
+					    </tr>
+					    <tr>
+					    	<td id="btns" colspan="2" style="width: 368px;">
+							    <div id="cancleBtn1" class="btn btn-default"  style="width: 368px;background: #FFFFFF; margin: 0 auto;">취소</div>
+					    	</td>
+					    </tr>
+		    		</table>
+			    </form>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+	
+	
+	<div class="modal fade" id="myModal_Unregister" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content" style="width:400px;margin: 0 auto;">
+		        <div class="modal-header">
+		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
+		        	<br><br>
+		        	<h4 class="modal-title" id="unregisterTitle" style="text-align: center;">Memory Lane Unregister</h4>
+		        	<br>
+		        </div>
+		        <br>
+		        			        	
+		        <div class="modal-body" id="unregisterBody" >
 		          	
 		        <form name="unregisterfrm" id="unregisterfrm" action="/memory/member/unregister" method="post">       
-			    	<table id="loginInfo">
+			    	<table>
 			    		<tr>
 			    			<div class="form-group">
 			    			탈퇴하실려면 비밀번호를 입력하세요.<br>탈퇴시 작성하신 노트,드래그,친구정보가 전부 삭제됩니다.
@@ -95,17 +161,15 @@ $("#menu-toggle").click(function(e){
 					    <tr>
 					    	<td id="btns" colspan="2" style="width: 368px;">
 					    		<input type="submit" value="회원탈퇴" class="btn btn-default" style="width: 368px;background: #B2CCFF; margin: 0 auto;">
-<!-- 							    <button id="unregisterBtn" class="btn btn-default"  style="width: 368px;background: #B2CCFF; margin: 0 auto;">회원탈퇴</button>    -->
 					    	</td>
 					    </tr>
 					    <tr>
 					    	<td id="btns" colspan="2" style="width: 368px;">
-							    <div id="cancleBtn" class="btn btn-default"  style="width: 368px;background: #FFFFFF; margin: 0 auto;">취소</div>
+							    <div id="cancleBtn2" class="btn btn-default"  style="width: 368px;background: #FFFFFF; margin: 0 auto;">취소</div>
 					    	</td>
 					    </tr>
 		    		</table>
 			    </form>
-		<!--           <div id="googleLoginDiv" align="center" class="g-signin2" data-onsuccess="onSignIn" style="width: 368px; text-align: center;"></div> -->
 		        </div>
 		      </div>
 		    </div>
