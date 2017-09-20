@@ -9,27 +9,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<title>Simple Sidebar - Start Bootstrap Template</title>
-
-<!-- Bootstrap core CSS -->
-<link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
-<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
+<title>Profile</title>
 </head>
-<script>
-
-
-
-</script>
 <body>
-
 	<h1>Profile</h1>
-	<script>
-		
-	</script>
 	<table>
 		<tr>
 			<td><h2>Name : </h2></td>
@@ -61,12 +44,12 @@
 	<div class="modal fade" id="myModal_Modify" role="dialog">
 		    <div class="modal-dialog">
 		    
-		      <!-- Modal content-->
-		      <div class="modal-content" style="width:400px;margin: 0 auto;">
+		      <!-- 회원정보수정 Modal-->
+		      <div class="modal-content memberModify">
 		        <div class="modal-header">
 		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
 		        	<br><br>
-		        	<h4 class="modal-title" id="modifyTitle" style="text-align: center;">Memory Lane Modify</h4>
+		        	<h4 class="modal-title modifyTitle" id="modifyTitle">Memory Lane Modify</h4>
 		        	<br>
 		        </div>
 		        <br>
@@ -113,13 +96,13 @@
 							</div>   		
 			    		</tr>
 					    <tr>
-					    	<td id="btns" colspan="2" style="width: 368px;">
-					    		<input type="submit" value="수정" class="btn btn-default" style="width: 368px;background: #B2CCFF; margin: 0 auto;">
+					    	<td id="btns" colspan="2">
+					    		<input type="submit" value="수정" class="btn btn-default memberModify_btns Modify_ok">
 					    	</td>
 					    </tr>
 					    <tr>
-					    	<td id="btns" colspan="2" style="width: 368px;">
-							    <div id="cancleBtn1" class="btn btn-default"  style="width: 368px;background: #FFFFFF; margin: 0 auto;">취소</div>
+					    	<td id="btns" colspan="2">
+							    <div id="cancleBtn1" class="btn btn-default memberModify_btns Modify_no">취소</div>
 					    	</td>
 					    </tr>
 		    		</table>
@@ -129,16 +112,16 @@
 		    </div>
 		  </div>
 	
-	
+	<!-- 탈퇴 모달 -->
 	<div class="modal fade" id="myModal_Unregister" role="dialog">
 		    <div class="modal-dialog">
 		    
 		      <!-- Modal content-->
-		      <div class="modal-content" style="width:400px;margin: 0 auto;">
+		      <div class="modal-content memberOut">
 		        <div class="modal-header">
 		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
 		        	<br><br>
-		        	<h4 class="modal-title" id="unregisterTitle" style="text-align: center;">Memory Lane Unregister</h4>
+		        	<h4 class="modal-title outTitle" id="unregisterTitle">Memory Lane Unregister</h4>
 		        	<br>
 		        </div>
 		        <br>
@@ -159,13 +142,13 @@
 			    			</div>
 			    		</tr>
 					    <tr>
-					    	<td id="btns" colspan="2" style="width: 368px;">
-					    		<input type="submit" value="회원탈퇴" class="btn btn-default" style="width: 368px;background: #B2CCFF; margin: 0 auto;">
+					    	<td id="btns" colspan="2"">
+					    		<input type="submit" value="회원탈퇴" class="btn btn-default memberOut_btns out_ok">
 					    	</td>
 					    </tr>
 					    <tr>
-					    	<td id="btns" colspan="2" style="width: 368px;">
-							    <div id="cancleBtn2" class="btn btn-default"  style="width: 368px;background: #FFFFFF; margin: 0 auto;">취소</div>
+					    	<td id="btns" colspan="2"">
+							    <div id="cancleBtn2" class="btn btn-default memberOut_btns out_no">취소</div>
 					    	</td>
 					    </tr>
 		    		</table>
@@ -174,5 +157,8 @@
 		      </div>
 		    </div>
 		  </div>
-</body>
+	</body>
+<script>
+
+</script>
 </html>

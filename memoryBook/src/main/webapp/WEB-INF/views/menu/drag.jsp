@@ -13,8 +13,8 @@
 </head>
 
 <body>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal_drag" role="dialog">
+	<!-- 이메일 보내기 Modal -->
+	<div class="modal fade" id="mailModal_drag" role="dialog">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -48,25 +48,7 @@
 		</div>
 	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="downloadDragModal" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-
-				<div class="modal-body">
-					<h1>[드래그 다운로드]</h1>
-					<br>
-					<h2>드래그를 다운로드 하겠습니까?</h2>
-					<br> <a id="downloadDragPath" class="btn btn-default">다운로드</a>
-					<input type="button" class="btn btn-default" data-dismiss="modal">취소
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- 드래그모달 -->
+	<!-- 드래그 읽기 모달 -->
 	<div class="modal fade" id="detailModal_drag" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -93,27 +75,14 @@
 
 	<!-- 메인뷰 -->
 	<div id="dragView" class="viewList">
-		<!-- 검색 -->
 		<div class="list_title">
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
 		</div>
 			<br>
 			<h3 class="tit_brunch">드래그 리스트</h3>
 			<p class="desc_brunch">
-				<div class="part">드래그를 공유해 보세요.<br></div>
-				<div class="part">
-					<div class="col-md-4 col-md-offset search_window">
-						<div action="" class="search-form">
-							<div class="form-group has-feedback"
-								onkeydown="javascript:if(event.keyCode == 13) searchList_drag();">
-								<label for="search" class="sr-only">Search</label>
-									<input type="text" class="form-control" name="searchWrd"
-									id="searchWrd" placeholder="드래그 검색">
-									<div class="glyphicon glyphicon-search form-control-feedback"></div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<span class="part">드래그를 공유해 보세요.<br>
+			</span>
 		</div>
 		<br><br><br>
 			<!-- 드래그내용 뿌리기 -->
@@ -197,13 +166,13 @@
 			         + (date.getMonth() + 1) + "-" 
 			         + date.getDate();         
 			//시간뿌리기 끝
-//	 		document.getElementById("dragView").style.display = "block";
 			$("#title_drag").html("<div>[ 드래그 데이터  "+time2+" ]</div><h3>" + title +"</h3>");
 			$("#date_drag").html(time);
 			$("#content_drag").html(content);
-			$("#update_drag").html("<div class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateDrag("+dragNo+");'></i></a></div>&nbsp;<div class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></div>&nbsp;<div class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></div>&nbsp;<div class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_modal'><i class='fa fa-download'></i></a></div></p>");
-//	 		document.getElementById("editorBtnDiv").style.display = "none";
-			
+			$("#update_drag").html("<div class='badge quote-badge' dragNote-toggle='tooltip' title='수정'><a href='' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateDrag("+dragNo+");'></i></a></div>&nbsp;"
+								  +"<div class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'><a href='' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></div>&nbsp;"
+								  +"<div class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'><a href='' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></div>&nbsp;"
+								  +"<div class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_modal'><i class='fa fa-download'></i></a></div></p>");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
 			alert("오류: " + errorText + "<br>" + "오류코드: " + status);

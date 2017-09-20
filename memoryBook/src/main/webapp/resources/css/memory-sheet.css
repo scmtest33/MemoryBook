@@ -105,6 +105,47 @@ a.btn_modal {
 	color: white;
 }
 
+/* 회원정보수정 모달 */
+.memberModify{
+	width:400px;
+	margin: 0 auto;
+}
+.modifyTitle{
+	text-align: center;
+}
+.memberModify_btns{
+	width: 368px;
+	margin: 0 auto;
+}
+.Modify_ok{
+	width: 368px;
+	background: #B2CCFF;
+}
+.Modify_no{
+	width: 368px;
+	background: #FFFFFF;
+}
+
+/* 회원탈퇴 모달 */
+.memberOut{
+	width:400px;
+	margin: 0 auto;
+}
+.outTitle{
+	text-align: center;
+}
+.memberOut_btns{
+	width: 368px;
+	margin: 0 auto;
+}
+.out_ok{
+	width: 368px;
+	background: #B2CCFF;
+}
+.out_no{
+	width: 368px;
+	background: #FFFFFF;
+}
 
 /* 노트 및 드래그 내용보기 모달 */
 .mail_modal_title{

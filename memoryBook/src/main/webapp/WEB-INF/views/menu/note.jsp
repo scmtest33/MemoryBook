@@ -13,8 +13,8 @@
 </head>
 
 <body>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
+	<!-- 메일보내기 Modal -->
+	<div class="modal fade" id="mailModal" role="dialog">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -46,24 +46,6 @@
 		</div>
 	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="downloadNoteModal" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-
-				<div class="modal-body">
-					<h1>[노트 다운로드]</h1>
-					<br>
-					<h2>노트를 다운로드 하겠습니까?</h2>
-					<br> <a id="downloadNotePath" class="btn btn-default">다운로드</a>
-					<div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
 	<!-- 노트모달 -->
 	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-lg">
@@ -90,7 +72,6 @@
 	</div>
 	<!-- 메인뷰 및 검색 -->
 	<div id="noteView" class="viewList">
-		<!-- 검색 -->
 		<div class="list_title">
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
 		</div>
@@ -98,8 +79,7 @@
 			<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
 			<p class="desc_brunch">
 				<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span>
-				<!-- 			<span class="part">그리고 다시 꺼내 보세요.<br></span>  -->
-				<!-- 			<span class="part"><span class="txt_brunch">노트 속 간직하고 있는 글과 감성을.</span></span> -->
+				<!-- 검색 -->
 				<span class="part">
 					<div class="col-md-4 col-md-offset">
 		           		 <div action="" class="search-form">
@@ -244,13 +224,13 @@
 			         + date.getMinutes() + ":"
 			         + date.getSeconds();
 			//시간 뿌리기 끝
-//	 		document.getElementById("noteView").style.display = "block";
 			$("#title").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
 			$("#date").html(time);
 			$("#content").html(content);
-			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_modal'><i class='fa fa-download'></i></a></span></p>");
-//	 		document.getElementById("editorBtnDiv").style.display = "none";
-			
+			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'><a href='' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;"
+							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteNote("+noteNo+");'></i></a></span>&nbsp;"
+							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='메일로 보내기'><a href='' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#mailModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;"
+							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_modal'><i class='fa fa-download'></i></a></span></p>");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
 			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
@@ -308,7 +288,7 @@
 	        			html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
 	        					         
 	        			html += "<p class='blog-post-bottom pull-right'>";         
-	        			html += "   <span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'><a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></a></span>";
+	        			html += "   <span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'><a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#mailModal' onclick='saveNoteNo("+noteNo+");'></i></a></span>";
 	        			html += "	<span class='badge quote-badge'dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"'><i class='fa fa-download'></i></a></span></p>";
 	        			//시간 뿌리기 끝
 	        			html += "</div>";
@@ -496,9 +476,11 @@
 	function downloadNote(noteNo){
 		var url = "/memory/download/downloadNote?noteNo=" + noteNo;
 		$("#downloadNotePath").attr("href", url);
+		console.log(noteNo);
 	}
 
 	$("#downloadNotePath").click(function(){
+		console.log(url);
 		$("#downloadNoteModal").modal('hide');
 	})
 
