@@ -76,9 +76,10 @@
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
 		</div>
 			<br>
-			<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
+			<p class="pageTitle">${name}님의 드래그를 자신만의 노트로 저장하세요</p>
+			<p class="pageSubTitle">드래그한번으로 원하는 텍스트와 이미지를 담아보세요</p>
 			<p class="desc_brunch">
-				<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span>
+<!-- 				<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span> -->
 				<!-- 검색 -->
 				<div class="searchInput col-md-offset">
 					<div class="search-form">

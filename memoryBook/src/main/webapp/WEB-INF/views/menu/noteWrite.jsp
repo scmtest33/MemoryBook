@@ -17,11 +17,8 @@
 	<div id="editorView" class="editorView">
 		<div>
 			<br>
-			<h3 class="tit_brunch">노트 작성</h3>
-
-			<p class="desc_brunch">
-				<span class="part">편집창 아래 드래그 박스에서 원하는 항목을 클릭하여 글을 작성해보세요.<br></span>
-			</p>
+			<p class="pageTitle">노트 작성</p>
+			<p class="pageSubTitle">편집창 아래 드래그 박스에서 원하는 항목을 클릭하여 노트를 작성해보세요</p>
 		</div>
 
 		<!-- 입력창 -->

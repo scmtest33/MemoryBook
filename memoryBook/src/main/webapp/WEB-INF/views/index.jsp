@@ -67,13 +67,6 @@
 					</a>
                 </li>
                 <li>
-                    <a id="dragtest" class="noteImg">
-                	    <img src="/memory/resources/img/indexImg/drag_hover.png" class="indexImg5">
-      		        	<img src="/memory/resources/img/indexImg/drag1.png" class="indexImg6">
-					    My Drag_test
-					</a>
-                </li>
-                <li>
       		        <a id="note" class="noteImg" >
       		        	<img src="/memory/resources/img/indexImg/note_hover.png" class="indexImg7">
       		        	<img src="/memory/resources/img/indexImg/note1.png" class="indexImg8">
@@ -89,21 +82,23 @@
                 </li>
                 <li>
                 	<a id="searchFriend" class="noteImg">
+                	<img src="/memory/resources/img/indexImg/search_hover.png" class="indexImg11">
+      		        <img src="/memory/resources/img/indexImg/search1.png" class="indexImg12">
 					    Friend Search
 					</a>
                 </li>
                 <li>
-                    <a onclick="logout()" class="noteImg">
-                	<img src="/memory/resources/img/indexImg/logout_hover.png" class="indexImg11">
-      		        <img src="/memory/resources/img/indexImg/logout1.png" class="indexImg12">
+                    <a onclick="logout()" class="noteImg" id="logout">
+                	<img src="/memory/resources/img/indexImg/logout_hover.png" class="indexImg13">
+      		        <img src="/memory/resources/img/indexImg/logout1.png" class="indexImg14">
                     Logout
                     </a>
                 </li>
                 <c:if test="${email eq 'admin'}">
                 <li>
                 	<a id="user" class="noteImg">
-                	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg13">
-      		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg14">
+                	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg15">
+      		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg16">
 					    UserList
 					</a>
                 </li>

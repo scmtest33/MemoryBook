@@ -79,10 +79,8 @@
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
 		</div>
 			<br>
-			<h3 class="tit_brunch">드래그 리스트</h3>
-			<p class="desc_brunch">
-			<span class="part">드래그를 공유해 보세요.<br>
-			</span>
+			<p class="pageTitle">${name}님이 드래그한 드래그 리스트</p>
+			<p class="pageSubTitle">${name}님이 걸어온 길을 공유해 보세요</p>
 		</div>
 		<br><br><br>
 		</div>

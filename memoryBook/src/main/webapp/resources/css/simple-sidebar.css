@@ -142,6 +142,19 @@ body {
 	z-index: 2;
 }
 
+.indexImg15 { 
+	position: absolute;
+	top : 585px;
+	left : 15px;
+	z-index: 1;
+}
+.indexImg16 { 
+	position: absolute;
+	top : 585px;
+	left : 15px;
+	z-index: 2;
+}
+
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -170,7 +183,32 @@ body {
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
-    background: rgba(0,0,0,0.2);
+/*     background: rgba(0,0,0,0.2); */
+}
+/* index 목록 색깔 호버 */
+#main:hover {
+	background: rgba(47,157,39,0.8);
+}
+#myProfile:hover {
+	background: rgba(225,0,0,0.8);
+}
+#drag:hover {
+	background: rgba(0,84,255,0.8);
+}
+#note:hover {
+	background: rgba(255,94,0,0.8);
+}
+#myFriend:hover {
+	background: rgba(165,102,255,0.8);
+}
+#searchFriend:hover {
+	background: rgba(255,246,18,0.8);
+}
+#logout:hover {
+	background: rgba(0,34,102,0.9);
+}
+#user:hover {
+	background: rgba(116,116,116,0.9);
 }
 
 .sidebar-nav li a:active,

@@ -11,6 +11,7 @@
 
 
 <title>친구 관리</title>
+<link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body>
@@ -39,10 +40,10 @@
 			</div>
 		</div>
 	</div>
-	
-	<p class="friendTitle">친구들은 무슨 길을 걷고 있을까요?</p>	
+	<br>
+	<p class="pageTitle">친구들은 무슨 길을 걷고 있을까요?</p>	
 		
-	<button class="btn btn-primary" id="Friend_toggle">
+	<button class="btn btn-success btn-lg" id="Friend_toggle">
 	  내친구 목록 확인하기
 	</button>
 	<div class="collapse" id="FriendList">
@@ -128,6 +129,7 @@ function friendList(){
 	                addRow +='<td class = "deleteFriend">' + '<img id = deleteF'+index+' src = "/memory/resources/img/cancel.png">' + '</td>';
 	                addRow += '</tr>';
 					$("#friendList").append(addRow);
+					
 // 					$("#friendPhoto"+index || "#friendName"+index).click(function(){
 					$("#friendName"+index).click(function(){
 						var friendNa = document.getElementById("friendName"+index).childNodes[0].nodeValue;
@@ -241,7 +243,7 @@ function friendNoteDetail(friendNoteNo){
 				var friendCategoryName = friendCategory[i].categoryName;
 				html += "<li class='active category_list' onclick='getNoteByFriendrCategoryNo("+friendCategoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+friendCategoryNo+"' aria-expanded='false'>"
 				html += "<a href='#' ondragstart='drag(event)' draggable='true' id='category"+friendCategoryNo+"' class='category_list'>"+friendCategoryName+"</a>";
-				html += "<a class='category_list_2' id='categoryUpdate"+friendCategoryNo+"'>"+friendCategoryName+"</a>";
+// 				html += "<a class='category_list_2' id='categoryUpdate"+friendCategoryNo+"'>"+friendCategoryName+"</a>";
 				html += "</li>";
 			}
 			$("#fNoteCategoryList").html(html);

@@ -15,7 +15,7 @@
 
 <body>
 
-<h1>${name}님 친구를 찾고 추가해보세요</h1><br>
+<p class="pageTitle">${name}님 친구를 찾고 추가해보세요</p>
 <input type="text" name="findId" id="findId" class="form-control" placeholder="이름 or Email을 입력하세요">
 <button name="findBtn" id="findBtn" class="btn btn-default" onclick="findMember()">Search</button><br><br><br><br>
 
@@ -32,46 +32,46 @@
 		getFriendList();
 	});
 
-	//내 친구 목록 불러오기
-	function getFriendList(){
-		$.ajax ({
-			url: "/memory/member/getFriendList",
-			type: "POST",
-			success : function(result){
-				var addTitle = "<tr><th>이름</th>";
-				addTitle+= "<th>이메일</th>";
-				addTitle+= "<th>친구삭제</th></tr>";
-				$("#listTable").append(addTitle);
-				$(result).each(function(index, item) {
-					var addRow  = '<tr id="flist"><td id="friendName'+ index +'">' + item.name + '</td>';
-		                addRow += '<td id="friendEmail">' + item.friend_Email + '</td>';
-		                addRow +='<td class = "deleteFriend">' + '<img id = deleteF'+index+' src = "/memory/resources/img/cancel.png">' + '</td>';
-		                addRow += '</tr>';
-						$("#listTable").append(addRow);
+// 	//내 친구 목록 불러오기
+// 	function getFriendList(){
+// 		$.ajax ({
+// 			url: "/memory/member/getFriendList",
+// 			type: "POST",
+// 			success : function(result){
+// 				var addTitle = "<tr><th>이름</th>";
+// 				addTitle+= "<th>이메일</th>";
+// 				addTitle+= "<th>친구삭제</th></tr>";
+// 				$("#listTable").append(addTitle);
+// 				$(result).each(function(index, item) {
+// 					var addRow  = '<tr id="flist"><td id="friendName'+ index +'">' + item.name + '</td>';
+// 		                addRow += '<td id="friendEmail">' + item.friend_Email + '</td>';
+// 		                addRow +='<td class = "deleteFriend">' + '<img id = deleteF'+index+' src = "/memory/resources/img/cancel.png">' + '</td>';
+// 		                addRow += '</tr>';
+// 						$("#listTable").append(addRow);
 						
-						$("#deleteF"+index).click(function(){
-							$.ajax({
-								url: "/memory/member/deleteFriend",
-								dataType: "json",
-								type: "post",
-								data: {"friend_Email" : item.friend_Email},
-								success: function(result){
-									if(result){
-										alert("친구가 삭제되었습니다.");
-										$("#friendList").empty();
-										$("#listTable").empty();
-										getFriendList();
-										friendList();
-									}else {
-										alert("친구삭제 실패")
-									}
-								}
-							});
-						});
-				})
-			}
-		})
-	}
+// 						$("#deleteF"+index).click(function(){
+// 							$.ajax({
+// 								url: "/memory/member/deleteFriend",
+// 								dataType: "json",
+// 								type: "post",
+// 								data: {"friend_Email" : item.friend_Email},
+// 								success: function(result){
+// 									if(result){
+// 										alert("친구가 삭제되었습니다.");
+// 										$("#friendList").empty();
+// 										$("#listTable").empty();
+// 										getFriendList();
+// 										friendList();
+// 									}else {
+// 										alert("친구삭제 실패")
+// 									}
+// 								}
+// 							});
+// 						});
+// 				})
+// 			}
+// 		})
+// 	}
 
 
 	//회원찾기
