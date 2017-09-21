@@ -21,6 +21,7 @@
 
     <!-- Custom CSS -->
     <link href="/memory/resources/css/stylish-portfolio.css" rel="stylesheet">
+	<link href="/memory/resources/css/memory-sheet.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Fonts -->
     <link href="/memory/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -207,13 +208,10 @@
 			    		<tr>
 			    			<td colspan="2">&nbsp;&nbsp;</td>
 			    		</tr>
-			    		<tr>
-			    			<td id="btns" colspan="2">
+						</table>
+						<table class="btns_align">
+			    			<td id="btns btn_space">
 							    <button id="joinBtn" class="btn btn-default join_ok join_btns">회원가입</button>   
-			    			</td>
-			    		</tr>
-			    		<tr>
-			    			<td id="btns" colspan="2">
 							    <button id="cancelBtn" class="btn btn-default join_no join_btns">취소</button>  
 			    			</td>
 			    		</tr>
@@ -238,14 +236,11 @@
 							    <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Password" required=""/>
 			    			</div>
 			    		</tr>
-			    		<br>
-					    <tr >
-					    	<td id="btns" colspan="2" style="width: 368px;">
-							    <button id="loginBtn" class="btn btn-default login_ok">로그인</button>   
-					    	</td>
-					    </tr>
+			    	</table>
+			    	<table class="btns_align">
 					    <tr>
-					    	<td id="btns" colspan="2" style="width: 368px;">
+					    	<td id="btns btn_etc btn_space">
+							    <button id="loginBtn" class="btn btn-default login_ok">로그인</button>   
 							    <div id="joinFormBtn" class="btn btn-default login_no">회원가입</div>
 					    	</td>
 					    </tr>
@@ -258,8 +253,8 @@
 		    </div>
 		  </div>
 
-
     <!-- Footer -->
+    <section id="contact" class="contact">
     <footer id="footer">
         <div class="container">
             <div class="row">
@@ -279,6 +274,7 @@
         </div>
         <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
     </footer>
+    </section>
 
     <!-- jQuery -->
     <script src="/memory/resources/js/jquery-3.2.1.js"></script>
@@ -329,7 +325,7 @@
         $("#sidebar-wrapper").toggleClass("active");
     });
     // Scrolls to the selected menu item on the page
-    $(function() {
+/*     $(function() {
         $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
             if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
                 var target = $(this.hash);
@@ -342,7 +338,7 @@
                 }
             }
         });
-    });
+    }); */
     //#to-top button appears after scrolling
     var fixed = false;
     $(document).scroll(function() {
