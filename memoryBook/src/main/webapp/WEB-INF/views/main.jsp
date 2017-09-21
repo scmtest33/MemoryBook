@@ -394,11 +394,14 @@
     			"mem_pwd" : $("input[name=loginPassword]").val()
     			},
     		success : function(result) {
-	    	    		if(result == "true"){
-	    	    			alert("로그인 완료.")
+    					var i = result.approvalNum;
+    					var a = result.email;
+	    	    		if(a != null && i != 1){
+	    	    			localStorage.setItem("memberNo", result.mem_no);
 	    	    			location.href='/memory/index';
 	    	    		}
-	    	    		else if(result == "stop"){
+	    	    		
+	    	    		else if(a != null && i == 1){
 	    	    			alert("계정이 정지되었습니다. 관지라에게 문의해주세요.")
 	    	    		}
 	    	    		else {
