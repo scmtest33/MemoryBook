@@ -4,16 +4,15 @@
 <%@ page session="false" %>
 <html>
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Stylish Portfolio - Start Bootstrap Theme</title>
+    <title>Memory Lane</title>
     
-    <!-- 	Favicon -->
+    <!-- Favicon -->
 	<link rel="shortcut icon" href="/memory/resources/img/memory.ico">
 	<link rel="icon" href="/memory/resources/img/memory.ico">
 
@@ -167,16 +166,16 @@
 		    <div class="modal-dialog">
 		    
 		      <!-- Modal content-->
-		      <div class="modal-content" style="width:400px;margin: 0 auto;">
+		      <div class="modal-content memberLogin">
 		        <div class="modal-header">
 		          <button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
 		          <br>
 		          <br>
-		          <h4 class="modal-title" id="dragNoteTitle" style="text-align: center;">Memory Lane LogIn</h4>
+		          <h4 class="modal-title loginTitle" id="dragNoteTitle">Memory Lane LogIn</h4>
 		          <br>
 		        </div>
 		        <br>
-		        	<div class="modal-body" id="joinModal"  style="display: none;">
+		        	<div class="modal-body joinModal" id="joinModal">
 		          	<form name="joinfrm" id="joinfrm">       
 			    	<table id="joinInfo">
 			    		<tr>
@@ -209,13 +208,13 @@
 			    			<td colspan="2">&nbsp;&nbsp;</td>
 			    		</tr>
 			    		<tr>
-			    			<td id="btns" colspan="2" style="width: 368px;">
-							    <button id="joinBtn" class="btn btn-default" style="width: 368px;background: #B2CCFF; margin: 0 auto;">회원가입</button>   
+			    			<td id="btns" colspan="2">
+							    <button id="joinBtn" class="btn btn-default join_ok join_btns">회원가입</button>   
 			    			</td>
 			    		</tr>
 			    		<tr>
-			    			<td id="btns" colspan="2" style="width: 368px;">
-							    <button id="cancelBtn" class="btn btn-default" style="width: 368px;background: #FFFFFF; margin: 0 auto;">취소</button>  
+			    			<td id="btns" colspan="2">
+							    <button id="cancelBtn" class="btn btn-default join_no join_btns">취소</button>  
 			    			</td>
 			    		</tr>
 		    		</table>
@@ -242,12 +241,12 @@
 			    		<br>
 					    <tr >
 					    	<td id="btns" colspan="2" style="width: 368px;">
-							    <button id="loginBtn" class="btn btn-default"  style="width: 368px;background: #B2CCFF; margin: 0 auto;">로그인</button>   
+							    <button id="loginBtn" class="btn btn-default login_ok">로그인</button>   
 					    	</td>
 					    </tr>
 					    <tr>
 					    	<td id="btns" colspan="2" style="width: 368px;">
-							    <div id="joinFormBtn" class="btn btn-default"  style="width: 368px;background: #FFFFFF; margin: 0 auto;">회원가입</div>
+							    <div id="joinFormBtn" class="btn btn-default login_no">회원가입</div>
 					    	</td>
 					    </tr>
 		    		</table>

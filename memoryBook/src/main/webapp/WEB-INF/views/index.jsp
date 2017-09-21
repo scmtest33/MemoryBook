@@ -11,6 +11,10 @@
     <meta name="author" content="">
 
     <title>Simple Sidebar - Start Bootstrap Template</title>
+    
+    <!-- Favicon -->
+	<link rel="shortcut icon" href="/memory/resources/img/memory.ico">
+	<link rel="icon" href="/memory/resources/img/memory.ico">
 
 	<!-- StyleSheets -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

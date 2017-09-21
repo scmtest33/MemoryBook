@@ -44,6 +44,7 @@ div.desc p {
 	text-overflow: ellipsis;
 }
 
+
 /* 에디터 */
 div.editorView {
 	z-index: 2;
@@ -88,6 +89,7 @@ div.editor {
 	margin-bottom: 15px;
 }
 
+
 /* 드래그 및 노트 모달 */
 #searchResult img {
 	max-width: 100%;
@@ -107,47 +109,34 @@ a.btn_modal {
 	color: white;
 }
 
-/* 회원정보수정 모달 */
-.memberModify{
+
+/* 회원정보수정,로그인,가입,탈퇴 모달 */
+.memberModify .memberLogin .memberOut{
 	width:400px;
 	margin: 0 auto;
 }
-.modifyTitle{
+.modifyTitle .loginTitle .outTitle{
 	text-align: center;
 }
-.memberModify_btns{
+.memberModify_btns .memberOut_btns{
 	width: 368px;
 	margin: 0 auto;
 }
-.Modify_ok{
+.Modify_ok .login_ok .join_ok .out_ok{
 	width: 368px;
 	background: #B2CCFF;
 }
-.Modify_no{
+.Modify_no .login_no .join_no .out_no{
 	width: 368px;
 	background: #FFFFFF;
+}
+.joinModal{
+	display: none;
+}
+.login_btns .join_btns{
+	margin: 0 auto;
 }
 
-/* 회원탈퇴 모달 */
-.memberOut{
-	width:400px;
-	margin: 0 auto;
-}
-.outTitle{
-	text-align: center;
-}
-.memberOut_btns{
-	width: 368px;
-	margin: 0 auto;
-}
-.out_ok{
-	width: 368px;
-	background: #B2CCFF;
-}
-.out_no{
-	width: 368px;
-	background: #FFFFFF;
-}
 
 /* 노트 및 드래그 내용보기 모달 */
 .mail_modal_title{
@@ -407,7 +396,7 @@ div.dragList img {
 }
 
 
-/* 삭제 아이콘 */
+/* 삭제존 */
 .deleteZone {
 	margin-top: 30px;
 	float: right;
