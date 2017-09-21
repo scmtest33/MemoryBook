@@ -111,6 +111,11 @@ a.btn_modal {
 
 
 /* 회원정보수정,로그인,가입,탈퇴 모달 */
+.profile_img{
+	width: 120px;
+	height: 160px;
+}
+
 .memberModify, .memberLogin, .memberOut{
 	width:400px;
 	margin: 0 auto;

@@ -5,7 +5,11 @@ public class MemberVO {
 	private String name;
 	private String email;
 	private String mem_pwd;
+	private String mem_image;
 	private int approvalNum;
+	public static final String IMAGE_DIR = "/web/upload_images/";
+
+	
 	public int getMem_no() {
 		return mem_no;
 	}
@@ -35,6 +39,13 @@ public class MemberVO {
 	}
 	public void setApprovalNum(int approvalNum) {
 		this.approvalNum = approvalNum;
+	}
+	
+	public String getMem_image() {
+		return mem_image;
+	}
+	public void setMem_image(String mem_image) {
+		this.mem_image = mem_image;
 	}
 	@Override
 	public String toString() {

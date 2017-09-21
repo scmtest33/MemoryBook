@@ -4,6 +4,7 @@ create table t_member(
 	mem_pwd varchar2(20) not NULL,
 	name varchar2(50) not NULL,
 	email varchar2(200) not NULL,
+	MEM_IMAGE VARCHAR2(1000),
 	APPROVALNUM varchar2(1) default 0 not NULL,
 	CONSTRAINT MEM_NO PRIMARY KEY(mem_no),
 	CONSTRAINT EMAIL UNIQUE (email)

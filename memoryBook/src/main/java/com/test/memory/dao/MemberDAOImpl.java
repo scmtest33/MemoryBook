@@ -88,4 +88,10 @@ public class MemberDAOImpl implements MemberDAO{
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.getFriendmemNo(email);
 	}
+
+	@Override
+	public boolean profilePhoto(MemberVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.profilePhoto(vo);
+	}
 }

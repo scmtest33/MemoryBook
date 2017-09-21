@@ -1,7 +1,12 @@
 package com.test.memory.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.test.memory.dao.MemberDAO;
 import com.test.memory.service.MemberService;
 import com.test.memory.vo.FriendVO;
 import com.test.memory.vo.MemberVO;
@@ -36,6 +42,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private MemberDAO dao;
 	
 		@RequestMapping(value = "join", method = RequestMethod.POST)
 		@ResponseBody
@@ -73,6 +82,7 @@ public class MemberController {
 				session.setAttribute("email", nvo.getEmail());
 				session.setAttribute("memberNo", nvo.getMem_no());
 				session.setAttribute("name", nvo.getName());
+				session.setAttribute("mem_image", nvo.getMem_image());
 				return nvo;
 			}
 		}
@@ -172,14 +182,49 @@ public class MemberController {
 		
 		@RequestMapping(value="/upload", method=RequestMethod.POST)
 		@ResponseBody
-		private void upload(HttpSession session,HttpServletRequest request, HttpServletResponse response, MultipartFile file, @RequestParam MultipartFile imageFile, Model model) throws Exception { 
+		private String upload(HttpSession session,HttpServletRequest request, HttpServletResponse response, MultipartFile file, @RequestParam MultipartFile imageFile, Model model) throws Exception { 
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset-utf-8");
-			
 			try {
-				service.setImage(request, response, imageFile);
+				OutputStream out = null;
+				MemberVO vo = new MemberVO();
+				String fileName = imageFile.getOriginalFilename();
+				String imgFormat = fileName.substring(fileName.lastIndexOf(".") + 1);
+				//확장자 체크
+				if (!imgFormat.equals("jpg")&&!imgFormat.equals("JPG")&&!imgFormat.equals("jpeg")&&!imgFormat.equals("JPEG")
+						&&!imgFormat.equals("png")&&!imgFormat.equals("PNG")&&!imgFormat.equals("gif")&&!imgFormat.equals("GIF")) {
+				//이미지 파일이 아닌경우
+					return "error";
+				}
+				//이미지 파일이 맞는 경우
+				else {
+				fileName = UUID.randomUUID().toString(); //이미지 파일명 암호화 (이름 중복방지 포함)
+				
+				byte[] bytes = imageFile.getBytes();
+				String path = "c:\\data\\mem_image\\"; //폴더 위치
+				String savePath = path + fileName; //실제 저장경로
+				
+				//파일저장
+				out = new FileOutputStream(new File(savePath));
+				out.write(bytes);
+				
+				//처리
+				model.addAttribute("FileUrl", fileName);
+				String oldFilePath = path + (String)session.getAttribute("mem_image"); //이전파일명 확보
+				vo.setMem_image(fileName); //DB전송용 현재파일명 세팅
+				dao.profilePhoto(vo);
+				session.setAttribute("mem_image", fileName); //현재파일로 세션변경
+				
+				//이전파일 삭제
+				if(oldFilePath != null) { //null인 경우에는 오류방지를 위해 미작동
+					File oldFile = new File(oldFilePath); //내용 데이터파일 경로
+					if(oldFile.exists()) oldFile.delete(); //내용 데이터파일 삭제처리
+				}
+				return fileName;
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
+				return "IOException";
 			}
 		}
 }

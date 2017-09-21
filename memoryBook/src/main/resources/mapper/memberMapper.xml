@@ -8,7 +8,7 @@
 
 	<!-- 회원 가입 정보 저장 -->
 	<insert id="join" parameterType="MemberVO">
-		INSERT INTO T_MEMBER VALUES (MEM_NO.NEXTVAL, #{mem_pwd}, #{name}, #{email}, 0)
+		INSERT INTO T_MEMBER VALUES (MEM_NO.NEXTVAL, #{mem_pwd}, #{name}, #{email}, #{mem_image}, 0)
 	</insert>
 	
 	<!-- 로그인 -->
@@ -36,6 +36,11 @@
 		approvalNum = '1' 
 		</if>
 		WHERE NAME = #{name}
+	</update>
+	
+	<!-- 프로필 사진 -->
+	<update id="profilePhoto" parameterType="MemberVO">
+		UPDATE T_MEMBER SET MEM_IMAGE = #{mem_image} WHERE MEM_NO = #{mem_no}
 	</update>
 	
 	<!-- 회원검색 -->
