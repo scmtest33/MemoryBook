@@ -28,9 +28,9 @@
 </table>
 
 <script>
-	$(function(){
-		getFriendList();
-	});
+// 	$(function(){
+// 		getFriendList();
+// 	});
 
 // 	//내 친구 목록 불러오기
 // 	function getFriendList(){
@@ -109,7 +109,6 @@
 											$("#table").empty();
 											$("#listTable").empty();
 											$("#friendList").empty();
-											getFriendList();
 											friendList();
 										}else {
 											alert("친구추가 실패")

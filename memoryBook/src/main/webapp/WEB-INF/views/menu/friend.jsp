@@ -47,10 +47,10 @@
 	  내친구 목록 확인하기
 	</button>
 	<div class="collapse" id="FriendList">
-	  <div class="well">
-	  	<table>
-			<tr id="friendList">
-			</tr>
+	  <div class="well2">
+	  	<table class="table table-striped" id="friendList">
+<!-- 			<tr id="friendList"> -->
+<!-- 			</tr> -->
 		</table>
 	  </div>
 	</div>	
@@ -130,7 +130,6 @@ function friendList(){
 	                addRow += '</tr>';
 					$("#friendList").append(addRow);
 					
-// 					$("#friendPhoto"+index || "#friendName"+index).click(function(){
 					$("#friendName"+index).click(function(){
 						var friendNa = document.getElementById("friendName"+index).childNodes[0].nodeValue;
 						$("#fNoteCategoryList").empty(); 
@@ -182,7 +181,6 @@ function friendList(){
 									alert("친구가 삭제되었습니다.");
 									$("#friendList").empty();
 									$("#listTable").empty();
-									getFriendList();
 									friendList();
 								}else {
 									alert("친구삭제 실패")
