@@ -185,7 +185,6 @@
     	if(result){
     		localStorage.clear();
     		location.href='/memory/member/logout';
-    		alert("로그아웃완료");
     	}
     }
     

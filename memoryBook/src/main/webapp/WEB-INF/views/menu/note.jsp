@@ -405,7 +405,7 @@
 				var noteImgSrc = noteContent.split('src="')[1].split('"')[0];
 				html += '<figure><img id="note'+note.noteNo+'" src="' + noteImgSrc + '" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
 			} else {
-				html += '<figure><img id="note'+note.noteNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
+				html += '<figure><img id="note'+note.noteNo+'" src="/memory/resources/img/D.png" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
 			}
 			html += "<div class='desc'><p>" + note.noteTitle + "</p></div>";
 			html += "</div>";

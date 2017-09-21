@@ -191,7 +191,7 @@
 				var dragImgSrc = dragContent.split('src="')[1].split('"')[0];
 				html += '<figure><img id="drag'+drag.dragNo+'" src="' + dragImgSrc + '" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
 			} else {
-				html += '<figure><img id="drag'+drag.dragNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
+				html += '<figure><img id="drag'+drag.dragNo+'" src="/memory/resources/img/D.png" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
 			}
 			html += "<div class='desc'><p>" + drag.dragUrlTitle + "</p></div>";
 			html += "</div>";
