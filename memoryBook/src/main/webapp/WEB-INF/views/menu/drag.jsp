@@ -82,7 +82,7 @@
 			<p class="pageTitle">${name}님이 드래그한 드래그 리스트</p>
 			<p class="pageSubTitle">${name}님이 걸어온 길을 공유해 보세요</p>
 		</div>
-		<br><br><br>
+		<br><br>
 		</div>
 		<!-- 드래그내용 뿌리기 -->
 		<div id="dragList" class="cardList"></div>

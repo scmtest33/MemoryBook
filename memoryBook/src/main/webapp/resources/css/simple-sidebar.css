@@ -42,7 +42,7 @@ body {
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+/*     padding: 15px; */
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -186,7 +186,7 @@ body {
 /*     background: rgba(0,0,0,0.2); */
 }
 /* index 목록 색깔 호버 */
-#main:hover {
+#indexMainB:hover {
 	background: rgba(47,157,39,0.8);
 }
 #myProfile:hover {
@@ -246,7 +246,7 @@ body {
         width: 250px;
     }
     #page-content-wrapper {
-        padding: 20px;
+        padding: 0px;
         position: relative;
     }
     #wrapper.toggled #page-content-wrapper {

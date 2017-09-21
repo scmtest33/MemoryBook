@@ -26,7 +26,7 @@
 	<link rel="stylesheet" type="text/css" href="/memory/resources/css/memory-sheet.css">
 
     <!-- Bootstrap core CSS -->
-    <link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
@@ -45,12 +45,12 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#main">
+                    <a id="indexMainA">
                         Memory Lane
                     </a>
                 </li>
                 <li>
-                    <a id="main" class="noteImg">
+                    <a id="indexMainB" class="noteImg">
                     	<img src="/memory/resources/img/indexImg/home_hover.png" class="indexImg1">
       		        	<img src="/memory/resources/img/indexImg/home1.png" class="indexImg2">
 	                    Main
@@ -111,12 +111,18 @@
         </div>
 
         <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <h1>Memory Lane</h1>
-                <p>${name}님 This is main screen.</p>
-                <a class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
-            </div>
+        <div id="page-content-wrapper" style="padding: 0px;">
+<!--             <div class="container-fluid"> -->
+<!--                 <h1>Memory Lane</h1> -->
+<%--                 <p>${name}님 This is main screen.</p> --%>
+<!--                 <a class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
+<!--             </div> -->
+            
+            <div id='indexMain2'>
+				<div class="container-fluid" id="indexMainContent">
+				<%@ include file="menu/indexMain.jsp" %>
+				</div>
+	        </div>
             
 			<div id="profile">
 				<div class="container-fluid">
@@ -178,6 +184,19 @@
 
     <!-- Menu Toggle Script -->
     <script>
+    //index들어왔을때 초기화면
+    $(function(){
+    	document.getElementById("myDragList").style.display = "none";
+    	document.getElementById("myNote").style.display = "none";
+    	document.getElementById("userList").style.display = "none";
+    	document.getElementById("memoList").style.display = "none";
+    	document.getElementById("friend").style.display = "none";
+    	document.getElementById("myDragtest").style.display = "none";
+    	document.getElementById("search").style.display = "none";
+    	document.getElementById("profile").style.display = "none";
+    	document.getElementById("indexMain2").style.display = "";
+	});
+    
     
 	//로그아웃
     function logout(){
@@ -246,6 +265,52 @@
 	});
     
     // 내비바 아이콘으로 열고 닫기
+    $("#indexMainA").click(function(e) {
+     	function profile_menu(){
+	    	document.getElementById("myDragList").style.display = "none";
+	    	document.getElementById("myNote").style.display = "none";
+	    	document.getElementById("userList").style.display = "none";
+	    	document.getElementById("memoList").style.display = "none";
+	    	document.getElementById("friend").style.display = "none";
+	    	document.getElementById("myDragtest").style.display = "none";
+	    	document.getElementById("search").style.display = "none";
+	    	document.getElementById("profile").style.display = "none";
+	    	document.getElementById("indexMain2").style.display = "";
+	    	
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			profile_menu();
+    		}
+    	} else {
+    		profile_menu();
+    	}
+    });
+    
+    $("#indexMainB").click(function(e) {
+     	function profile_menu(){
+	    	document.getElementById("myDragList").style.display = "none";
+	    	document.getElementById("myNote").style.display = "none";
+	    	document.getElementById("userList").style.display = "none";
+	    	document.getElementById("memoList").style.display = "none";
+	    	document.getElementById("friend").style.display = "none";
+	    	document.getElementById("myDragtest").style.display = "none";
+	    	document.getElementById("search").style.display = "none";
+	    	document.getElementById("profile").style.display = "none";
+	    	document.getElementById("indexMain2").style.display = "";
+	    	
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			profile_menu();
+    		}
+    	} else {
+    		profile_menu();
+    	}
+    });
+    
     $("#myProfile").click(function(e) {
      	function profile_menu(){
 	    	document.getElementById("myDragList").style.display = "none";
@@ -255,6 +320,7 @@
 	    	document.getElementById("friend").style.display = "none";
 	    	document.getElementById("myDragtest").style.display = "none";
 	    	document.getElementById("search").style.display = "none";
+	    	document.getElementById("indexMain2").style.display = "none";
 	    	document.getElementById("profile").style.display = "";
     	}
     	if(editor_chk){
@@ -276,6 +342,7 @@
         	document.getElementById("memoList").style.display = "none";
         	document.getElementById("search").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("indexMain2").style.display = "none";
         	document.getElementById("myDragList").style.display = "";
     	}
     	if(editor_chk){
@@ -297,6 +364,7 @@
         	document.getElementById("memoList").style.display = "none";
         	document.getElementById("myDragList").style.display = "none";
         	document.getElementById("search").style.display = "none";
+        	document.getElementById("indexMain2").style.display = "none";
         	document.getElementById("myDragtest").style.display = "";
     	}
     	if(editor_chk){
@@ -318,6 +386,7 @@
         	document.getElementById("memoList").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
         	document.getElementById("search").style.display = "none";
+        	document.getElementById("indexMain2").style.display = "none";
         	document.getElementById("myNote").style.display = "";
     	}
     	if(editor_chk){
@@ -339,6 +408,7 @@
         	document.getElementById("memoList").style.display = "none";
         	document.getElementById("search").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("indexMain2").style.display = "none";
         	document.getElementById("friend").style.display = "";
     	}
     	if(editor_chk){
@@ -360,6 +430,7 @@
 	    	document.getElementById("memoList").style.display = "none";
 	    	document.getElementById("myDragtest").style.display = "none";
 	    	document.getElementById("friend").style.display = "none";
+	    	document.getElementById("indexMain2").style.display = "none";
 	    	document.getElementById("search").style.display = "";
     	}
 	    if(editor_chk){
@@ -381,6 +452,7 @@
         	document.getElementById("memoList").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
         	document.getElementById("search").style.display = "none";
+        	document.getElementById("indexMain2").style.display = "none";
         	document.getElementById("userList").style.display = "";
     	}
     	if(editor_chk){
@@ -402,6 +474,7 @@
         	document.getElementById("userList").style.display = "none";
         	document.getElementById("search").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("indexMain2").style.display = "none";
         	document.getElementById("memoList").style.display = "";
     	}
     	if(editor_chk){
