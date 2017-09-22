@@ -295,8 +295,8 @@
 	//드래그 내용 수정 및 수정내용을 노트에 등록
 	function updateDrag(dragNo){
 		localStorage.setItem("dragNoToUpdate",dragNo);
-    	document.getElementById("noteUpdateBtn").style.display = "block";
-		document.getElementById("noteSubmitBtn").style.display = "none"
+		$('#noteUpdateBtn').css('display', 'block');
+		$('#noteSubmitBtn').css('display', 'none');
 		$.ajax({
 			type: "POST",
 			url : "/memory/drag/dragDetail",
@@ -307,15 +307,13 @@
 			var title = result.noteTitle;
 			var content = result.noteContent;
 			$("input[name=noteTitle]").val(title);
-			$(".nicEdit-main").html(content);
-			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo);
+			CKEDITOR.instances.ckeditor.setData(content);
 			getCategory();
-			open_editor();
+			open_editorDrag();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
 			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
-		
 	}
 
 	// 드래그 삭제
@@ -331,11 +329,12 @@
 				url:"/memory/drag/deleteDrag",
 				dataType:"json",
 				data: {"dragNo":dragNo},
-				type: "POST"
-				}).done(function (result){
+				type: "POST",
+				success: function (result){
 					alert(result.msg,'success');
 					makeDragList();
 					mainDragList();
+					}
 			});
 		}
 	}

@@ -21,6 +21,7 @@ import com.test.memory.vo.MemoVO;
  */
 
 @Controller
+@RequestMapping("/memo")
 public class MemoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);

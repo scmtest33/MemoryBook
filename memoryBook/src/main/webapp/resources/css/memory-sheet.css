@@ -43,6 +43,9 @@ div.desc p {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.page-content-wrapper{
+	padding: 0px;
+}
 
 
 /* 에디터 */

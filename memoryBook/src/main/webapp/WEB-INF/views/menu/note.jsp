@@ -348,8 +348,8 @@
 		var categoryToUpdate = event.target.id;
 		var categoryInput = "categoryUpdate" + categoryToUpdate.substring(8);
 		alert(categoryInput);
-		document.getElementById(categoryToUpdate).style.display = "none";
-//	 	document.getElementById(categoryInput).style.display = "block";
+		$('#categoryToUpdate').css('display', 'none');
+		$('#categoryInput').css('display', 'block');
 		$("#"+categoryInput).attr("style","display:block !important");
 		getMainCategory();
 	}
@@ -423,20 +423,18 @@
 	// 에디터 열기
 	var editor_chk = false; // 드래그 입력시 에디터 on/off여부 체크
 	$("#noteWrite").click(function(e) {
-    	document.getElementById("noteView").style.display = "none";
-    	document.getElementById("profileModal").style.display = "none";
-    	document.getElementById("noteEditor").style.display = "";
-    	document.getElementById("noteUpdateBtn").style.display = "none";
-		document.getElementById("noteSubmitBtn").style.display = "block"
+		$('#noteView').css('display', 'none');
+		$('#profileModal').css('display', 'none');
+		$('#noteEditor').css('display', '');
+		$('#noteUpdateBtn').css('display', 'none');
+		$('#noteSubmitBtn').css('display', 'block');
     	getCategory();
 		editor_chk = true;
     });
 	
 	function note_open() {
-		document.getElementById("sideDragBar").style.display = "none";
-//	 	document.getElementById("editorBtnDiv").style.display = "none";
+		$('#sideDragBar').css('display', 'none');
 		$("#sideDragBar").show("slide", {direction: "left" }, 600);
-//	 	$("#editorBtnDiv").show("slide", {direction: "left" }, 600);
 		getCategory(); // 카테고리 셀렉박스에 옵션 넣기
 	}
 
@@ -460,13 +458,16 @@
 	}
 	
 	function open_editor() {
-//	 	document.getElementById("editorBtnDiv").style.display = "block";
-//		document.getElementById("noteView").style.display = "none";
-//	 	document.getElementById("searchView").style.display = "none";
-//		document.getElementById("newsView").style.display = "none";
-    	document.getElementById("noteView").style.display = "none";
-    	document.getElementById("profileModal").style.display = "none";
-    	document.getElementById("noteEditor").style.display = "";
+		$('#noteView').css('display', 'none');
+		$('#profileModal').css('display', 'none');
+		$('#noteEditor').css('display', '');
+	}
+	
+	function open_editorDrag() {
+		$('#myDragList').css('display', 'none');
+		$('#noteView').css('display', 'none');
+		$('#profileModal').css('display', 'none');
+		$('#noteEditor').css('display', '');
 	}
 
 	//노트 다운로드
@@ -484,8 +485,8 @@
 	//노트 업데이트
 	function updateNote(noteNo){
 		localStorage.setItem("noteNoToUpdate",noteNo);
-    	document.getElementById("noteUpdateBtn").style.display = "block";
-		document.getElementById("noteSubmitBtn").style.display = "none"
+		$('#noteUpdateBtn').css('display', 'block');
+		$('#noteSubmitBtn').css('display', 'none');
 		$.ajax({
 			type: "POST",
 			url : "/memory/note/noteDetail",
@@ -506,17 +507,11 @@
 		});
 		
 	}
-	// 검색 뒤로 가기
-	// function goBack() {
-//	 	document.getElementById("searchResult").style.display = "none";
-//	 	document.getElementById("daumView").style.display = "block";
-	// }
 
 	// 노트 에디터 뿌리기
 	$("#editorOpenBtn").click(function() {
-		document.getElementById("noteView").style.display = "none";
-//	 	document.getElementById("searchView").style.display = "none";
-		document.getElementById("newsView").style.display = "none";
+		$('#noteView').css('display', 'none');
+		$('#newsView').css('display', 'none');
 		$("#editorView").show("slide", {direction: "left" }, 600);
 		$("#editorOpenBtn").toggle();
 		$("#editorCloseBtn").toggle();
@@ -525,8 +520,6 @@
 	// 노트 에디터 닫기
 	$("#editorCloseBtn").click(function() {
 		$("#editorView").hide("slide", {direction: "left" }, 700);
-//	 	$("#searchView").show("slide", {direction: "left" }, 1300);
-//	 	$("#searchView").show("slide", {direction: "left" }, 1300);
 		$("#editorOpenBtn").toggle();
 		$("#editorCloseBtn").toggle();
 	});
@@ -573,17 +566,17 @@
 
 	// 카테고리 인풋창 열기
 	function showInput() {
-		document.getElementById("categoryToAdd").style.display = "block";
-	    document.getElementById("Category1").style.display = "block";
-	    document.getElementById("Category2").style.display = "block";
+		$('#categoryToAdd').css('display', 'block');
+		$('#Category1').css('display', 'block');
+		$('#Category2').css('display', 'block');
 	    return false;
 	}
 
 	// 카테고리 인풋창 끄기
 	function closeInput() {
-		document.getElementById("categoryToAdd").style.display = "none";
-	    document.getElementById("Category1").style.display = "none";
-	    document.getElementById("Category2").style.display = "none";
+		$('#categoryToAdd').css('display', 'none');
+		$('#Category1').css('display', 'none');
+		$('#Category2').css('display', 'none');
 	    $("#categoryToAdd").val("");
 	    return false;
 	}
@@ -608,11 +601,7 @@
 		.done(function (result) {
 			alert(result.msg);
 			appendCategory(result.categoryList);
-			document.getElementById("categoryToAdd").style.display = "none";
-		    document.getElementById("Category1").style.display = "none";
-		    document.getElementById("Category2").style.display = "none";
-		    $("#categoryToAdd").val("");
-			
+			closeInput();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
 			alert("오류: " + errorText + "<br>" + "오류코드: " + status);

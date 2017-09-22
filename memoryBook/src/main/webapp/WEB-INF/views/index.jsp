@@ -111,7 +111,7 @@
         </div>
 
         <!-- Page Content -->
-        <div id="page-content-wrapper" style="padding: 0px;">
+        <div id="page-content-wrapper" class="page-content-wrapper">
 <!--             <div class="container-fluid"> -->
 <!--                 <h1>Memory Lane</h1> -->
 <%--                 <p>${name}님 This is main screen.</p> --%>
@@ -186,15 +186,16 @@
     <script>
     //index들어왔을때 초기화면
     $(function(){
-    	document.getElementById("myDragList").style.display = "none";
-    	document.getElementById("myNote").style.display = "none";
-    	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
-    	document.getElementById("friend").style.display = "none";
-    	document.getElementById("myDragtest").style.display = "none";
-    	document.getElementById("search").style.display = "none";
-    	document.getElementById("profile").style.display = "none";
-    	document.getElementById("indexMain2").style.display = "";
+    	$('#myDragList').css('display', 'none');
+    	$('#myNote').css('display', 'none');
+    	$('#userList').css('display', 'none');
+    	$('#memoList').css('display', 'none');
+    	$('#friend').css('display', 'none');
+    	$('#myDragtest').css('display', 'none');
+    	$('#search').css('display', 'none');
+    	$('#profile').css('display', 'none');
+    	$('#editorDraglist').css('display', 'none');
+    	$('#indexMain2').css('display', '');
 	});
     
     
@@ -232,21 +233,18 @@
 		mainFriendNoteList() //친구 노트 리스트
 		getMainFriendCategory();//친구 카테고리 리스트
 		//노트 리스트 화면
-		document.getElementById("profileModal").style.display = "";
-		document.getElementById("noteView").style.display = "";
-		document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
-		document.getElementById("noteView").style.height = screen.innerHeight +"px";
-		document.getElementById("noteEditor").style.display = "none";
+		$('#profileModal').css('display', '');
+		$('#noteView').css('display', '');
+		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#noteView').css('height', 'screen.innerHeight +"px"');
+		$('#noteEditor').css('display', 'none');
 		$("#noteTitle").val("");
 		CKEDITOR.instances.ckeditor.setData("");
 		
 		//노트 에디터
-		document.getElementById("editorView").style.width = (screen.innerWidth - 420) +"px";
-		document.getElementById("editorView").style.height = screen.innerHeight +"px";
+		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#editorView').css('height', 'screen.innerHeight +"px"');
 		
-		//드래그 리스트
-		document.getElementById("dragView").style.height = screen.innerHeight +"px";
-
 		//메뉴 이동시 에디터 체크
 		var chk_tf;
 	}
@@ -254,29 +252,28 @@
 	// 브라우저 창 크기 변화 시 위치 지정 (통합)
 	$(window).resize(function(){
 		//드래그 리스트
-		document.getElementById("dragView").style.width = (screen.innerWidth - 420) +"px";
-		document.getElementById("dragView").style.height = screen.innerHeight +"px";
+		$('#editorDraglist').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#editorDraglist').css('height', 'screen.innerHeight +"px"');
 		//노트 리스트
-		document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
-		document.getElementById("noteView").style.height = screen.innerHeight +"px";
+		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#noteView').css('height', 'screen.innerHeight +"px"');
 		//노트 에디터
-		document.getElementById("editorView").style.width = (screen.innerWidth - 420) +"px";
-		document.getElementById("editorView").style.height = screen.innerHeight +"px";
+		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#editorView').css('height', 'screen.innerHeight +"px"');
 	});
     
     // 내비바 아이콘으로 열고 닫기
     $("#indexMainA").click(function(e) {
      	function profile_menu(){
-	    	document.getElementById("myDragList").style.display = "none";
-	    	document.getElementById("myNote").style.display = "none";
-	    	document.getElementById("userList").style.display = "none";
-	    	document.getElementById("memoList").style.display = "none";
-	    	document.getElementById("friend").style.display = "none";
-	    	document.getElementById("myDragtest").style.display = "none";
-	    	document.getElementById("search").style.display = "none";
-	    	document.getElementById("profile").style.display = "none";
-	    	document.getElementById("indexMain2").style.display = "";
-	    	
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#indexMain2').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -290,15 +287,15 @@
     
     $("#indexMainB").click(function(e) {
      	function profile_menu(){
-	    	document.getElementById("myDragList").style.display = "none";
-	    	document.getElementById("myNote").style.display = "none";
-	    	document.getElementById("userList").style.display = "none";
-	    	document.getElementById("memoList").style.display = "none";
-	    	document.getElementById("friend").style.display = "none";
-	    	document.getElementById("myDragtest").style.display = "none";
-	    	document.getElementById("search").style.display = "none";
-	    	document.getElementById("profile").style.display = "none";
-	    	document.getElementById("indexMain2").style.display = "";
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#indexMain2').css('display', '');
 	    	
     	}
     	if(editor_chk){
@@ -313,15 +310,15 @@
     
     $("#myProfile").click(function(e) {
      	function profile_menu(){
-	    	document.getElementById("myDragList").style.display = "none";
-	    	document.getElementById("myNote").style.display = "none";
-	    	document.getElementById("userList").style.display = "none";
-	    	document.getElementById("memoList").style.display = "none";
-	    	document.getElementById("friend").style.display = "none";
-	    	document.getElementById("myDragtest").style.display = "none";
-	    	document.getElementById("search").style.display = "none";
-	    	document.getElementById("indexMain2").style.display = "none";
-	    	document.getElementById("profile").style.display = "";
+     		$('#indexMain2').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#profile').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -335,15 +332,15 @@
     
     $("#drag").click(function(e) {
     	function drag_menu(){
-    		document.getElementById("profile").style.display = "none";
-        	document.getElementById("myNote").style.display = "none";
-        	document.getElementById("userList").style.display = "none";
-        	document.getElementById("friend").style.display = "none";
-        	document.getElementById("memoList").style.display = "none";
-        	document.getElementById("search").style.display = "none";
-        	document.getElementById("myDragtest").style.display = "none";
-        	document.getElementById("indexMain2").style.display = "none";
-        	document.getElementById("myDragList").style.display = "";
+    		$('#indexMain2').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#myDragList').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -357,15 +354,15 @@
     
     $("#dragtest").click(function(e) {
     	function dragTest_menu(){
-    		document.getElementById("profile").style.display = "none";
-        	document.getElementById("myNote").style.display = "none";
-        	document.getElementById("userList").style.display = "none";
-        	document.getElementById("friend").style.display = "none";
-        	document.getElementById("memoList").style.display = "none";
-        	document.getElementById("myDragList").style.display = "none";
-        	document.getElementById("search").style.display = "none";
-        	document.getElementById("indexMain2").style.display = "none";
-        	document.getElementById("myDragtest").style.display = "";
+    		$('#indexMain2').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -379,15 +376,15 @@
     
     $("#note").click(function(e) {
     	function note_menu(){
-    		document.getElementById("profile").style.display = "none";
-        	document.getElementById("myDragList").style.display = "none";
-        	document.getElementById("friend").style.display = "none";
-        	document.getElementById("userList").style.display = "none";
-        	document.getElementById("memoList").style.display = "none";
-        	document.getElementById("myDragtest").style.display = "none";
-        	document.getElementById("search").style.display = "none";
-        	document.getElementById("indexMain2").style.display = "none";
-        	document.getElementById("myNote").style.display = "";
+    		$('#indexMain2').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#myNote').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -401,15 +398,15 @@
     
     $("#myFriend").click(function(e) {
     	function friend_menu(){
-    		document.getElementById("profile").style.display = "none";
-        	document.getElementById("myDragList").style.display = "none";
-        	document.getElementById("myNote").style.display = "none";
-        	document.getElementById("userList").style.display = "none";
-        	document.getElementById("memoList").style.display = "none";
-        	document.getElementById("search").style.display = "none";
-        	document.getElementById("myDragtest").style.display = "none";
-        	document.getElementById("indexMain2").style.display = "none";
-        	document.getElementById("friend").style.display = "";
+    		$('#indexMain2').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#friend').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -423,15 +420,15 @@
     
     $("#searchFriend").click(function(e) {
     	function search_menu(){
-	    	document.getElementById("profile").style.display = "none";
-	    	document.getElementById("myDragList").style.display = "none";
-	    	document.getElementById("myNote").style.display = "none";
-	    	document.getElementById("userList").style.display = "none";
-	    	document.getElementById("memoList").style.display = "none";
-	    	document.getElementById("myDragtest").style.display = "none";
-	    	document.getElementById("friend").style.display = "none";
-	    	document.getElementById("indexMain2").style.display = "none";
-	    	document.getElementById("search").style.display = "";
+    		$('#indexMain2').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#memoList').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#search').css('display', '');
     	}
 	    if(editor_chk){
 			editorCancelChk();
@@ -445,15 +442,15 @@
     
     $("#user").click(function(e) {
     	function user_menu(){
-    		document.getElementById("profile").style.display = "none";
-        	document.getElementById("myDragList").style.display = "none";
-        	document.getElementById("myNote").style.display = "none";
-        	document.getElementById("friend").style.display = "none";
-        	document.getElementById("memoList").style.display = "none";
-        	document.getElementById("myDragtest").style.display = "none";
-        	document.getElementById("search").style.display = "none";
-        	document.getElementById("indexMain2").style.display = "none";
-        	document.getElementById("userList").style.display = "";
+    		$('#indexMain2').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#userList').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -467,15 +464,15 @@
     
     $("#memo").click(function(e) {
     	function memo_menu(){
-    		document.getElementById("profile").style.display = "none";
-        	document.getElementById("myDragList").style.display = "none";
-        	document.getElementById("myNote").style.display = "none";
-        	document.getElementById("friend").style.display = "none";
-        	document.getElementById("userList").style.display = "none";
-        	document.getElementById("search").style.display = "none";
-        	document.getElementById("myDragtest").style.display = "none";
-        	document.getElementById("indexMain2").style.display = "none";
-        	document.getElementById("memoList").style.display = "";
+    		$('#indexMain2').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#memoList').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -504,14 +501,14 @@
 		editor_chk = false;
 		$("#noteTitle").val('');
 		CKEDITOR.instances.ckeditor.setData("");
-    	document.getElementById("noteEditor").style.display = "none";
-    	document.getElementById("categoryToAdd").style.display = "none";
-    	document.getElementById("Category1").style.display = "none";
-    	document.getElementById("Category2").style.display = "none";
-    	document.getElementById("profileModal").style.display = "";
-    	document.getElementById("noteView").style.display = "";
-    	document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
-		document.getElementById("noteView").style.height = screen.innerHeight +"px";
+		$('#noteEditor').css('display', 'none');
+		$('#categoryToAdd').css('display', 'none');
+		$('#Category1').css('display', 'none');
+		$('#Category2').css('display', 'none');
+		$('#profileModal').css('display', '');
+		$('#noteView').css('display', '');
+		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#noteView').css('height', 'screen.innerHeight +"px"');
 		chk_tf = true;
 		} else {
 		chk_tf = false;

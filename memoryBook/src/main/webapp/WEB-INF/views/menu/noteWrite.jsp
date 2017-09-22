@@ -228,11 +228,11 @@
     
 	//작성 또는 수정 완료시 노트리스트로 복귀
 	function main_open() {
-    	document.getElementById("noteEditor").style.display = "none";
-    	document.getElementById("profileModal").style.display = "";
-    	document.getElementById("noteView").style.display = "";
-    	document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
-		document.getElementById("noteView").style.height = screen.innerHeight +"px";
+		$('#noteEditor').css('display', 'none');
+		$('#profileModal').css('display', '');
+		$('#noteView').css('display', '');
+		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#noteView').css('height', 'screen.innerHeight +"px"');
 		getMainCategory();
 		mainNoteList();
 		makeDragList();

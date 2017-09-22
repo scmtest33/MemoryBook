@@ -318,7 +318,7 @@
     		url: "/memory/member/emailCheck",
     		type: "POST",
     		data: {"email" : email},
-    		success : function(result) {
+    		success: function(result) {
     					var check = result.email;
 	    	    		if(!result && email != ""){
 	    	    			$('#emailck').css('color', 'red');

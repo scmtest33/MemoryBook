@@ -9,11 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.test.memory.vo.MemberVO;
 import com.test.memory.vo.MemoVO;
 
-
-
-
-
-
 @Repository
 public class MemoDAOImpl implements MemoDAO{
 	
