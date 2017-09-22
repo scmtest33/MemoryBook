@@ -5,6 +5,7 @@ create table t_member(
 	name varchar2(50) not NULL,
 	email varchar2(200) not NULL,
 	MEM_IMAGE VARCHAR2(1000),
+	INFONUMBER varchar2(1) not NULL,
 	APPROVALNUM varchar2(1) default 0 not NULL,
 	CONSTRAINT MEM_NO PRIMARY KEY(mem_no),
 	CONSTRAINT EMAIL UNIQUE (email)
@@ -40,14 +41,6 @@ create table t_drag(
 	CONSTRAINT MEM_NO_D FOREIGN KEY(mem_no) REFERENCES t_member(mem_no) on delete cascade
 );
 
---드래그 이미지 테이블
-create table t_drag_img(
-	drag_img_no number(6) primary key,
-	drag_no number(6) not NULL,
-	drag_img_path varchar2(1000) not NULL,
-	CONSTRAINT DRAG_NO_D FOREIGN KEY(drag_no) REFERENCES t_drag(drag_no) on delete cascade
-);
-
 --노트 테이블
 create table t_note(
 	note_no number(6) primary key,
@@ -60,26 +53,6 @@ create table t_note(
 	note_auth varchar2(1) default 0 not NULL,
 	CONSTRAINT MEM_NO_N FOREIGN KEY(mem_no) REFERENCES t_member(mem_no) on delete cascade,
 	CONSTRAINT CATEGORY_NO FOREIGN KEY(category_no) REFERENCES t_category(category_no) on delete cascade
-);
-
---노트 이미지 테이블
-create table t_note_img(
-	note_img_no number(6) primary key,
-	note_no number(6) not NULL,
-	note_img_path varchar2(1000) not NULL,
-	note_img_width number(6),
-	note_img_height number(6),
-	CONSTRAINT NOTE_NO FOREIGN KEY(note_no) REFERENCES t_note(note_no) on delete cascade
-);
-
---쪽지 테이블
-	CREATE TABLE T_MEMOS(
-	NUM NUMBER NOT NULL,
-	FROMEMAIL VARCHAR2(20) REFERENCES T_MEMBER(EMAIL) NOT NULL,
-	TOEMAIL VARCHAR2(20) NOT NULL,
-	TITLE VARCHAR2(20) NOT NULL,
-	CONTENT VARCHAR2(1000) NOT NULL,
-	INPUTDATE DATE NOT NULL
 );
 
 --시퀀스
