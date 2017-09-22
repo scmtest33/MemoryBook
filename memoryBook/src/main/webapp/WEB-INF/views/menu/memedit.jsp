@@ -11,43 +11,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Profile</title>
+<title>회원정보 수정</title>
 </head>
 <body>
-	<h1>Profile</h1>
-	<table>
-		<tr>
-			<td id="getImage"></td>
-		</tr>
-		<br>
-		<tr>
-			<td>
-				<input type="file" name="imageFile" id="imageFile">
-			</td>
-			<td>
-			<input type="button" value="등록" onclick="uploadImage()">
-			<td>
-		</tr>
-		<tr>
-			<td><h2>Name : </h2></td>
-			<td><h2>${name}</h2></td>
-		</tr>
-		<tr>
-			<td><h2>Email : </h2></td>
-			<td><h2>${email}</h2></td>
-		</tr>
-		<tr>
-			<td><h2>My Information : </h2></td>
-			<td>
-				<c:if test="${infoNumber==0}">
-					<h2> 전체 공개</h2>
-				</c:if>
-				<c:if test="${infoNumber==1}">
-					<h2> 나만 공개</h2>
-				</c:if>
-			</td>
-		</tr>
-	</table>
+	<h1>회원정보 수정</h1>
 	<table>
 		<tr>
 			<td>
@@ -61,21 +28,7 @@
 		</tr>
 	</table>
 	
-	
-	<div class="modal fade" id="myModal_Modify" role="dialog">
-		    <div class="modal-dialog">
-		    
-		      <!-- 회원정보수정 Modal-->
-		      <div class="modal-content memberModify" id="updateModal">
-		        <div class="modal-header">
-		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
-		        	<br><br>
-		        	<h4 class="modal-title modifyTitle" id="modifyTitle">Memory Lane Modify</h4>
-		        	<br>
-		        </div>
-		        <br>
-		        			        	
-		        <div class="modal-body" id="modifyBody" >
+	<div class="modal-body" id="modifyBody" >
 		          	
 		        <form name="infoModify" id="infoModify" action="/memory/member/infoUpdate" method="post">       
 			    	<table>
@@ -127,67 +80,8 @@
 		    		</table>
 			    </form>
 		        </div>
-		      </div>
-		    </div>
-		  </div>
 	
-	<!-- 탈퇴 모달 -->
-	<div class="modal fade" id="myModal_Unregister" role="dialog">
-		    <div class="modal-dialog">
-		    
-		      <!-- Modal content-->
-		      <div class="modal-content memberOut">
-		        <div class="modal-header">
-		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
-		        	<br><br>
-		        	<h4 class="modal-title outTitle" id="unregisterTitle">Memory Lane Unregister</h4>
-		        	<br>
-		        </div>
-		        <br>
-		        			        	
-		        <div class="modal-body" id="unregisterBody" >
-		          	
-		        <form name="unregisterfrm" id="unregisterfrm" action="/memory/member/unregister" method="post">       
-			    	<table>
-			    		<tr>
-			    			<div class="form-group">
-			    			탈퇴하실려면 비밀번호를 입력하세요.<br>탈퇴시 작성하신 노트,드래그,친구정보가 전부 삭제됩니다.
-			    			</div>
-			    		</tr>
-			    		<tr>
-			    			<div class="form-group">
-							    <label for="loginPassword">Password:</label>
-							    <input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
-			    			</div>
-			    		</tr>
-					    <tr>
-					    	<td id="btns" colspan="2">
-					    		<input type="submit" value="회원탈퇴" class="btn btn-default memberOut_btns out_ok">
-					    	</td>
-					    </tr>
-					    <tr>
-					    	<td id="btns" colspan="2">
-							    <button class="btn btn-default memberModify_btns Modify_no" id="cancelBtn2" data-dismiss="modal">취소</button>
-					    	</td>
-					    </tr>
-		    		</table>
-			    </form>
-		        </div>
-		      </div>
-		    </div>
-		  </div>
-		  
-		  
-	<div>
-		<br><br><br>
-		<%@ include file="memedit.jsp" %>
-	</div>	  
-	</body>
 <script>
-$(function(){
-	$("#getImage").html("<img id='profile_img' class='profile_img' src='/memory/data/mem_image/${mem_image}'>");
-});
-
 //비밀번호 확인
 $("#pwd2").on("keyup",function(){
 	var mo = document.infoModify;
