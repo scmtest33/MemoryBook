@@ -130,6 +130,13 @@ body {
 	line-height: normal;
 	margin: 0;
 }
+.userName{
+	color: #2BBCDE;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+}
 
 .table-filter .media .title span {
 	font-size: .8em;
@@ -149,5 +156,8 @@ body {
 }
 
 #userEmail{
+	font-size: 14px;
+}
+.userEmail{
 	font-size: 14px;
 }

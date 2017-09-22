@@ -40,6 +40,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- 모달 끝 -->
 	<br>
 	<p class="pageTitle">친구들은 무슨 길을 걷고 있을까요?</p>	
 		
@@ -47,12 +48,23 @@
 	  내친구 목록 확인하기
 	</button>
 	<div class="collapse" id="FriendList">
-	  <div class="well2">
-	  	<table class="table table-striped" id="friendList">
-<!-- 			<tr id="friendList"> -->
-<!-- 			</tr> -->
-		</table>
-	  </div>
+			<div class="container">
+			<div class="row">
+				<section class="content">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="panel panel-default">
+							<div class="panel-body">
+							<div class="table-container">
+								<table id="friendList" class="table table-filter">
+										
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			</div>
 	</div>	
 	
 <br>
@@ -123,15 +135,28 @@ function friendList(){
 		type: "POST",
 		success : function(result){
 			$(result).each(function(index, item) {
-				var addRow  = '<tr id="flist"><td id="friendPhoto'+ index +'">' + item.photo + '</td>';
-					addRow += '<td id="friendName'+ index +'">' + item.name + '</td>';
-	                addRow += '<td id="friendEmail">' + item.friend_Email + '</td>';
-	                addRow +='<td class = "deleteFriend">' + '<img id = deleteF'+index+' src = "/memory/resources/img/cancel.png">' + '</td>';
-	                addRow += '</tr>';
+				var addRow = '<tbody><tr>';
+					addRow += '<td id="list'+ index +'"><div class="media">';
+					addRow += '<td><a href="#" class="pull-left"><img id="userPhoto'+ index +'" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo img-circle"></a></td>';
+					addRow += '<td><div class="media-body"><h4 class="userName" id="userName'+ index +'">'+ item.name + '</h4> <p class="userEmail" id="userEmail">'+ item.friend_Email +'</p></div></td>';
+					addRow += '<td class = "deleteFriend">' + '<img id = deleteF'+index+' src = "/memory/resources/img/cancel.png">' + '</td>';
+					addRow += '</div></td>';
+					addRow += '</tr></tbody>';
 					$("#friendList").append(addRow);
 					
-					$("#friendName"+index).click(function(){
-						var friendNa = document.getElementById("friendName"+index).childNodes[0].nodeValue;
+					
+				
+// 				var addRow  = '<tr id="flist"><td id="friendPhoto'+ index +'">' + item.photo + '</td>';
+// 					addRow += '<td id="friendName'+ index +'">' + item.name + '</td>';
+// 	                addRow += '<td id="friendEmail">' + item.friend_Email + '</td>';
+// 	                addRow +='<td class = "deleteFriend">' + '<img id = deleteF'+index+' src = "/memory/resources/img/cancel.png">' + '</td>';
+// 	                addRow += '</tr>';
+// 					$("#friendList").append(addRow);
+					
+					
+					
+					$("#userName"+index).click(function(){
+						var friendNa = document.getElementById("userName"+index).childNodes[0].nodeValue;
 						$("#fNoteCategoryList").empty(); 
 						$("#fNoteCardList").empty(); 
 						$.ajax({
@@ -150,8 +175,8 @@ function friendList(){
 						});
 					});
 					
-					$("#friendPhoto"+index).click(function(){
-						var friendNa = document.getElementById("friendName"+index).childNodes[0].nodeValue;
+					$("#userPhoto"+index).click(function(){
+						var friendNa = document.getElementById("userName"+index).childNodes[0].nodeValue;
 						$("#fNoteCategoryList").empty(); 
 						$("#fNoteCardList").empty(); 
 						$.ajax({
