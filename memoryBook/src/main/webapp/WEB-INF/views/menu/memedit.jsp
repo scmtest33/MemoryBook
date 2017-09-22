@@ -34,7 +34,7 @@
 			    	<table>
 			    		<tr>
 			    			<div class="form-group">
-			    			회원님의 정보를 수정해보세요.
+			    			회원님의 정보를 수정해보세요
 			    			</div>
 			    		</tr>
 			    		<tr>
