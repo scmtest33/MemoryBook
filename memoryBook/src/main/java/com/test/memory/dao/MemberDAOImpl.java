@@ -100,4 +100,10 @@ public class MemberDAOImpl implements MemberDAO{
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.profilePhoto(vo);
 	}
+	
+	@Override
+	public boolean infoUpdate(MemberVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.infoUpdate(vo);
+	}
 }

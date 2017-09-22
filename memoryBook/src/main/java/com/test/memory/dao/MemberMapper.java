@@ -18,4 +18,5 @@ public interface MemberMapper {
 	public ArrayList<FriendVO> getFriendList(String loginEmail);
 	public int getFriendmemNo(String email);
 	public boolean profilePhoto(MemberVO vo);
+	public boolean infoUpdate(MemberVO vo);
 }

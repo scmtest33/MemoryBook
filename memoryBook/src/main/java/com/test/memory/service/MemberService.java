@@ -22,4 +22,5 @@ public interface MemberService {
 	public boolean deleteFriend(FriendVO friend);
 	public ArrayList<FriendVO> getFriendList(String loginEmail);
 	public int getFriendmemNo(String email);
+	public boolean infoUpdate(MemberVO vo);
 }

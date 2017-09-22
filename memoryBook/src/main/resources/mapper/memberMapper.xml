@@ -8,7 +8,7 @@
 
 	<!-- 회원 가입 정보 저장 -->
 	<insert id="join" parameterType="MemberVO">
-		INSERT INTO T_MEMBER VALUES (MEM_NO.NEXTVAL, #{name}, #{email}, #{mem_pwd}, #{mem_image, jdbcType=VARCHAR}, 0)
+		INSERT INTO T_MEMBER VALUES (MEM_NO.NEXTVAL, #{name}, #{email}, #{mem_pwd}, #{mem_image, jdbcType=VARCHAR}, 0, 0)
 	</insert>
 	
 	<!-- 이메일 중복 체크 -->
@@ -45,7 +45,11 @@
 	
 	<!-- 프로필 사진 -->
 	<update id="profilePhoto" parameterType="MemberVO">
-		UPDATE T_MEMBER SET MEM_IMAGE = #{mem_image} WHERE MEM_NO = #{mem_no}
+		UPDATE T_MEMBER SET MEM_IMAGE = #{mem_image} WHERE EMAIL = #{email}
+	</update>
+	
+	<update id="infoUpdate" parameterType="MemberVO">
+		UPDATE T_MEMBER SET NAME = #{name}, MEM_PWD = #{mem_pwd}, INFONUMBER = #{infoNumber} WHERE EMAIL = #{email}
 	</update>
 	
 	<!-- 회원검색 -->

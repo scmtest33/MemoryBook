@@ -79,4 +79,9 @@ public class MemberServiceImpl implements MemberService{
 	public int getFriendmemNo(String email) {
 		return dao.getFriendmemNo(email);
 	}
+	
+	@Override
+	public boolean infoUpdate(MemberVO vo) {
+		return dao.infoUpdate(vo);
+	}
 }

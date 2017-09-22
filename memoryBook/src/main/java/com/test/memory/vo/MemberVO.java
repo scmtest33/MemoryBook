@@ -7,6 +7,8 @@ public class MemberVO {
 	private String mem_pwd;
 	private String mem_image;
 	private int approvalNum;
+	private int infoNumber;
+	
 	public int getMem_no() {
 		return mem_no;
 	}
@@ -42,10 +44,18 @@ public class MemberVO {
 	}
 	public void setApprovalNum(int approvalNum) {
 		this.approvalNum = approvalNum;
+	}	
+	public int getInfoNumber() {
+		return infoNumber;
 	}
+	public void setInfoNumber(int infoNumber) {
+			this.infoNumber = infoNumber;	
+	}
+	
 	@Override
 	public String toString() {
 		return "MemberVO [mem_no=" + mem_no + ", name=" + name + ", email=" + email + ", mem_pwd=" + mem_pwd
-				+ ", mem_image=" + mem_image + ", approvalNum=" + approvalNum + "]";
+				+ ", mem_image=" + mem_image + ", approvalNum=" + approvalNum + ", infoNumber=" + infoNumber + "]";
 	}
+	
 }

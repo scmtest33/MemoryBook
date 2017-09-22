@@ -223,7 +223,11 @@ public class MemberController {
 				//처리
 				model.addAttribute("FileUrl", fileName);
 				String oldFilePath = path + (String)session.getAttribute("mem_image"); //이전파일명 확보
+				String email =(String)session.getAttribute("email");
+				System.out.println(email);
+				vo.setEmail(email);
 				vo.setMem_image(fileName); //DB전송용 현재파일명 세팅
+				System.out.println("사진 : "+ vo);
 				dao.profilePhoto(vo);
 				session.setAttribute("mem_image", fileName); //현재파일로 세션변경
 				
@@ -238,5 +242,14 @@ public class MemberController {
 				e.printStackTrace();
 				return "IOException";
 			}
+		}
+		
+		@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
+		@ResponseBody
+		private boolean infoUpdate(MemberVO vo, HttpSession session, Model model) throws Exception { 
+			System.out.println(vo);
+			service.infoUpdate(vo);
+			
+			return service.infoUpdate(vo);
 		}
 }
