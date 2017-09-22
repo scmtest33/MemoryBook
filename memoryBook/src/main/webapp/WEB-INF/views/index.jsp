@@ -27,6 +27,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
+    
+    <!-- tableStyle CSS -->
+    <link href="/memory/resources/css/tableStyle.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">

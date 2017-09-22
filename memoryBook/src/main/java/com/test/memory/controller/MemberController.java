@@ -95,6 +95,7 @@ public class MemberController {
 				session.setAttribute("memberNo", nvo.getMem_no());
 				session.setAttribute("name", nvo.getName());
 				session.setAttribute("mem_image", nvo.getMem_image());
+				session.setAttribute("infoNumber", nvo.getInfoNumber());
 				return nvo;
 			}
 		}
@@ -118,6 +119,8 @@ public class MemberController {
 				session.setAttribute("email", nvo.getEmail());
 				session.setAttribute("memberNo", nvo.getMem_no());
 				session.setAttribute("name", nvo.getName());
+				session.setAttribute("mem_image", nvo.getMem_image());
+				session.setAttribute("infoNumber", nvo.getInfoNumber());
 				return nvo;
 			}
 		}
