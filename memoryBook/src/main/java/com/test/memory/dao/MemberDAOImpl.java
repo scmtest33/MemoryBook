@@ -27,6 +27,12 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
+	public MemberVO emailCheck(MemberVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.emailCheck(vo);
+	}
+	
+	@Override
 	public MemberVO login(MemberVO vo) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.login(vo);

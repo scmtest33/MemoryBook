@@ -123,6 +123,10 @@ a.btn_modal {
 .modifyTitle, .loginTitle, .outTitle, .btns_align{
 	text-align: center;
 }
+.googleLogin{
+	width: 368px;
+	text-align: center;
+}
 .memberModify_btns, .memberOut_btns{
 	width: 368px;
 	margin: 0 auto;

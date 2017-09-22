@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -11,6 +10,15 @@
     <meta name="author" content="">
 
     <title>Memory Lane</title>
+    
+    <!-- jQuery -->
+    <script src="/memory/resources/js/jquery-3.2.1.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/memory/resources/js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    
     
     <!-- Favicon -->
 	<link rel="shortcut icon" href="/memory/resources/img/memory.ico">
@@ -162,7 +170,7 @@
         <!-- /.container -->
     </section>
 
-		    <!-- Modal -->
+		  <!-- Modal -->
 		  <div class="modal fade" id="myModal" role="dialog">
 		    <div class="modal-dialog">
 		    
@@ -178,33 +186,27 @@
 		        <br>
 		        	<div class="modal-body joinModal" id="joinModal">
 		          	<form name="joinfrm" id="joinfrm">       
-			    	<table id="joinInfo">
-			    		<tr>
+			    	<div id="joinInfo">
 			    			<div class="form-group">
 			    			 <label for="name">name:</label>
-			    			 <input type="text" class="form-control" id="name" name="name" placeholder="이름음 입력하세요" required="" autofocus="" />
+			    			 <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력하세요" required="" autofocus="" />
 			    			</div>
-			    		</tr>
-			    		<tr>
 			    			<div class="form-group">
 			    			 <label for="email">Email:</label>
-			    			 <input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요" required="" autofocus="" />
+			    			 <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요" required="" autofocus="" />
 			    			 <span id="emailck"></span>
 			    			</div>
-			    		</tr>
-			    		<tr>
 			    			<div class="form-group">
 			    			 <label for="password">password:</label>
 			    			 <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
 			    			</div>
-			    		</tr>
-			    		<tr>
 			    			<div class="form-group">
-			    			 <label for="passwordConf">password:</label>
+			    			 <label for="passwordConf">password check:</label>
 			    			 <input type="password" class="form-control" id="passwordConf" name="passwordConf" placeholder="비밀번호를 확인하세요" required="" autofocus="" />
 			    			 <span id="checkPwd"></span>
 			    			</div>
-			    		</tr>
+			    		</div>
+			    		<table>
 			    		<tr>
 			    			<td colspan="2">&nbsp;&nbsp;</td>
 			    		</tr>
@@ -246,7 +248,7 @@
 					    </tr>
 		    		</table>
 			    </form>
-		<!--           <div id="googleLoginDiv" align="center" class="g-signin2" data-onsuccess="onSignIn" style="width: 368px; text-align: center;"></div> -->
+		<!--           <div id="googleLoginDiv" align="center" class="g-signin2 googleLogin" data-onsuccess="onSignIn"></div> -->
 		          
 		        </div>
 		      </div>
@@ -261,10 +263,9 @@
                 <div class="col-lg-10 col-lg-offset-1 text-center">
                     <h4><strong>MemoryLane</strong>
                     </h4>
-                    <p>3481 Melrose Place
-                        <br>Beverly Hills, CA 90210</p>
+                    <p>서울 강남구 삼성동 COEX 4F ICT교육센터</p>
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
+                        <li><i class="fa fa-phone fa-fw"></i> (010) 1234-5678</li>
                         <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
                         </li>
                     </ul>
@@ -276,54 +277,81 @@
     </footer>
     </section>
 
-    <!-- jQuery -->
-    <script src="/memory/resources/js/jquery-3.2.1.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/memory/resources/js/bootstrap.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
     <script>
-    
-    
     //모달 회원가입창버튼 
     $("#joinFormBtn").click(function (){
     	$("#dragNoteTitle").html("Welcome to Memory Lane")
-    	document.getElementById("loginModal").style.display = "none";
-    	document.getElementById("joinModal").style.display = "block";
+    	$('#loginModal').css('display', 'none');
+    	$('#joinModal').css('display', 'block');
     	return false;
     })
     //모달 취소버튼
     $("#cancelBtn").click(function (){
     	$("#dragNoteTitle").html("Welcome to Memory Lane")
-    	document.getElementById("loginModal").style.display = "block";
-    	document.getElementById("joinModal").style.display = "none";
+    	$('#loginModal').css('display', 'block');
+    	$('#joinModal').css('display', 'none');
     	return false;
     })
     //비밀번호 확인
     $("#passwordConf").on("keyup",function(){
-      var f1 = document.joinfrm;
-      var pw1 = f1.password.value;
-      var pw2 = f1.passwordConf.value;
-      if(pw1!=pw2){
-       document.getElementById('checkPwd').style.color = "red";
-       document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
-      }else{
-       document.getElementById('checkPwd').style.color = "green";
-       document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
-      }
+		var f1 = document.joinfrm;
+		var pw1 = f1.password.value;
+		var pw2 = f1.passwordConf.value;
+		if(pw1!=pw2) {
+		$('#checkPwd').css('color', 'red');
+		document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
+		}else{
+		$('#checkPwd').css('color', 'green');
+		document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+		}
     })
+    
+    //이메일 중복 확인
+    $("#email").on("keyup",function(){
+    	var validate = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    	var f1 = document.joinfrm;
+		var email = f1.email.value;
+		console.log("test: "+email)
+		if(email == "") document.getElementById('emailck').innerHTML = "";
+		var emailok = validate.test(email);
+		$.ajax ({
+    		url: "/memory/member/emailCheck",
+    		type: "POST",
+    		data: {"email" : email},
+    		success : function(result) {
+    					var check = result.email;
+	    	    		if(!result && email != ""){
+	    	    			$('#emailck').css('color', 'red');
+	    	    			document.getElementById('emailck').innerHTML = "이미 사용중인 이메일 입니다."; 
+	    	    		}
+	    	    		if(result && email != "") {
+	    	    			$('#emailck').css('color', 'green');
+	    	    			document.getElementById('emailck').innerHTML = "사용가능한 이메일 입니다.";
+	    	    		}
+	    	    		if(!emailok && email != "") {
+	    	    			$('#emailck').css('color', 'red');
+	    	    			document.getElementById('emailck').innerHTML = "Email주소를 올바른 형식으로 입력하세요"; 
+	    	    		}
+    	    		}
+		});
+    })
+    
+/*     function validateEmail(email) {
+    	return re.test(email);
+    }   */
     
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {
         e.preventDefault();
         $("#sidebar-wrapper").toggleClass("active");
     });
+    
     // Opens the sidebar menu
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#sidebar-wrapper").toggleClass("active");
     });
+    
     // Scrolls to the selected menu item on the page
 /*     $(function() {
         $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
@@ -339,6 +367,7 @@
             }
         });
     }); */
+    
     //#to-top button appears after scrolling
     var fixed = false;
     $(document).scroll(function() {
@@ -364,6 +393,7 @@
             }
         }
     });
+    
     // Disable Google Maps scrolling
     // See http://stackoverflow.com/a/25904582/1607849
     // Disable scroll zooming and bind back the click event
@@ -373,6 +403,7 @@
         that.off('mouseleave', onMapMouseleaveHandler);
         that.find('iframe').css("pointer-events", "none");
     }
+    
     var onMapClickHandler = function(event) {
             var that = $(this);
             // Disable the click handler until the user leaves the map area
@@ -390,9 +421,9 @@
     		url: "/memory/member/login",
     		type: "POST",
     		data: {
-    			"email" : $("input[name=loginEmail]").val(),
-    			"mem_pwd" : $("input[name=loginPassword]").val()
-    			},
+					"email" : $("input[name=loginEmail]").val(),
+					"mem_pwd" : $("input[name=loginPassword]").val()
+					},
     		success : function(result) {
     					var i = result.approvalNum;
     					var a = result.email;
@@ -402,74 +433,72 @@
 	    	    		}
 	    	    		
 	    	    		else if(a != null && i == 1){
-	    	    			alert("계정이 정지되었습니다. 관지라에게 문의해주세요.")
+	    	    			alert("계정이 정지되었습니다. 관리자에게 문의해주세요.\n※관리자Email: admin@memory.lane")
 	    	    		}
 	    	    		else {
 	    	    			alert("ID/PWD를 확인해 주세요.")
 	    	    		}
     	    		}
-    	});
+		});
     	return false;
-	    });
+	});
         
-		$("#joinBtn").click(function () {
-	    	
-	    	var frm = document.joinfrm;
-	    	if (frm.name.value == "") {
-	    		frm.name.focus();
-	    		alert("Please insert your name");
-	    		return false;
-	    	}
-	    	if (frm.email.value == "") {
-	    		frm.email.focus();
-	    		alert("Please insert your E-mail");
-	    		return false;
-	    	}
-	    	
-	    	if (frm.password.value == "") {
-	    		frm.password.focus();
-	    		alert("Please insert your password");
-	    		return false;
-	    	}
-	    	if (frm.passwordConf.value == "") {
-	    		frm.passwordConf.focus();
-	    		alert("Please insert confirm password");
-	    		return false;
-	    	}
-	    	if(frm.password.value != frm.passwordConf.value){
-	    		frm.passwordConf.focus();
-	    		alert("Please check your password");
-	    		return false;	  
-	    	}
-	    	$.ajax ({
-	     		url: "/memory/member/join",
-	     		type: "POST",
-	     		data: {
-	 				"name" : $("input[name=name]").val(),    			
-	     			"email" : $("input[name=email]").val(),
-	     			"mem_pwd" : $("input[name=password]").val()
-	     			},
-	     		success : function(result) {
-	     				if(result){
-	 	    	    		alert("회원가입완료");
-	 	    	    		frm.name.value = "";
-	 	    	    		frm.email.value = "";
-	 	    	    		frm.password.value = "";
-	 	    	    		frm.passwordConf.value = "";
-	 	    	    		document.getElementById("loginModal").style.display = "block";
-	 	    	    		document.getElementById("joinModal").style.display = "none";
-	    					$("#myModal").modal('hide');
-	     				}else alert("회원가입 실패");
-	     	    }
+	$("#joinBtn").click(function () {
+	   	var frm = document.joinfrm;
+	   	if (frm.name.value == "") {
+	   		frm.name.focus();
+	   		alert("이름을 입력하세요");
+	   		return false;
+	   	}
+	   	if (frm.email.value == "") {
+	   		frm.email.focus();
+	   		alert("E-mail을 입력하세요");
+	   		return false;
+	   	}
+	   	if (frm.password.value == "") {
+	   		frm.password.focus();
+	   		alert("비밀번호를 입력하세요");
+	   		return false;
+	   	}
+	   	if (frm.passwordConf.value == "") {
+	   		frm.passwordConf.focus();
+	   		alert("비밀번호 확인란에도 입력하세요");
+	   		return false;
+	   	}
+	   	if(frm.password.value != frm.passwordConf.value){
+	   		frm.passwordConf.focus();
+	   		alert("비밀번호가 다릅니다");
+	   		return false;	  
+	   	}
+	   	$.ajax ({
+			url: "/memory/member/join",
+	    	type: "POST",
+	    	data: {
+	 			"name" : $("input[name=name]").val(),    			
+	    		"email" : $("input[name=email]").val(),
+	    		"mem_pwd" : $("input[name=password]").val()
+	    		},
+	    	success: function(result) {
+	    			if(result) {
+						alert("회원가입완료");
+	 	    	    	frm.name.value = "";
+	 	    	    	frm.email.value = "";
+	 	    	    	frm.password.value = "";
+	 	    	    	frm.passwordConf.value = "";
+	 	    	    	$('#loginModal').css('display', 'block');
+	 	    	    	$('#joinModal').css('display', 'none');
+	    				$("#myModal").modal('hide');
+	     			} else alert("회원가입 실패");
+	     	    },
+	     	error: alert("이메일이 중복되었거나, 올바르게 입력되지 않았습니다.")
 	     	});
 	     	return false;
 	    });
+
 		//다운로드 링크주기
 // 	    function downloadUrl(){
 // 	    	window.open("https://chrome.google.com/webstore/detail/drag-note/hljfaipfmfnppbpkkdmdchehfpoehflh?utm_source=gmail", "_blank")
 // 	    };
     </script>
-
 </body>
-
 </html>

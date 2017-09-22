@@ -28,6 +28,11 @@ public class MemberServiceImpl implements MemberService{
 	public boolean join(MemberVO vo) {
 		return dao.join(vo);
 	}
+
+	@Override
+	public MemberVO emailCheck(MemberVO vo) {
+		return dao.emailCheck(vo);
+	}
 	
 	@Override
 	public MemberVO login(MemberVO vo) {
@@ -41,14 +46,12 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public ArrayList<MemberVO> getList() {
-		
 		return dao.getList();
 		
 	}
 
 	@Override
 	public boolean click(MemberVO vo) {
-		
 		return dao.click(vo);
 	}
 	

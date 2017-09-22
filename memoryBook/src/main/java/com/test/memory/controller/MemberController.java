@@ -46,6 +46,11 @@ public class MemberController {
 	@Autowired
 	private MemberDAO dao;
 	
+		@RequestMapping(value = "main", method = RequestMethod.GET)
+		public String main() {
+			return "main"; 
+		}
+	
 		@RequestMapping(value = "join", method = RequestMethod.POST)
 		@ResponseBody
 		public boolean join(MemberVO vo) {
@@ -53,10 +58,17 @@ public class MemberController {
 			return service.join(vo);
 		}
 		
-		
-		@RequestMapping(value = "main", method = RequestMethod.GET)
-		public String main() {
-			return "main"; 
+		@RequestMapping(value = "emailCheck", method = RequestMethod.POST)
+		@ResponseBody
+		public boolean emailCheck(String email, HttpSession session, Model model) {
+			
+			MemberVO vo = new MemberVO();
+			vo.setEmail(email);
+			
+			MemberVO nvo = service.emailCheck(vo);
+			if (nvo != null) {
+				return false;
+			} else return true;
 		}
 		
 		@RequestMapping(value = "login", method = RequestMethod.POST)
