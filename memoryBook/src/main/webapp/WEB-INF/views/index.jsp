@@ -157,15 +157,6 @@
 			  	</div>
 		  	</div>
 		  	
-		  	<div id='memoList'>
-		  		<div class="container-fluid">
-					<h1>memoList</h1>
-			  	<%--  현재 에러
-			  	<%@ include file="manager/receivedMemos.jsp" %>
-	    	    --%>
-	    		</div>
-		  	</div>
-		  	
 		  	<div id='userList'>
 		  		<div class="container-fluid">
 			  		<%@ include file="manager/userList.jsp" %>
@@ -192,12 +183,12 @@
     	$('#myDragList').css('display', 'none');
     	$('#myNote').css('display', 'none');
     	$('#userList').css('display', 'none');
-    	$('#memoList').css('display', 'none');
     	$('#friend').css('display', 'none');
     	$('#myDragtest').css('display', 'none');
     	$('#search').css('display', 'none');
     	$('#profile').css('display', 'none');
     	$('#editorDraglist').css('display', 'none');
+		$('#memberEdit').css('display', 'none');
     	$('#indexMain2').css('display', '');
 	});
     
@@ -273,7 +264,6 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#indexMain2').css('display', '');
@@ -295,7 +285,6 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#indexMain2').css('display', '');
@@ -318,7 +307,6 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#profile').css('display', '');
@@ -340,7 +328,6 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#myDragList').css('display', '');
@@ -363,7 +350,6 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', '');
     	}
@@ -384,7 +370,6 @@
      		$('#myDragList').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#myNote').css('display', '');
@@ -406,7 +391,6 @@
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#friend').css('display', '');
@@ -428,7 +412,6 @@
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#search').css('display', '');
@@ -451,7 +434,6 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#userList').css('display', '');
     	}
@@ -462,28 +444,6 @@
     		}
     	} else {
     		user_menu();
-    	}
-    });
-    
-    $("#memo").click(function(e) {
-    	function memo_menu(){
-    		$('#indexMain2').css('display', 'none');
-     		$('#profile').css('display', 'none');
-     		$('#myDragList').css('display', 'none');
-     		$('#myNote').css('display', 'none');
-     		$('#friend').css('display', 'none');
-     		$('#search').css('display', 'none');
-     		$('#userList').css('display', 'none');
-     		$('#myDragtest').css('display', 'none');
-     		$('#memoList').css('display', '');
-    	}
-    	if(editor_chk){
-    		editorCancelChk();
-    		if(chk_tf) {
-    			memo_menu();
-    		}
-    	} else {
-    		memo_menu();
     	}
     });
     

@@ -91,11 +91,13 @@ public class MemberController {
 				return nvo;
 			}
 			else{
+				String mem_img = nvo.getMem_image();
+				if(mem_img == null) mem_img = "null";
 				session.setAttribute("email", nvo.getEmail());
 				session.setAttribute("memberNo", nvo.getMem_no());
 				session.setAttribute("name", nvo.getName());
-				session.setAttribute("mem_image", nvo.getMem_image());
 				session.setAttribute("infoNumber", nvo.getInfoNumber());
+				session.setAttribute("mem_image", mem_img);
 				return nvo;
 			}
 		}
@@ -217,6 +219,7 @@ public class MemberController {
 				
 				byte[] bytes = imageFile.getBytes();
 				String path = "c:\\data\\mem_image\\"; //폴더 위치
+//				String path = "g:\\SPRING\\git\\data\\mem_image\\"; //폴더 위치
 				String savePath = path + fileName; //실제 저장경로
 				
 				//파일저장

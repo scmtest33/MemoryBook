@@ -176,12 +176,6 @@
 		      </div>
 		    </div>
 		  </div>
-		  
-		  
-	<div>
-		<br><br>
-		<%@ include file="memedit.jsp" %>
-	</div>	  
 	</body>
 <script>
 $(function(){
