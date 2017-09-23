@@ -16,63 +16,40 @@
 <body>
 
 <p class="pageTitle">${name}님 친구를 찾고 추가해보세요</p>
-<input type="text" name="findId" id="findId" class="form-control" placeholder="이름 or Email을 입력하세요">
+<input type="text" name="findId" id="findId" class="form-control" placeholder="이름 또는 Email을 입력하세요">
 <button name="findBtn" id="findBtn" class="btn btn-default" onclick="findMember()">Search</button><br><br><br><br>
 
-<table class="table table-hover" id="table">
+<!-- <table class="table table-hover" id="table"> -->
 	
-</table>
+<!-- </table> -->
 
-<table class="table table-striped" id="listTable">
+<!-- <table class="table table-striped" id="listTable"> -->
 
-</table>
+<!-- </table> -->
+<div class="container">
+	<div class="row">
+
+		<section class="content">
+<!-- 			<h1 class="pageTitle">회원 목록</h1> -->
+			<div class="col-md-8 col-md-offset-2">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="table-container">
+							<table id="table3" class="table table-filter">
+									
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+</div>
+
+
 
 <script>
-// 	$(function(){
-// 		getFriendList();
-// 	});
-
-// 	//내 친구 목록 불러오기
-// 	function getFriendList(){
-// 		$.ajax ({
-// 			url: "/memory/member/getFriendList",
-// 			type: "POST",
-// 			success : function(result){
-// 				var addTitle = "<tr><th>이름</th>";
-// 				addTitle+= "<th>이메일</th>";
-// 				addTitle+= "<th>친구삭제</th></tr>";
-// 				$("#listTable").append(addTitle);
-// 				$(result).each(function(index, item) {
-// 					var addRow  = '<tr id="flist"><td id="friendName'+ index +'">' + item.name + '</td>';
-// 		                addRow += '<td id="friendEmail">' + item.friend_Email + '</td>';
-// 		                addRow +='<td class = "deleteFriend">' + '<img id = deleteF'+index+' src = "/memory/resources/img/cancel.png">' + '</td>';
-// 		                addRow += '</tr>';
-// 						$("#listTable").append(addRow);
-						
-// 						$("#deleteF"+index).click(function(){
-// 							$.ajax({
-// 								url: "/memory/member/deleteFriend",
-// 								dataType: "json",
-// 								type: "post",
-// 								data: {"friend_Email" : item.friend_Email},
-// 								success: function(result){
-// 									if(result){
-// 										alert("친구가 삭제되었습니다.");
-// 										$("#friendList").empty();
-// 										$("#listTable").empty();
-// 										getFriendList();
-// 										friendList();
-// 									}else {
-// 										alert("친구삭제 실패")
-// 									}
-// 								}
-// 							});
-// 						});
-// 				})
-// 			}
-// 		})
-// 	}
-
 
 	//회원찾기
 	function findMember() {
@@ -83,20 +60,20 @@
 				"findId" : $("input[name=findId]").val()
 				},
 			success : function(result) {
-						$("#table").empty();
-						var addTitle = "<tr><th>이름</th>";
-						addTitle+= "<th>이메일</th>";
-						addTitle+= "<th>친구추가</th></tr>";
-						$("#table").append(addTitle);
+						$("#table3").empty();
+						$("#findId").val("");
 						var btn;
 // 						var Email = ${email};
 						$(result).each(function(index, item) {
-							var addRow  = '<tr id="mlist"><td id="userName'+ index +'">' + item.name + '</td>';
-				                addRow += '<td id="userEmail">' + item.email + '</td>';
-				                addRow +='<td class = "addFriend">' + '<img id = addF'+index+' src = "/memory/resources/img/adduser.png">' + '</td>';
-				                addRow += '</tr>';
-								$("#table").append(addRow);
-
+							var addRow = '<tbody><tr>';
+								addRow += '<td><div class="media">';
+								addRow += '<td><a href="#" class="pull-left"><img id="userPhoto'+ index +'" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo img-circle"></a></td>';
+								addRow += '<td><div class="media-body"><h4 class="userName" id="userName'+ index +'">'+ item.name + '</h4> <p class="userEmail" id="userEmail">'+ item.email +'</p></div></td>';
+								addRow += '<td class = "addFriend">' + '<img id = addF'+index+' src = "/memory/resources/img/add.png">' + '</td>';
+								addRow += '</div></td>';
+								addRow += '</tr></tbody>';
+								$("#table3").append(addRow);
+							
 								$("#addF"+index).click(function(){
 								$.ajax({
 									url: "/memory/member/addFriend",
@@ -106,7 +83,7 @@
 									success: function(result){
 										if(result){
 											alert("친구가 추가되었습니다.");
-											$("#table").empty();
+											$("#table3").empty();
 											$("#listTable").empty();
 											$("#friendList").empty();
 											friendList();

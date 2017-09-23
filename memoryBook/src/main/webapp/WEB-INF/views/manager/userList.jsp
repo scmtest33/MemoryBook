@@ -18,7 +18,7 @@
 	<div class="row">
 
 		<section class="content">
-			<h1>회원 목록</h1>
+			<h1 class="pageTitle">회원 목록</h1>
 			<div class="col-md-8 col-md-offset-2">
 				<div class="panel panel-default">
 					<div class="panel-body">
