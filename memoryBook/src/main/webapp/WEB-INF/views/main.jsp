@@ -114,7 +114,7 @@
                                 <h2 class="service-content">
                                     <strong>드래그 저장 기능</strong>
                                 </h2>
-                                <p class="service-content2">정보 검색하던 사이트에서 내가 원하는 부분만 드래그하면 저장이 가능합니다.</p>
+                                <p class="service-content2">정보 검색하던 사이트에서 내가 원하는 부분만 드래그하면 저장이 가능합니다</p>
 <!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                                 <h2 class="service-content">
                                     <strong>노트 기능</strong>
                                 </h2>
-                                <p class="service-content2">내가 드래그한 내용을 나만의 방식으로 수정해 보세요.</p>
+                                <p class="service-content2">내가 드래그한 내용을 나만의 방식으로 수정해 보세요</p>
 <!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                                 <h2 class="service-content">
                                     <strong>친구 기능</strong>
                                 </h2>
-                                <p class="service-content2">친구들과 함께 노트를 공유해 보세요.</p>
+                                <p class="service-content2">친구들과 함께 노트를 공유해 보세요</p>
 <!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
@@ -162,8 +162,8 @@
     <section id="portfolio" class="portfolio">
         <div class="portfolio_con">
                     <h1 class="text001" align="right"><strong>크롬 확장 프로그램</strong></h1><br>
-                    <h2 class="text002" align="right"><strong>메모리 레인은 구글 확장 프로그램을 사용합니다.</strong></h2>
-                    <h2 class="text002" align="right"><strong>메모리 레인을 사용하기 위해 구글 확장프로그램을 설치해 주세요.</strong></h2>
+                    <h2 class="text002" align="right"><strong>메모리 레인은 구글 확장 프로그램을 사용합니다</strong></h2>
+                    <h2 class="text002" align="right"><strong>메모리 레인을 사용하기 위해 구글 확장프로그램을 설치해 주세요</strong></h2>
                     <a class="btn btn-default btn-lg" onclick="downloadUrl" id="downBtn">Download it now</a>
                     
         </div>
@@ -180,7 +180,7 @@
 		          <button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
 		          <br>
 		          <br>
-		          <h4 class="modal-title loginTitle" id="dragNoteTitle">Memory Lane LogIn</h4>
+		          <h4 class="modal-title loginTitle" id="memoryLaneTitle">Memory Lane</h4>
 		          <br>
 		        </div>
 		        <br>
@@ -280,14 +280,14 @@
     <script>
     //모달 회원가입창버튼 
     $("#joinFormBtn").click(function (){
-    	$("#dragNoteTitle").html("Welcome to Memory Lane")
+    	$("#memoryLaneTitle").html("Memory Lane")
     	$('#loginModal').css('display', 'none');
     	$('#joinModal').css('display', 'block');
     	return false;
     })
     //모달 취소버튼
     $("#cancelBtn").click(function (){
-    	$("#dragNoteTitle").html("Welcome to Memory Lane")
+    	$("#memoryLaneTitle").html("Memory Lane")
     	$('#loginModal').css('display', 'block');
     	$('#joinModal').css('display', 'none');
     	return false;

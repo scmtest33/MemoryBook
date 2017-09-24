@@ -286,6 +286,14 @@ th {
 }
 
 @font-face {
+	  font-family: 'FontNanum';
+	  src: url('../fonts/NanumSquareR.eot');
+	  src: local(※), url('../fonts/NanumSquareR.eot?#iefix') format('embedded-opentype'), url('../fonts/NanumSquareR.woff') format('woff'), url('../fonts/NanumSquareR.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
+}
+
+@font-face {
   font-family: 'Glyphicons Halflings';
 
   src: url('../fonts/glyphicons-halflings-regular.eot');
@@ -5972,7 +5980,8 @@ button.close {
   padding-right: 2px;
   border-bottom: 1px solid #e5e5e5;
 /*   background-color: #6799FF; */
-	background: url(../img/mainImg/road66.jpg) no-repeat center center scroll;
+	background: linear-gradient(45deg, #00a0d6 0%,#30aad3 11%,#57b6d6 21%,#3faed3 36%,#3faed3 36%,#52b152 70%,#008e1e 89%,#008e1e 100%); 
+
 }
 .modal-header .close {
   margin-top: -2px;
@@ -5981,6 +5990,9 @@ button.close {
 .modal-title {
   margin: 0;
   line-height: 1.42857143;
+  font-family: "fontPac";
+  font-size: 42px;
+  color: white;
 }
 .modal-body {
   position: relative;
@@ -6474,8 +6486,9 @@ button.close {
   text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
 }
 .sayHi {
-	font-family : "fontOeg";
+	font-family : "fontNanum";
 	padding-bottom: 10px;
+	font-weight: bold;
 }
 .sayHi2 {
 	font-family : "fontPac";
@@ -6483,9 +6496,10 @@ button.close {
 	font-size: 100px;
 }
 .sayHi3 {
-	font-family : "fontOeg";
+	font-family : "fontNanum";
 	padding-bottom: 100px;
 	font-size: 80px;
+	font-weight: bold;
 }
 .carousel-caption .btn {
   text-shadow: none;
@@ -6816,13 +6830,15 @@ button.close {
 
 .pageTitle{
 	font-size: 50px;
-	font-family: "FontHoon";
+	font-family: "FontNanum";
+	font-weight: bold;
 }
 
 .pageSubTitle{
 	font-size: 37px;
-	font-family: "FontHoon";
+	font-family: "FontNanum";
 	color: #008040;
+	font-weight: bold;
 }
 
 .clickerName{
@@ -6836,6 +6852,11 @@ button.close {
 
 #indexMainContent{
 	padding: 0px;
+}
+
+#titleNote{
+	font-family: "fontNanum";
+	font-weight: bold;
 }
 
 /* .sayHi { */

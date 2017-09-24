@@ -14,7 +14,7 @@
 </head>
 
 <body>
-
+<br>
 <p class="pageTitle">${name}님 친구를 찾고 추가해보세요</p>
 <input type="text" name="findId" id="findId" class="form-control" placeholder="이름 또는 Email을 입력하세요">
 <button name="findBtn" id="findBtn" class="btn btn-default" onclick="findMember()">Search</button><br><br><br><br>

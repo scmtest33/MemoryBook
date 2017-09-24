@@ -278,3 +278,11 @@ body {
 	  font-weight: normal;
 	  font-style: normal;
 }
+
+@font-face {
+	  font-family: 'FontNanum';
+	  src: url('../fonts/NanumSquareR.eot');
+	  src: local(※), url('../fonts/NanumSquareR.eot?#iefix') format('embedded-opentype'), url('../fonts/NanumSquareR.woff') format('woff'), url('../fonts/NanumSquareR.ttf') format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
+}

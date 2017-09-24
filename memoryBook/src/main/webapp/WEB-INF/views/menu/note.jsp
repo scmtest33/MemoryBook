@@ -54,7 +54,7 @@
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
-					<div id='title' class="w3-margin w3-padding modal_detail_title"></div>
+					<div id='titleNote' class="w3-margin w3-padding modal_detail_title"></div>
 				</div>
 				<div class="modal-body">
 					<div class="row">
@@ -123,7 +123,7 @@
 					<div class="container">
 						<h2>이메일 설정</h2>
 						<br>
-						<p>보낼 이메일을 설정해주세요 :)</p>
+						<p>보낼 이메일을 설정해주세요</p>
 						<br>
 						<form class="form-inline">
 							<div class="form-group">
@@ -221,7 +221,7 @@
 			         + date.getMinutes() + ":"
 			         + date.getSeconds();
 			//시간 뿌리기 끝
-			$("#title").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
+			$("#titleNote").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
 			$("#date").html(time);
 			$("#content").html(content);
 			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'><a href='' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;"
