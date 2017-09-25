@@ -92,7 +92,7 @@
 									}
 // 								addRow += '<td><div class="ckbox"><input type="checkbox" name="checkbox" id="checkbox'+index+'"><label for="checkbox'+index+'"></label></div></td>';
 								addRow += '<td><div class="media">';
-								addRow += '<td><a href="#" class="pull-left"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo img-circle"></a></td>';
+								addRow += '<td><a href="#" class="media-photo"><img src="/memory/data/mem_image/'+item.mem_image+'" class="media-photo img-circle"></a></td>';
 								addRow += '<td><div class="media-body"><h4 id="userName">'+ item.name + '</h4> <p id="userEmail">'+ item.email +'</p></div></td>';
 								if(item.approvalNum == 0){
 					                   addRow +='<td class = "practice">' + '<img id = "normal'+index+'" src = "/memory/resources/img/open-lock.png">' + '</td>';
