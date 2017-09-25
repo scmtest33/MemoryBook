@@ -138,7 +138,7 @@ function friendList(){
 				var addRow = '<tbody><tr>';
 					addRow += '<td><div class="media">';
 // 					addRow += '<td id="list'+ index +'"><div class="media">';
-					addRow += '<td><a href="#" class="pull-left"><img id="userPhoto'+ index +'" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo img-circle"></a></td>';
+					addRow += '<td><a href="#" class="pull-left"><img id="userPhoto'+ index +'" src="/memory/data/mem_image/'+item.mem_image+'" class="media-photo img-circle"></a></td>';
 					addRow += '<td><div class="media-body"><h4 class="userName" id="userName'+ index +'">'+ item.name + '</h4> <p class="userEmail" id="userEmail">'+ item.friend_Email +'</p></div></td>';
 					addRow += '<td class = "deleteFriend">' + '<img id = deleteF'+index+' src = "/memory/resources/img/cancel.png">' + '</td>';
 					addRow += '</div></td>';
