@@ -16,6 +16,13 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/memory/resources/js/bootstrap.min.js"></script>
+    
+    <!-- sweet_alert2 -->
+    <script src="/memory/resources/js/sweetalert2.js"></script>
+	<link rel="stylesheet" href="/memory/resources/css/sweetalert2.css">
+
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 
     <!-- Custom Theme JavaScript -->
     
@@ -46,7 +53,7 @@
 
 <body>
 
-    <!-- Navigation  -->
+    <!-- Navigation -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
     <nav id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -433,10 +440,20 @@
 	    	    		}
 	    	    		
 	    	    		else if(a != null && i == 1){
-	    	    			alert("계정이 정지되었습니다. 관리자에게 문의해주세요.\n※관리자Email: admin@memory.lane")
+	    	    			swal({
+	    	    				  title: '로그인 불가 계정',
+	    	    				  text: '관리자께 문의바랍니다. (문의: admin@memory.lane)',
+	    	    				  type: 'error',
+	    	    				  confirmButtonText: '확인'
+	    	    				})
 	    	    		}
 	    	    		else {
-	    	    			alert("ID/PWD를 확인해 주세요.")
+	    	    			swal({
+	    	    				  title: 'ID/PW ERROR!',
+	    	    				  text: 'ID 또는 비밀번호가 잘못 입력되었습니다.',
+	    	    				  type: 'error',
+	    	    				  confirmButtonText: '확인'
+	    	    				})
 	    	    		}
     	    		}
 		});
@@ -447,27 +464,52 @@
 	   	var frm = document.joinfrm;
 	   	if (frm.name.value == "") {
 	   		frm.name.focus();
-	   		alert("이름을 입력하세요");
+	   		swal({
+				  title: 'ERROR!',
+				  text: '이름을 입력해 주세요.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 	   		return false;
 	   	}
 	   	if (frm.email.value == "") {
 	   		frm.email.focus();
-	   		alert("E-mail을 입력하세요");
+	   		swal({
+				  title: 'ERROR!',
+				  text: 'E-mail 주소를 입력해 주세요.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 	   		return false;
 	   	}
 	   	if (frm.password.value == "") {
 	   		frm.password.focus();
-	   		alert("비밀번호를 입력하세요");
+	   		swal({
+				  title: 'ERROR!',
+				  text: '비밀번호를 입력해 주세요.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 	   		return false;
 	   	}
 	   	if (frm.passwordConf.value == "") {
 	   		frm.passwordConf.focus();
-	   		alert("비밀번호 확인란에도 입력하세요");
+	   		swal({
+				  title: 'ERROR!',
+				  text: '비밀번호 확인란이 입력되지 않았습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 	   		return false;
 	   	}
 	   	if(frm.password.value != frm.passwordConf.value){
 	   		frm.passwordConf.focus();
-	   		alert("비밀번호가 다릅니다");
+	   		swal({
+				  title: 'ERROR!',
+				  text: '비밀번호가 일치하지 않습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 	   		return false;	  
 	   	}
 	   	$.ajax ({
@@ -480,7 +522,12 @@
 	    		},
 	    	success: function(result) {
 	    			if(result) {
-						alert("회원가입완료");
+	    				swal({
+	     					  title: '회원가입 성공',
+	     					  text: '회원가입이 완료되었습니다. 이제 로그인 하세요~',
+	     					  type: 'success',
+	     					  confirmButtonText: '확인'
+	     					})
 	 	    	    	frm.name.value = "";
 	 	    	    	frm.email.value = "";
 	 	    	    	frm.password.value = "";
@@ -488,9 +535,21 @@
 	 	    	    	$('#loginModal').css('display', 'block');
 	 	    	    	$('#joinModal').css('display', 'none');
 	    				$("#myModal").modal('hide');
-	     			} else alert("회원가입 실패");
+	     			} else {
+	     				swal({
+	     					  title: '회원가입 실패',
+	     					  text: '오류가 발생 하였습니다. 다시 시도해주세요',
+	     					  type: 'error',
+	     					  confirmButtonText: '확인'
+	     					})
+	     			}
 	     	    },
-	     	error: alert("이메일이 중복되었거나, 올바르게 입력되지 않았습니다.")
+	     	error: swal({
+				  title: '회원가입 실패',
+					  text: '이메일이 중복되었거나, 올바르게 입력되지 않았습니다.',
+					  type: 'error',
+					  confirmButtonText: '확인'
+					})
 	     	});
 	     	return false;
 	    });
