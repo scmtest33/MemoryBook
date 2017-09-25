@@ -228,7 +228,8 @@ public class MemberController {
 				
 				//처리
 				model.addAttribute("FileUrl", fileName);
-				String oldFilePath = path + (String)session.getAttribute("mem_image"); //이전파일명 확보
+				String img_file = (String)session.getAttribute("mem_image");
+				String oldFilePath = path + img_file; //이전파일명 확보
 				String email =(String)session.getAttribute("email");
 				System.out.println(email);
 				vo.setEmail(email);
@@ -238,7 +239,7 @@ public class MemberController {
 				session.setAttribute("mem_image", fileName); //현재파일로 세션변경
 				
 				//이전파일 삭제
-				if(oldFilePath != null) { //null인 경우에는 오류방지를 위해 미작동
+				if(oldFilePath != null && img_file != null) { //null인 경우에는 오류방지를 위해 미작동
 					File oldFile = new File(oldFilePath); //내용 데이터파일 경로
 					if(oldFile.exists()) oldFile.delete(); //내용 데이터파일 삭제처리
 				}

@@ -73,12 +73,16 @@
 	
 	<!-- 친구목록 가져오기 -->
 	<select id="getFriendList" parameterType="String" resultType="FriendVO">
-		SELECT f.friend_Email, m.name FROM T_FRIEND f, T_MEMBER m
+		SELECT f.friend_Email, m.name, m.MEM_IMAGE FROM T_FRIEND f, T_MEMBER m
 		WHERE m.email = f.friend_Email and f.MEM_EMAIL = #{loginEmail}
 	</select>
 	
 	<select id="getFriendmemNo" resultType="Int" parameterType="String">
 		SELECT MEM_NO FROM T_MEMBER WHERE email = #{email}
+	</select>
+	<!-- 노트공개여부검사 -->
+	<select id="getInfoNumber" resultType="Int" parameterType="Int">
+		SELECT INFONUMBER FROM T_MEMBER WHERE MEM_NO = #{mem_no}
 	</select>
 	
 </mapper>
