@@ -77,6 +77,12 @@
 		WHERE m.email = f.friend_Email and f.MEM_EMAIL = #{loginEmail}
 	</select>
 	
+	<!-- 	친구 중복체크 -->
+	<select id="friendCheck" parameterType="String" resultType="String">
+		SELECT f.friend_Email FROM T_FRIEND f, T_MEMBER m
+		WHERE m.email = f.friend_Email and f.MEM_EMAIL = #{myEmail}
+	</select>
+	
 	<select id="getFriendmemNo" resultType="Int" parameterType="String">
 		SELECT MEM_NO FROM T_MEMBER WHERE email = #{email}
 	</select>

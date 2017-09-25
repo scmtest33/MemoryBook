@@ -14,6 +14,7 @@ public interface MemberMapper {
 	public boolean click(MemberVO vo);
 	public ArrayList<MemberVO> findMember(String findId);
 	public int addFriend(FriendVO friend);
+	public ArrayList<String> friendCheck(String myEmail);
 	public int deleteFriend(FriendVO friend);
 	public ArrayList<FriendVO> getFriendList(String loginEmail);
 	public int getFriendmemNo(String email);

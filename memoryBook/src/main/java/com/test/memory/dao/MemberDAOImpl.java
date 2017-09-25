@@ -64,13 +64,34 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public boolean addFriend(FriendVO friend) {
+	public boolean addFriend(String myEmail, FriendVO friend) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		int num = mapper.addFriend(friend);
-		if(num == 1){
-			return true;
+		if(friendCheck(myEmail, friend)){
+			int num = mapper.addFriend(friend);
+			if(num == 1){
+				return true;
+			}
+			return false;
 		}
-		return false;
+		else return false;
+	}
+	
+	@Override
+	public boolean friendCheck(String myEmail, FriendVO friend) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		ArrayList<String> flist = mapper.friendCheck(myEmail);
+		
+		
+		for(String friendMail : flist){
+			System.out.println("친구목록에서 : " + friendMail);
+			System.out.println("내가클릭한친구 : " + friend.getFriend_Email());
+			
+			
+			if(friendMail.equals(friend.getFriend_Email())) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override

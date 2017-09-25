@@ -170,11 +170,12 @@ public class MemberController {
 		}
 		
 		//친구추가
-		@RequestMapping(value = "addFriend", method = RequestMethod.POST)
-		@ResponseBody
-		public boolean addFriend(FriendVO friend) {
-			return service.addFriend(friend);
-		}
+				@RequestMapping(value = "addFriend", method = RequestMethod.POST)
+				@ResponseBody
+				public boolean addFriend(HttpSession session, FriendVO friend) {
+					String myEmail = (String)session.getAttribute("email");
+					return service.addFriend(myEmail, friend);
+				}
 		
 		//친구삭제
 		@RequestMapping(value = "deleteFriend", method = RequestMethod.POST)

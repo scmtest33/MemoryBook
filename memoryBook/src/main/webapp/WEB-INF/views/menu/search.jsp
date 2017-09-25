@@ -47,8 +47,6 @@
 	</div>
 </div>
 
-
-
 <script>
 
 	//회원찾기
@@ -83,16 +81,18 @@
 									success: function(result){
 										if(result){
 											alert("친구가 추가되었습니다.");
+											
 											$("#table3").empty();
 											$("#listTable").empty();
 											$("#friendList").empty();
 											friendList();
 										}else {
-											alert("친구추가 실패")
+											alert("이미 추가된 친구입니다.")
 										}
 									}
 								});
 							});
+								
 						});
 						
 		    		}
