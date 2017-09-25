@@ -260,4 +260,13 @@ public class MemberController {
 			
 			return service.infoUpdate(vo);
 		}
+		
+		//내 프로필 정보 받아오기
+		@RequestMapping(value = "myList", method = RequestMethod.GET)
+		@ResponseBody
+		public MemberVO myList(HttpSession session, MemberVO vo) {
+			
+			String email =(String)session.getAttribute("email");
+			return service.myList(email);
+		}
 }

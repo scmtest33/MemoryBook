@@ -23,4 +23,5 @@ public interface MemberService {
 	public ArrayList<FriendVO> getFriendList(String loginEmail);
 	public int getFriendmemNo(String email);
 	public boolean infoUpdate(MemberVO vo);
+	public MemberVO myList(String email);
 }

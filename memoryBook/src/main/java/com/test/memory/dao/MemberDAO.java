@@ -20,4 +20,5 @@ public interface MemberDAO {
 	public int getFriendmemNo(String email);
 	public boolean profilePhoto(MemberVO vo);
 	public boolean infoUpdate(MemberVO vo);
+	public MemberVO myList(String email);
 }

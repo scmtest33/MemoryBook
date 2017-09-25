@@ -127,4 +127,10 @@ public class MemberDAOImpl implements MemberDAO{
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.infoUpdate(vo);
 	}
+	
+	@Override
+	public MemberVO myList(String email) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.myList(email);
+	}
 }

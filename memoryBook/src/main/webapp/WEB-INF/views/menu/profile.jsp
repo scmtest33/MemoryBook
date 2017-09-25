@@ -26,27 +26,11 @@
 			</td>
 			<td>
 			<input type="button" value="등록" onclick="uploadImage()">
-			<td>
-		</tr>
-		<tr>
-			<td><h2>Name : </h2></td>
-			<td><h2>${name}</h2></td>
-		</tr>
-		<tr>
-			<td><h2>Email : </h2></td>
-			<td><h2>${email}</h2></td>
-		</tr>
-		<tr>
-			<td><h2>My Information : </h2></td>
-			<td>
-				<c:if test="${infoNumber==0}">
-					<h2> 전체 공개</h2>
-				</c:if>
-				<c:if test="${infoNumber==1}">
-					<h2> 나만 공개</h2>
-				</c:if>
 			</td>
 		</tr>
+		</table>
+		<table id="myInfoList">
+		
 	</table>
 	<table>
 		<tr>
@@ -61,23 +45,21 @@
 		</tr>
 	</table>
 	
-	
-	<div class="modal fade" id="myModal_Modify" role="dialog">
-		    <div class="modal-dialog">
+	<div class="modal fade" id="myModal_Modify" tabindex="-1" role="dialog" aria-labelledby="modifyTitle" aria-hidden="true" >
+		<div class="modal-dialog">
 		    
 		      <!-- 회원정보수정 Modal-->
 		      <div class="modal-content memberModify" id="updateModal">
 		        <div class="modal-header">
-		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
+		        	<button type="button" class="close" id="modalClose" data-dismiss="modal" aria-label="Close">
+		        	<span aria-hidden="true">&times;</span></button>
 		        	<br><br>
 		        	<h4 class="modal-title modifyTitle" id="modifyTitle">Memory Lane Modify</h4>
 		        	<br>
 		        </div>
 		        <br>
-		        			        	
 		        <div class="modal-body" id="modifyBody" >
-		          	
-		        <form name="infoModify" id="infoModify" action="/memory/member/infoUpdate" method="post">       
+		        <form name="infoModify" id="infoModify">       
 			    	<table>
 			    		<tr>
 			    			<div class="form-group">
@@ -93,7 +75,7 @@
 			    		<tr>
 			    			<div class="form-group">
 			    			<label for="name">Name</label>
-							    <input type="text" class="form-control" id="name" name="name" value="${name}" placeholder="이름을 다시 입력해주세요" required="required"/>
+							    <input type="text" class="form-control" id="name" name="name" placeholder="이름을 다시 입력해주세요" required="required"/>
 			    			</div>
 			    		</tr>
 			    		<tr>
@@ -118,7 +100,7 @@
 			    		</tr>
 					    <tr>
 					    	<td id="btns" colspan="2">
-					    		<input type="button" id="updateBtn" class="btn btn-default memberModify_btns Modify_ok" value="수정" onclick="mem_update()">
+					    		<input type="button" id="updateBtn"  data-target="#myModal_Modify" class="btn btn-primary" value="수정" onclick="mem_update()">
 					    	</td>
 					    	<td id="btns" colspan="2">
 							    <button class="btn btn-default memberModify_btns Modify_no" id="cancelBtn1" data-dismiss="modal">취소</button>
@@ -179,6 +161,38 @@
 	</body>
 <script>
 $(function(){
+	myList();
+});
+
+
+function myList(){
+	$.ajax ({
+		url: "/memory/member/myList",
+		type: "get",
+		success : function(result){
+			$(result).each(function(index, item) {
+				var addRow = '<tr><td><h2>Name : </h2></td>';
+					addRow += '<td id="myName"><h2>'+ item.name + '</h2></td></td></tr>';
+					addRow += '<tr><td><h2>Email : </h2></td>';
+					addRow += '<td id="myEmail"><h2>'+ item.email +'</h2></td></tr>';
+					addRow += '<tr><td><h2>My Infomation : </h2></td>';
+					if(item.infoNumber == 0){
+		                   addRow +='<td id="myInfomation"><h2>전체 공개</h2></td>';
+		                }else{
+		            	   addRow +='<td id="myInfomation"><h2>나만 공개</h2></td>';
+		                }
+					addRow += '</tr>';
+					$("#myInfoList").append(addRow);
+
+			})
+		}
+	})
+}
+
+
+
+
+$(function(){
 	$("#getImage").html("<img id='profile_img' class='profile_img' src='/memory/data/mem_image/${mem_image}'>");
 });
 
@@ -228,7 +242,7 @@ function open_modal() {
 	$('.modal-backdrop').toggle();
 }
 
-function mem_update() {
+function mem_update() { 
 	//라디오 버튼 Name 가져오기
     var radio_btn = document.getElementsByName("infoNumber");
 
@@ -244,23 +258,27 @@ function mem_update() {
         alert("공개방법을 선택해주세요");
         return;
     }
-   	$.ajax ({
-		url: "/memory/member/infoUpdate",
-    	type: "POST",
-    	data: {
- 			"name" : $("input[name=name]").val(),    			
-    		"email" : $("input[name=email]").val(),
-    		"mem_pwd" : $("input[name=pwd1]").val(),
-    		"infoNumber" : infoNumber_check
-    		},
-    	success: function(result) {
-    			if(result) {
-					alert("회원수정완료");
-    				$('#myModal_Modify').modal('hide').on('hidden.bs.modal', functionThatEndsUpDestroyingTheDOM);
-//					$('.modal-backdrop').remove();
-     			} else alert("회원수정 실패");
-    	}
-
+	   	$.ajax ({
+			url: "/memory/member/infoUpdate",
+	    	type: "POST",
+	    	data: {
+	 			"name" : $("input[name=name]").val(),    			
+	    		"email" : $("input[name=email]").val(),
+	    		"mem_pwd" : $("input[name=pwd1]").val(),
+	    		"infoNumber" : infoNumber_check
+	    		},
+	    	success: function(result) {
+	    			if(result) {
+						alert("회원수정완료")
+						$('#myModal_Modify').on('hidden.bs.modal', function (e) {
+						  $(this).find('#infoModify')[0].reset();
+						});
+						$("#myInfoList").empty();
+						myList();
+						location.href = '/memory/index';
+			    	
+	     			} else alert("회원수정 실패");	
+	    	}
      	});
      	return false;
     };

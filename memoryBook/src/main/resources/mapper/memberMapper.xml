@@ -90,5 +90,10 @@
 	<select id="getInfoNumber" resultType="Int" parameterType="Int">
 		SELECT INFONUMBER FROM T_MEMBER WHERE MEM_NO = #{mem_no}
 	</select>
+	<!-- 자신의 정보 -->
+	<select id="myList" resultType="MemberVO">
+		SELECT * FROM T_MEMBER WHERE email = #{email}
+	</select>
+	
 	
 </mapper>

@@ -84,4 +84,10 @@ public class MemberServiceImpl implements MemberService{
 	public boolean infoUpdate(MemberVO vo) {
 		return dao.infoUpdate(vo);
 	}
+	
+	@Override
+	public MemberVO myList(String email) {
+		return dao.myList(email);
+	}
+
 }
