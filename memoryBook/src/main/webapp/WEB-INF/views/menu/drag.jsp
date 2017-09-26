@@ -22,8 +22,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h2 class="modal-title">
-						<i class="fa fa-envelope" class="mail_modal_title"></i> Share a
-						drag
+						<i class="fa fa-envelope" class="mail_modal_title"></i> Share a drag
 					</h2>
 				</div>
 				<br>
@@ -107,7 +106,12 @@
 			return false;
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '오류코드: ' + status,
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 		
 	}
@@ -131,7 +135,12 @@
 	        $("#email_drag").val("");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '오류코드: ' + status,
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	})
 	function saveDragNo(dragNo){
@@ -173,7 +182,12 @@
 								  +"<div class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_modal'><i class='fa fa-download'></i></a></div></p>");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '로드실패 또는 이미 삭제 된 내용입니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 		
@@ -191,7 +205,12 @@
 			makeDragCards(result);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '리스트 생성을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 	
@@ -235,7 +254,12 @@
 			$("#dragList").html(html);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '자료 읽기를 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 	
@@ -312,31 +336,51 @@
 			open_editorDrag();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '노트 등록을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 
 	// 드래그 삭제
-	function deleteDrag(dragNo) {
+ 	function deleteDrag(dragNo) {
 		var dragNo = dragNo;
 		var memberNo = ${memberNo};
 		
-		var del_chk;
-		del_chk = confirm("정말 드래그를 삭제하시겠습니까?");
-		
-		if (del_chk) {
-			$.ajax({
-				url:"/memory/drag/deleteDrag",
-				dataType:"json",
-				data: {"dragNo":dragNo},
-				type: "POST",
-				success: function (result){
-					alert(result.msg,'success');
-					makeDragList();
-					mainDragList();
-					}
-			});
-		}
+		swal({
+			  title: '정말 드래그를 삭제하시겠습니까?',
+			  text: '삭제 후에는 복구하실 수 없습니다.',
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '네',
+			  cancelButtonText: '아니오',
+			  confirmButtonClass: 'swal2-confirm btn btn-success',
+			  cancelButtonClass: 'swal2-cancel btn btn-danger',
+			  buttonsStyling: false
+		}).then(function () {
+				$.ajax({
+					url:"/memory/drag/deleteDrag",
+					dataType:"json",
+					data: {"dragNo":dragNo},
+					type: "POST",
+					success: function (result){
+						swal("삭제 완료", result.msg,'success');
+						makeDragList();
+						mainDragList();
+						},
+					error: swal({
+						  title: 'Error!',
+						  text: '드래그데이터 삭제를 실패하였습니다.',
+						  type: 'error',
+						  confirmButtonText: '확인'
+						})
+				});
+			})
 	}
     </script>
 </body>

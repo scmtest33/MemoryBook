@@ -167,7 +167,12 @@
 			return false;
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '검색오류가 발생했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 		
 	}
@@ -187,11 +192,21 @@
 			dataType : "json"
 		})
 		.done(function (result) {
-			alert(result.msg, "success");
+			swal({
+				  title: '전송 완료',
+				  text: result.msg,
+				  type: 'success',
+				  confirmButtonText: '확인'
+				})		
 	        $("#email").val("");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '메일전송을 실패하였습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	})
 	function saveNoteNo(noteNo){
@@ -230,7 +245,12 @@
 							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_modal'><i class='fa fa-download'></i></a></span></p>");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '로드실패 또는 이미 삭제 된 내용입니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 	
@@ -302,7 +322,12 @@
 
 	        	})
 	        	.fail(function(jqXhr, textStatus, errorText){
-	        		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+	        		swal({
+	  				  title: 'Error!',
+	  				  text: '노트목록 로딩을 실패했습니다.',
+	  				  type: 'error',
+	  				  confirmButtonText: '확인'
+	  				})
 	        	});
 	        }
 	        ,editable : false
@@ -339,7 +364,12 @@
 			$("#categoryList").html(html);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '카테고리 목록 생성을 실패했습니다',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 	
@@ -347,7 +377,7 @@
 	function categoryUpdate(event){
 		var categoryToUpdate = event.target.id;
 		var categoryInput = "categoryUpdate" + categoryToUpdate.substring(8);
-		alert(categoryInput);
+		alert(categoryInput); // 수정필요...
 		$('#categoryToUpdate').css('display', 'none');
 		$('#categoryInput').css('display', 'block');
 		$("#"+categoryInput).attr("style","display:block !important");
@@ -370,7 +400,12 @@
 			makeNoteCards(result);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '리스트 생성을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 
@@ -387,7 +422,12 @@
 			makeNoteCards(result);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '노트목록 로딩을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 
@@ -453,7 +493,12 @@
 			$("#"+selcat).attr("selected", "selected");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '카테고리 목록 로딩을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 	
@@ -503,7 +548,12 @@
 			open_editor();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '노트 수정을 실패하였습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 		
 	}
@@ -524,45 +574,77 @@
 		$("#editorCloseBtn").toggle();
 	});
 
-	// 노트 삭제
-		function deleteNote(noteNo) {
-		var noteNo = noteNo;
-		var memberNo = ${memberNo};
-		
-		var del_chk;
-		del_chk = confirm("정말 노트를 삭제하시겠습니까?");
-		
-		if (del_chk) {
-			$.ajax({
-				url:"/memory/note/deleteNote",
-				dataType:"json",
-				data: {"noteNo":noteNo},
-				type: "POST"
-				}).done(function (result){
-					alert(result.msg,'success');
-					mainNoteList();
+// 노트 삭제
+	function deleteNote(noteNo) {
+	var noteNo = noteNo;
+	var memberNo = ${memberNo};
+	
+	swal({
+		  title: '정말 노트를 삭제하시겠습니까?',
+		  text: '삭제 후에는 복구하실 수 없습니다.',
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '네',
+		  cancelButtonText: '아니오',
+		  confirmButtonClass: 'swal2-confirm btn btn-success',
+		  cancelButtonClass: 'swal2-cancel btn btn-danger',
+		  buttonsStyling: false
+	}).then(function () {
+		$.ajax({
+			url:"/memory/note/deleteNote",
+			dataType:"json",
+			data: {"noteNo":noteNo},
+			type: "POST",
+			success: function (result){
+				mainNoteList();
+				swal("노트를 삭제했습니다.", result.msg,'success');
+				},
+			error: swal({
+				  title: 'Error!',
+				  text: '노트삭제를 실패하였습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 			});
-		}
+		})
 	}
 
 	//카테고리 삭제
 	function deleteCategory(categoryNo) {
-		var del_chk;
-		del_chk = confirm("정말 카테고리를 삭제하시겠습니까?\n(카테고리 삭제시 해당 카테고리의 게시물도 전부 삭제됩니다)");
-		
-		if (del_chk) {
+		swal({
+			  title: '정말 카테고리를 삭제하시겠습니까?',
+			  text: '삭제시 해당 카테고리의 게시물도 전부 삭제됩니다.',
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '네',
+			  cancelButtonText: '아니오',
+			  confirmButtonClass: 'swal2-confirm btn btn-success',
+			  cancelButtonClass: 'swal2-cancel btn btn-danger',
+			  buttonsStyling: false
+		}).then(function () {
 			$.ajax({
 				url:"/memory/note/deleteCategory",
 				dataType:"json",
 				data: {"categoryNo":categoryNo},
-				type: "POST"
-				}).done(function (result){
-					alert(result.msg,'success');
+				type: "POST",
+				success: function (result){
 					mainNoteList();
 					getMainCategory();
-			});
-		}
-	}	
+					swal("카테고리를 삭제했습니다.", result.msg,'success');
+					},
+				error: swal({
+					  title: 'Error!',
+					  text: '카테고리삭제를 실패하였습니다.',
+					  type: 'error',
+					  confirmButtonText: '확인'
+					})
+				});
+			})
+	}
 
 	// 카테고리 인풋창 열기
 	function showInput() {
@@ -587,7 +669,12 @@
 		var memberNo = ${memberNo};
 		
 		if (categoryName == "") {
-			alert("카테고리를 입력하세요");
+			swal({
+				  title: 'Error!',
+				  text: '카테고리명을 입력하세요',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 			return false;
 		}
 		
@@ -599,12 +686,22 @@
 			dataType : "json"
 		})
 		.done(function (result) {
-			alert(result.msg);
+			swal({
+				  title: '카테고리등록 성공',
+				  text: result.msg,
+				  type: 'success',
+				  confirmButtonText: '확인'
+				})			
 			appendCategory(result.categoryList);
 			closeInput();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '카테고리등록을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 	
