@@ -152,7 +152,7 @@
             
 			<div id="profile">
 				<div class="container-fluid">
-				<%@ include file="menu/profile_bak.jsp" %>
+				<%@ include file="menu/profile.jsp" %>
 				</div>
 	        </div>
 	        

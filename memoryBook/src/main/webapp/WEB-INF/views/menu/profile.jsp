@@ -50,7 +50,7 @@
         <i class="fa fa-coffee"></i>
         	회원님의 정보를 수정해보세요.
       </div>
-      <h3>Personal info</h3>
+      <h3>Personal Infomation Update</h3>
       <form class="form-horizontal" role="form">
       	<div class="form-group">
           <label class="col-lg-3 control-label">Email:</label>
@@ -237,9 +237,8 @@ function open_modal() {
 function mem_update() {
 	//암호가 일치하지 않거나 입력되지 않았을 경우
 	var mo = document.infoModify;
-	var pw1 = mo.pwd1.value;
-	var pw2 = mo.pwd2.value;
-	console.log(pw1+"/"+pw2)
+	var pw1 = document.getElementById('pwd1').value;
+	var pw2 = document.getElementById('pwd2').value;
 	if (pw1 != pw2 || pw1 == ""){
 		swal({
 			  title: 'Error!',
