@@ -198,6 +198,7 @@ public class MemberController {
 			return service.getFriendmemNo(email);
 		}
 		
+		//프로필 사진 업로드
 		@RequestMapping(value="/upload", method=RequestMethod.POST)
 		@ResponseBody
 		private String upload(HttpSession session,HttpServletRequest request, HttpServletResponse response, MultipartFile file, @RequestParam MultipartFile imageFile, Model model) throws Exception { 
@@ -252,6 +253,7 @@ public class MemberController {
 			}
 		}
 		
+		//회원정보 수정
 		@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
 		@ResponseBody
 		private boolean infoUpdate(MemberVO vo, HttpSession session, Model model) throws Exception { 
@@ -264,9 +266,10 @@ public class MemberController {
 		//내 프로필 정보 받아오기
 		@RequestMapping(value = "myList", method = RequestMethod.GET)
 		@ResponseBody
-		public MemberVO myList(HttpSession session, MemberVO vo) {
+		public MemberVO myList(HttpSession session, Model model, MemberVO vo) {
 			
 			String email =(String)session.getAttribute("email");
+			model.addAttribute("approvalnum", vo.getApprovalNum()).toString();
 			return service.myList(email);
 		}
 }

@@ -149,8 +149,8 @@
 		var frm = document.noteFrm;
 		if (frm.noteTitle.value == "") {
 			swal({
-				  title: 'Error!',
-				  text: '제목이 입력되지 않았습니다..',
+				  title: 'Warning!',
+				  text: '제목이 입력되지 않았습니다.',
 				  type: 'warning',
 				  confirmButtonText: '확인'
 				})
@@ -159,7 +159,7 @@
 		}
 		if (frm.category.value == "") {
 			swal({
-				  title: 'Error!',
+				  title: 'Warning!',
 				  text: '카테고리가 선택되지 않았습니다..',
 				  type: 'warning',
 				  confirmButtonText: '확인'

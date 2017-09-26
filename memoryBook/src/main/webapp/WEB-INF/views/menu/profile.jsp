@@ -66,21 +66,24 @@
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">My Information:</label><br>
-          <div class="col-lg-8">
-		  	<input id="infoNumber" name="infoNumber" type="radio" value="0"> 전체 공개 &nbsp&nbsp&nbsp
-		  	<input id="infoNumber" name="infoNumber" type="radio" value="1"> 나만 공개
+          <div id="infoSet" class="col-lg-8">
 		  </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">Password:</label>
           <div class="col-md-8">
-            <input class="form-control" type="password" id="pwd1" name="pwd1" placeholder="비밀번호를 입력하세요" required="" autofocus="">
+            <input class="form-control" type="password" id="pwd1" name="pwd1" placeholder="비밀번호를 입력하세요 (바꾸지 않을경우 현재 PW입력)" required="" autofocus="">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">Confirm password:</label>
           <div class="col-md-8">
-            <input class="form-control" type="password" id="pwd2" name="pwd2" placeholder="비밀번호를 확인하세요" required="" autofocus="" >
+            <input class="form-control" type="password" id="pwd2" name="pwd2" placeholder="비밀번호 변경시에만 입력하면 됩니다." required="" autofocus="" >
+          </div>
+        </div>
+        <div class="form-group">
+        	<label class="col-md-3 control-label">&nbsp;</label>
+        	<div id="checkPwd" class="col-md-8">
           </div>
         </div>
         <div class="form-group">
@@ -162,26 +165,52 @@ function myList(){
 					addRow += '<tr><td><h3>My Infomation : </h3></td>';
 					if(item.infoNumber == 0){
 		                   addRow +='<td id="myInfomation"><h3>전체 공개</h3></td>';
+		                   var addRow2 ='<input id="infoNumber" name="infoNumber" type="radio" value="0" checked="checked"> 전체 공개&nbsp;&nbsp;&nbsp;';
+		                   addRow2 +='<input id="infoNumber" name="infoNumber" type="radio" value="1"> 나만 공개';
 		                }else{
 		            	   addRow +='<td id="myInfomation"><h3>나만 공개</h3></td>';
+		            	   var addRow2 ='<input id="infoNumber" name="infoNumber" type="radio" value="0"> 전체 공개&nbsp;&nbsp;&nbsp;';
+		                   addRow2 +='<input id="infoNumber" name="infoNumber" type="radio" value="1" checked="checked"> 나만 공개';
 		                }
 					addRow += '</tr>';
 					$("#myInfoList").append(addRow);
-
+					$("#infoSet").append(addRow2);
 			})
 		}
 	})
 }
 
 //비밀번호 확인
+$("#pwd1").on("keyup",function(){
+	var mo = document.infoModify;
+	var pw1 = document.getElementById('pwd1').value;
+	var pw2 = document.getElementById('pwd2').value;
+	console.log(pw1);
+	if(pw2!=pw1 && pw2!=""){
+		if(pw2!=""){
+		$('#checkPwd').css('color', 'red');
+		document.getElementById('checkPwd').innerHTML = "암호를 확인해 주세요."; 
+		}
+	} else if(pw2=="") {
+		document.getElementById('checkPwd').innerHTML = "";
+	} else {
+		$('#checkPwd').css('color', 'green');
+	document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+	}
+})
+
 $("#pwd2").on("keyup",function(){
 	var mo = document.infoModify;
-	var pw1 = mo.pwd1.value;
-	var pw2 = mo.pwd2.value;
-	if(pw1!=pw2){
+	var pw1 = document.getElementById('pwd1').value;
+	var pw2 = document.getElementById('pwd2').value;
+	if(pw1!=pw2 && pw2!=""){
+		if(pw1!=""){
 		$('#checkPwd').css('color', 'red');
-		document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
-	}else{
+		document.getElementById('checkPwd').innerHTML = "암호를 확인해 주세요."; 
+		}
+	} else if(pw2=="") {
+		document.getElementById('checkPwd').innerHTML = "";
+	} else {
 		$('#checkPwd').css('color', 'green');
 	document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
 	}
@@ -239,14 +268,16 @@ function mem_update() {
 	var mo = document.infoModify;
 	var pw1 = document.getElementById('pwd1').value;
 	var pw2 = document.getElementById('pwd2').value;
-	if (pw1 != pw2 || pw1 == ""){
-		swal({
-			  title: 'Error!',
-			  text: '비밀번호를 확인해 주세요.',
-			  type: 'error',
-			  confirmButtonText: '확인'
-			})
-		return;
+	if (pw2 != ""){
+		if(pw1 != pw2 || pw1 == "") {
+			swal({
+				  title: 'Error!',
+				  text: '비밀번호를 확인해 주세요.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
+			return;
+		}
 	} else {
 	//라디오 버튼 Name 가져오기
 	var radio_btn = document.getElementsByName("infoNumber");
@@ -288,6 +319,7 @@ function mem_update() {
 						  $(this).find('#infoModify')[0].reset();
 						});
 						$("#myInfoList").empty();
+						$("#infoSet").empty();
 						myList();
 			    	
 	     			} else {
