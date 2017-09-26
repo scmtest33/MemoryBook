@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -16,28 +15,45 @@
 	<link rel="shortcut icon" href="/memory/resources/img/memory.ico">
 	<link rel="icon" href="/memory/resources/img/memory.ico">
 
+	<!-- jQuery -->
+	<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
+	
+	<!-- Bootstrap Core JavaScript -->
+    <script src="/memory/resources/js/bootstrap.min.js"></script>
+
+    <!-- sweet_alert2 -->
+    <script src="/memory/resources/js/sweetalert2.js"></script>
+	<link rel="stylesheet" href="/memory/resources/css/sweetalert2.css">
+	
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	
+	<!-- Custom Theme JavaScript -->
+	
+
+    <!-- Bootstrap core CSS -->
+    <link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
+    <link href="/memory/resources/css/bootstrap4-buttons.css" rel="stylesheet">
+	
+    <!-- tableStyle CSS -->
+    <link href="/memory/resources/css/tableStyle.css" rel="stylesheet">
+
+    <!-- simple-sidebar CSS -->
+    <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
+	
 	<!-- StyleSheets -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/memory/resources/css/memory-sheet.css">
+
+	<!-- fullcalendar -->
+	<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
+	<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
+
+	<!-- Custom Fonts -->
 	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="/memory/resources/css/memory-sheet.css">
-
-    <!-- Bootstrap core CSS -->
-    <link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
-    
-    <!-- tableStyle CSS -->
-    <link href="/memory/resources/css/tableStyle.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
-
-	<!-- 공용 스크립트 -->
-	<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
-	<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
-	<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
 </head>
 
 <body>
@@ -109,6 +125,13 @@
 					    UserList
 					</a>
                 </li>
+                <li>
+                	<a id="dragtest" class="noteImg">
+                	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg15">
+      		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg16">
+					    DragTest
+					</a>
+                </li>
                 </c:if>
             </ul>
         </div>
@@ -129,7 +152,7 @@
             
 			<div id="profile">
 				<div class="container-fluid">
-				<%@ include file="menu/profile.jsp" %>
+				<%@ include file="menu/profile_bak.jsp" %>
 				</div>
 	        </div>
 	        
