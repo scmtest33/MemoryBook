@@ -14,105 +14,87 @@
 <title>Profile</title>
 </head>
 <body>
-	<h1>Profile</h1>
-	<table>
-		<tr>
-			<td id="getImage"></td>
-		</tr>
-		<br>
-		<tr>
-			<td>
-				<input type="file" name="imageFile" id="imageFile">
-			</td>
-			<td>
-			<input type="button" value="등록" onclick="uploadImage()">
-			</td>
-		</tr>
-		</table>
-		<table id="myInfoList">
+<div class="container" style="padding-top: 60px;">
+  <h1 class="page-header">Profile</h1>
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="text-center">
+      <table align="center">
+      	<tr>
+      		<td id="getImage">
+      		</td>
+      	</tr>
+      </table>
+        <table>
+	        <tr>
+	        	<td>
+	        		<input type="file" class="text-center center-block well well-sm" name="imageFile" id="imageFile">
+	        	</td>
+	        	<td>&nbsp
+	        	</td>
+	        	<td>
+	        		<input type="button" class="text-center center-block well well-sm" value="등록" onclick="uploadImage()">
+	        	</td>
+	        <tr>
+        </table>
+        <table id="myInfoList" class="text-center center-block well well-sm">
 		
 	</table>
-	<table>
-		<tr>
-			<td>
-				<button data-toggle="modal" data-target="#myModal_Modify" onclick="open_modal()">Modify</button>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<button data-toggle="modal" data-target="#myModal_Unregister">Unregister</button>
-			</td>
-		</tr>
-	</table>
-	
-	<div class="modal fade" id="myModal_Modify" tabindex="-1" role="dialog" aria-labelledby="modifyTitle" aria-hidden="true" >
-		<div class="modal-dialog">
-		    
-		      <!-- 회원정보수정 Modal-->
-		      <div class="modal-content memberModify" id="updateModal">
-		        <div class="modal-header">
-		        	<button type="button" class="close" id="modalClose" data-dismiss="modal" aria-label="Close">
-		        	<span aria-hidden="true">&times;</span></button>
-		        	<br><br>
-		        	<h4 class="modal-title modifyTitle" id="modifyTitle">Memory Lane Modify</h4>
-		        	<br>
-		        </div>
-		        <br>
-		        <div class="modal-body" id="modifyBody" >
-		        <form name="infoModify" id="infoModify">       
-			    	<table>
-			    		<tr>
-			    			<div class="form-group">
-			    			회원님의 정보를 수정해보세요.
-			    			</div>
-			    		</tr>
-			    		<tr>
-			    			<div class="form-group">
-			    			<label for="email">Email</label>
-							    <input type="text" class="form-control" id="email" name="email" value="${email}" disabled="disabled" required="required"/>
-			    			</div>
-			    		</tr>
-			    		<tr>
-			    			<div class="form-group">
-			    			<label for="name">Name</label>
-							    <input type="text" class="form-control" id="name" name="name" placeholder="이름을 다시 입력해주세요" required="required"/>
-			    			</div>
-			    		</tr>
-			    		<tr>
-			    			<div class="form-group">
-			    			 <label for="password">Password:</label>
-			    			 <input type="password" class="form-control" id="pwd1" name="pwd1" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
-			    			</div>
-			    		</tr>
-			    		<tr>
-			    			<div class="form-group">
-			    			 <label for="passwordConf">Password:</label>
-			    			 <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="비밀번호를 확인하세요" required="" autofocus="" />
-			    			 <span id="checkPwd"></span>
-			    			</div>
-			    		</tr>
-			    		<tr>
-			    			<div class="form-group">
-			    			<label for="infomation">My Information</label><br>
-			    			<input id="infoNumber" name="infoNumber" type="radio" value="0"> 전체 공개 &nbsp&nbsp&nbsp
-							<input id="infoNumber" name="infoNumber" type="radio" value="1"> 나만 공개
-							</div>   		
-			    		</tr>
-					    <tr>
-					    	<td id="btns" colspan="2">
-					    		<input type="button" id="updateBtn"  data-target="#myModal_Modify" class="btn btn-primary" value="수정" onclick="mem_update()">
-					    	</td>
-					    	<td id="btns" colspan="2">
-							    <button class="btn btn-default memberModify_btns Modify_no" id="cancelBtn1" data-dismiss="modal">취소</button>
-					    	</td>
-					    </tr>
-		    		</table>
-			    </form>
-		        </div>
-		      </div>
-		    </div>
+      </div>
+    </div>
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+      <div class="alert alert-info alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a> 
+        <i class="fa fa-coffee"></i>
+        	회원님의 정보를 수정해보세요.
+      </div>
+      <h3>Personal info</h3>
+      <form class="form-horizontal" role="form">
+      	<div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" name="email" value="${email}" disabled="disabled">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" id="name" name="name" placeholder="이름을 다시 입력해주세요" required="required">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">My Information:</label><br>
+          <div class="col-lg-8">
+		  	<input id="infoNumber" name="infoNumber" type="radio" value="0"> 전체 공개 &nbsp&nbsp&nbsp
+		  	<input id="infoNumber" name="infoNumber" type="radio" value="1"> 나만 공개
 		  </div>
-	
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Password:</label>
+          <div class="col-md-8">
+            <input class="form-control" type="password" id="pwd1" name="pwd1" placeholder="비밀번호를 입력하세요" required="" autofocus="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Confirm password:</label>
+          <div class="col-md-8">
+            <input class="form-control" type="password" id="pwd2" name="pwd2" placeholder="비밀번호를 확인하세요" required="" autofocus="" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input class="btn btn-primary" value="수정" type="button" onclick="mem_update()">
+            <input class="btn btn-danger pull-right"  data-toggle="modal" data-target="#myModal_Unregister" value="탈퇴" type="button">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 	<!-- 탈퇴 모달 -->
 	<div class="modal fade" id="myModal_Unregister" role="dialog">
 		    <div class="modal-dialog">
@@ -146,9 +128,10 @@
 					    	<td id="btns" colspan="2">
 					    		<input type="submit" value="회원탈퇴" class="btn btn-default memberOut_btns out_ok">
 					    	</td>
-					    </tr>
-					    <tr>
-					    	<td id="btns" colspan="2">
+					    	<td>
+					    	&nbsp;&nbsp;
+					    	</td>
+						    	<td id="btns" colspan="2">
 							    <button class="btn btn-default memberModify_btns Modify_no" id="cancelBtn2" data-dismiss="modal">취소</button>
 					    	</td>
 					    </tr>
@@ -162,6 +145,7 @@
 <script>
 $(function(){
 	myList();
+	$("#getImage").html("<img class='profile1 img-circle' width='150px' height='150px' alt='avatar' src='/memory/data/mem_image/${mem_image}'>");
 });
 
 
@@ -171,15 +155,15 @@ function myList(){
 		type: "get",
 		success : function(result){
 			$(result).each(function(index, item) {
-				var addRow = '<tr><td><h2>Name : </h2></td>';
-					addRow += '<td id="myName"><h2>'+ item.name + '</h2></td></td></tr>';
-					addRow += '<tr><td><h2>Email : </h2></td>';
-					addRow += '<td id="myEmail"><h2>'+ item.email +'</h2></td></tr>';
-					addRow += '<tr><td><h2>My Infomation : </h2></td>';
+				var addRow = '<tr><td><h3>Name : </h3></td>';
+					addRow += '<td id="myName"><h3>'+ item.name + '</h3></td></td></tr>';
+					addRow += '<tr><td><h3>Email : </h3></td>';
+					addRow += '<td id="myEmail"><h3>'+ item.email +'</h3></td></tr>';
+					addRow += '<tr><td><h3>My Infomation : </h3></td>';
 					if(item.infoNumber == 0){
-		                   addRow +='<td id="myInfomation"><h2>전체 공개</h2></td>';
+		                   addRow +='<td id="myInfomation"><h3>전체 공개</h3></td>';
 		                }else{
-		            	   addRow +='<td id="myInfomation"><h2>나만 공개</h2></td>';
+		            	   addRow +='<td id="myInfomation"><h3>나만 공개</h3></td>';
 		                }
 					addRow += '</tr>';
 					$("#myInfoList").append(addRow);
@@ -188,13 +172,6 @@ function myList(){
 		}
 	})
 }
-
-
-
-
-$(function(){
-	$("#getImage").html("<img id='profile_img' class='profile_img' src='/memory/data/mem_image/${mem_image}'>");
-});
 
 //비밀번호 확인
 $("#pwd2").on("keyup",function(){
@@ -229,7 +206,7 @@ function uploadImage() {
 			} else if (result == "IOException") {
 				alert("업로드 실패");
 			} else {
-			$("#getImage").html("<img id='profile_img' class='profile_img' src='/memory/data/mem_image/"+result+"'>");
+			$("#getImage").html("<img class='profile1 img-circle' width='150px' height='150px' alt='avatar' src='/memory/data/mem_image/"+result+"'>");
 			}
 		},
 		error: function(jqXhr, textStatus, errorText){
@@ -275,7 +252,6 @@ function mem_update() {
 						});
 						$("#myInfoList").empty();
 						myList();
-						location.href = '/memory/index';
 			    	
 	     			} else alert("회원수정 실패");	
 	    	}
