@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -15,45 +16,32 @@
 	<link rel="shortcut icon" href="/memory/resources/img/memory.ico">
 	<link rel="icon" href="/memory/resources/img/memory.ico">
 
-	<!-- jQuery -->
-	<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
-	
-	<!-- Bootstrap Core JavaScript -->
-    <script src="/memory/resources/js/bootstrap.min.js"></script>
-
-    <!-- sweet_alert2 -->
-    <script src="/memory/resources/js/sweetalert2.js"></script>
-	<link rel="stylesheet" href="/memory/resources/css/sweetalert2.css">
-	
-	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-	
-	<!-- Custom Theme JavaScript -->
-	
-
-    <!-- Bootstrap core CSS -->
-    <link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
-    <link href="/memory/resources/css/bootstrap4-buttons.css" rel="stylesheet">
-	
-    <!-- tableStyle CSS -->
-    <link href="/memory/resources/css/tableStyle.css" rel="stylesheet">
-
-    <!-- simple-sidebar CSS -->
-    <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
-	
 	<!-- StyleSheets -->
-	<link rel="stylesheet" type="text/css" href="/memory/resources/css/memory-sheet.css">
-
-	<!-- fullcalendar -->
-	<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
-	<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
-
-	<!-- Custom Fonts -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/memory/resources/css/memory-sheet.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
+
+	<!-- sweet_alert2 -->
+    <script src="/memory/resources/js/sweetalert2.js"></script>
+	<link rel="stylesheet" href="/memory/resources/css/sweetalert2.css">
+
+	<!-- tableStyle CSS -->
+    <link href="/memory/resources/css/tableStyle.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
+
+	<!-- 공용 스크립트 -->
+	<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
+	<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
+	<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
 </head>
 
 <body>
@@ -125,13 +113,6 @@
 					    UserList
 					</a>
                 </li>
-                <li>
-                	<a id="dragtest" class="noteImg">
-                	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg15">
-      		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg16">
-					    DragTest
-					</a>
-                </li>
                 </c:if>
             </ul>
         </div>
@@ -180,6 +161,15 @@
 			  	</div>
 		  	</div>
 		  	
+		  	<div id='memoList'>
+		  		<div class="container-fluid">
+					<h1>memoList</h1>
+			  	<%--  현재 에러
+			  	<%@ include file="manager/receivedMemos.jsp" %>
+	    	    --%>
+	    		</div>
+		  	</div>
+		  	
 		  	<div id='userList'>
 		  		<div class="container-fluid">
 			  		<%@ include file="manager/userList.jsp" %>
@@ -206,23 +196,33 @@
     	$('#myDragList').css('display', 'none');
     	$('#myNote').css('display', 'none');
     	$('#userList').css('display', 'none');
+    	$('#memoList').css('display', 'none');
     	$('#friend').css('display', 'none');
     	$('#myDragtest').css('display', 'none');
     	$('#search').css('display', 'none');
     	$('#profile').css('display', 'none');
     	$('#editorDraglist').css('display', 'none');
-		$('#memberEdit').css('display', 'none');
     	$('#indexMain2').css('display', '');
 	});
     
     
 	//로그아웃
     function logout(){
-    	var result = confirm("로그아웃하시겠습니까?");
-    	if(result){
-    		localStorage.clear();
-    		location.href='/memory/member/logout';
-    	}
+    	swal({
+    		  title: '정말로 로그아웃 하시겠습니까?',
+    		  type: 'question',
+    		  showCancelButton: true,
+    		  confirmButtonColor: '#3085d6',
+    		  cancelButtonColor: '#d33',
+    		  confirmButtonText: '네',
+    		  cancelButtonText: '아니오',
+    		  confirmButtonClass: 'btn btn-success',
+    		  cancelButtonClass: 'btn btn-danger',
+    		  buttonsStyling: false
+    		}).then(function () {
+    			localStorage.clear();
+        		location.href='/memory/member/logout';
+    		})
     }
     
   //모달 취소버튼
@@ -259,8 +259,6 @@
 		CKEDITOR.instances.ckeditor.setData("");
 		
 		//노트 에디터
-		$('#Category1').css('display', 'none');
-		$('#Category2').css('display', 'none');
 		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#editorView').css('height', 'screen.innerHeight +"px"');
 		
@@ -289,6 +287,7 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#indexMain2').css('display', '');
@@ -310,6 +309,7 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#indexMain2').css('display', '');
@@ -332,6 +332,7 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#profile').css('display', '');
@@ -353,6 +354,7 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#myDragList').css('display', '');
@@ -375,6 +377,7 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', '');
     	}
@@ -395,6 +398,7 @@
      		$('#myDragList').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#myNote').css('display', '');
@@ -416,6 +420,7 @@
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
      		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#friend').css('display', '');
@@ -437,6 +442,7 @@
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
+     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#search').css('display', '');
@@ -459,6 +465,7 @@
      		$('#myNote').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
+     		$('#memoList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#userList').css('display', '');
     	}
@@ -469,6 +476,28 @@
     		}
     	} else {
     		user_menu();
+    	}
+    });
+    
+    $("#memo").click(function(e) {
+    	function memo_menu(){
+    		$('#indexMain2').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#memoList').css('display', '');
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			memo_menu();
+    		}
+    	} else {
+    		memo_menu();
     	}
     });
     
