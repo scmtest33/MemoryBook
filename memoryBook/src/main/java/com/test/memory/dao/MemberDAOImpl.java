@@ -59,7 +59,6 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public ArrayList<MemberVO> findMember(String loginEmail, String findId) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		System.out.println("지금 로그인한 이메일 : "+ loginEmail);
 		ArrayList<MemberVO> list = mapper.findMember(loginEmail, findId); 
 		return list;
 	}
@@ -81,13 +80,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public boolean friendCheck(String myEmail, FriendVO friend) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		ArrayList<String> flist = mapper.friendCheck(myEmail);
-		
-		
 		for(String friendMail : flist){
-			System.out.println("친구목록에서 : " + friendMail);
-			System.out.println("내가클릭한친구 : " + friend.getFriend_Email());
-			
-			
 			if(friendMail.equals(friend.getFriend_Email())) {
 				return false;
 			}
