@@ -50,7 +50,7 @@
 				<table>
 					<tr>
 						<td><input type="text" id="noteTitle" name="noteTitle"
-							class="noteTitle" placeholder="제목이 입력되지 않았습니다." /></td>
+							class="noteTitle" placeholder="제목을 입력하세요." /></td>
 					</tr>
 					<tr>
 						<td><textarea class="ckeditor" id="ckeditor" name="ckeditor"></textarea></td>

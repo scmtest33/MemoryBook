@@ -259,6 +259,8 @@
 		CKEDITOR.instances.ckeditor.setData("");
 		
 		//노트 에디터
+		$('#Category1').css('display', 'none');
+		$('#Category2').css('display', 'none');
 		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#editorView').css('height', 'screen.innerHeight +"px"');
 		

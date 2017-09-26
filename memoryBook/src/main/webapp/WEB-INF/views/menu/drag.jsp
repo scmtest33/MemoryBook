@@ -229,7 +229,7 @@
 				var drag = result[i];	
 				var dragNo = drag.dragNo;
 				console.log("드래그번호"+dragNo)
-				html += " <div class='dragList' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"' onclick='dragDetail("+drag.dragNo+")'data-toggle='modal' data-target='#detailModal_drag'>";
+				html += " <div class='dragList' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"' onclick='dragDetail("+drag.dragNo+")' data-toggle='modal' data-target='#detailModal_drag'>";
 				html += " <div class='dragTitle'>" + drag.dragUrlTitle +" </div>";
 				html += " <hr>";
 				html += " <div class='dragContent'>" + drag.dragContent +" </div>";

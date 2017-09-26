@@ -31,7 +31,7 @@
 	        	<td>
 	        		<input type="file" class="text-center center-block well well-sm" name="imageFile" id="imageFile">
 	        	</td>
-	        	<td>&nbsp
+	        	<td>&nbsp;
 	        	</td>
 	        	<td>
 	        		<input type="button" class="text-center center-block well well-sm" value="등록" onclick="uploadImage()">
@@ -146,193 +146,186 @@
 		  </div>
 	</body>
 <script>
-$(function(){
-	myList();
-	$("#getImage").html("<img class='profile1 img-circle' width='150px' height='150px' alt='avatar' src='/memory/data/mem_image/${mem_image}'>");
-});
-
-
-function myList(){
-	$.ajax ({
-		url: "/memory/member/myList",
-		type: "get",
-		success : function(result){
-			$(result).each(function(index, item) {
-				var addRow = '<tr><td><h3>Name : </h3></td>';
-					addRow += '<td id="myName"><h3>'+ item.name + '</h3></td></td></tr>';
-					addRow += '<tr><td><h3>Email : </h3></td>';
-					addRow += '<td id="myEmail"><h3>'+ item.email +'</h3></td></tr>';
-					addRow += '<tr><td><h3>My Infomation : </h3></td>';
-					if(item.infoNumber == 0){
-		                   addRow +='<td id="myInfomation"><h3>전체 공개</h3></td>';
-		                   var addRow2 ='<input id="infoNumber" name="infoNumber" type="radio" value="0" checked="checked"> 전체 공개&nbsp;&nbsp;&nbsp;';
-		                   addRow2 +='<input id="infoNumber" name="infoNumber" type="radio" value="1"> 나만 공개';
-		                }else{
-		            	   addRow +='<td id="myInfomation"><h3>나만 공개</h3></td>';
-		            	   var addRow2 ='<input id="infoNumber" name="infoNumber" type="radio" value="0"> 전체 공개&nbsp;&nbsp;&nbsp;';
-		                   addRow2 +='<input id="infoNumber" name="infoNumber" type="radio" value="1" checked="checked"> 나만 공개';
-		                }
-					addRow += '</tr>';
-					$("#myInfoList").append(addRow);
-					$("#infoSet").append(addRow2);
-			})
+	$(function(){
+		myList();
+		$("#getImage").html("<img class='profile1 img-circle' width='150px' height='150px' alt='avatar' src='/memory/data/mem_image/${mem_image}'>");
+	});
+	
+	
+	function myList(){
+		$.ajax ({
+			url: "/memory/member/myList",
+			type: "get",
+			success : function(result){
+				$(result).each(function(index, item) {
+					var addRow = '<tr><td><h3>Name : </h3></td>';
+						addRow += '<td id="myName"><h3>'+ item.name + '</h3></td></td></tr>';
+						addRow += '<tr><td><h3>Email : </h3></td>';
+						addRow += '<td id="myEmail"><h3>'+ item.email +'</h3></td></tr>';
+						addRow += '<tr><td><h3>My Infomation : </h3></td>';
+						if(item.infoNumber == 0){
+			                   addRow +='<td id="myInfomation"><h3>전체 공개</h3></td>';
+			                   var addRow2 ='<input id="infoNumber" name="infoNumber" type="radio" value="0" checked="checked"> 전체 공개&nbsp;&nbsp;&nbsp;';
+			                   addRow2 +='<input id="infoNumber" name="infoNumber" type="radio" value="1"> 나만 공개';
+			                }else{
+			            	   addRow +='<td id="myInfomation"><h3>나만 공개</h3></td>';
+			            	   var addRow2 ='<input id="infoNumber" name="infoNumber" type="radio" value="0"> 전체 공개&nbsp;&nbsp;&nbsp;';
+			                   addRow2 +='<input id="infoNumber" name="infoNumber" type="radio" value="1" checked="checked"> 나만 공개';
+			                }
+						addRow += '</tr>';
+						$("#myInfoList").append(addRow);
+						$("#infoSet").append(addRow2);
+				})
+			}
+		})
+	}
+	
+	//비밀번호 확인
+	$("#pwd1").on("keyup",function(){
+		var mo = document.infoModify;
+		var pw1 = document.getElementById('pwd1').value;
+		var pw2 = document.getElementById('pwd2').value;
+		console.log(pw1);
+		if(pw2!=pw1 && pw2!=""){
+			if(pw2!=""){
+			$('#checkPwd').css('color', 'red');
+			document.getElementById('checkPwd').innerHTML = "암호를 확인해 주세요."; 
+			}
+		} else if(pw2=="") {
+			document.getElementById('checkPwd').innerHTML = "";
+		} else {
+			$('#checkPwd').css('color', 'green');
+		document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
 		}
 	})
-}
-
-//비밀번호 확인
-$("#pwd1").on("keyup",function(){
-	var mo = document.infoModify;
-	var pw1 = document.getElementById('pwd1').value;
-	var pw2 = document.getElementById('pwd2').value;
-	console.log(pw1);
-	if(pw2!=pw1 && pw2!=""){
-		if(pw2!=""){
-		$('#checkPwd').css('color', 'red');
-		document.getElementById('checkPwd').innerHTML = "암호를 확인해 주세요."; 
+	
+	$("#pwd2").on("keyup",function(){
+		var mo = document.infoModify;
+		var pw1 = document.getElementById('pwd1').value;
+		var pw2 = document.getElementById('pwd2').value;
+		if(pw1!=pw2 && pw2!=""){
+			if(pw1!=""){
+			$('#checkPwd').css('color', 'red');
+			document.getElementById('checkPwd').innerHTML = "암호를 확인해 주세요."; 
+			}
+		} else if(pw2=="") {
+			document.getElementById('checkPwd').innerHTML = "";
+		} else {
+			$('#checkPwd').css('color', 'green');
+		document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
 		}
-	} else if(pw2=="") {
-		document.getElementById('checkPwd').innerHTML = "";
-	} else {
-		$('#checkPwd').css('color', 'green');
-	document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
-	}
-})
-
-$("#pwd2").on("keyup",function(){
-	var mo = document.infoModify;
-	var pw1 = document.getElementById('pwd1').value;
-	var pw2 = document.getElementById('pwd2').value;
-	if(pw1!=pw2 && pw2!=""){
-		if(pw1!=""){
-		$('#checkPwd').css('color', 'red');
-		document.getElementById('checkPwd').innerHTML = "암호를 확인해 주세요."; 
-		}
-	} else if(pw2=="") {
-		document.getElementById('checkPwd').innerHTML = "";
-	} else {
-		$('#checkPwd').css('color', 'green');
-	document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
-	}
-})
-
-//프로필 사진
-function uploadImage() {
-	var data = new FormData();
-	var files = $("#imageFile").get(0).files;
-	if (files.length > 0) {
-		data.append("imageFile", files[0]);
-		}
-	$.ajax({
-		type: "POST",
-		url : "/memory/member/upload",
-		data: data,
-		processData: false,
-		contentType: false,
-		success: function (result) {
-			if(result == "error") {
-				swal({
-					  title: 'Warning!',
-					  text: '이미지 파일만 업로드가 가능합니다.',
-					  type: 'warning',
-					  confirmButtonText: '확인'
-					})
-			} else if (result == "IOException") {
+	})
+	
+	//프로필 사진
+	function uploadImage() {
+		var data = new FormData();
+		var files = $("#imageFile").get(0).files;
+		if (files.length > 0) {
+			data.append("imageFile", files[0]);
+			}
+		$.ajax({
+			type: "POST",
+			url : "/memory/member/upload",
+			data: data,
+			processData: false,
+			contentType: false,
+			success: function (result) {
+				if(result == "error") {
+					swal({
+						  title: 'Warning!',
+						  text: '이미지 파일만 업로드가 가능합니다.',
+						  type: 'warning',
+						  confirmButtonText: '확인'
+						})
+				} else if (result == "IOException") {
+					swal({
+						  title: 'Error!',
+						  text: '이미지파일 업로드를 실패했습니다.',
+						  type: 'error',
+						  confirmButtonText: '확인'
+						})
+				} else {
+				$("#getImage").html("<img class='profile1 img-circle' width='150px' height='150px' alt='avatar' src='/memory/data/mem_image/"+result+"'>");
+				}
+			},
+			error: function(jqXhr, textStatus, errorText){
 				swal({
 					  title: 'Error!',
-					  text: '이미지파일 업로드를 실패했습니다.',
+					  text: '프로필사진 등록을 실패했습니다.',
 					  type: 'error',
 					  confirmButtonText: '확인'
 					})
-			} else {
-			$("#getImage").html("<img class='profile1 img-circle' width='150px' height='150px' alt='avatar' src='/memory/data/mem_image/"+result+"'>");
 			}
-		},
-		error: function(jqXhr, textStatus, errorText){
-			swal({
-				  title: 'Error!',
-				  text: '프로필사진 등록을 실패했습니다.',
-				  type: 'error',
-				  confirmButtonText: '확인'
-				})
+		});
+	}
+	
+	function mem_update() {
+		//암호가 일치하지 않거나 입력되지 않았을 경우
+		var mo = document.infoModify;
+		var pw1 = document.getElementById('pwd1').value;
+		var pw2 = document.getElementById('pwd2').value;
+		if (pw2 != ""){
+			if(pw1 != pw2 || pw1 == "") {
+				swal({
+					  title: 'Error!',
+					  text: '비밀번호를 확인해 주세요.',
+					  type: 'error',
+					  confirmButtonText: '확인'
+					})
+				return;
+			}
+		} else {
+		//라디오 버튼 Name 가져오기
+		var radio_btn = document.getElementsByName("infoNumber");
+			//라디오 버튼이 체크되었나 확인하기 위한 변수
+		var infoNumber_check = 0;
+		//만약 라디오 2번버튼이 체크가 되어있다면 true
+		if (infoNumber[1].checked == true) {
+			//라디오 버튼2번이 체크되면 infoNumber_check를 1로 만들어준다.
+			infoNumber_check++;
 		}
-	});
-}
-
-function open_modal() {
-	$('.modal-backdrop').toggle();
-}
-
-function mem_update() {
-	//암호가 일치하지 않거나 입력되지 않았을 경우
-	var mo = document.infoModify;
-	var pw1 = document.getElementById('pwd1').value;
-	var pw2 = document.getElementById('pwd2').value;
-	if (pw2 != ""){
-		if(pw1 != pw2 || pw1 == "") {
+			if (infoNumber[0].checked == false
+				&& infoNumber[1].checked == false) {
 			swal({
 				  title: 'Error!',
-				  text: '비밀번호를 확인해 주세요.',
+				  text: '공개방법을 선택해주세요.',
 				  type: 'error',
 				  confirmButtonText: '확인'
 				})
 			return;
-		}
-	} else {
-	//라디오 버튼 Name 가져오기
-	var radio_btn = document.getElementsByName("infoNumber");
-		//라디오 버튼이 체크되었나 확인하기 위한 변수
-	var infoNumber_check = 0;
-	//만약 라디오 2번버튼이 체크가 되어있다면 true
-	if (infoNumber[1].checked == true) {
-		//라디오 버튼2번이 체크되면 infoNumber_check를 1로 만들어준다.
-		infoNumber_check++;
-	}
-		if (infoNumber[0].checked == false
-			&& infoNumber[1].checked == false) {
-		swal({
-			  title: 'Error!',
-			  text: '공개방법을 선택해주세요.',
-			  type: 'error',
-			  confirmButtonText: '확인'
-			})
-		return;
-	}}
-	   	$.ajax ({
-			url: "/memory/member/infoUpdate",
-	    	type: "POST",
-	    	data: {
-	 			"name" : $("input[name=name]").val(),    			
-	    		"email" : $("input[name=email]").val(),
-	    		"mem_pwd" : $("input[name=pwd1]").val(),
-	    		"infoNumber" : infoNumber_check
-	    		},
-	    	success: function(result) {
-	    			if(result) {
-	    				swal({
-	    					  title: '회원정보 수정 완료',
-	    					  text: '회원정보가 정상적으로 수정되었습니다',
-	    					  type: 'success',
-	    					  confirmButtonText: '확인'
-	    					})	
-						$('#myModal_Modify').on('hidden.bs.modal', function (e) {
-						  $(this).find('#infoModify')[0].reset();
-						});
-						$("#myInfoList").empty();
-						$("#infoSet").empty();
-						myList();
-			    	
-	     			} else {
-	     				swal({
-	     					  title: 'Error!',
-	     					  text: '회원정보 수정을 실패했습니다.',
-	     					  type: 'error',
-	     					  confirmButtonText: '확인'
-	     					})
-	     			}
-	    	}
-     	});
-     	return false;
-    };
+		}}
+		   	$.ajax ({
+				url: "/memory/member/infoUpdate",
+		    	type: "POST",
+		    	data: {
+		 			"name" : $("input[name=name]").val(),    			
+		    		"email" : $("input[name=email]").val(),
+		    		"mem_pwd" : $("input[name=pwd1]").val(),
+		    		"infoNumber" : infoNumber_check
+		    		},
+		    	success: function(result) {
+		    			if(result) {
+		    				swal({
+		    					  title: '회원정보 수정 완료',
+		    					  text: '회원정보가 정상적으로 수정되었습니다',
+		    					  type: 'success',
+		    					  confirmButtonText: '확인'
+		    					})	
+							$("#myInfoList").empty();
+							$("#infoSet").empty();
+							myList();
+				    	
+		     			} else {
+		     				swal({
+		     					  title: 'Error!',
+		     					  text: '회원정보 수정을 실패했습니다.',
+		     					  type: 'error',
+		     					  confirmButtonText: '확인'
+		     					})
+		     			}
+		    	}
+	     	});
+	     	return false;
+	    };
 </script>
 </html>
