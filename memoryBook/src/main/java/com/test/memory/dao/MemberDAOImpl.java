@@ -57,9 +57,10 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public ArrayList<MemberVO> findMember(String findId) {
+	public ArrayList<MemberVO> findMember(String loginEmail, String findId) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		ArrayList<MemberVO> list = mapper.findMember(findId); 
+		System.out.println("지금 로그인한 이메일 : "+ loginEmail);
+		ArrayList<MemberVO> list = mapper.findMember(loginEmail, findId); 
 		return list;
 	}
 	

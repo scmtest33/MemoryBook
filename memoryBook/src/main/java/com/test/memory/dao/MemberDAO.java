@@ -12,7 +12,7 @@ public interface MemberDAO {
 	public boolean unregister(MemberVO vo);
 	public ArrayList<MemberVO> getList();
 	public boolean click(MemberVO vo);
-	public ArrayList<MemberVO> findMember(String findId);
+	public ArrayList<MemberVO> findMember(String loginEmail, String findId);
 	public boolean addFriend(String myEmail, FriendVO friend);
 	public boolean friendCheck(String myEmail, FriendVO friend);
 	public boolean deleteFriend(FriendVO friend);

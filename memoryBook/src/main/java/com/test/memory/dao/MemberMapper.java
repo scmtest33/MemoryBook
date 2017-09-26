@@ -12,7 +12,7 @@ public interface MemberMapper {
 	public boolean unregister(MemberVO vo);
 	public ArrayList<MemberVO> getList();
 	public boolean click(MemberVO vo);
-	public ArrayList<MemberVO> findMember(String findId);
+	public ArrayList<MemberVO> findMember(String loginEmail, String findId);
 	public int addFriend(FriendVO friend);
 	public ArrayList<String> friendCheck(String myEmail);
 	public int deleteFriend(FriendVO friend);

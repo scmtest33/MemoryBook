@@ -54,11 +54,8 @@
 	
 	<!-- 회원검색 -->
 	<select id="findMember" parameterType="String" resultType="MemberVO">
-		SELECT name, email FROM T_MEMBER WHERE NAME LIKE '%'||#{name}||'%' or EMAIL LIKE '%'||#{email}||'%' order by mem_no desc
-		
-<!-- 		SELECT m.name, m.email, f.mem_auth FROM T_MEMBER m, T_FRIEND f  -->
-<!-- 		WHERE f.mem_email = #{0} and m.email = f.friend_email and m.name LIKE '%'||#{1}||'%' or m.email LIKE '%'||#{1}||'%'  -->
-<!-- 		order by mem_no desc -->
+<!-- 		SELECT name, email FROM T_MEMBER WHERE NAME LIKE '%'||#{name}||'%' or EMAIL LIKE '%'||#{email}||'%' order by mem_no desc -->
+		SELECT * FROM T_MEMBER WHERE (EMAIL != #{0} and EMAIL != 'admin') and (NAME LIKE '%'||#{1}||'%' or EMAIL LIKE '%'||#{1}||'%') order by mem_no desc
 	</select>
 	
 	<!-- 친구추가 -->
