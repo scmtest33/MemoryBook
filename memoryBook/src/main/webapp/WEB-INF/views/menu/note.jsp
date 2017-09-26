@@ -375,13 +375,42 @@
 	
 	//카테고리 수정
 	function categoryUpdate(event){
-		var categoryToUpdate = event.target.id;
-		var categoryInput = "categoryUpdate" + categoryToUpdate.substring(8);
-		alert(categoryInput); // 수정필요...
-		$('#categoryToUpdate').css('display', 'none');
-		$('#categoryInput').css('display', 'block');
-		$("#"+categoryInput).attr("style","display:block !important");
-		getMainCategory();
+		var categoryToUpdate = event.target.id.substring(8); // 카테고리 고유번호 추출
+		swal({
+			  title: '카테고리 이름 변경',
+			  text: '변경 할 새로운 카테고리명을 입력해 주세요',
+			  input: 'text',
+			  showCancelButton: true,
+			  confirmButtonText: '확인',
+			  cancelButtonText: '취소',
+			  showLoaderOnConfirm: true,
+			  preConfirm: function (text) {
+			    return new Promise(function (resolve, reject) {
+			      setTimeout(function() {
+			        if (text === '') {
+			          reject('카테고리명을 입력해 주세요')
+			        } else {
+			        	$.ajax({
+			    			type: "POST",
+			    			url : "/memory/note/noteCategoryUpdate",
+			    			data: {"categoryNo" : categoryToUpdate, "categoryName" : text},
+			    			dataType: "json",
+			    			success: function () {
+					    				resolve();
+					    				getMainCategory();
+					    			}
+			    		})
+			        }
+			      })
+			    })
+			  },
+			  allowOutsideClick: false
+			}).then(function (text) {
+			  swal({
+			    type: 'success',
+			    title: '카테고리 변경이 완료되었습니다.',
+			  })
+			})
 	}
 
 	//메인에 카테고리 별로 리스트 뿌리기
@@ -390,7 +419,7 @@
 		var memberNo = localStorage.getItem("memberNo");
 		$.ajax({
 			type: "POST",
-			url : "/memory/note/noteCartegoryList",
+			url : "/memory/note/noteCategoryList",
 			data: {"memberNo" : memberNo,
 				   "categoryNo" : categoryNo		
 			},

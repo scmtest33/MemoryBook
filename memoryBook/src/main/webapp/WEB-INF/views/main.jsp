@@ -61,7 +61,7 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top" onclick=$("#menu-close").click();>Memory Book</a>
+                <a href="#top" onclick=$("#menu-close").click();>Memory Lane</a>
             </li>
             <li>
                 <a href="#top" onclick=$("#menu-close").click();>Home</a>
@@ -74,9 +74,6 @@
             </li>
             <li>
                 <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
-            </li>
-            <li>
-                <a href="#register"  onclick=$("#menu-close").click();>Register</a>
             </li>
             <li>
                 <a data-toggle="modal" data-target="#myModal" onclick=$("#menu-close").click();>Login</a>

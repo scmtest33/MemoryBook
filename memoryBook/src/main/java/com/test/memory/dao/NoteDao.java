@@ -14,7 +14,7 @@ public interface NoteDao {
 
 	public List<NoteVO> noteList(NoteVO note) throws Exception;
 
-	public List<NoteVO> noteCartegoryList(NoteVO note) throws Exception;
+	public List<NoteVO> noteCategoryList(NoteVO note) throws Exception;
 
 	public List<NoteVO> noteByDate(HashMap<String, Object> map) throws Exception;
 
@@ -31,5 +31,7 @@ public interface NoteDao {
 	public void deleteCategory(int categoryNo) throws Exception;
 
 	public List<CategoryVO> getFriendCategory(int memberNo);
+
+	public void noteCategoryUpdate(CategoryVO category);
 
 }

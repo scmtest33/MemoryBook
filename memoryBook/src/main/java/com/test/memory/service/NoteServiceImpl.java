@@ -62,8 +62,8 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Override
-	public List<NoteVO> noteCartegoryList(NoteVO note) throws Exception {
-		return dao.noteCartegoryList(note);
+	public List<NoteVO> noteCategoryList(NoteVO note) throws Exception {
+		return dao.noteCategoryList(note);
 	}
 
 	@Override
@@ -128,6 +128,10 @@ public class NoteServiceImpl implements NoteService{
 		               + ")</script>");
 		    printWriter.flush();
 			}
+	}
+	@Override
+	public void noteCategoryUpdate(CategoryVO category) {
+		dao.noteCategoryUpdate(category);
 	}
 		
 }

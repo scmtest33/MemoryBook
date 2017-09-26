@@ -35,9 +35,9 @@ public class NoteDAOImpl implements NoteDao{
 	}
 
 	@Override
-	public List<NoteVO> noteCartegoryList(NoteVO note) throws Exception {
+	public List<NoteVO> noteCategoryList(NoteVO note) throws Exception {
 		NoteMapper mapper = sqlSession.getMapper(NoteMapper.class);
-		return mapper.noteCartegoryList(note);
+		return mapper.noteCategoryList(note);
 	}
 
 	@Override
@@ -86,6 +86,12 @@ public class NoteDAOImpl implements NoteDao{
 	public List<CategoryVO> getFriendCategory(int memberNo) {
 		NoteMapper mapper = sqlSession.getMapper(NoteMapper.class);
 		return mapper.getFriendCategory(memberNo);
+	}
+
+	@Override
+	public void noteCategoryUpdate(CategoryVO category) {
+		NoteMapper mapper = sqlSession.getMapper(NoteMapper.class);
+		mapper.noteCategoryUpdate(category);
 	}
 	
 }

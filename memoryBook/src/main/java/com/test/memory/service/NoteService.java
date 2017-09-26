@@ -24,7 +24,7 @@ public interface NoteService {
 	
 	public List<CategoryVO> getCategory(CategoryVO category) throws Exception;
 
-	public List<NoteVO> noteCartegoryList(NoteVO note) throws Exception;
+	public List<NoteVO> noteCategoryList(NoteVO note) throws Exception;
 
 	public void deleteCategory(int categoryNo) throws Exception;
 
@@ -37,5 +37,7 @@ public interface NoteService {
 	public List<CategoryVO> getFriendCategory(CategoryVO category) throws Exception;
 
 	public void ckeditorImageUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile file) throws Exception;
+
+	public void noteCategoryUpdate(CategoryVO category);
 
 }

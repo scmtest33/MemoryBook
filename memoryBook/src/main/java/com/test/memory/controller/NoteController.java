@@ -60,12 +60,13 @@ public class NoteController {
 	@Autowired
 	private NoteService service;
 	
+	//노트 작성
 	@RequestMapping("/note")
 	public Map<String, Object> note(NoteVO note, HttpSession session) throws Exception {
 		String FileName = UUID.randomUUID().toString(); //데이터 파일명 생성
 		Map<String, Object> msg = new HashMap<>();
 		
-		//note save
+		//note데이터 save
 		try{
 			fos = new FileOutputStream(FILE_PATH + FileName);
 			oos = new ObjectOutputStream(fos);
@@ -83,6 +84,7 @@ public class NoteController {
 		return msg;
 	}
 	
+	//노트 수정
 	@RequestMapping("/noteUpdate")
 	public Map<String, Object> noteUpdate(NoteVO note, HttpServletRequest request, HttpSession session) throws Exception {
 		String modified = UUID.randomUUID().toString(); //수정 된 파일명 생성
@@ -108,7 +110,7 @@ public class NoteController {
 		return msg;
 	}
 	
-	//이미지 업로드
+	//노트 내 이미지 업로드
 	@RequestMapping(value="/note_img_upload", method=RequestMethod.POST)
 	public void ckeditorImageUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile file, @RequestParam MultipartFile upload) throws Exception {
 		response.setCharacterEncoding("UTF-8");
@@ -153,6 +155,7 @@ public class NoteController {
 		return noteList;
 	}
 	
+	//친구가 공개한 노트리스트 보기
 	@RequestMapping("/friendNoteList")
 	public List<NoteVO> friendNoteList(HttpServletRequest request) throws Exception {
 		
@@ -187,13 +190,14 @@ public class NoteController {
 		return noteList;
 	}
 	
-	@RequestMapping("/noteCartegoryList")
-	public List<NoteVO> noteCartegoryList(HttpServletRequest request, HttpSession session) throws Exception {
+	//노트 카테고리 리스트
+	@RequestMapping("/noteCategoryList")
+	public List<NoteVO> noteCategoryList(HttpServletRequest request, HttpSession session) throws Exception {
 		NoteVO note = new NoteVO();
 		note.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
 		note.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));
 		
-		List<NoteVO> noteList = service.noteCartegoryList(note);
+		List<NoteVO> noteList = service.noteCategoryList(note);
 		for(NoteVO n : noteList){
 			try{
 				// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
@@ -219,8 +223,20 @@ public class NoteController {
 		return noteList;
 	}
 	
-	@RequestMapping("/freindNoteCartegoryList")
-	public List<NoteVO> freindNoteCartegoryList(HttpServletRequest request) throws Exception {
+	//카테고리 이름 수정
+		@RequestMapping(value="/noteCategoryUpdate", method=RequestMethod.POST)
+		public Map<String, Object> noteCategoryUpdate(CategoryVO category, HttpServletRequest request, HttpSession session) throws Exception {
+			Map<String, Object> msg = new HashMap<>();
+			category.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
+			category.setCategoryName(request.getParameter("categoryName"));
+			System.out.println("test:"+category);
+			service.noteCategoryUpdate(category);
+			return msg;
+		}
+	
+	//친구의 노트 카테고리 리스트
+	@RequestMapping("/freindNoteCategoryList")
+	public List<NoteVO> freindNoteCategoryList(HttpServletRequest request) throws Exception {
 		NoteVO note = new NoteVO();
 		if((request.getParameter("friendCategoryNo").equals(""))||(request.getParameter("friendNo").equals(""))){
 			note.setCategoryNo(0);
@@ -230,7 +246,7 @@ public class NoteController {
 			note.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
 		}
 		
-		List<NoteVO> noteList = service.noteCartegoryList(note);
+		List<NoteVO> noteList = service.noteCategoryList(note);
 		for(NoteVO n : noteList){
 			try{
 				// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
@@ -256,6 +272,7 @@ public class NoteController {
 		return noteList;
 	}
 	
+	//노트 작성일 검색
 	@RequestMapping("/noteByDate")
 	public List<NoteVO> noteByDate(HttpServletRequest request, HttpSession session) throws Exception {
 		String date = request.getParameter("date");
@@ -270,6 +287,8 @@ public class NoteController {
 		
 		return noteList;
 	}
+	
+	//노트내용 보기
 	@RequestMapping("/noteDetail")
 	public NoteVO noteDetail(String noteNo) throws Exception {
 		NoteVO n= service.noteDetail(Integer.parseInt(noteNo));
@@ -295,6 +314,7 @@ public class NoteController {
 		return n;
 	}
 	
+	//노트 삭제
 	@RequestMapping("/deleteNote")
 	public Map<String, String> deleteNote(String noteNo) throws Exception {
 		//삭제부
@@ -308,6 +328,8 @@ public class NoteController {
 		msg.put("msg", "노트가 삭제되었습니다.");
 		return msg;
 	}
+	
+	//카테고리 삭제
 	@RequestMapping("/deleteCategory")
 	public Map<String, String> deleteCategory(String categoryNo) throws Exception {
 		service.deleteCategory(Integer.parseInt(categoryNo));
@@ -316,6 +338,7 @@ public class NoteController {
 		return msg;
 	}
 	
+	//카테고리 등록
 	@RequestMapping("/addCategory")
 	public Map<String, Object> addCategory(HttpServletRequest request, HttpSession session) throws Exception {
 		CategoryVO category = new CategoryVO();
@@ -328,6 +351,8 @@ public class NoteController {
 		msg.put("categoryList", categoryList);
 		return msg;
 	}
+	
+	//카테고리 가져오기
 	@RequestMapping("/getCategory")
 	public Map<String, Object> getCategory(HttpServletRequest request, HttpSession session) throws Exception {
 		CategoryVO category = new CategoryVO();
@@ -339,6 +364,7 @@ public class NoteController {
 		return msg;
 	}
 	
+	//친구의 카테고리 가져오기
 	@RequestMapping("/getFriendCategory")
 	public Map<String, Object> getFriendCategory(HttpServletRequest request) throws Exception {
 		//로그인시 처음에는 친구넘버 초기값이 클리어되어 있기때문에 에러발생 친구이름 클릭시 해결.  
@@ -352,6 +378,8 @@ public class NoteController {
 		msg.put("friendCategory", friendCategory);
 		return msg;
 	}
+	
+	//메일로 노트내용 보내기
 	@RequestMapping("/mailNote")
 	public Map<String, Object> mailNote(HttpServletRequest request, HttpSession m_session) throws Exception{
 		// 메일발송 데이터 입력

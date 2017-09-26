@@ -21,12 +21,15 @@
 		<result property="categoryName" column="category_name"/>
 		<result property="memberNo" column="mem_no"/>
 	</resultMap>
+	
 	<!-- 노트 등록 -->	
 	<insert id="insertNote" parameterType="noteVO">
 		insert into t_note values (
 			NOTE_NO.NEXTVAL, #{memberNo}, #{categoryNo}, #{noteContent}, #{noteTitle}, SYSDATE, SYSDATE, '0'
 		)
 	</insert>
+	
+	<!-- 노트 수정 -->
 	<update id="updateNote" parameterType="noteVO">
 		update t_note 
 		   set note_title = #{noteTitle},
@@ -35,6 +38,7 @@
 		       note_update_date = SYSDATE
 	     where note_no = #{noteNo}
 	</update>
+	
 	<!-- 노트 리스트 -->
 	<select id="noteList" parameterType="noteVO" resultMap="noteMap">
 		select 
@@ -60,8 +64,9 @@
 		 
 		 order by n.note_no desc
 	</select>
+	
 	<!-- 노트 카테고리 리스트 -->
-	<select id="noteCartegoryList" parameterType="noteVO" resultMap="noteMap">
+	<select id="noteCategoryList" parameterType="noteVO" resultMap="noteMap">
 		select 
 			n.note_no,
 			n.mem_no,
@@ -95,6 +100,7 @@
 		   and n.note_reg_date between #{date1} and #{date2}
 		 order by n.note_no desc
 	</select>
+	
 	<!-- 카테고리 리스트 -->
 	<select id="getCategory" parameterType="int" resultMap="categoryMap">
 		select *
@@ -102,18 +108,27 @@
 		 where mem_no = #{memberNo} order by category_name
 	</select>
 	
-	<!-- 카테고리 리스트 -->
+	<!-- 친구의 카테고리 리스트 -->
 	<select id="getFriendCategory" parameterType="int" resultMap="categoryMap">
 		select *
 		  from t_category
 		 where mem_no = #{memberNo} order by category_name
 	</select>
+	
 	<!-- 카테고리 등록 -->
 	<insert id="addCategory" parameterType="categoryVO" useGeneratedKeys="true" keyProperty="noteNo">
 		insert into t_category values (
 			CATEGORY_NO.NEXTVAL, #{memberNo}, #{categoryName}
 		)
 	</insert>
+	
+	<!-- 카테고리 수정 -->
+	<update id="noteCategoryUpdate" parameterType="categoryVO">
+		update t_category 
+		   set category_name = #{categoryName}
+	     where category_no = #{categoryNo}
+	</update>
+	
 	<!-- 노트 디테일 -->
 	<select id="noteDetail" parameterType="int" resultMap="noteMap">
 		select n.note_no,
@@ -128,6 +143,7 @@
 		    on n.category_no = c.category_no 
 		 where note_no = #{noteNo}
 	</select>
+	
 	<!-- 이메일로 보낼 노트 -->
 	<select id="emailNote" parameterType="NoteVO" resultMap="noteMap">
 		select n.note_no,
@@ -141,12 +157,14 @@
 		    on n.mem_no = m.mem_no 
 		 where n.note_no = #{noteNo}
 	</select>
+	
 	<!-- 노트 삭제 -->
 	<delete id="deleteNote" parameterType="int">
 		delete 
 		  from t_note
 		 where note_no = #{noteNo}
 	</delete>
+	
 	<!-- 카테고리 삭제 -->
 	<delete id="deleteCategory" parameterType="int">
 		delete 
