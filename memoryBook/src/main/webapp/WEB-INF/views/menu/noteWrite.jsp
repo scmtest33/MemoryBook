@@ -50,7 +50,7 @@
 				<table>
 					<tr>
 						<td><input type="text" id="noteTitle" name="noteTitle"
-							class="noteTitle" placeholder="제목을 입력하세요" /></td>
+							class="noteTitle" placeholder="제목이 입력되지 않았습니다." /></td>
 					</tr>
 					<tr>
 						<td><textarea class="ckeditor" id="ckeditor" name="ckeditor"></textarea></td>
@@ -92,16 +92,24 @@
 	$("#noteSubmitBtn").click(function() {
 		var frm = document.noteFrm;
 		if (frm.noteTitle.value == "") {
-			alert("제목을 입력하세요.");
+			swal({
+				  title: 'Error!',
+				  text: '제목이 입력되지 않았습니다..',
+				  type: 'warning',
+				  confirmButtonText: '확인'
+				})
 			frm.noteTitle.focus();
 			return false;
 		}
 		if (frm.category.value == "") {
-			alert("카테고리를 선택하세요.",'success');
+			swal({
+				  title: 'Error!',
+				  text: '카테고리가 선택되지 않았습니다..',
+				  type: 'warning',
+				  confirmButtonText: '확인'
+				})
 			return false;
 		}
-//	 	if (!confirm("노트를 등록하시겠습니까?"))
-//	 		return;
 
 		var memNo = ${memberNo};
 		var editor = CKEDITOR.instances.ckeditor.getData();
@@ -112,16 +120,25 @@
 			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor, "categoryNo" : $("#category").val()},
 		})
 		.done(function (result) {
-			alert(result.msg, "success");
+			swal({
+				  title: '작성 완료',
+				  text: result.msg,
+				  type: 'success',
+				  confirmButtonText: '확인'
+				})	
 			mainNoteList();
 			$("input[name=noteTitle]").val("");
 			CKEDITOR.instances.ckeditor.setData("");
 			main_open();
-			console.log("정상작동");
 			editor_chk = false;
 		})
 		.fail(function (jqXhr, textStatus, errorText) {
-			alert("오류 : " + errorText);
+			swal({
+				  title: 'Error!',
+				  text: '노트 작성을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 		
 		return false;
@@ -131,12 +148,22 @@
 	$("#noteUpdateBtn").click(function() {
 		var frm = document.noteFrm;
 		if (frm.noteTitle.value == "") {
-			alert("제목을 입력하세요.");
+			swal({
+				  title: 'Error!',
+				  text: '제목이 입력되지 않았습니다..',
+				  type: 'warning',
+				  confirmButtonText: '확인'
+				})
 			frm.noteTitle.focus();
 			return false;
 		}
 		if (frm.category.value == "") {
-			alert("카테고리를 선택하세요.");
+			swal({
+				  title: 'Error!',
+				  text: '카테고리가 선택되지 않았습니다..',
+				  type: 'warning',
+				  confirmButtonText: '확인'
+				})
 			return false;
 		}
 //	 	if (!confirm("정말 수정하시겠습니까?"))
@@ -152,7 +179,12 @@
 				"categoryNo" : $("#category").val(), "noteNo" : localStorage.getItem("noteNoToUpdate")}
 		})
 		.done(function (result) {
-			alert(result.msg, "success");
+			swal({
+				  title: '노트수정 완료',
+				  text: result.msg,
+				  type: 'success',
+				  confirmButtonText: '확인'
+				})	
 			mainNoteList();
 			noteDetail(result.noteNo);
 			$("input[name=noteTitle]").val("");
@@ -162,7 +194,12 @@
 			main_open();
 		})
 		.fail(function (jqXhr, textStatus, errorText) {
-			alert("오류 : " + errorText);
+			swal({
+				  title: 'Error!',
+				  text: '노트 수정을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 		
 		return false;
@@ -220,7 +257,12 @@
     			CKEDITOR.instances.ckeditor.setData(CKEDITOR.instances.ckeditor.getData() + result.dragContent.replace("amp;", "&") + "<br>");
     		})
     		.fail(function (jqXhr, textStatus, errorText) {
-//     			alert("오류 : " + errorText);
+//     			swal({
+//				  title: 'Error!',
+//				  text: '드래그 입력을 실패했습니다.',
+//				  type: 'error',
+//				  confirmButtonText: '확인'
+//				})
     		});
     		return false;
     	}

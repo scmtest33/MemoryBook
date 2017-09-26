@@ -202,15 +202,30 @@ function uploadImage() {
 		contentType: false,
 		success: function (result) {
 			if(result == "error") {
-				alert("이미지 파일이 아닙니다.");
+				swal({
+					  title: 'Warning!',
+					  text: '이미지 파일만 업로드가 가능합니다.',
+					  type: 'warning',
+					  confirmButtonText: '확인'
+					})
 			} else if (result == "IOException") {
-				alert("업로드 실패");
+				swal({
+					  title: 'Error!',
+					  text: '이미지파일 업로드를 실패했습니다.',
+					  type: 'error',
+					  confirmButtonText: '확인'
+					})
 			} else {
 			$("#getImage").html("<img class='profile1 img-circle' width='150px' height='150px' alt='avatar' src='/memory/data/mem_image/"+result+"'>");
 			}
 		},
 		error: function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			swal({
+				  title: 'Error!',
+				  text: '프로필사진 등록을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		}
 	});
 }
@@ -219,22 +234,40 @@ function open_modal() {
 	$('.modal-backdrop').toggle();
 }
 
-function mem_update() { 
+function mem_update() {
+	//암호가 일치하지 않거나 입력되지 않았을 경우
+	var mo = document.infoModify;
+	var pw1 = mo.pwd1.value;
+	var pw2 = mo.pwd2.value;
+	console.log(pw1+"/"+pw2)
+	if (pw1 != pw2 || pw1 == ""){
+		swal({
+			  title: 'Error!',
+			  text: '비밀번호를 확인해 주세요.',
+			  type: 'error',
+			  confirmButtonText: '확인'
+			})
+		return;
+	} else {
 	//라디오 버튼 Name 가져오기
-    var radio_btn = document.getElementsByName("infoNumber");
-
-    //라디오 버튼이 체크되었나 확인하기 위한 변수
-    var infoNumber_check = 0;
-        //만약 라디오 2번버튼이 체크가 되어있다면 true
-        if(infoNumber[1].checked==true){
-            //라디오 버튼2번이 체크되면 infoNumber_check를 1로 만들어준다.
-            infoNumber_check++;
-        }
-    
-    if(infoNumber[0].checked==false && infoNumber[1].checked==false){
-        alert("공개방법을 선택해주세요");
-        return;
-    }
+	var radio_btn = document.getElementsByName("infoNumber");
+		//라디오 버튼이 체크되었나 확인하기 위한 변수
+	var infoNumber_check = 0;
+	//만약 라디오 2번버튼이 체크가 되어있다면 true
+	if (infoNumber[1].checked == true) {
+		//라디오 버튼2번이 체크되면 infoNumber_check를 1로 만들어준다.
+		infoNumber_check++;
+	}
+		if (infoNumber[0].checked == false
+			&& infoNumber[1].checked == false) {
+		swal({
+			  title: 'Error!',
+			  text: '공개방법을 선택해주세요.',
+			  type: 'error',
+			  confirmButtonText: '확인'
+			})
+		return;
+	}}
 	   	$.ajax ({
 			url: "/memory/member/infoUpdate",
 	    	type: "POST",
@@ -246,14 +279,26 @@ function mem_update() {
 	    		},
 	    	success: function(result) {
 	    			if(result) {
-						alert("회원수정완료")
+	    				swal({
+	    					  title: '회원정보 수정 완료',
+	    					  text: '회원정보가 정상적으로 수정되었습니다',
+	    					  type: 'success',
+	    					  confirmButtonText: '확인'
+	    					})	
 						$('#myModal_Modify').on('hidden.bs.modal', function (e) {
 						  $(this).find('#infoModify')[0].reset();
 						});
 						$("#myInfoList").empty();
 						myList();
 			    	
-	     			} else alert("회원수정 실패");	
+	     			} else {
+	     				swal({
+	     					  title: 'Error!',
+	     					  text: '회원정보 수정을 실패했습니다.',
+	     					  type: 'error',
+	     					  confirmButtonText: '확인'
+	     					})
+	     			}
 	    	}
      	});
      	return false;

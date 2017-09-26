@@ -204,12 +204,22 @@ function friendList(){
 							data: {"friend_Email" : item.friend_Email},
 							success: function(result){
 								if(result){
-									alert("친구가 삭제되었습니다.");
+									swal({
+										  title: '삭제 완료',
+										  text: '친구삭제를 성공했습니다.',
+										  type: 'success',
+										  confirmButtonText: '확인'
+										})	
 									$("#friendList").empty();
 									$("#listTable").empty();
 									friendList();
 								}else {
-									alert("친구삭제 실패")
+									swal({
+										  title: 'Error!',
+										  text: '친구삭제를 실패했습니다.',
+										  type: 'error',
+										  confirmButtonText: '확인'
+										})
 								}
 							}
 						});
@@ -246,11 +256,16 @@ function friendNoteDetail(friendNoteNo){
 		
 	})
 	.fail(function(jqXhr, textStatus, errorText){
-		alert("오류: " + errorText + "<br>" + "오류코드: " + status+"1");
+		swal({
+			  title: 'Error!',
+			  text: '친구 노트목록 로딩을 실패했습니다.',
+			  type: 'error',
+			  confirmButtonText: '확인'
+			})
 	});
 }
 	
-	//메인에 카테고리 뿌리기
+	//메인에 친구 목록 뿌리기
 	function getMainFriendCategory(){
 		var friendNo = localStorage.getItem("friendNo");
 		$.ajax({
@@ -276,7 +291,12 @@ function friendNoteDetail(friendNoteNo){
 			
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			//alert("오류: " + errorText + "<br>" + "오류코드: " + status+"2"); 초기 친구노트 에러
+//			  swal({
+//			  title: 'Error!',
+//			  text: '친구 노트목록 로딩을 실패했습니다.',
+//			  type: 'error',
+//			  confirmButtonText: '확인'
+//			})
 		});
 	}
 	
@@ -297,7 +317,12 @@ function friendNoteDetail(friendNoteNo){
 			makeFriendNoteCards(result);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"3");
+			swal({
+				  title: 'Error!',
+				  text: '목록 생성을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
 
@@ -315,7 +340,12 @@ function friendNoteDetail(friendNoteNo){
 			getFriendCategory();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			//alert("오류: " + errorText + "<br>" + "오류코드: " + status+"4"); 초기 친구노트 에러
+//			swal({
+//				  title: 'Error!',
+//				  text: '목록 생성을 실패했습니다.',
+//				  type: 'error',
+//				  confirmButtonText: '확인'
+//				})
 		});
 	}
 
@@ -364,7 +394,12 @@ function friendNoteDetail(friendNoteNo){
 			$("#"+selcat).attr("selected", "selected");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status+"5");
+			swal({
+				  title: 'Error!',
+				  text: '카테고리 목록 생성을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
 		});
 	}
     </script>

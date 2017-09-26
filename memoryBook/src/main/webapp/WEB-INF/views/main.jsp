@@ -11,6 +11,10 @@
 
     <title>Memory Lane</title>
     
+    <!-- Favicon -->
+	<link rel="shortcut icon" href="/memory/resources/img/memory.ico">
+	<link rel="icon" href="/memory/resources/img/memory.ico">
+
     <!-- jQuery -->
     <script src="/memory/resources/js/jquery-3.2.1.js"></script>
 
@@ -26,16 +30,14 @@
 
     <!-- Custom Theme JavaScript -->
     
-    
-    <!-- Favicon -->
-	<link rel="shortcut icon" href="/memory/resources/img/memory.ico">
-	<link rel="icon" href="/memory/resources/img/memory.ico">
 
     <!-- Bootstrap Core CSS -->
     <link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
+    <!-- stylish-portfolio CSS -->
     <link href="/memory/resources/css/stylish-portfolio.css" rel="stylesheet">
+    
+    <!-- StyleSheets -->
 	<link href="/memory/resources/css/memory-sheet.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Fonts -->
@@ -451,7 +453,7 @@
 	    	    			swal({
 	    	    				  title: 'ID/PW ERROR!',
 	    	    				  text: 'ID 또는 비밀번호가 잘못 입력되었습니다.',
-	    	    				  type: 'error',
+	    	    				  type: 'Warning',
 	    	    				  confirmButtonText: '확인'
 	    	    				})
 	    	    		}
@@ -467,7 +469,7 @@
 	   		swal({
 				  title: 'ERROR!',
 				  text: '이름을 입력해 주세요.',
-				  type: 'error',
+				  type: 'Warning',
 				  confirmButtonText: '확인'
 				})
 	   		return false;
@@ -477,7 +479,7 @@
 	   		swal({
 				  title: 'ERROR!',
 				  text: 'E-mail 주소를 입력해 주세요.',
-				  type: 'error',
+				  type: 'Warning',
 				  confirmButtonText: '확인'
 				})
 	   		return false;
@@ -487,7 +489,7 @@
 	   		swal({
 				  title: 'ERROR!',
 				  text: '비밀번호를 입력해 주세요.',
-				  type: 'error',
+				  type: 'Warning',
 				  confirmButtonText: '확인'
 				})
 	   		return false;

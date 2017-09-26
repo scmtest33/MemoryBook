@@ -81,14 +81,23 @@
 									data: {"myEmail": '${email}', "friend_Email" : item.email},
 									success: function(result){
 										if(result){
-											alert("친구가 추가되었습니다.");
-											
+											swal({
+												  title: '친구등록 완료',
+												  text: '친구가 추가되었습니다.',
+												  type: 'success',
+												  confirmButtonText: '확인'
+												})	
 											$("#table3").empty();
 											$("#listTable").empty();
 											$("#friendList").empty();
 											friendList();
 										}else {
-											alert("이미 추가된 친구입니다.")
+											swal({
+												  title: 'Error!',
+												  text: '이미 등록된 친구입니다.',
+												  type: 'error',
+												  confirmButtonText: '확인'
+												})
 										}
 									}
 								});
