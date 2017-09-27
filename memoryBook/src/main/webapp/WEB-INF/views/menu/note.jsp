@@ -339,6 +339,7 @@
 	        
 	    })
 	} */
+	
 	//메인에 카테고리 뿌리기
 	function getMainCategory(){
 		var memberNo = localStorage.getItem("memberNo");
@@ -357,8 +358,6 @@
 				html += "<li class='active' onclick='getNoteByCategoryNo("+category.categoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' aria-expanded='false' class='category_list'>"
 				html += "<a data-toggle='tab' ondblclick='categoryUpdate(event);' href='#' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' style='min-width:20px;'>"+category.categoryName+"</a>";
 				html += "<a data-toggle='tab' contenteditable='true' style='min-width:20px; display:none;' id='categoryUpdate"+category.categoryNo+"'>"+category.categoryName+"</a>";
-//				html += "<a data-toggle='tab' ondblclick='categoryUpdate(event);' href='#' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' class='category_list'>"+category.categoryName+"</a>";
-//				html += "<a data-toggle='tab' contenteditable='true' class='category_list_2' id='categoryUpdate"+category.categoryNo+"'>"+category.categoryName+"</a>";
 				html += "</li>";
 			}
 			$("#categoryList").html(html);
@@ -519,7 +518,30 @@
 		})
 		.done(function (result) {
 			appendCategory(result.categoryList);
+		})
+		.fail(function(jqXhr, textStatus, errorText){
+			swal({
+				  title: 'Error!',
+				  text: '카테고리 목록 로딩을 실패했습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
+		});
+	}
+	
+	// DB에서 카테고리 가져오고 지정하기
+	function setCategory(){
+		var memberNo = ${memberNo};
+		$.ajax({
+			type: "POST",
+			url : "/memory/note/getCategory",
+			data: {"memberNo" : memberNo},
+			dataType : "json"
+		})
+		.done(function (result) {
+			appendCategory(result.categoryList);
 			var selcat = localStorage.getItem("selectedItem");
+			console.log(localStorage.getItem("selectedItem"));
 			$("#"+selcat).attr("selected", "selected");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
@@ -532,10 +554,22 @@
 		});
 	}
 	
+	//에디터 오픈
 	function open_editor() {
 		$('#noteView').css('display', 'none');
 		$('#profileModal').css('display', 'none');
 		$('#noteEditor').css('display', '');
+	}
+
+	//공개설정 옵션창 초기화
+	function authInit() {
+	$("#authSet").empty();
+ 		var addRow = "<td><label for='auth'>공개설정</label></td>";
+			addRow += "<td>&nbsp;&nbsp;</td>"
+        	addRow += "<td><input id='authSet' name='authSet' type='radio' value='0'> 친구랑 보기</td>"
+			addRow += "<td>&nbsp;&nbsp;</td>"
+			addRow += "<td><input id='authSet' name='authSet' type='radio' value='1'> 나만보기</td>" 
+	$("#authSet").append(addRow);
 	}
 	
 	function open_editorDrag() {
@@ -571,10 +605,25 @@
 		.done(function (result) {
 			var title = result.noteTitle;
 			var content = result.noteContent;
+			var auth = result.noteAuth;
+			console.log(auth);
 			$("input[name=noteTitle]").val(title);
 			CKEDITOR.instances.ckeditor.setData(content);
 			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo);
-			getCategory();
+			$("#authSet").empty();
+			var addRow = "<td><label for='auth'>공개설정</label></td>";
+				addRow += "<td>&nbsp;&nbsp;</td>"
+				if(auth == 0){
+		        	addRow += "<td><input id='authSet2' name='authSet2' type='radio' value='0' checked='checked'> 친구랑 보기</td>"
+					addRow += "<td>&nbsp;&nbsp;</td>"
+					addRow += "<td><input id='authSet2' name='authSet2' type='radio' value='1'> 나만보기</td>"
+				} else {
+					addRow += "<td><input id='authSet2' name='authSet2' type='radio' value='0'> 친구랑 보기</td>"
+					addRow += "<td>&nbsp;&nbsp;</td>"
+					addRow += "<td><input id='authSet2' name='authSet2' type='radio' value='1' checked='checked'> 나만보기</td>"
+				}
+			$("#authSet").append(addRow);
+			setCategory();
 			open_editor();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
@@ -585,7 +634,6 @@
 				  confirmButtonText: '확인'
 				})
 		});
-		
 	}
 
 	// 노트 에디터 뿌리기
@@ -741,12 +789,14 @@
 	// 카테고리 셀렉박스에 옵션 추가
 	function appendCategory(categoryList){
 		 $("#category option").remove();
+		 var addRow = "<option value='noselect'>카테고리선택</option>";
 		 for(var i = 0; i < categoryList.length; i++){
 				var category = categoryList[i];
 				var categoryName = category.categoryName;
 				var categoryNo = category.categoryNo;
-				$("#category").append("<option value='"+categoryNo+"' id='categoryNo"+categoryNo+"'>"+categoryName+"</option>");
+				addRow += "<option value='"+categoryNo+"' id='categoryNo"+categoryNo+"'>"+categoryName+"</option>"
 		}
+		$("#category").append(addRow);
 	}
 
 	//Tooltip 효과

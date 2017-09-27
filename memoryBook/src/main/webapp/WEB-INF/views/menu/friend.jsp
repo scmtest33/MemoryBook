@@ -307,7 +307,7 @@ function friendNoteDetail(friendNoteNo){
 		var friendNo = localStorage.getItem("friendNo");
 		$.ajax({
 			type: "POST",
-			url : "/memory/note/freindNoteCartegoryList",
+			url : "/memory/note/freindNoteCategoryList",
 			data: {"friendNo" : friendNo,
 				   "friendCategoryNo" : friendCategoryNo		
 			},

@@ -74,7 +74,7 @@
 		WHERE m.email = f.friend_Email and f.MEM_EMAIL = #{loginEmail}
 	</select>
 	
-	<!-- 	친구 중복체크 -->
+	<!-- 친구 중복체크 -->
 	<select id="friendCheck" parameterType="String" resultType="String">
 		SELECT f.friend_Email FROM T_FRIEND f, T_MEMBER m
 		WHERE m.email = f.friend_Email and f.MEM_EMAIL = #{myEmail}
@@ -83,10 +83,12 @@
 	<select id="getFriendmemNo" resultType="Int" parameterType="String">
 		SELECT MEM_NO FROM T_MEMBER WHERE email = #{email}
 	</select>
+	
 	<!-- 노트공개여부검사 -->
 	<select id="getInfoNumber" resultType="Int" parameterType="Int">
 		SELECT INFONUMBER FROM T_MEMBER WHERE MEM_NO = #{mem_no}
 	</select>
+	
 	<!-- 자신의 정보 -->
 	<select id="myList" resultType="MemberVO">
 		SELECT * FROM T_MEMBER WHERE email = #{email}

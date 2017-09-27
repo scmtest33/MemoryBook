@@ -13,6 +13,8 @@ public interface NoteMapper {
 	public void updateNote(NoteVO note) throws Exception;
 
 	public List<NoteVO> noteList(NoteVO note) throws Exception;
+	
+	public List<NoteVO> fnoteList(NoteVO note) throws Exception;
 
 	public List<NoteVO> noteCategoryList(NoteVO note) throws Exception;
 

@@ -39,6 +39,11 @@ public class NoteServiceImpl implements NoteService{
 	public List<NoteVO> noteList(NoteVO note) throws Exception {
 		return dao.noteList(note);
 	}
+	
+	@Override
+	public List<NoteVO> fnoteList(NoteVO note) throws Exception {
+		return dao.fnoteList(note);
+	}
 
 	@Override
 	public void deleteNote(int noteNo) throws Exception {

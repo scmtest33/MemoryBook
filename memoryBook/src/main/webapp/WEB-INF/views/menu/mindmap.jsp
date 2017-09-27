@@ -23,28 +23,29 @@
 	</div>
 	
 	<!-- 메뉴부분 -->
-	<div class="mindMenu">
+	<div class="mindMenu divCenter">
 		<div class="control">
 			<button id="NewButton" onclick="newmap()">newmap</button>
 			<button id="SaveButton" onclick="save()">Save</button>
 			<button id="LoadButton" onclick="load()">Load</button>
 			<button id="DeleteButton" onclick="deletemap()">Delete</button>
 			<div id="loadedjson"></div> <!-- 저장목록 -->
-			<div class="notelist">
-        	카테고리 선택
-        	<form name='categorySel'>
-				<select id='cateSel' onchange='cateSelect()'>
-					<option selected>전체보기</option>
-				</select>
-			</form>
-        	<!-- <div id="categoryList2"></div> -->
-        	
-			<!-- <ul class="nav nav-tabs" id="categoryList2"></ul> -->
-				<div class="tab-content"><br>
-					<div id="mindCardList" class="mindCardList List">
+				<div class="notelist">
+					<div class="labels">
+		        		<label>카테고리</label>
+					</div>
+					<div class="selects">
+			        	<form name="categorySel">
+							<select class="form-control" id="cateSel" onchange="cateSelect()">
+								<option selected>전체보기</option>
+							</select>
+						</form>
+					</div>
+					<div class="tab-content"><br>
+						<div id="mindCardList" class="mindCardList List">
+						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
 
@@ -542,7 +543,12 @@ function mainNoteList2() {
 		makeNoteCards2(result);
 	})
 	.fail(function(jqXhr, textStatus, errorText){
-		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+		swal({
+			  title: 'Error!',
+			  text: '노트목록 로딩을 실패했습니다.',
+			  type: 'error',
+			  confirmButtonText: '확인'
+			})
 	});
 }
 

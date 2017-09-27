@@ -31,6 +31,7 @@
 						<td>&nbsp;&nbsp;</td>
 						<td><select name="category" id="category"
 							class="form-control">
+							<option value="noselect">카테고리선택</option>
 						</select></td>
 						<td>&nbsp;&nbsp;</td>
 						<td><i class="fa fa-plus-circle w3-xlarge cate_close_btn"
@@ -44,6 +45,13 @@
 						<td>&nbsp;&nbsp;</td>
 						<td><i id="Category2" class="fa fa-times-circle w3-xlarge cate_btns" onclick="closeInput();"></i>
 						</td>
+					</tr>
+					<tr id="authSet">
+						<td><label for="auth">공개설정</label></td>
+						<td>&nbsp;&nbsp;</td>
+			        	<td><input id="authSet" name="authSet" type="radio" value="0"> 친구랑 보기</td>
+						<td>&nbsp;&nbsp;</td>
+						<td><input id="authSet" name="authSet" type="radio" value="1"> 나만보기</td>
 					</tr>
 				</table>
 				<br> <br>
@@ -104,42 +112,67 @@
 		if (frm.category.value == "") {
 			swal({
 				  title: 'Error!',
-				  text: '카테고리가 선택되지 않았습니다..',
+				  text: '카테고리가 선택되지 않았습니다.',
 				  type: 'warning',
 				  confirmButtonText: '확인'
 				})
 			return false;
 		}
+		var radio_btn = document.getElementsByName("authSet");
+		var authSet_check = 0;
+		if (authSet[1].checked == true) {
+			authSet_check++;
+		}
+		if (authSet[0].checked == false && authSet[1].checked == false) {
+			swal({
+				  title: 'Error!',
+				  text: '공개방법을 선택해주세요.',
+				  type: 'warning',
+				  confirmButtonText: '확인'
+				})
+			return;
+		}
 
 		var memNo = ${memberNo};
 		var editor = CKEDITOR.instances.ckeditor.getData();
 		
-		$.ajax({
-			url : "/memory/note/note",
-			type : "POST",
-			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor, "categoryNo" : $("#category").val()},
-		})
-		.done(function (result) {
-			swal({
-				  title: '작성 완료',
-				  text: result.msg,
-				  type: 'success',
-				  confirmButtonText: '확인'
-				})	
-			mainNoteList();
-			$("input[name=noteTitle]").val("");
-			CKEDITOR.instances.ckeditor.setData("");
-			main_open();
-			editor_chk = false;
-		})
-		.fail(function (jqXhr, textStatus, errorText) {
+		if($("#category").val() != "noselect") {
+			$.ajax({
+				url : "/memory/note/note",
+				type : "POST",
+				data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor, 
+					"categoryNo" : $("#category").val(), "noteAuth" : authSet_check}
+			})
+			.done(function (result) {
+				swal({
+					  title: '작성 완료',
+					  text: result.msg,
+					  type: 'success',
+					  confirmButtonText: '확인'
+					})	
+				mainNoteList();
+				$("input[name=noteTitle]").val("");
+				CKEDITOR.instances.ckeditor.setData("");
+				authInit();
+				main_open();
+				editor_chk = false;
+			})
+			.fail(function (jqXhr, textStatus, errorText) {
+				swal({
+					  title: 'Error!',
+					  text: '노트 작성을 실패했습니다.',
+					  type: 'error',
+					  confirmButtonText: '확인'
+					})
+			});
+		} else {
 			swal({
 				  title: 'Error!',
-				  text: '노트 작성을 실패했습니다.',
-				  type: 'error',
+				  text: '카테고리를 선택해주세요.',
+				  type: 'warning',
 				  confirmButtonText: '확인'
 				})
-		});
+		}
 		
 		return false;
 	});
@@ -160,47 +193,73 @@
 		if (frm.category.value == "") {
 			swal({
 				  title: 'Warning!',
-				  text: '카테고리가 선택되지 않았습니다..',
+				  text: '카테고리가 선택되지 않았습니다.',
 				  type: 'warning',
 				  confirmButtonText: '확인'
 				})
 			return false;
 		}
-//	 	if (!confirm("정말 수정하시겠습니까?"))
-//	 		return;
+		
+		var radio_btn = document.getElementsByName("authSet2");
+		var authSet_check = 0;
+		console.log(radio_btn);
+		console.log("친구"+authSet2[0].checked);
+		console.log("나"+authSet2[1].checked);
+		if (authSet2[1].checked == true) {
+			authSet_check++;
+		}
+		if (authSet2[0].checked == false && authSet2[1].checked == false) {
+			swal({
+				  title: 'Error!',
+				  text: '공개방법을 선택해주세요.',
+				  type: 'warning',
+				  confirmButtonText: '확인'
+				})
+			return;
+		}
 
 		var memNo = ${memberNo};
 		var editor = CKEDITOR.instances.ckeditor.getData();
 		
-		$.ajax({
-			url : "/memory/note/noteUpdate",
-			type : "POST",
-			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor,
-				"categoryNo" : $("#category").val(), "noteNo" : localStorage.getItem("noteNoToUpdate")}
-		})
-		.done(function (result) {
-			swal({
-				  title: '노트수정 완료',
-				  text: result.msg,
-				  type: 'success',
-				  confirmButtonText: '확인'
-				})	
-			mainNoteList();
-			noteDetail(result.noteNo);
-			$("input[name=noteTitle]").val("");
-			CKEDITOR.instances.ckeditor.setData("");
-			$("#category").val("");
-			editor_chk = false;
-			main_open();
-		})
-		.fail(function (jqXhr, textStatus, errorText) {
+		if($("#category").val() != "noselect") {
+			$.ajax({
+				url : "/memory/note/noteUpdate",
+				type : "POST",
+				data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor,
+					"categoryNo" : $("#category").val(), "noteAuth" : authSet_check, "noteNo" : localStorage.getItem("noteNoToUpdate")}
+			})
+			.done(function (result) {
+				swal({
+					  title: '노트수정 완료',
+					  text: result.msg,
+					  type: 'success',
+					  confirmButtonText: '확인'
+					})	
+				mainNoteList();
+				noteDetail(result.noteNo);
+				$("input[name=noteTitle]").val("");
+				CKEDITOR.instances.ckeditor.setData("");
+				$("#category").val("");
+				editor_chk = false;
+				authInit();
+				main_open();
+			})
+			.fail(function (jqXhr, textStatus, errorText) {
+				swal({
+					  title: 'Error!',
+					  text: '노트 수정을 실패했습니다.',
+					  type: 'error',
+					  confirmButtonText: '확인'
+					})
+			});
+		} else {
 			swal({
 				  title: 'Error!',
-				  text: '노트 수정을 실패했습니다.',
-				  type: 'error',
+				  text: '카테고리를 선택해주세요.',
+				  type: 'warning',
 				  confirmButtonText: '확인'
 				})
-		});
+		}
 		
 		return false;
 	});

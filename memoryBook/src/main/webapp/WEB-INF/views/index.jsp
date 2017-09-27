@@ -524,6 +524,7 @@
 		editor_chk = false;
 		$("#noteTitle").val('');
 		CKEDITOR.instances.ckeditor.setData("");
+		authInit();
 		$('#noteEditor').css('display', 'none');
 		$('#categoryToAdd').css('display', 'none');
 		$('#Category1').css('display', 'none');

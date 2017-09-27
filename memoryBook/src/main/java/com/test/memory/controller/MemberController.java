@@ -54,7 +54,6 @@ public class MemberController {
 		@RequestMapping(value = "join", method = RequestMethod.POST)
 		@ResponseBody
 		public boolean join(MemberVO vo) {
-			System.out.println(vo);
 			return service.join(vo);
 		}
 		
@@ -74,8 +73,6 @@ public class MemberController {
 		@RequestMapping(value = "login", method = RequestMethod.POST)
 		@ResponseBody
 		public MemberVO login(String email,String mem_pwd, HttpSession session, Model model) {
-			System.out.println(email);
-			System.out.println(mem_pwd);
 			
 			MemberVO vo = new MemberVO();
 			vo.setEmail(email);
@@ -83,7 +80,6 @@ public class MemberController {
 			
 			
 			MemberVO nvo = service.login(vo); 
-			System.out.println(nvo + "메인 로그인");
 			if(nvo == null){
 				return null;
 			}
@@ -106,7 +102,6 @@ public class MemberController {
 		@RequestMapping(value = "login_ex", method = RequestMethod.POST)
 		@ResponseBody
 		public MemberVO login_ex(String email,String mem_pwd, HttpSession session, Model model) {
-			System.out.println(email);
 			MemberVO vo = new MemberVO();
 			vo.setEmail(email);
 			vo.setMem_pwd(mem_pwd);
@@ -233,10 +228,8 @@ public class MemberController {
 				String img_file = (String)session.getAttribute("mem_image");
 				String oldFilePath = path + img_file; //이전파일명 확보
 				String email =(String)session.getAttribute("email");
-				System.out.println(email);
 				vo.setEmail(email);
 				vo.setMem_image(fileName); //DB전송용 현재파일명 세팅
-				System.out.println("사진 : "+ vo);
 				dao.profilePhoto(vo);
 				session.setAttribute("mem_image", fileName); //현재파일로 세션변경
 				
@@ -257,7 +250,6 @@ public class MemberController {
 		@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
 		@ResponseBody
 		private boolean infoUpdate(MemberVO vo, HttpSession session, Model model) throws Exception { 
-			System.out.println(vo);
 			service.infoUpdate(vo);
 			
 			return service.infoUpdate(vo);

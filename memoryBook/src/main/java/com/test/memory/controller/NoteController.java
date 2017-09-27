@@ -77,6 +77,7 @@ public class NoteController {
 		} finally {
 			note.setNoteContent(FileName); // 데이터 저장 후 내용을 파일이름으로 변경
 			closeStreams();
+			System.out.println(note);
 			int noteNo = service.note(note);
 			msg.put("msg", "새로운 노트가 등록되었습니다.");
 			msg.put("noteNo", noteNo);
@@ -89,6 +90,7 @@ public class NoteController {
 	public Map<String, Object> noteUpdate(NoteVO note, HttpServletRequest request, HttpSession session) throws Exception {
 		String modified = UUID.randomUUID().toString(); //수정 된 파일명 생성
 		Map<String, Object> msg = new HashMap<>();
+		System.out.println(note);
 		//note edit commit.
 		NoteVO data = service.noteDetail(note.getNoteNo()); //원본 파일명 추출
 		try{
@@ -229,7 +231,6 @@ public class NoteController {
 			Map<String, Object> msg = new HashMap<>();
 			category.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
 			category.setCategoryName(request.getParameter("categoryName"));
-			System.out.println("test:"+category);
 			service.noteCategoryUpdate(category);
 			return msg;
 		}

@@ -15,6 +15,8 @@ public interface NoteService {
 	public int note(NoteVO note)throws Exception;
 
 	public List<NoteVO> noteList(NoteVO note)throws Exception;
+	
+	public List<NoteVO> fnoteList(NoteVO note)throws Exception;
 
 	public void deleteNote(int noteNo)throws Exception;
 

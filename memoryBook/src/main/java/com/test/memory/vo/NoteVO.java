@@ -13,32 +13,8 @@ public class NoteVO {
 	private String searchWrd;
 	private Date noteRegDate;
 	private Date noteUpdateDate;
+	private String noteAuth;
 	
-	
-	public String getSearchWrd() {
-		return searchWrd;
-	}
-	public void setSearchWrd(String searchWrd) {
-		this.searchWrd = searchWrd;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-	public int getCategoryNo() {
-		return categoryNo;
-	}
-	public void setCategoryNo(int categoryNo) {
-		this.categoryNo = categoryNo;
-	}
 	public int getNoteNo() {
 		return noteNo;
 	}
@@ -50,6 +26,18 @@ public class NoteVO {
 	}
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
+	}
+	public int getCategoryNo() {
+		return categoryNo;
+	}
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getNoteContent() {
 		return noteContent;
@@ -63,6 +51,18 @@ public class NoteVO {
 	public void setNoteTitle(String noteTitle) {
 		this.noteTitle = noteTitle;
 	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	public String getSearchWrd() {
+		return searchWrd;
+	}
+	public void setSearchWrd(String searchWrd) {
+		this.searchWrd = searchWrd;
+	}
 	public Date getNoteRegDate() {
 		return noteRegDate;
 	}
@@ -75,12 +75,17 @@ public class NoteVO {
 	public void setNoteUpdateDate(Date noteUpdateDate) {
 		this.noteUpdateDate = noteUpdateDate;
 	}
-
+	public String getNoteAuth() {
+		return noteAuth;
+	}
+	public void setNoteAuth(String noteAuth) {
+		this.noteAuth = noteAuth;
+	}
 	@Override
 	public String toString() {
 		return "NoteVO [noteNo=" + noteNo + ", memberNo=" + memberNo + ", categoryNo=" + categoryNo + ", email=" + email
 				+ ", noteContent=" + noteContent + ", noteTitle=" + noteTitle + ", categoryName=" + categoryName
 				+ ", searchWrd=" + searchWrd + ", noteRegDate=" + noteRegDate + ", noteUpdateDate=" + noteUpdateDate
-				+ "]";
+				+ ", noteAuth=" + noteAuth + "]";
 	}
 }

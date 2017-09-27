@@ -122,7 +122,7 @@ a.btn_modal {
 	width:400px;
 	margin: 0 auto;
 }
-.modifyTitle, .loginTitle, .outTitle, .btns_align{
+.modifyTitle, .loginTitle, .outTitle, .btns_align, .divCenter{
 	text-align: center;
 }
 .googleLogin{
@@ -426,11 +426,20 @@ div.gallery_mind {
 	width: 180px;
 	height: 180px;
 }
+div.labels{
+	display: inline-block;
+	padding-top: 7px;
+}
+div.selects{
+	float: right;
+	width: 160px;
+	padding-right: 15px;
+}
 div.dropzone{
 	float: right;
 	border: solid 1px black;
-	width:800px;
-	height:600px;
+	width: 800px;
+	height: 600px;
 }
 
 /* 삭제존 */

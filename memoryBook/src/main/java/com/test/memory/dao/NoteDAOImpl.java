@@ -33,6 +33,12 @@ public class NoteDAOImpl implements NoteDao{
 		NoteMapper mapper = sqlSession.getMapper(NoteMapper.class);
 		return mapper.noteList(note);
 	}
+	
+	@Override
+	public List<NoteVO> fnoteList(NoteVO note) throws Exception {
+		NoteMapper mapper = sqlSession.getMapper(NoteMapper.class);
+		return mapper.fnoteList(note);
+	}
 
 	@Override
 	public List<NoteVO> noteCategoryList(NoteVO note) throws Exception {
