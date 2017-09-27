@@ -10,7 +10,6 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>마인드맵</title>
-<script src="http://code.jquery.com/jquery-3.2.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.23/go-debug.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.24/go.js"></script>
 
@@ -730,14 +729,6 @@ function makeNoteCards2(result) {
 	$("#mindCardList").html(html);
 }
 
- 
- 
- 
- 
- 
- 
-
-
 //노트 디테일
 function noteDetail2(noteNo){
 	$.ajax({
@@ -787,31 +778,7 @@ function getNoteByCategoryNo2(categoryNo){
 	});
 }
 
-function searchList2(){
-	var searchWrd = $("#searchWrd2").val();
-	var memberNo = localStorage.getItem("memberNo");
-	$.ajax({
-		type: "POST",
-		url : "/memory/note/noteList",
-		data: {"searchWrd" : searchWrd,
-			   "memberNo" : memberNo
-		 	},
-		dataType : "json"
-	})
-	.done(function (result) {
-		makeNoteCards2(result);
-		$("#searchWrd2").val("");
-		return false;
-	})
-	.fail(function(jqXhr, textStatus, errorText){
-		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
-	});
-	
-}
-
-
 function save() {
-	 
 	var mindjson =   myDiagram.model.toJson();
 	var mem_no = ${memberNo};
 	var sessionnum = sessionStorage.getItem("num");

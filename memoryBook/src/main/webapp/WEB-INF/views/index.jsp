@@ -248,9 +248,11 @@
 	// 로딩 위치 지정
 	window.onload = function () {
 		mainNoteList(); //노트 리스트
+		mainNoteList2(); //노트 리스트(마인드맵용)
 		mainDragList(); //드래그 리스트
 		makeDragList(); //글 작성창 드래그 리스트
 		getMainCategory(); //카테고리 리스트
+		getMainCategory2(); //카테고리 리스트(마인드맵용)
 		mainFriendNoteList() //친구 노트 리스트
 		getMainFriendCategory();//친구 카테고리 리스트
 		//노트 리스트 화면
