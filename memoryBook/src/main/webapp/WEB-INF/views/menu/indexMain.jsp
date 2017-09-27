@@ -64,7 +64,7 @@
       <div class="item active">
         <img src="/memory/resources/img/road14.jpg" style="width:100%;">
 		  <div class="carousel-caption">
-		    <p class="sayHi">Hi, ${name}<p>
+		    <p class="sayHi">Hi, Good Day<p>
 		    <p class="sayHi3">this is</p>
 		    <p class="sayHi2">Memory Lane</p>
 		</div> 
@@ -73,7 +73,7 @@
       <div class="item">
         <img src="/memory/resources/img/road10.jpg" style="width:100%; ">
     	<div class="carousel-caption">
-		    <p class="sayHi">Hi, ${name}<p>
+		    <p class="sayHi">Hi, Good Day<p>
 		    <p class="sayHi3">this is</p>
 		    <p class="sayHi2">Memory Lane</p>
 		</div> 
@@ -82,7 +82,7 @@
       <div class="item">
         <img src="/memory/resources/img/road16.jpg" style="width:100%; ">
         <div class="carousel-caption">
-		    <p class="sayHi">Hi, ${name}<p>
+		    <p class="sayHi">Hi, Good Day<p>
 		    <p class="sayHi3">this is</p>
 		    <p class="sayHi2">Memory Lane</p>
 		</div>

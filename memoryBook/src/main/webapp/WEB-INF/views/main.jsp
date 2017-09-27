@@ -434,6 +434,7 @@
     					var i = result.approvalNum;
     					var a = result.email;
 	    	    		if(a != null && i != 1){
+	    	    			localStorage.setItem("friendNo", 0);
 	    	    			localStorage.setItem("memberNo", result.mem_no);
 	    	    			location.href='/memory/index';
 	    	    		}
