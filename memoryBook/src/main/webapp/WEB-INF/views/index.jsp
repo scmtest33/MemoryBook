@@ -105,13 +105,6 @@
 					    Friend Search
 					</a>
                 </li>
-                <li>
-                    <a onclick="logout()" class="noteImg" id="logout">
-                	<img src="/memory/resources/img/indexImg/logout_hover.png" class="indexImg13">
-      		        <img src="/memory/resources/img/indexImg/logout1.png" class="indexImg14">
-                    	Logout
-                    </a>
-                </li>
                 <c:if test="${email eq 'admin'}">
                 <li>
                 	<a id="user" class="noteImg">
@@ -121,6 +114,13 @@
 					</a>
                 </li>
                 </c:if>
+                <li>
+                    <a onclick="logout()" class="noteImg" id="logout">
+                	<img src="/memory/resources/img/indexImg/logout_hover.png" class="indexImg13">
+      		        <img src="/memory/resources/img/indexImg/logout1.png" class="indexImg14">
+                    	Logout
+                    </a>
+                </li>
             </ul>
         </div>
 

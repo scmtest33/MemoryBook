@@ -19,7 +19,7 @@
   <div class="row">
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
-      <div class="text-center">
+      <div>
       <table align="center">
       	<tr>
       		<td id="getImage">
@@ -38,8 +38,10 @@
 	        	</td>
 	        <tr>
         </table>
-        <table id="myInfoList" class="text-center center-block well well-sm">
-		
+        <table>
+		<ul id="myInfoList" class="list-group">
+                
+        </ul>
 	</table>
       </div>
     </div>
@@ -90,6 +92,7 @@
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
             <input class="btn btn-primary" value="수정" type="button" onclick="mem_update()">
+             <input class="btn btn-default" value="리셋" type="reset">
             <input class="btn btn-danger pull-right"  data-toggle="modal" data-target="#myModal_Unregister" value="탈퇴" type="button">
           </div>
         </div>
@@ -158,17 +161,14 @@
 			type: "get",
 			success : function(result){
 				$(result).each(function(index, item) {
-					var addRow = '<tr><td><h3>Name : </h3></td>';
-						addRow += '<td id="myName"><h3>'+ item.name + '</h3></td></td></tr>';
-						addRow += '<tr><td><h3>Email : </h3></td>';
-						addRow += '<td id="myEmail"><h3>'+ item.email +'</h3></td></tr>';
-						addRow += '<tr><td><h3>My Infomation : </h3></td>';
+					var addRow = '<li class="list-group-item"><h4><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;'+ item.name + '</h4></li>';
+						addRow += '<li class="list-group-item"><h4><i class="fa fa-envelope"></i>&nbsp;&nbsp;'+ item.email +'</h4></li>';
 						if(item.infoNumber == 0){
-			                   addRow +='<td id="myInfomation"><h3>전체 공개</h3></td>';
+			                   addRow +='<li class="list-group-item"><h4><i class="fa fa-key fa-lg"></i>&nbsp;전체 공개</h4></li>';
 			                   var addRow2 ='<input id="infoNumber" name="infoNumber" type="radio" value="0" checked="checked"> 전체 공개&nbsp;&nbsp;&nbsp;';
 			                   addRow2 +='<input id="infoNumber" name="infoNumber" type="radio" value="1"> 나만 공개';
 			                }else{
-			            	   addRow +='<td id="myInfomation"><h3>나만 공개</h3></td>';
+			            	   addRow +='<li class="list-group-item"><h4><i class="fa fa-key fa-lg"></i>&nbsp;나만 공개</h4></li>';
 			            	   var addRow2 ='<input id="infoNumber" name="infoNumber" type="radio" value="0"> 전체 공개&nbsp;&nbsp;&nbsp;';
 			                   addRow2 +='<input id="infoNumber" name="infoNumber" type="radio" value="1" checked="checked"> 나만 공개';
 			                }
