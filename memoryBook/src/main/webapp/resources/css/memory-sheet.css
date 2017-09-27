@@ -410,6 +410,29 @@ div.dragList img {
 }
 
 
+/* 마인드맵 */
+div.mindMenu{
+	display: inline-block;
+	width: 230px;
+	height: 680px;
+}
+div.notelist{
+	overflow: auto;
+}
+div.gallery_mind {
+	margin: 5px;
+	border: 1px solid #ccc;
+	float: left;
+	width: 180px;
+	height: 180px;
+}
+div.dropzone{
+	float: right;
+	border: solid 1px black;
+	width:800px;
+	height:600px;
+}
+
 /* 삭제존 */
 .deleteZone {
 	margin-top: 30px;

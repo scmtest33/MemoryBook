@@ -15,88 +15,42 @@
 
 </head>
 <body>
-<div class="container show-grid" id="sample" style="padding-top: 60px;">
-<div class="row">
-
-<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
+	<!-- title -->
+	<div class="container show-grid" id="sample" style="padding-top: 60px;">
+		<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
 			<p class="desc_brunch">
 				<span class="part">노트가 마인드맵으로 되는 공간<br></span>
-				
-
-	<div class="col-md-6">
-	<div class="text-left">			
-  <div style="width:300%; white-space:nowrap;">
-     <!-- <span style="display: inline-block; vertical-align: top">
-      <div class="palettezone" id="testpalettezone">
-        <div class="draggable" draggable="true">Water</div>
-        <div class="draggable" draggable="true">Coffee</div>
-        <div class="draggable" draggable="true">Tea</div>
-      </div> 
-    </span> -->
-    <span style="display: inline-block; vertical-align: top">
-      <div class="dropzone" id="myDiagramDiv" style="border: solid 1px black; width:1000px; height:650px;">
-      </div>
-    </span>
-    
-  </div>
-
-<br><br>
-<div class = "control">
-<button id="NewButton" onclick="newmap()">newmap</button>
-<button id="SaveButton" onclick="save()">Save</button>
-<button id="LoadButton" onclick="load()">Load</button>
-<button id="DeleteButton" onclick="deletemap()">Delete</button>
-</div>
-<div id="loadedjson">
-
-<p>여기가 제이슨 로드 지역</p>
-
-</div>
-</div><!-- text-center -->
-</div><!-- class col-md-4  -->
-
- 
-
-<!-- <div id="mindView" class="viewList">
-		<div class="list_title">
-		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
-		</div>
-			<br>
-			<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
-			<p class="desc_brunch">
-				<span class="part">노트가 마인드맵으로 되는 공간<br></span>
-				검색
-				<div class="searchInput col-md-offset">
-					<div class="search-form">
-		            		<label for="search" class="sr-only">Search</label>
-		            		<input type="text" class="form-control" name="searchWrd2" id="searchWrd2" placeholder="노트 검색" onkeydown="javascript:if(event.keyCode == 13) searchList();">
-		        	</div>
-				</div>
-		<div class="btn-default noteSearch_btn" id="noteSearch_btn2" onclick="searchList2();"><img src="/memory/resources/img/search_icon.jpg"></div>
-		</div> -->
-		<br><br><br>
-		
-	<!-- 	<div class="alert alert-info alert-dismissable">
-        <a class="panel-close close" data-dismiss="alert">×</a> 
-        <i class="fa fa-coffee"></i>
-      </div> -->
-		
-</div>
-	  </div> <!-- div row -->
-		 <div class="col-md-6">
-	  <div class="row">
-        	카테고리 선택
-		<ul class="nav nav-tabs" id="categoryList2">
-
-		</ul>
-		<div class="tab-content">
-			<br>
-			
-			<div id="mindCardList" class="mindCardList List"></div>
-		</div>
-<!-- <textarea id="mySavedModel" style="width:50%;height:100px"></textarea> -->
-	</div><!-- col-md-8 col sm -->
 	</div>
+	
+	<!-- 메뉴부분 -->
+	<div class="mindMenu">
+		<div class="control">
+			<button id="NewButton" onclick="newmap()">newmap</button>
+			<button id="SaveButton" onclick="save()">Save</button>
+			<button id="LoadButton" onclick="load()">Load</button>
+			<button id="DeleteButton" onclick="deletemap()">Delete</button>
+			<div id="loadedjson"></div> <!-- 저장목록 -->
+			<div class="notelist">
+        	카테고리 선택
+        	<form name='categorySel'>
+				<select id='cateSel' onchange='cateSelect()'>
+					<option selected>전체보기</option>
+				</select>
+			</form>
+        	<!-- <div id="categoryList2"></div> -->
+        	
+			<!-- <ul class="nav nav-tabs" id="categoryList2"></ul> -->
+				<div class="tab-content"><br>
+					<div id="mindCardList" class="mindCardList List">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 마인드맵 dropZone -->
+	<div class="dropzone" id="myDiagramDiv"></div>
+	
 
 
 	<!-- 노트모달 -->
@@ -125,12 +79,6 @@
 	</div>
 	
 	
-	
-	
-	
-	
-	
-	
 <script>
 
 
@@ -155,7 +103,7 @@ function highlight(node) {  // may be null
 // we can add the event to the document and disregard
 // all elements that are not of class "draggable"
 document.addEventListener("dragstart", function(event) {
-  if (event.target.className !== "gallery") return;
+  if (event.target.className !== "gallery_mind") return;
   // Some data must be set to allow drag
   event.dataTransfer.setData("text", "");
   event.dataTransfer.setData("img", "");
@@ -552,78 +500,6 @@ function nodeInfo(d) {  // Tooltip info for a node data object
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function getMainCategory2(){
 	var memberNo = localStorage.getItem("memberNo");
 	$.ajax({
@@ -633,23 +509,24 @@ function getMainCategory2(){
 		dataType : "json"
 	})
 	.done(function (result) {
-		var html = '<li class="active"><a data-toggle="tab" onclick="mainNoteList2()">전체</a></li>';
+		var html = "<option value='allCategory'>전체글 보기</option>";
 		var categoryList = result.categoryList;
 		for(var i = 0; i < categoryList.length; i++){
 			var category = categoryList[i];
 			var categoryNo = category.categoryNo;
-			html += "<li class='active' onclick='getNoteByCategoryNo2("+category.categoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' aria-expanded='false' class='category_list'>"
-			html += "<a data-toggle='tab' ondblclick='categoryUpdate(event);' href='#' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' style='min-width:20px;'>"+category.categoryName+"</a>";
-			html += "<a data-toggle='tab' contenteditable='true' style='min-width:20px; display:none;' id='categoryUpdate"+category.categoryNo+"'>"+category.categoryName+"</a>";
-//			html += "<a data-toggle='tab' ondblclick='categoryUpdate(event);' href='#' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' class='category_list'>"+category.categoryName+"</a>";
-//			html += "<a data-toggle='tab' contenteditable='true' class='category_list_2' id='categoryUpdate"+category.categoryNo+"'>"+category.categoryName+"</a>";
-			html += "</li>";
+			html += "<option value='"+category.categoryNo+"'>"+category.categoryName+"</option>"
 		}
-		$("#categoryList2").html(html);
+		$("#cateSel").html(html);
 	})
 	.fail(function(jqXhr, textStatus, errorText){
 		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 	});
+}
+ 
+ 
+function cateSelect() {
+	  var categoryNo=document.getElementById("cateSel").value
+	  getNoteByCategoryNo2(categoryNo);
 }
 
 
@@ -669,35 +546,6 @@ function mainNoteList2() {
 	});
 }
 
-/* function makeNoteCards2(result) {
-	var html = "";
-	for (var i = 0; i < result.length; i++) {
-
-		var note = result[i];	
-		var noteNo = note.noteNo;
-		var categoryNo = note.categoryNo;
-		html += "<div class='gallery' onclick='noteDetail2("+note.noteNo+")' class='modal_input' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal1'  >";
-		// 이미지 뿌리기
-		var noteContent = note.noteContent;
-		if(noteContent.indexOf('<img') != -1) {
-			var noteImgSrc = noteContent.split('src="')[1].split('"')[0];
-			html += '<figure><img id="note'+note.noteNo+'" src="' + noteImgSrc + '" alt="" onclick="noteDetail2('+note.noteNo+')" ></figure>';
-		} else {
-			html += '<figure><img id="note'+note.noteNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="noteDetail2('+note.noteNo+')" ></figure>';
-		}
-		html += "<div class='desc'><p>" + note.noteTitle + "</p></div>";
-		html += "</div>";
-
-	}
-	if (result.length == 0) {
-		html += "<div class='gallery'>";
-		html += '	<img src="/memory/resources/img/D.png" alt="" width="300px" height="200px" >';
-		html += "	<div  class='desc'><p> 노트가 없습니다. </p></div>";
-		html += "</div>";
-	}
-	$("#mindCardList").html(html);
-}
- */
 
 function makeNoteCards2(result) {
 	var html = "";
@@ -706,12 +554,12 @@ function makeNoteCards2(result) {
 		var note = result[i];	
 		var noteNo = note.noteNo;
 		var categoryNo = note.categoryNo;
-		html += "<div class='gallery' onclick='noteDetail2("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal1'>";
+		html += "<div class='gallery_mind' onclick='noteDetail2("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal1'>";
 		// 이미지 뿌리기
 		var noteContent = note.noteContent;
 		if(noteContent.indexOf('<img') != -1) {
 			var noteImgSrc = noteContent.split('src="')[1].split('"')[0];
-			html += '<figure><img class="gallery" id="note'+note.noteNo+'" src="' + noteImgSrc + '" draggable="true" alt="" onclick="noteDetail2('+note.noteNo+')" ></figure>';
+			html += '<figure><img class="gallery_mind" id="note'+note.noteNo+'" src="' + noteImgSrc + '" draggable="true" alt="" onclick="noteDetail2('+note.noteNo+')" ></figure>';
 		} else {
 			html += '<figure><img id="note'+note.noteNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="noteDetail2('+note.noteNo+')" ></figure>';
 		}
@@ -720,7 +568,7 @@ function makeNoteCards2(result) {
 
 	}
 	if (result.length == 0) {
-		html += "<div class='gallery'>";
+		html += "<div class='gallery_mind'>";
 		html += '	<img src="/memory/resources/img/D.png" alt="" width="300px" height="200px" >';
 		html += "	<div  class='desc'><p> 노트가 없습니다. </p></div>";
 		html += "하이하이";
@@ -762,9 +610,10 @@ function noteDetail2(noteNo){
 function getNoteByCategoryNo2(categoryNo){
 	var categoryNo = categoryNo;
 	var memberNo = localStorage.getItem("memberNo");
+	if(categoryNo != "allCategory") {
 	$.ajax({
 		type: "POST",
-		url : "/memory/note/noteCartegoryList",
+		url : "/memory/note/noteCategoryList",
 		data: {"memberNo" : memberNo,
 			   "categoryNo" : categoryNo		
 		},
@@ -776,6 +625,9 @@ function getNoteByCategoryNo2(categoryNo){
 	.fail(function(jqXhr, textStatus, errorText){
 		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 	});
+	} else {
+		mainNoteList2();
+	}
 }
 
 function save() {
@@ -930,12 +782,6 @@ function deletemap(){
 	 
  }
  
- 
 </script>
-
-
-
-
-
 </body>
 </html>

@@ -398,6 +398,7 @@
 			    			success: function () {
 					    				resolve();
 					    				getMainCategory();
+					    				getMainCategory2();
 					    			}
 			    		})
 			        }
@@ -628,6 +629,7 @@
 			type: "POST",
 			success: function (result){
 				mainNoteList();
+				mainNoteList2();
 				swal("노트를 삭제했습니다.", result.msg,'success');
 				},
 			error: swal({
@@ -663,6 +665,8 @@
 				success: function (result){
 					mainNoteList();
 					getMainCategory();
+					mainNoteList2();
+					getMainCategory2();
 					swal("카테고리를 삭제했습니다.", result.msg,'success');
 					},
 				error: swal({
