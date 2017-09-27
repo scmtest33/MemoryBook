@@ -7,6 +7,7 @@ drop table t_drag_img;
 drop table t_drag;
 drop table t_friend;
 drop table t_category;
+drop table t_mindmap;
 drop table t_member;
 
 drop sequence mem_no;
@@ -15,4 +16,4 @@ drop sequence drag_no;
 drop sequence drag_img_no;
 drop sequence note_no;
 drop sequence note_img_no;
-drop sequence seq_memo;
+drop sequence T_MINDMAP_MINDNUM_seq;
