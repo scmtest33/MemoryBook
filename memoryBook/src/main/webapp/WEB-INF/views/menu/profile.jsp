@@ -61,7 +61,7 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Name:</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" id="name" name="name" placeholder="이름을 다시 입력해주세요" required="required">
+            <input class="form-control" type="text" id="name" name="name" value="${name}" placeholder="이름을 입력해주세요" required="required">
           </div>
         </div>
         <div class="form-group">

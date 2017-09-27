@@ -52,12 +52,12 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a id="indexMainA">
+                    <a id="indexTitle">
                         Memory Lane
                     </a>
                 </li>
                 <li>
-                    <a id="indexMainB" class="noteImg">
+                    <a id="Main" class="noteImg">
                     	<img src="/memory/resources/img/indexImg/home_hover.png" class="indexImg1">
       		        	<img src="/memory/resources/img/indexImg/home1.png" class="indexImg2">
 	                    Main
@@ -84,6 +84,13 @@
 					    My Note
 					</a>
                 </li>
+                <li>
+      		        <a id="mindmap" class="noteImg" >
+      		        	<img src="/memory/resources/img/indexImg/note_hover.png" class="indexImg7">
+      		        	<img src="/memory/resources/img/indexImg/note1.png" class="indexImg8">
+					    My Mindmap
+					</a>
+                </li>
                  <li>
                 	<a id="myFriend" class="noteImg">
                 		<img src="/memory/resources/img/indexImg/friend_hover.png" class="indexImg9">
@@ -102,7 +109,7 @@
                     <a onclick="logout()" class="noteImg" id="logout">
                 	<img src="/memory/resources/img/indexImg/logout_hover.png" class="indexImg13">
       		        <img src="/memory/resources/img/indexImg/logout1.png" class="indexImg14">
-                    Logout
+                    	Logout
                     </a>
                 </li>
                 <c:if test="${email eq 'admin'}">
@@ -110,7 +117,7 @@
                 	<a id="user" class="noteImg">
                 	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg15">
       		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg16">
-					    UserList
+						UserList
 					</a>
                 </li>
                 </c:if>
@@ -125,7 +132,7 @@
 <!--                 <a class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
 <!--             </div> -->
             
-            <div id='indexMain2'>
+            <div id='indexMain'>
 				<div class="container-fluid" id="indexMainContent">
 				<%@ include file="menu/indexMain.jsp" %>
 				</div>
@@ -149,6 +156,12 @@
 	            </div>
 	        </div>
 	        
+		  	<div id='mindMap'>
+		  		<div class="container-fluid">
+			  		<%@ include file="menu/mindmap.jsp" %>
+			  	</div>
+		  	</div> 
+	        
 			<div id='friend'>
 				<div class="container-fluid">
 			  		<%@ include file="menu/friend.jsp" %> 
@@ -161,20 +174,11 @@
 			  	</div>
 		  	</div>
 		  	
-		  	<div id='memoList'>
-		  		<div class="container-fluid">
-					<h1>memoList</h1>
-			  	<%--  현재 에러
-			  	<%@ include file="manager/receivedMemos.jsp" %>
-	    	    --%>
-	    		</div>
-		  	</div>
-		  	
 		  	<div id='userList'>
 		  		<div class="container-fluid">
 			  		<%@ include file="manager/userList.jsp" %>
 			  	</div>
-		  	</div> 
+		  	</div>
 		  	
 			<div id='myDragtest'>
 				<div class="container-fluid">
@@ -195,14 +199,14 @@
     $(function(){
     	$('#myDragList').css('display', 'none');
     	$('#myNote').css('display', 'none');
+    	$('#mindMap').css('display', 'none');
     	$('#userList').css('display', 'none');
-    	$('#memoList').css('display', 'none');
     	$('#friend').css('display', 'none');
     	$('#myDragtest').css('display', 'none');
     	$('#search').css('display', 'none');
     	$('#profile').css('display', 'none');
     	$('#editorDraglist').css('display', 'none');
-    	$('#indexMain2').css('display', '');
+    	$('#indexMain').css('display', '');
 	});
     
     
@@ -280,17 +284,17 @@
 	});
     
     // 내비바 아이콘으로 열고 닫기
-    $("#indexMainA").click(function(e) {
+    $("#indexTitle").click(function(e) {
      	function profile_menu(){
      		$('#profile').css('display', 'none');
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
-     		$('#indexMain2').css('display', '');
+     		$('#indexMain').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -302,17 +306,17 @@
     	}
     });
     
-    $("#indexMainB").click(function(e) {
+    $("#Main").click(function(e) {
      	function profile_menu(){
      		$('#profile').css('display', 'none');
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
-     		$('#indexMain2').css('display', '');
+     		$('#indexMain').css('display', '');
 	    	
     	}
     	if(editor_chk){
@@ -327,12 +331,12 @@
     
     $("#myProfile").click(function(e) {
      	function profile_menu(){
-     		$('#indexMain2').css('display', 'none');
+     		$('#indexMain').css('display', 'none');
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#profile').css('display', '');
@@ -349,12 +353,12 @@
     
     $("#drag").click(function(e) {
     	function drag_menu(){
-    		$('#indexMain2').css('display', 'none');
+    		$('#indexMain').css('display', 'none');
      		$('#profile').css('display', 'none');
      		$('#myNote').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#myDragList').css('display', '');
@@ -371,13 +375,13 @@
     
     $("#dragtest").click(function(e) {
     	function dragTest_menu(){
-    		$('#indexMain2').css('display', 'none');
+    		$('#indexMain').css('display', 'none');
      		$('#profile').css('display', 'none');
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', '');
     	}
@@ -393,12 +397,12 @@
     
     $("#note").click(function(e) {
     	function note_menu(){
-    		$('#indexMain2').css('display', 'none');
+    		$('#indexMain').css('display', 'none');
      		$('#profile').css('display', 'none');
      		$('#myDragList').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#myNote').css('display', '');
@@ -413,14 +417,36 @@
     	}
     });
     
-    $("#myFriend").click(function(e) {
-    	function friend_menu(){
-    		$('#indexMain2').css('display', 'none');
+    $("#mindmap").click(function(e) {
+    	function mind_menu(){
+    		$('#indexMain').css('display', 'none');
      		$('#profile').css('display', 'none');
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
+     		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', 'none');
+     		$('#mindMap').css('display', '');
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			mind_menu();
+    		}
+    	} else {
+    		mind_menu();
+    	}
+    });
+    
+    $("#myFriend").click(function(e) {
+    	function friend_menu(){
+    		$('#indexMain').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
+     		$('#search').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#friend').css('display', '');
@@ -437,12 +463,12 @@
     
     $("#searchFriend").click(function(e) {
     	function search_menu(){
-    		$('#indexMain2').css('display', 'none');
+    		$('#indexMain').css('display', 'none');
      		$('#profile').css('display', 'none');
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
      		$('#friend').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#userList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#search').css('display', '');
@@ -459,13 +485,13 @@
     
     $("#user").click(function(e) {
     	function user_menu(){
-    		$('#indexMain2').css('display', 'none');
+    		$('#indexMain').css('display', 'none');
      		$('#profile').css('display', 'none');
      		$('#myDragList').css('display', 'none');
      		$('#myNote').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
      		$('#friend').css('display', 'none');
      		$('#search').css('display', 'none');
-     		$('#memoList').css('display', 'none');
      		$('#myDragtest').css('display', 'none');
      		$('#userList').css('display', '');
     	}
@@ -476,28 +502,6 @@
     		}
     	} else {
     		user_menu();
-    	}
-    });
-    
-    $("#memo").click(function(e) {
-    	function memo_menu(){
-    		$('#indexMain2').css('display', 'none');
-     		$('#profile').css('display', 'none');
-     		$('#myDragList').css('display', 'none');
-     		$('#myNote').css('display', 'none');
-     		$('#friend').css('display', 'none');
-     		$('#search').css('display', 'none');
-     		$('#userList').css('display', 'none');
-     		$('#myDragtest').css('display', 'none');
-     		$('#memoList').css('display', '');
-    	}
-    	if(editor_chk){
-    		editorCancelChk();
-    		if(chk_tf) {
-    			memo_menu();
-    		}
-    	} else {
-    		memo_menu();
     	}
     });
     

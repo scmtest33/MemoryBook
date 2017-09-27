@@ -55,6 +55,14 @@ create table t_note(
 	CONSTRAINT CATEGORY_NO FOREIGN KEY(category_no) REFERENCES t_category(category_no) on delete cascade
 );
 
+--마인드맵 테이블
+create table T_MINDMAP(
+mindnum number(3) constraint T_MINDMAP_mindnum_PK PRIMARY KEY,
+mindname varchar2(1000) constraint T_MINDMAP_mindname_NN not null,
+mindjson varchar2(4000) constraint T_MINDMAP_mindjson_NN not null,
+mem_no number(6) constraint T_MINDMAP_mem_no_FK references T_MEMBER(mem_no)
+);
+
 --시퀀스
 create sequence mem_no start with 1 increment by 1;
 create sequence category_no start with 1 increment by 1;
@@ -62,4 +70,4 @@ create sequence drag_no start with 1 increment by 1;
 create sequence drag_img_no start with 1 increment by 1;
 create sequence note_no start with 1 increment by 1;
 create sequence note_img_no start with 1 increment by 1;
-CREATE SEQUENCE SEQ_MEMO start with 1 increment by 1;
+CREATE SEQUENCE T_MINDMAP_MINDNUM_seq start with 1 increment by 1;

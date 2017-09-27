@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="com.test.memory.dao.MindmapMapper">
+  
+  <insert id="insertmap" parameterType="MindMapVO">
+  
+  insert into T_MINDMAP VALUES (T_MINDMAP_MINDNUM_seq.nextval, #{mindname}, #{mindjson}, #{mem_no})
+  
+  </insert>
+  
+  <select id="mindmapList" parameterType="MindMapVO" resultType="MindMapVO">
+  
+  select * from T_MINDMAP where mem_no = #{mem_no}
+  
+  
+  </select>
+  
+  <delete id="deletemap" parameterType="MindMapVO">
+  
+  delete from T_MINDMAP where mindnum = #{mindnum}
+  
+  </delete>  
+  
+  <update id="updatemap" parameterType="MindMapVO">
+  	update T_MINDMAP set mindjson = #{mindjson} where mindnum = #{mindnum}
+  </update>
+  
+  
+  </mapper>
