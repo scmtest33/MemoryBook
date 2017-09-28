@@ -178,6 +178,10 @@ a.btn_modal {
 	width: 340px;
 	height: 450px;
 }
+.profile-photo{
+	border: 1px solid #e3e3e3;
+	border-radius: 50%;
+}
 .profile-name{
 	font-size: x-large;
 }

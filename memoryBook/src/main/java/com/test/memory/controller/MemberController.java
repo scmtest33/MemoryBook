@@ -45,12 +45,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDAO dao;
-	
-		@RequestMapping(value = "main", method = RequestMethod.GET)
-		public String main() {
-			return "main"; 
-		}
-	
+
 		@RequestMapping(value = "join", method = RequestMethod.POST)
 		@ResponseBody
 		public boolean join(MemberVO vo) {
@@ -60,10 +55,8 @@ public class MemberController {
 		@RequestMapping(value = "emailCheck", method = RequestMethod.POST)
 		@ResponseBody
 		public boolean emailCheck(String email, HttpSession session, Model model) {
-			
 			MemberVO vo = new MemberVO();
 			vo.setEmail(email);
-			
 			MemberVO nvo = service.emailCheck(vo);
 			if (nvo != null) {
 				return false;
@@ -73,12 +66,9 @@ public class MemberController {
 		@RequestMapping(value = "login", method = RequestMethod.POST)
 		@ResponseBody
 		public MemberVO login(String email,String mem_pwd, HttpSession session, Model model) {
-			
 			MemberVO vo = new MemberVO();
 			vo.setEmail(email);
 			vo.setMem_pwd(mem_pwd);
-			
-			
 			MemberVO nvo = service.login(vo);
 			if(nvo == null){
 				return null;
@@ -90,13 +80,9 @@ public class MemberController {
 				if(mem_img == null) mem_img = "null";
 				session.setAttribute("email", nvo.getEmail());
 				session.setAttribute("memberNo", nvo.getMem_no());
-//				session.setAttribute("name", nvo.getName());
-//				session.setAttribute("infoNumber", nvo.getInfoNumber());
-//				session.setAttribute("mem_image", mem_img);
 				return nvo;
 			}
 		}
-		
 		
 		@RequestMapping(value = "login_ex", method = RequestMethod.POST)
 		@ResponseBody
@@ -105,21 +91,29 @@ public class MemberController {
 			vo.setEmail(email);
 			vo.setMem_pwd(mem_pwd);
 			MemberVO nvo = service.login(vo); 
-				session.setAttribute("email", nvo.getEmail());
-				session.setAttribute("memberNo", nvo.getMem_no());
-				session.setAttribute("name", nvo.getName());
-				session.setAttribute("mem_image", nvo.getMem_image());
-				session.setAttribute("infoNumber", nvo.getInfoNumber());
-				return nvo;
-			
+			session.setAttribute("email", nvo.getEmail());
+			session.setAttribute("memberNo", nvo.getMem_no());
+			session.setAttribute("name", nvo.getName());
+			session.setAttribute("mem_image", nvo.getMem_image());
+			session.setAttribute("infoNumber", nvo.getInfoNumber());
+			return nvo;
 		}
-		
 		
 		//로그아웃
 		@RequestMapping(value = "logout", method = RequestMethod.GET)
 		public String logout(HttpSession session) {
 			session.invalidate();
 			return "redirect:/";
+		}
+		
+		//회원정보 수정
+		@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
+		@ResponseBody
+		private boolean infoUpdate(MemberVO vo, HttpSession session, HttpServletRequest request) throws Exception { 
+			vo.setEmail((String)session.getAttribute("email"));
+			System.out.println(vo);
+			System.out.println(service.infoUpdate(vo));
+			return service.infoUpdate(vo);
 		}
 		
 		//회원탈퇴
@@ -134,6 +128,7 @@ public class MemberController {
 				return "redirect:/";
 			}else return "redirect:/index";
 		}
+		
 		//리스트 출력
 		@RequestMapping(value = "getList", method = RequestMethod.GET)
 		@ResponseBody
@@ -144,7 +139,6 @@ public class MemberController {
 		@RequestMapping(value = "click")
 		@ResponseBody
 		public boolean click(MemberVO vo) {
-		
 			return service.click(vo);
 		}
 		
@@ -157,12 +151,12 @@ public class MemberController {
 		}
 		
 		//친구추가
-				@RequestMapping(value = "addFriend", method = RequestMethod.POST)
-				@ResponseBody
-				public boolean addFriend(HttpSession session, FriendVO friend) {
-					String myEmail = (String)session.getAttribute("email");
-					return service.addFriend(myEmail, friend);
-				}
+		@RequestMapping(value = "addFriend", method = RequestMethod.POST)
+		@ResponseBody
+		public boolean addFriend(HttpSession session, FriendVO friend) {
+			String myEmail = (String)session.getAttribute("email");
+			return service.addFriend(myEmail, friend);
+		}
 		
 		//친구삭제
 		@RequestMapping(value = "deleteFriend", method = RequestMethod.POST)
@@ -183,6 +177,17 @@ public class MemberController {
 		@ResponseBody
 		public int getFriendmemNo(String email, Model model) {
 			return service.getFriendmemNo(email);
+		}
+		
+		//내 프로필 정보 받아오기
+		@RequestMapping(value = "myList", method = RequestMethod.POST)
+		@ResponseBody
+		public MemberVO myList(HttpSession session, Model model, MemberVO vo) {
+			String email =(String)session.getAttribute("email");
+			model.addAttribute("mem_image", vo.getMem_image()).toString();
+			model.addAttribute("name", vo.getName()).toString();
+			model.addAttribute("infoNumber", vo.getInfoNumber()).toString();
+			return service.myList(email);
 		}
 		
 		//프로필 사진 업로드
@@ -236,25 +241,5 @@ public class MemberController {
 				e.printStackTrace();
 				return "IOException";
 			}
-		}
-		
-		//회원정보 수정
-		@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
-		@ResponseBody
-		private boolean infoUpdate(MemberVO vo, HttpSession session, HttpServletRequest request) throws Exception { 
-			vo.setEmail((String)session.getAttribute("email"));
-			System.out.println(vo);
-			System.out.println(service.infoUpdate(vo));
-			return service.infoUpdate(vo);
-		}
-		
-		//내 프로필 정보 받아오기
-		@RequestMapping(value = "myList", method = RequestMethod.POST)
-		@ResponseBody
-		public MemberVO myList(HttpSession session, Model model, MemberVO vo) {
-			String email =(String)session.getAttribute("email");
-			model.addAttribute("name", vo.getName()).toString();
-			model.addAttribute("infoNumber", vo.getInfoNumber()).toString();
-			return service.myList(email);
 		}
 }

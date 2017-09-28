@@ -399,7 +399,8 @@
 			type: "post",
 			success : function(result){
 				$("#profileView").empty();
-				var addRow = '<a id="getImage" onclick="photoEdit()"><img class="profile1 img-circle profile-photo" width="130px" height="130px" alt="avatar" src="/memory/data/mem_image/${mem_image}"></a>';
+				var addRow = '<a id="getImage" onclick="photoEdit()">'
+					addRow += '<img class="profile1 profile-photo" width="130px" height="130px" alt="avatar" src="/memory/data/mem_image/'+result.mem_image+'"></a>';
 					addRow += '<br>';
 					addRow += '<span class="profile-name">'+result.name+'</span>';
 					addRow += '<span class="profile-editBtn">&nbsp;<i onclick="nameEdit()" class="fa fa-pencil-square" aria-hidden="true"></i></span>';
@@ -804,7 +805,7 @@
     							  confirmButtonText: '확인'
     							})
     					} else {
-    					$("#getImage").html("<img class='profile1 img-circle' width='130px' height='130px' alt='avatar' src='/memory/data/mem_image/"+result+"'>");
+    					$("#getImage").html("<img class='profile1 profile-photo' width='130px' height='130px' alt='avatar' src='/memory/data/mem_image/"+result+"'>");
     					swal({
 							  title: '프로필 이미지 변경 완료',
 							  type: 'success',
