@@ -105,36 +105,6 @@
 						"<img class='profile1 img-circle' width='150px' height='150px' alt='avatar' src='/memory/data/mem_image/${mem_image}'>");
 	});
 
-	function myList() {
-		$
-				.ajax({
-					url : "/memory/member/myList",
-					type : "get",
-					success : function(result) {
-						$(result)
-								.each(
-										function(index, item) {
-											var addRow = '<li class="list-group-item"><h4><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;'
-													+ item.name + '</h4></li>';
-											addRow += '<li class="list-group-item"><h4><i class="fa fa-envelope"></i>&nbsp;&nbsp;'
-													+ item.email + '</h4></li>';
-											if (item.infoNumber == 0) {
-												addRow += '<li class="list-group-item"><h4><i class="fa fa-key fa-lg"></i>&nbsp;허용</h4></li>';
-												var addRow2 = '<input id="infoNumber" name="infoNumber" type="radio" value="0" checked="checked"> 허용&nbsp;&nbsp;&nbsp;';
-												addRow2 += '<input id="infoNumber" name="infoNumber" type="radio" value="1"> 비허용';
-											} else {
-												addRow += '<li class="list-group-item"><h4><i class="fa fa-key fa-lg"></i>&nbsp;비허용</h4></li>';
-												var addRow2 = '<input id="infoNumber" name="infoNumber" type="radio" value="0"> 허용&nbsp;&nbsp;&nbsp;';
-												addRow2 += '<input id="infoNumber" name="infoNumber" type="radio" value="1" checked="checked"> 비허용';
-											}
-											addRow += '</tr>';
-											$("#myInfoList").append(addRow);
-											$("#infoSet").append(addRow2);
-										})
-					}
-				})
-	}
-
 	//비밀번호 확인
 	$("#pwd1").on("keyup", function() {
 		var mo = document.infoModify;

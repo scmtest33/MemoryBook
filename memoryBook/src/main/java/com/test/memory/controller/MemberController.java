@@ -79,14 +79,14 @@ public class MemberController {
 			vo.setMem_pwd(mem_pwd);
 			
 			
-			MemberVO nvo = service.login(vo); 
+			MemberVO nvo = service.login(vo);
 			if(nvo == null){
 				return null;
 			}
 			else if(nvo.getApprovalNum()==1){
 				return nvo;
-			}
-			else{
+			} else {
+				System.out.println(nvo);
 				String mem_img = nvo.getMem_image();
 				if(mem_img == null) mem_img = "null";
 				session.setAttribute("email", nvo.getEmail());
