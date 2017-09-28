@@ -86,8 +86,8 @@
                 </li>
                 <li>
       		        <a id="mindmap" class="noteImg" >
-      		        	<img src="/memory/resources/img/indexImg/note_hover.png" class="indexImg9">
-      		        	<img src="/memory/resources/img/indexImg/note1.png" class="indexImg10">
+      		        	<img src="/memory/resources/img/indexImg/mindmap_hover.png" class="indexImg9">
+      		        	<img src="/memory/resources/img/indexImg/mindmap1.png" class="indexImg10">
 					    My Mindmap
 					</a>
                 </li>
