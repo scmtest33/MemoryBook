@@ -15,7 +15,7 @@
 </head>
 <body><br>
 <p class="pageTitle">PROFILE</p>
-<p class="pageSubTitle">여러분의 소중한 정보를 확인해보세요!</p>
+<p class="pageSubTitle">여러분의 소중한 정보를 확인해보세요</p>
 <div class="container" style="padding : 0px;">
   <div class="row">
     <!-- left column -->
@@ -48,11 +48,6 @@
     </div>
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-      <div class="alert alert-info alert-dismissable">
-        <a class="panel-close close" data-dismiss="alert">×</a> 
-        <i class="fa fa-coffee"></i>
-        	회원님의 정보를 수정해보세요.
-      </div>
       <h3>Personal Infomation Update</h3>
       <form class="form-horizontal" role="form">
       	<div class="form-group">

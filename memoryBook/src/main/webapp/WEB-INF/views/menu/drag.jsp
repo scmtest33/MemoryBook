@@ -79,7 +79,7 @@
 		</div>
 			<br>
 			<p class="pageTitle">DRAG LIST</p>
-			<p class="pageSubTitle">걸어온 길을 살펴보고 정리해 보세요!</p>
+			<p class="pageSubTitle">걸어온 길을 살펴보고 정리해 보세요</p>
 		</div>
 		<br><br>
 		</div>

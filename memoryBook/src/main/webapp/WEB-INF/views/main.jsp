@@ -150,7 +150,7 @@
                                 <h2 class="service-content">
                                     <strong>마인드 맵 기능</strong>
                                 </h2>
-                                <p class="service-content2">마인드맵으로 계획을 짜보세요</p>
+                                <p class="service-content2">마인드맵으로 계획을 구성해 보세요</p>
 <!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>

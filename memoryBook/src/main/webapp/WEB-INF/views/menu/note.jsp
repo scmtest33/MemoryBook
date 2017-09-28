@@ -76,8 +76,8 @@
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
 		</div>
 			<br>
-			<p class="pageTitle">DRAG NOTE</p>
-			<p class="pageSubTitle">자신만의 노트로 담아보세요!</p>
+			<p class="pageTitle">NOTE LIST</p>
+			<p class="pageSubTitle">자신만의 노트로 담아보세요</p>
 			<p class="desc_brunch">
 <!-- 				<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span> -->
 				<!-- 검색 -->

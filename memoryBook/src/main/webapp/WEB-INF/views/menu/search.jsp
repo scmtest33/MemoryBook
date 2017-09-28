@@ -16,10 +16,16 @@
 <body>
 <br>
 <p class="pageTitle">FRIEND ADDITION</p>
-<p class="pageSubTitle">친구를 찾고 추가해보세요!</p>
-<input type="text" name="findId" id="findId" class="form-control" placeholder="이름 또는 Email을 입력하세요">
-<button name="findBtn" id="findBtn" class="btn btn-default" onclick="findMember()">Search</button><br><br><br><br>
-
+<p class="pageSubTitle">친구를 찾고 추가해보세요</p>
+<!-- 검색 -->
+      <div class="searchInput col-md-offset">
+         <div class="search-form">
+                  <label for="search" class="sr-only">Search</label>
+                  <input type="text" class="form-control" name="findId" id="findId" placeholder="이름 또는 Email을 입력하세요" onkeydown="javascript:if(event.keyCode == 13) searchList();">
+           </div>
+      </div>
+      <div class="btn-default noteSearch_btn" id="findBtn" onclick="findMember();"><img src="/memory/resources/img/search_icon.jpg"></div>
+	
 <!-- <table class="table table-hover" id="table"> -->
 	
 <!-- </table> -->
@@ -27,7 +33,7 @@
 <!-- <table class="table table-striped" id="listTable"> -->
 
 <!-- </table> -->
-<div class="container">
+<div class="container" style="padding:30px;">
 	<div class="row">
 
 		<section class="content">
