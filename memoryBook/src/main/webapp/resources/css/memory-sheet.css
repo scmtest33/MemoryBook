@@ -174,8 +174,31 @@ a.btn_modal {
 
 
 /* 프로필 모달 */
+.profile-size{
+	width: 500px;
+}
 .align-center{
 	text-align: center;
+}
+
+
+/* 회원검색 모달 */
+.memSearch-size{
+	width: 680px;
+}
+.memSearch{
+	margin: 10px;
+}
+.memSearch-input{
+	width: 500px;
+}
+.memSearch-btn{
+}
+.searchResult{
+	margin: 10px;
+	width: 660px;
+	height: 200px;
+	overflow: auto;
 }
 
 /* 드래그, 노트, 친구 리스트 */
@@ -414,11 +437,6 @@ div.dragList img {
 	padding-right: 8px;
 }
 
-
-/* 회원검색 */
-.searchResult{
-	width: 660px;
-}
 
 /* 마인드맵 */
 div.mindMenu{

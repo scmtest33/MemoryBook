@@ -101,7 +101,6 @@
                 </li>
                 <li>
                		<a class="noteImg" data-toggle="modal" data-target="#userSearchModal">
-                	<!-- <a id="searchFriend" class="noteImg"> -->
                 	<img src="/memory/resources/img/indexImg/search_hover.png" class="indexImg13">
       		        <img src="/memory/resources/img/indexImg/search1.png" class="indexImg14">
 					    Friend Search
@@ -170,12 +169,6 @@
 			  	</div>
 		  	</div>
 	        
-			<div id='search'>
-				<div class="container-fluid">
-			  		<%-- <%@ include file="menu/search.jsp" %> --%>
-			  	</div>
-		  	</div>
-		  	
 		  	<div id='userList'>
 		  		<div class="container-fluid">
 			  		<%@ include file="manager/userList.jsp" %>
@@ -200,7 +193,7 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content profile-size">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h2 class="modal-title">
@@ -278,25 +271,29 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content"> <!-- 여기가 모달 사이즈 -->
+			<div class="modal-content memSearch-size"> <!-- 여기가 모달 사이즈 -->
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h2 class="modal-title">
 						<i class="fa fa-user-o modal_title"></i> User Search
 					</h2>
 				</div>
-				<div class="align-center">
-					<div class="searchInput col-md-offset">
-						<div class="search-form">
-							<label for="search" class="sr-only">Search</label> <input type="text"
-								class="form-control" name="findId" id="findId"
-								placeholder="이름 또는 Email을 입력하세요"
-								onkeydown="javascript:if(event.keyCode == 13) searchList();">
+				<div>
+					<div class="col-md-offset">
+						<div class="memSearch">
+							<table>
+								<tr>
+									<td class="memSearch-input">
+										<input type="text" class="form-control searchInput" name="findId" id="findId"
+										 placeholder="이름 또는 Email을 입력하세요" onkeydown="javascript:if(event.keyCode == 13) searchList();">
+								 	</td>
+									<td>
+										<button class="btn-default noteSearch_btn memSearch-btn" id="findBtn" onclick="findMember();">
+										<img src="/memory/resources/img/search_icon.jpg"></button>
+									</td>
+								</tr>
+							</table>
 						</div>
-					</div>
-					<div class="btn-default noteSearch_btn" id="findBtn"
-						onclick="findMember();">
-						<img src="/memory/resources/img/search_icon.jpg">
 					</div>
 					<br>
 					<br>
@@ -749,6 +746,13 @@
 						$("#searched").empty();
 						$("#findId").val("");
 						var btn;
+						if(result.length <= 0){
+							swal({
+								  title: '검색결과가 없습니다.',
+								  type: 'info',
+								  confirmButtonText: '확인'
+								})
+						} else {
 						$("#panel").append("<div class='panel panel-default searchResult' id='searched'></div>");
 						$(result).each(function(index, item) {
 							var addRow = '<table class="table table-filter">';
@@ -793,8 +797,8 @@
 							});
 						});
 		    		}
+			}
 		});
-		return false;
     };
     </script>
 </body>
