@@ -78,8 +78,8 @@
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
 		</div>
 			<br>
-			<p class="pageTitle">${name}님이 드래그한 드래그 리스트</p>
-			<p class="pageSubTitle">${name}님이 걸어온 길을 공유해 보세요</p>
+			<p class="pageTitle">DRAG LIST</p>
+			<p class="pageSubTitle">걸어온 길을 살펴보고 정리해 보세요!</p>
 		</div>
 		<br><br>
 		</div>
@@ -248,7 +248,7 @@
 			}
 			if (result.length == 0) {
 				html += "<div class='container'>";
-				html += "<h6>등록 된 드래그가 없습니다.</h6>";
+				html += "<h3>등록 된 드래그가 없습니다.</h3>";
 				html += "</div>";
 			}
 			$("#dragList").html(html);

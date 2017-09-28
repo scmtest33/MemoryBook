@@ -106,20 +106,13 @@ public class MemberController {
 			vo.setEmail(email);
 			vo.setMem_pwd(mem_pwd);
 			MemberVO nvo = service.login(vo); 
-			if(nvo == null){
-				return null;
-			}
-			else if(nvo.getApprovalNum()==1){
-				return null;
-			}
-			else{
 				session.setAttribute("email", nvo.getEmail());
 				session.setAttribute("memberNo", nvo.getMem_no());
 				session.setAttribute("name", nvo.getName());
 				session.setAttribute("mem_image", nvo.getMem_image());
 				session.setAttribute("infoNumber", nvo.getInfoNumber());
 				return nvo;
-			}
+			
 		}
 		
 		
@@ -250,8 +243,7 @@ public class MemberController {
 		@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
 		@ResponseBody
 		private boolean infoUpdate(MemberVO vo, HttpSession session, Model model) throws Exception { 
-			service.infoUpdate(vo);
-			
+			System.out.println(vo);
 			return service.infoUpdate(vo);
 		}
 		

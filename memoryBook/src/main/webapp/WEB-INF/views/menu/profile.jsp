@@ -14,8 +14,8 @@
 <title>Profile</title>
 </head>
 <body><br>
-<p class="pageTitle">Profile</p>
-<p class="pageSubTitle">여러분의 소중한 정보를 확인해보세요.</p>
+<p class="pageTitle">PROFILE</p>
+<p class="pageSubTitle">여러분의 소중한 정보를 확인해보세요!</p>
 <div class="container" style="padding : 0px;">
   <div class="row">
     <!-- left column -->
