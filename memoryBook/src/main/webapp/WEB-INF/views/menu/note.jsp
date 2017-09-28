@@ -193,8 +193,7 @@
 		})
 		.done(function (result) {
 			swal({
-				  title: '전송 완료',
-				  text: result.msg,
+				  title: '노트를 메일로 보냈습니다.',
 				  type: 'success',
 				  confirmButtonText: '확인'
 				})		
@@ -558,6 +557,7 @@
 		$('#noteView').css('display', 'none');
 		$('#profileModal').css('display', 'none');
 		$('#noteEditor').css('display', '');
+		editor_chk = true;
 	}
 
 	//공개설정 옵션창 초기화
@@ -602,7 +602,7 @@
 			dataType : "json"
 		})
 		.done(function (result) {
-			editor_chk = true;
+			note_Chk = true;
 			var title = result.noteTitle;
 			var content = result.noteContent;
 			var auth = result.noteAuth;
@@ -628,7 +628,7 @@
 		.fail(function(jqXhr, textStatus, errorText){
 			swal({
 				  title: 'Error!',
-				  text: '노트 수정을 실패하였습니다.',
+				  text: '에디터 로딩을 실패하였습니다.',
 				  type: 'error',
 				  confirmButtonText: '확인'
 				})
@@ -673,15 +673,21 @@
 			url:"/memory/note/deleteNote",
 			dataType:"json",
 			data: {"noteNo":noteNo},
-			type: "POST",
-			success: function (result){
+			type: "POST"
+			})
+			.done(function (result){
 				mainNoteList();
 				mainNoteList2();
-				swal("노트를 삭제했습니다.", result.msg,'success');
-				},
-			error: swal({
+				swal({
+					  title: '노트를 삭제하였습니다.',
+					  type: 'success',
+					  confirmButtonText: '확인'
+					})
+			})
+			.fail(function(){
+				swal({
 				  title: 'Error!',
-				  text: '노트삭제를 실패하였습니다.',
+				  text: '노트 삭제를 실패하였습니다.',
 				  type: 'error',
 				  confirmButtonText: '확인'
 				})
@@ -708,17 +714,23 @@
 				url:"/memory/note/deleteCategory",
 				dataType:"json",
 				data: {"categoryNo":categoryNo},
-				type: "POST",
-				success: function (result){
+				type: "POST"
+				})
+				.done(function (result){
 					mainNoteList();
 					getMainCategory();
 					mainNoteList2();
 					getMainCategory2();
-					swal("카테고리를 삭제했습니다.", result.msg,'success');
-					},
-				error: swal({
+					swal({
+						  title: '카테고리를 삭제했습니다.',
+						  type: 'success',
+						  confirmButtonText: '확인'
+						})
+				})
+				.fail(function(){
+					swal({
 					  title: 'Error!',
-					  text: '카테고리삭제를 실패하였습니다.',
+					  text: '카테고리 삭제를 실패하였습니다.',
 					  type: 'error',
 					  confirmButtonText: '확인'
 					})
@@ -768,7 +780,6 @@
 		.done(function (result) {
 			swal({
 				  title: '카테고리등록 성공',
-				  text: result.msg,
 				  type: 'success',
 				  confirmButtonText: '확인'
 				})			

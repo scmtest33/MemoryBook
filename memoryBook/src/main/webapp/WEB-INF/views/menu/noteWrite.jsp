@@ -113,8 +113,8 @@
 				})
 			return false;
 		}
-		var radio_btn = $("input[name=authSet]:checked").val();
-		if (radio_btn == null) {
+		var authority = $("input[name=authSet]:checked").val();
+		if (authority == null) {
 			swal({
 				  title: 'Error!',
 				  text: '공개방법을 선택해주세요.',
@@ -132,12 +132,11 @@
 				url : "/memory/note/note",
 				type : "POST",
 				data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor, 
-					"categoryNo" : $("#category").val(), "noteAuth" : radio_btn}
+					"categoryNo" : $("#category").val(), "noteAuth" : authority}
 			})
 			.done(function (result) {
 				swal({
-					  title: '작성 완료',
-					  text: result.msg,
+					  title: '노트가 등록되었습니다.',
 					  type: 'success',
 					  confirmButtonText: '확인'
 					})	
@@ -191,8 +190,8 @@
 			return false;
 		}
 		
-		var radio_btn = $("input[name=authSet2]:checked").val();
-		if (radio_btn == null) {
+		var authority = $("input[name=authSet2]:checked").val();
+		if (authority == null) {
 			swal({
 				  title: 'Error!',
 				  text: '공개방법을 선택해주세요.',
@@ -210,12 +209,11 @@
 				url : "/memory/note/noteUpdate",
 				type : "POST",
 				data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor,
-					"categoryNo" : $("#category").val(), "noteAuth" : authSet_check, "noteNo" : localStorage.getItem("noteNoToUpdate")}
+					"categoryNo" : $("#category").val(), "noteAuth" : authority, "noteNo" : localStorage.getItem("noteNoToUpdate")}
 			})
 			.done(function (result) {
 				swal({
-					  title: '노트수정 완료',
-					  text: result.msg,
+					  title: '노트수정을 완료했습니다.',
 					  type: 'success',
 					  confirmButtonText: '확인'
 					})	

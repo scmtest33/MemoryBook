@@ -86,8 +86,8 @@
                 </li>
                 <li>
       		        <a id="mindmap" class="noteImg" >
-      		        	<img src="/memory/resources/img/indexImg/mindmap_hover.png" class="indexImg9">
-      		        	<img src="/memory/resources/img/indexImg/mindmap1.png" class="indexImg10">
+      		        	<img src="/memory/resources/img/indexImg/note_hover.png" class="indexImg9">
+      		        	<img src="/memory/resources/img/indexImg/note1.png" class="indexImg10">
 					    My Mindmap
 					</a>
                 </li>
@@ -197,6 +197,7 @@
     <script>
     var editor_chk = false; //드래그 입력시 에디터 on/off여부 체크
     var chk_tf; //메뉴 이동시 에디터 체크
+    var note_Chk; //에디터 모드 구분 (노트/드래그)
 
     //index들어왔을때 초기화면
     $(function(){
@@ -277,14 +278,17 @@
 	// 브라우저 창 크기 변화 시 위치 지정 (통합)
 	$(window).resize(function(){
 		//드래그 리스트
-		$('#editorDraglist').css('width', '(screen.innerWidth - 420) +"px"');
-		$('#editorDraglist').css('height', 'screen.innerHeight +"px"');
+		$('#myDragList').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#myDragList').css('height', 'screen.innerHeight +"px"');		
 		//노트 리스트
 		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#noteView').css('height', 'screen.innerHeight +"px"');
 		//노트 에디터
 		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#editorView').css('height', 'screen.innerHeight +"px"');
+		//에디터 드래그 리스트
+		$('#editorDraglist').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#editorDraglist').css('height', 'screen.innerHeight +"px"');
 	});
     
     // 내비바 아이콘으로 열고 닫기
@@ -481,10 +485,14 @@
 			editorCancelChk();
 			if(chk_tf) {
 				search_menu();
-			}
+			}	
+			console.log("editor: "+editor_chk);
+			console.log("chk: "+chk_tf);
 		} else {
 			search_menu();
 		}
+	    console.log("editor2: "+editor_chk);
+		console.log("chk2: "+chk_tf);
 	});
     
     $("#user").click(function(e) {
@@ -519,7 +527,31 @@
     });
     
     //에티터 작동중 취소여부 확인 (noteWrite.jsp에도 연동되어 같이 적용됨)
-	function editorCancelChk() {
+     function editorCancelChk() { 
+ 		var chk; 
+ 		chk = confirm("정말로 취소하시겠습니까?"); 
+ 		if(chk) { 
+	 		editor_chk = false; 
+	 		$("#noteTitle").val(''); 
+	 		CKEDITOR.instances.ckeditor.setData(""); 
+	 		authInit(); 
+	 		$('#noteEditor').css('display', 'none'); 
+	 		$('#categoryToAdd').css('display', 'none'); 
+	 		$('#Category1').css('display', 'none'); 
+	 		$('#Category2').css('display', 'none'); 
+	 		$('#profileModal').css('display', ''); 
+	 		$('#noteView').css('display', ''); 
+	 		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"'); 
+	 		$('#noteView').css('height', 'screen.innerHeight +"px"'); 
+	 		chk_tf = true; 
+ 		} else { 
+ 			chk_tf = false; 
+ 		} 
+ 	}
+
+    
+    
+/*  	function editorCancelChk() {
 		swal({
 			  title: '정말로 취소하시겠습니까?',
 			  text: '취소시 글 내용은 저장되지 않습니다.',
@@ -534,22 +566,24 @@
 			  buttonsStyling: false
 		}).then(function () {
 			editor_chk = false;
-			$("#noteTitle").val('');
-			CKEDITOR.instances.ckeditor.setData("");
-			authInit();
-			$('#noteEditor').css('display', 'none');
-			$('#categoryToAdd').css('display', 'none');
-			$('#Category1').css('display', 'none');
-			$('#Category2').css('display', 'none');
-			$('#profileModal').css('display', '');
-			$('#noteView').css('display', '');
-			$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
-			$('#noteView').css('height', 'screen.innerHeight +"px"');
-			chk_tf = true;
+			console.log(editor_chk);
+	 		$("#noteTitle").val(''); 
+	 		CKEDITOR.instances.ckeditor.setData(""); 
+	 		authInit(); 
+	 		$('#noteEditor').css('display', 'none'); 
+	 		$('#categoryToAdd').css('display', 'none'); 
+	 		$('#Category1').css('display', 'none'); 
+	 		$('#Category2').css('display', 'none'); 
+	 		$('#profileModal').css('display', ''); 
+	 		$('#noteView').css('display', ''); 
+	 		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"'); 
+	 		$('#noteView').css('height', 'screen.innerHeight +"px"'); 
+	 		chk_tf = true;
+	 		console.log(chk_tf);
 			}, function (dismiss) {
 				chk_tf = false;
 			   });
-	}
+	} */
     
 	// 드롭 허용
 	function allowDrop(ev) {
