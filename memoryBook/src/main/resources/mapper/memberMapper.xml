@@ -8,7 +8,7 @@
 
 	<!-- 회원 가입 정보 저장 -->
 	<insert id="join" parameterType="MemberVO">
-		INSERT INTO T_MEMBER VALUES (MEM_NO.NEXTVAL, #{name}, #{email}, #{mem_pwd}, #{mem_image, jdbcType=VARCHAR}, 0, 0)
+	INSERT INTO T_MEMBER VALUES (MEM_NO.NEXTVAL, #{mem_pwd}, #{name}, #{email}, 0, #{mem_image, jdbcType=VARCHAR}, 0)
 	</insert>
 	
 	<!-- 이메일 중복 체크 -->
@@ -48,6 +48,7 @@
 		UPDATE T_MEMBER SET MEM_IMAGE = #{mem_image} WHERE EMAIL = #{email}
 	</update>
 	
+	<!-- 프로필 수정 -->
 	<update id="infoUpdate" parameterType="MemberVO">
 		UPDATE T_MEMBER SET NAME = #{name}, MEM_PWD = #{mem_pwd}, INFONUMBER = #{infoNumber} WHERE EMAIL = #{email}
 	</update>
@@ -55,7 +56,7 @@
 	<!-- 회원검색 -->
 	<select id="findMember" parameterType="String" resultType="MemberVO">
 <!-- 		SELECT name, email FROM T_MEMBER WHERE NAME LIKE '%'||#{name}||'%' or EMAIL LIKE '%'||#{email}||'%' order by mem_no desc -->
-		SELECT * FROM T_MEMBER WHERE (EMAIL != #{0} and EMAIL != 'admin') and (NAME LIKE '%'||#{1}||'%' or EMAIL LIKE '%'||#{1}||'%') order by mem_no desc
+		SELECT * FROM T_MEMBER WHERE (EMAIL != #{0} and EMAIL != 'admin') AND (NAME LIKE '%'||#{1}||'%' or EMAIL LIKE '%'||#{1}||'%') AND INFONUMBER=0 order by mem_no desc
 	</select>
 	
 	<!-- 친구추가 -->
@@ -70,7 +71,7 @@
 	
 	<!-- 친구목록 가져오기 -->
 	<select id="getFriendList" parameterType="String" resultType="FriendVO">
-		SELECT f.friend_Email, m.name, m.MEM_IMAGE FROM T_FRIEND f, T_MEMBER m
+		SELECT f.friend_Email, m.name, m.MEM_IMAGE, m.infonumber FROM T_FRIEND f, T_MEMBER m
 		WHERE m.email = f.friend_Email and f.MEM_EMAIL = #{loginEmail}
 	</select>
 	

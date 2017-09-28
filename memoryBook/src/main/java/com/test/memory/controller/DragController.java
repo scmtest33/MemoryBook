@@ -228,7 +228,6 @@ public class DragController {
 	@RequestMapping("/dragDetail")
 	public DragVO dragDetail(String dragNo) throws Exception {
 		DragVO d = service.dragDetail(Integer.parseInt(dragNo));
-		System.out.println(d);
 		try{
 			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
 			fis = new FileInputStream(FILE_PATH + d.getDragContent());

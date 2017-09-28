@@ -67,10 +67,10 @@
                 <a href="#top" onclick=$("#menu-close").click();>Home</a>
             </li>
             <li>
-                <a href="#services" onclick=$("#menu-close").click();>Services</a>
+                <a href="#services" onclick=$("#menu-close").click();>About</a>
             </li>
             <li>
-                <a href="#portfolio" onclick=$("#menu-close").click();>Portfolio</a>
+                <a href="#portfolio" onclick=$("#menu-close").click();>Chrome EP</a>
             </li>
             <li>
                 <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
@@ -120,7 +120,7 @@
                                 <h2 class="service-content">
                                     <strong>드래그 저장 기능</strong>
                                 </h2>
-                                <p class="service-content2">정보 검색하던 사이트에서 내가 원하는 부분만 드래그하면 저장이 가능합니다</p>
+                                <p class="service-content2">드래그 기능만으로  간편하게 텍스트와 이미지 등을 저장해 보세요 </p>
 <!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
@@ -148,9 +148,9 @@
                             <div class="service-item"><br><br><br>
                                 <img src="/memory/resources/img/mainIcon/mindmap1.png"><br><br>
                                 <h2 class="service-content">
-                                    <strong>마인드 맵 기능</strong>
+                                    <strong>다이어그램 기능</strong>
                                 </h2>
-                                <p class="service-content2">친구들과 마인드맵으로 회의, 계획을 짜보세요</p>
+                                <p class="service-content2">노트를 한눈에 알아보기 쉽게 도식화하여  자신에게 알맞는 플랜을 만들어 보세요</p>
 <!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
@@ -271,8 +271,8 @@
                     </h4>
                     <p>서울 강남구 삼성동 COEX 4F ICT교육센터</p>
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (010) 1234-5678</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
+                        <li><i class="fa fa-phone fa-fw"></i> (010) 2570-1040</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">leemhyh@naver.com</a>
                         </li>
                     </ul>
                     <p class="text-muted">Copyright &copy; 잊지못해NotNull</p>
@@ -434,6 +434,7 @@
     					var i = result.approvalNum;
     					var a = result.email;
 	    	    		if(a != null && i != 1){
+	    	    			localStorage.setItem("friendNo", 0);
 	    	    			localStorage.setItem("memberNo", result.mem_no);
 	    	    			location.href='/memory/index';
 	    	    		}
@@ -450,7 +451,7 @@
 	    	    			swal({
 	    	    				  title: 'ID/PW ERROR!',
 	    	    				  text: 'ID 또는 비밀번호가 잘못 입력되었습니다.',
-	    	    				  type: 'Warning',
+	    	    				  type: 'error',
 	    	    				  confirmButtonText: '확인'
 	    	    				})
 	    	    		}
@@ -519,39 +520,41 @@
 	    		"email" : $("input[name=email]").val(),
 	    		"mem_pwd" : $("input[name=password]").val()
 	    		},
-	    	success: function(result) {
-	    			if(result) {
-	    				swal({
-	     					  title: '회원가입 성공',
-	     					  text: '회원가입이 완료되었습니다. 이제 로그인 하세요~',
-	     					  type: 'success',
-	     					  confirmButtonText: '확인'
-	     					})
-	 	    	    	frm.name.value = "";
-	 	    	    	frm.email.value = "";
-	 	    	    	frm.password.value = "";
-	 	    	    	frm.passwordConf.value = "";
-	 	    	    	$('#loginModal').css('display', 'block');
-	 	    	    	$('#joinModal').css('display', 'none');
-	    				$("#myModal").modal('hide');
-	     			} else {
-	     				swal({
-	     					  title: '회원가입 실패',
-	     					  text: '오류가 발생 하였습니다. 다시 시도해주세요',
-	     					  type: 'error',
-	     					  confirmButtonText: '확인'
-	     					})
-	     			}
-	     	    },
-	     	error: swal({
+	   	})
+	   	.done(function (result){
+	   		if(result) {
+				swal({
+ 					  title: '회원가입 성공',
+ 					  text: '회원가입이 완료되었습니다. 이제 로그인 하세요~',
+ 					  type: 'success',
+ 					  confirmButtonText: '확인'
+ 					})
+	    	    	frm.name.value = "";
+	    	    	frm.email.value = "";
+	    	    	frm.password.value = "";
+	    	    	frm.passwordConf.value = "";
+	    	    	$('#loginModal').css('display', 'block');
+	    	    	$('#joinModal').css('display', 'none');
+					$("#myModal").modal('hide');
+ 			} else {
+ 				swal({
+ 					  title: '회원가입 실패',
+ 					  text: '오류가 발생 하였습니다. 다시 시도해주세요',
+ 					  type: 'error',
+ 					  confirmButtonText: '확인'
+ 					})
+ 				}
+		})
+		.fail(function(){
+			swal({
 				  title: '회원가입 실패',
-					  text: '이메일이 중복되었거나, 올바르게 입력되지 않았습니다.',
-					  type: 'error',
-					  confirmButtonText: '확인'
-					})
-	     	});
-	     	return false;
-	    });
+				  text: '이메일이 중복되었거나, 올바르게 입력되지 않았습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
+		});
+	   	return false;
+	 });
 
 		//다운로드 링크주기
 // 	    function downloadUrl(){

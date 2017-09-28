@@ -76,8 +76,8 @@
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
 		</div>
 			<br>
-			<p class="pageTitle">${name}님의 드래그를 자신만의 노트로 저장하세요</p>
-			<p class="pageSubTitle">드래그한번으로 원하는 텍스트와 이미지를 담아보세요</p>
+			<p class="pageTitle">NOTE LIST</p>
+			<p class="pageSubTitle">자신만의 노트로 담아보세요</p>
 			<p class="desc_brunch">
 <!-- 				<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span> -->
 				<!-- 검색 -->
@@ -106,45 +106,6 @@
 	<div class="noteEditor" id="noteEditor">
 		<br><br><br>
 		<%@ include file="noteWrite.jsp" %>
-	</div>
-
-	<!-- profile modal -->
-	<div id="profileModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">설정</h4>
-				</div>
-				<div class="modal-body">
-
-					<div class="container">
-						<h2>이메일 설정</h2>
-						<br>
-						<p>보낼 이메일을 설정해주세요</p>
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="email">Email:</label> <input type="email"
-									class="form-control" id="email" placeholder="Enter email">
-							</div>
-							<div class="form-group">
-								<label for="pwd">Password:</label> <input type="password"
-									class="form-control" id="pwd" placeholder="Enter password">
-							</div>
-							<button type="submit" class="btn btn-default">설정</button>
-						</form>
-					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-
-		</div>
 	</div>
 	<!-- 본문내용 끝 -->
 
@@ -193,8 +154,7 @@
 		})
 		.done(function (result) {
 			swal({
-				  title: '전송 완료',
-				  text: result.msg,
+				  title: '노트를 메일로 보냈습니다.',
 				  type: 'success',
 				  confirmButtonText: '확인'
 				})		
@@ -239,9 +199,9 @@
 			$("#titleNote").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
 			$("#date").html(time);
 			$("#content").html(content);
-			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'><a href='' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;"
-							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteNote("+noteNo+");'></i></a></span>&nbsp;"
-							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='메일로 보내기'><a href='' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#mailModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;"
+			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'><a class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;"
+							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteNote("+noteNo+");'></i></a></span>&nbsp;"
+							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='메일로 보내기'><a class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#mailModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;"
 							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_modal'><i class='fa fa-download'></i></a></span></p>");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
@@ -490,10 +450,8 @@
 	}
 
 	// 에디터 열기
-	var editor_chk = false; // 드래그 입력시 에디터 on/off여부 체크
 	$("#noteWrite").click(function(e) {
 		$('#noteView').css('display', 'none');
-		$('#profileModal').css('display', 'none');
 		$('#noteEditor').css('display', '');
 		$('#noteUpdateBtn').css('display', 'none');
 		$('#noteSubmitBtn').css('display', 'block');
@@ -557,8 +515,8 @@
 	//에디터 오픈
 	function open_editor() {
 		$('#noteView').css('display', 'none');
-		$('#profileModal').css('display', 'none');
 		$('#noteEditor').css('display', '');
+		editor_chk = true;
 	}
 
 	//공개설정 옵션창 초기화
@@ -575,7 +533,6 @@
 	function open_editorDrag() {
 		$('#myDragList').css('display', 'none');
 		$('#noteView').css('display', 'none');
-		$('#profileModal').css('display', 'none');
 		$('#noteEditor').css('display', '');
 	}
 
@@ -603,10 +560,10 @@
 			dataType : "json"
 		})
 		.done(function (result) {
+			note_Chk = true;
 			var title = result.noteTitle;
 			var content = result.noteContent;
 			var auth = result.noteAuth;
-			console.log(auth);
 			$("input[name=noteTitle]").val(title);
 			CKEDITOR.instances.ckeditor.setData(content);
 			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo);
@@ -629,7 +586,7 @@
 		.fail(function(jqXhr, textStatus, errorText){
 			swal({
 				  title: 'Error!',
-				  text: '노트 수정을 실패하였습니다.',
+				  text: '에디터 로딩을 실패하였습니다.',
 				  type: 'error',
 				  confirmButtonText: '확인'
 				})
@@ -674,15 +631,21 @@
 			url:"/memory/note/deleteNote",
 			dataType:"json",
 			data: {"noteNo":noteNo},
-			type: "POST",
-			success: function (result){
+			type: "POST"
+			})
+			.done(function (result){
 				mainNoteList();
 				mainNoteList2();
-				swal("노트를 삭제했습니다.", result.msg,'success');
-				},
-			error: swal({
+				swal({
+					  title: '노트를 삭제하였습니다.',
+					  type: 'success',
+					  confirmButtonText: '확인'
+					})
+			})
+			.fail(function(){
+				swal({
 				  title: 'Error!',
-				  text: '노트삭제를 실패하였습니다.',
+				  text: '노트 삭제를 실패하였습니다.',
 				  type: 'error',
 				  confirmButtonText: '확인'
 				})
@@ -709,17 +672,23 @@
 				url:"/memory/note/deleteCategory",
 				dataType:"json",
 				data: {"categoryNo":categoryNo},
-				type: "POST",
-				success: function (result){
+				type: "POST"
+				})
+				.done(function (result){
 					mainNoteList();
 					getMainCategory();
 					mainNoteList2();
 					getMainCategory2();
-					swal("카테고리를 삭제했습니다.", result.msg,'success');
-					},
-				error: swal({
+					swal({
+						  title: '카테고리를 삭제했습니다.',
+						  type: 'success',
+						  confirmButtonText: '확인'
+						})
+				})
+				.fail(function(){
+					swal({
 					  title: 'Error!',
-					  text: '카테고리삭제를 실패하였습니다.',
+					  text: '카테고리 삭제를 실패하였습니다.',
 					  type: 'error',
 					  confirmButtonText: '확인'
 					})
@@ -769,7 +738,6 @@
 		.done(function (result) {
 			swal({
 				  title: '카테고리등록 성공',
-				  text: result.msg,
 				  type: 'success',
 				  confirmButtonText: '확인'
 				})			

@@ -47,11 +47,6 @@
 						</td>
 					</tr>
 					<tr id="authSet">
-						<td><label for="auth">공개설정</label></td>
-						<td>&nbsp;&nbsp;</td>
-			        	<td><input id="authSet" name="authSet" type="radio" value="0"> 친구랑 보기</td>
-						<td>&nbsp;&nbsp;</td>
-						<td><input id="authSet" name="authSet" type="radio" value="1"> 나만보기</td>
 					</tr>
 				</table>
 				<br> <br>
@@ -118,12 +113,8 @@
 				})
 			return false;
 		}
-		var radio_btn = document.getElementsByName("authSet");
-		var authSet_check = 0;
-		if (authSet[1].checked == true) {
-			authSet_check++;
-		}
-		if (authSet[0].checked == false && authSet[1].checked == false) {
+		var authority = $("input[name=authSet]:checked").val();
+		if (authority == null) {
 			swal({
 				  title: 'Error!',
 				  text: '공개방법을 선택해주세요.',
@@ -141,12 +132,11 @@
 				url : "/memory/note/note",
 				type : "POST",
 				data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor, 
-					"categoryNo" : $("#category").val(), "noteAuth" : authSet_check}
+					"categoryNo" : $("#category").val(), "noteAuth" : authority}
 			})
 			.done(function (result) {
 				swal({
-					  title: '작성 완료',
-					  text: result.msg,
+					  title: '노트가 등록되었습니다.',
 					  type: 'success',
 					  confirmButtonText: '확인'
 					})	
@@ -200,15 +190,8 @@
 			return false;
 		}
 		
-		var radio_btn = document.getElementsByName("authSet2");
-		var authSet_check = 0;
-		console.log(radio_btn);
-		console.log("친구"+authSet2[0].checked);
-		console.log("나"+authSet2[1].checked);
-		if (authSet2[1].checked == true) {
-			authSet_check++;
-		}
-		if (authSet2[0].checked == false && authSet2[1].checked == false) {
+		var authority = $("input[name=authSet2]:checked").val();
+		if (authority == null) {
 			swal({
 				  title: 'Error!',
 				  text: '공개방법을 선택해주세요.',
@@ -226,12 +209,11 @@
 				url : "/memory/note/noteUpdate",
 				type : "POST",
 				data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : editor,
-					"categoryNo" : $("#category").val(), "noteAuth" : authSet_check, "noteNo" : localStorage.getItem("noteNoToUpdate")}
+					"categoryNo" : $("#category").val(), "noteAuth" : authority, "noteNo" : localStorage.getItem("noteNoToUpdate")}
 			})
 			.done(function (result) {
 				swal({
-					  title: '노트수정 완료',
-					  text: result.msg,
+					  title: '노트수정을 완료했습니다.',
 					  type: 'success',
 					  confirmButtonText: '확인'
 					})	

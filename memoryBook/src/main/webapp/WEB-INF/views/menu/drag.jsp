@@ -78,8 +78,8 @@
 		<div class="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)">
 		</div>
 			<br>
-			<p class="pageTitle">${name}님이 드래그한 드래그 리스트</p>
-			<p class="pageSubTitle">${name}님이 걸어온 길을 공유해 보세요</p>
+			<p class="pageTitle">DRAG LIST</p>
+			<p class="pageSubTitle">걸어온 길을 살펴보고 정리해 보세요</p>
 		</div>
 		<br><br>
 		</div>
@@ -88,32 +88,13 @@
 	<!-- 본문내용 끝 -->
 
 	<script>
-	//드래그 검색
-	function searchList_drag(){
-		var searchWrd = $("#searchWrd").val();
-		var memberNo = ${memberNo};
-		$.ajax({
-			type: "POST",
-			url : "/memory/drag/dragList",
-			data: {"searchWrd" : searchWrd,
-				   "memberNo" : memberNo
-			 	},
-			dataType : "json"
-		})
-		.done(function (result) {
-			makeDragCards(result);
-			$("#searchWrd").val("");
-			return false;
-		})
-		.fail(function(jqXhr, textStatus, errorText){
-			swal({
-				  title: 'Error!',
-				  text: '오류코드: ' + status,
-				  type: 'error',
-				  confirmButtonText: '확인'
-				})
-		});
-		
+	//에디터 오픈
+	function open_editorD() {
+		$('#myDragList').css('display', 'none');
+		$('#myNote').css('display', '');
+		$('#noteView').css('display', 'none');
+		$('#noteEditor').css('display', '');
+		editor_chk = true;
 	}
 
 	//메일로 드래그 보내기
@@ -131,7 +112,11 @@
 			dataType : "json"
 		})
 		.done(function (result) {
-			alert(result.msg, "success");
+			swal({
+				  title: '드래그를 메일로 보냈습니다.',
+				  type: 'success',
+				  confirmButtonText: '확인'
+				})
 	        $("#email_drag").val("");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
@@ -176,9 +161,9 @@
 			$("#title_drag").html("<div>[ 드래그 데이터  "+time2+" ]</div><h3>" + title +"</h3>");
 			$("#date_drag").html(time);
 			$("#content_drag").html(content);
-			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'><a href='' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateDrag("+dragNo+");'></i></a></span>&nbsp;"
-								  +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'><a href='' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></span>&nbsp;"
-								  +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='메일로 보내기'><a href='' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#mailModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;"
+			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'><a class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='dragNoteWrite("+dragNo+");'></i></a></span>&nbsp;"
+								  +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'><a class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></span>&nbsp;"
+								  +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='메일로 보내기'><a class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#mailModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;"
 								  +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_modal'><i class='fa fa-download'></i></a></span></p>");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
@@ -317,10 +302,10 @@
 	})
 
 	//드래그 내용 수정 및 수정내용을 노트에 등록
-	function updateDrag(dragNo){
+	function dragNoteWrite(dragNo){
 		localStorage.setItem("dragNoToUpdate",dragNo);
-		$('#noteUpdateBtn').css('display', 'block');
-		$('#noteSubmitBtn').css('display', 'none');
+		$('#noteUpdateBtn').css('display', 'none');
+		$('#noteSubmitBtn').css('display', 'block');
 		$.ajax({
 			type: "POST",
 			url : "/memory/drag/dragDetail",
@@ -328,17 +313,18 @@
 			dataType : "json"
 		})
 		.done(function (result) {
-			var title = result.noteTitle;
-			var content = result.noteContent;
+			var title = result.dragUrlTitle;
+			console.log(title);
+			var content = result.dragContent;
 			$("input[name=noteTitle]").val(title);
 			CKEDITOR.instances.ckeditor.setData(content);
 			getCategory();
-			open_editorDrag();
+			open_editorD();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
 			swal({
 				  title: 'Error!',
-				  text: '노트 등록을 실패했습니다.',
+				  text: '에디터 로딩을 실패했습니다.',
 				  type: 'error',
 				  confirmButtonText: '확인'
 				})
@@ -367,13 +353,19 @@
 					url:"/memory/drag/deleteDrag",
 					dataType:"json",
 					data: {"dragNo":dragNo},
-					type: "POST",
-					success: function (result){
-						swal("삭제 완료", result.msg,'success');
+					type: "POST"
+					})
+					.done(function (result){
+						swal({
+							  title: '드래그를 삭제하였습니다.',
+							  type: 'success',
+							  confirmButtonText: '확인'
+							})	
 						makeDragList();
 						mainDragList();
-						},
-					error: swal({
+					})
+					.fail(function(){
+						swal({
 						  title: 'Error!',
 						  text: '드래그데이터 삭제를 실패하였습니다.',
 						  type: 'error',
