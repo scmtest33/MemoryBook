@@ -5,12 +5,15 @@ public class FriendVO {
 	private String friend_Email;
 	private String name;
 	private String mem_image;
+	private int infoNumber; 
 	public FriendVO() {}
-	public FriendVO(String myEmail, String friend_Email, String name) {
+	public FriendVO(String myEmail, String friend_Email, String name, String mem_image, int infoNumber) {
 		super();
 		this.myEmail = myEmail;
 		this.friend_Email = friend_Email;
 		this.name = name;
+		this.mem_image = mem_image;
+		this.infoNumber = infoNumber;
 	}
 	public String getMyEmail() {
 		return myEmail;
@@ -37,11 +40,16 @@ public class FriendVO {
 	public void setMem_image(String mem_image) {
 		this.mem_image = mem_image;
 	}
+	
+	public int getinfoNumber() {
+		return infoNumber;
+	}
+	public void setinfoNumber(int infoNumber) {
+		this.infoNumber = infoNumber;
+	}
 	@Override
 	public String toString() {
 		return "FriendVO [myEmail=" + myEmail + ", friend_Email=" + friend_Email + ", name=" + name + ", mem_image="
-				+ mem_image + "]";
+				+ mem_image + ", infoNumber=" + infoNumber + "]";
 	}
-	
-	
 }

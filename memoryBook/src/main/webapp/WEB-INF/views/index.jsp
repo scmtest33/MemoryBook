@@ -86,41 +86,41 @@
                 </li>
                 <li>
       		        <a id="mindmap" class="noteImg" >
-      		        	<img src="/memory/resources/img/indexImg/note_hover.png" class="indexImg7">
-      		        	<img src="/memory/resources/img/indexImg/note1.png" class="indexImg8">
+      		        	<img src="/memory/resources/img/indexImg/mindmap_hover.png" class="indexImg9">
+      		        	<img src="/memory/resources/img/indexImg/mindmap1.png" class="indexImg10">
 					    My Mindmap
 					</a>
                 </li>
                  <li>
                 	<a id="myFriend" class="noteImg">
-                		<img src="/memory/resources/img/indexImg/friend_hover.png" class="indexImg9">
-      		        	<img src="/memory/resources/img/indexImg/friend1.png" class="indexImg10">
+                		<img src="/memory/resources/img/indexImg/friend_hover.png" class="indexImg11">
+      		        	<img src="/memory/resources/img/indexImg/friend1.png" class="indexImg12">
 					    My Friend
 					</a>
                 </li>
                 <li>
                 	<a id="searchFriend" class="noteImg">
-                	<img src="/memory/resources/img/indexImg/search_hover.png" class="indexImg11">
-      		        <img src="/memory/resources/img/indexImg/search1.png" class="indexImg12">
+                	<img src="/memory/resources/img/indexImg/search_hover.png" class="indexImg13">
+      		        <img src="/memory/resources/img/indexImg/search1.png" class="indexImg14">
 					    Friend Search
 					</a>
+                </li>
+                <li>
+                    <a onclick="logout()" class="noteImg" id="logout">
+                	<img src="/memory/resources/img/indexImg/logout_hover.png" class="indexImg15">
+      		        <img src="/memory/resources/img/indexImg/logout1.png" class="indexImg16">
+                    	Logout
+                    </a>
                 </li>
                 <c:if test="${email eq 'admin'}">
                 <li>
                 	<a id="user" class="noteImg">
-                	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg15">
-      		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg16">
+                	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg17">
+      		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg18">
 						UserList
 					</a>
                 </li>
                 </c:if>
-                <li>
-                    <a onclick="logout()" class="noteImg" id="logout">
-                	<img src="/memory/resources/img/indexImg/logout_hover.png" class="indexImg13">
-      		        <img src="/memory/resources/img/indexImg/logout1.png" class="indexImg14">
-                    	Logout
-                    </a>
-                </li>
             </ul>
         </div>
 

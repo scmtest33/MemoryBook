@@ -170,11 +170,18 @@ function friendList(){
 							data: {"email": item.friend_Email},
 							success: function(result){
 								var html = '<p class="clickerName">'+friendNa+'님의 노트</p>';
+								
+								//전체공개 나만공개 분기처리
+								if(item.infoNumber == 0){
 								$("#noteView2").html(html);
 								localStorage.setItem("friendNo",result);
 								var friendNo = localStorage.getItem("friendNo");
 								getMainFriendCategory();
 								mainFriendNoteList();
+								}else{
+									html += '<p>전체공개를 하지 않은 회원입니다.</p>';
+									$("#noteView2").html(html);
+								}
 							}
 						});
 					});

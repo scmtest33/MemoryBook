@@ -155,6 +155,19 @@ body {
 	z-index: 2;
 }
 
+.indexImg17 { 
+	position: absolute;
+	top : 655px;
+	left : 15px;
+	z-index: 1;
+}
+.indexImg18 { 
+	position: absolute;
+	top : 655px;
+	left : 15px;
+	z-index: 2;
+}
+
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -186,7 +199,7 @@ body {
 /*     background: rgba(0,0,0,0.2); */
 }
 /* index 목록 색깔 호버 */
-#indexMainB:hover {
+#Main:hover {
 	background: rgba(47,157,39,0.8);
 }
 #myProfile:hover {
@@ -199,7 +212,7 @@ body {
 	background: rgba(255,94,0,0.8);
 }
 #myFriend:hover {
-	background: rgba(165,102,255,0.8);
+	background: #FFB2F5;
 }
 #searchFriend:hover {
 	background: rgba(255,246,18,0.8);
@@ -209,6 +222,9 @@ body {
 }
 #user:hover {
 	background: rgba(116,116,116,0.9);
+}
+#mindmap:hover {
+	background: rgb(140, 61, 197); 
 }
 
 .sidebar-nav li a:active,
