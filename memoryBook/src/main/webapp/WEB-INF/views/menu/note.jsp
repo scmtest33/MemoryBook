@@ -239,9 +239,9 @@
 			$("#titleNote").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
 			$("#date").html(time);
 			$("#content").html(content);
-			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'><a href='' class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;"
-							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='' class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteNote("+noteNo+");'></i></a></span>&nbsp;"
-							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='메일로 보내기'><a href='' class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#mailModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;"
+			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'><a class='btn_modal'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;"
+							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a class='btn_modal'><i class='fa fa-trash' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteNote("+noteNo+");'></i></a></span>&nbsp;"
+							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='메일로 보내기'><a class='btn_modal'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#mailModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;"
 							 +"<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_modal'><i class='fa fa-download'></i></a></span></p>");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
@@ -490,7 +490,6 @@
 	}
 
 	// 에디터 열기
-	var editor_chk = false; // 드래그 입력시 에디터 on/off여부 체크
 	$("#noteWrite").click(function(e) {
 		$('#noteView').css('display', 'none');
 		$('#profileModal').css('display', 'none');
@@ -603,10 +602,10 @@
 			dataType : "json"
 		})
 		.done(function (result) {
+			editor_chk = true;
 			var title = result.noteTitle;
 			var content = result.noteContent;
 			var auth = result.noteAuth;
-			console.log(auth);
 			$("input[name=noteTitle]").val(title);
 			CKEDITOR.instances.ckeditor.setData(content);
 			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo);

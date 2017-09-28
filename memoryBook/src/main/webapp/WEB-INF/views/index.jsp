@@ -195,6 +195,9 @@
 
     <!-- Menu Toggle Script -->
     <script>
+    var editor_chk = false; //드래그 입력시 에디터 on/off여부 체크
+    var chk_tf; //메뉴 이동시 에디터 체크
+
     //index들어왔을때 초기화면
     $(function(){
     	$('#myDragList').css('display', 'none');
@@ -255,6 +258,7 @@
 		getMainCategory2(); //카테고리 리스트(마인드맵용)
 		mainFriendNoteList() //친구 노트 리스트
 		getMainFriendCategory();//친구 카테고리 리스트
+		authInit();//노트 권한설정창
 		//노트 리스트 화면
 		$('#profileModal').css('display', '');
 		$('#noteView').css('display', '');
@@ -268,8 +272,6 @@
 		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#editorView').css('height', 'screen.innerHeight +"px"');
 		
-		//메뉴 이동시 에디터 체크
-		var chk_tf;
 	}
 
 	// 브라우저 창 크기 변화 시 위치 지정 (통합)
@@ -518,25 +520,35 @@
     
     //에티터 작동중 취소여부 확인 (noteWrite.jsp에도 연동되어 같이 적용됨)
 	function editorCancelChk() {
-		var chk;
-		chk = confirm("정말로 취소하시겠습니까?");
-		if(chk) {
-		editor_chk = false;
-		$("#noteTitle").val('');
-		CKEDITOR.instances.ckeditor.setData("");
-		authInit();
-		$('#noteEditor').css('display', 'none');
-		$('#categoryToAdd').css('display', 'none');
-		$('#Category1').css('display', 'none');
-		$('#Category2').css('display', 'none');
-		$('#profileModal').css('display', '');
-		$('#noteView').css('display', '');
-		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
-		$('#noteView').css('height', 'screen.innerHeight +"px"');
-		chk_tf = true;
-		} else {
-		chk_tf = false;
-		}
+		swal({
+			  title: '정말로 취소하시겠습니까?',
+			  text: '취소시 글 내용은 저장되지 않습니다.',
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '네',
+			  cancelButtonText: '아니오',
+			  confirmButtonClass: 'swal2-confirm btn btn-success',
+			  cancelButtonClass: 'swal2-cancel btn btn-danger',
+			  buttonsStyling: false
+		}).then(function () {
+			editor_chk = false;
+			$("#noteTitle").val('');
+			CKEDITOR.instances.ckeditor.setData("");
+			authInit();
+			$('#noteEditor').css('display', 'none');
+			$('#categoryToAdd').css('display', 'none');
+			$('#Category1').css('display', 'none');
+			$('#Category2').css('display', 'none');
+			$('#profileModal').css('display', '');
+			$('#noteView').css('display', '');
+			$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
+			$('#noteView').css('height', 'screen.innerHeight +"px"');
+			chk_tf = true;
+			}, function (dismiss) {
+				chk_tf = false;
+			   });
 	}
     
 	// 드롭 허용

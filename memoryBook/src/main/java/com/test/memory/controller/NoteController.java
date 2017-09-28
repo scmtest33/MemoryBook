@@ -167,7 +167,7 @@ public class NoteController {
 		}else note.setMemberNo(Integer.parseInt(request.getParameter("friendNo")));
 
 
-		List<NoteVO> noteList = service.noteList(note);
+		List<NoteVO> noteList = service.fnoteList(note);
 		for(NoteVO n : noteList){
 			try{
 				// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다

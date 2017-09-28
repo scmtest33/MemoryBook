@@ -49,13 +49,14 @@
 			n.note_content,
 			c.category_name,
 			n.note_title,
+			n.note_auth,
 			n.note_reg_date,
 			n.note_update_date
 		  from t_note n inner join t_category c
 		    on n.category_no = c.category_no 
 		 where n.mem_no = #{memberNo}
 		 
-		 		<if test='searchWrd != "" and searchWrd != null '>
+		 	<if test='searchWrd != "" and searchWrd != null '>
 				AND (
 						(n.note_content LIKE '%'||#{searchWrd}||'%')
 						OR
@@ -79,14 +80,6 @@
 		  from t_note n inner join t_category c
 		    on n.category_no = c.category_no 
 		 where n.mem_no = #{memberNo} and n.note_auth = 0
-		 
-		 		<if test='searchWrd != "" and searchWrd != null '>
-				AND (
-						(n.note_content LIKE '%'||#{searchWrd}||'%')
-						OR
-						(n.note_title LIKE '%'||#{searchWrd}||'%')
-					)
-			</if>
 		 order by n.note_no desc
 	</select>
 	

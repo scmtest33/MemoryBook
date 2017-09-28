@@ -123,7 +123,8 @@ public class NoteServiceImpl implements NoteService{
 			out.write(bytes);
 			String callback = request.getParameter("CKEditorFuncNum");
 			printWriter = response.getWriter();
-			String fileUrl = request.getContextPath()+ "/data/img_data" + "/" +fileName; //url 경로
+			String domain = "http://localhost:8888";
+			String fileUrl = domain+request.getContextPath()+ "/data/img_data" + "/" +fileName; //url 경로
 			System.out.println(fileUrl);
 			printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
 		               + callback
