@@ -56,7 +56,7 @@
 	<!-- 회원검색 -->
 	<select id="findMember" parameterType="String" resultType="MemberVO">
 <!-- 		SELECT name, email FROM T_MEMBER WHERE NAME LIKE '%'||#{name}||'%' or EMAIL LIKE '%'||#{email}||'%' order by mem_no desc -->
-		SELECT * FROM T_MEMBER WHERE (EMAIL != #{0} AND EMAIL != 'admin') AND (NAME LIKE '%'||#{1}||'%' or EMAIL LIKE '%'||#{1}||'%') AND INFONUMBER=0 order by mem_no desc
+		SELECT * FROM T_MEMBER WHERE (EMAIL != #{0} and EMAIL != 'admin') and (NAME LIKE '%'||#{1}||'%' or EMAIL LIKE '%'||#{1}||'%') order by mem_no desc
 	</select>
 	
 	<!-- 친구추가 -->
