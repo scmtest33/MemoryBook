@@ -113,6 +113,27 @@ a.btn_modal {
 }
 
 
+/* 노트 및 드래그 내용보기 모달 */
+.mail_modal_title{
+	color: #555555;
+}
+.modal_input{
+	box-shadow: 1px 2px 5px #bbb;
+}
+.modal_detail_title{
+	text-align: center;
+}
+.modal_detail_date{
+	text-align: right;
+}
+.modal_detail_content{
+	text-align: left;
+}
+.modal_detail_footer{
+	text-align: right;
+}
+
+
 /* 회원정보수정,로그인,가입,탈퇴 모달 */
 .profile_img{
 	width: 120px;
@@ -152,33 +173,35 @@ a.btn_modal {
 }
 
 
-/* 노트 및 드래그 내용보기 모달 */
-.mail_modal_title{
-	color: #555555;
-}
-.modal_input{
-	box-shadow: 1px 2px 5px #bbb;
-}
-.modal_detail_title{
-	text-align: center;
-}
-.modal_detail_date{
-	text-align: right;
-}
-.modal_detail_content{
-	text-align: left;
-}
-.modal_detail_footer{
-	text-align: right;
-}
-
-
 /* 프로필 모달 */
 .profile-size{
-	width: 500px;
+	width: 340px;
+	height: 450px;
+}
+.profile-name{
+	font-size: x-large;
+}
+.profile-items{
+	font-size: large;
+}
+.profile-editBtn{
+	font-size: large;
+}
+.profile-btns{
+	height: 100%;
 }
 .align-center{
+	margin-top: 5px;
+	margin-bottom: 5px;
 	text-align: center;
+}
+.align-left{
+	margin: 5px;
+	text-align: left;
+}
+li.profile{
+	text-align: left;
+	margin: 5px;
 }
 
 

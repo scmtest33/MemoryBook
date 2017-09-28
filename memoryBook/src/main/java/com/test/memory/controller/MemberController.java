@@ -86,14 +86,13 @@ public class MemberController {
 			else if(nvo.getApprovalNum()==1){
 				return nvo;
 			} else {
-				System.out.println(nvo);
 				String mem_img = nvo.getMem_image();
 				if(mem_img == null) mem_img = "null";
 				session.setAttribute("email", nvo.getEmail());
 				session.setAttribute("memberNo", nvo.getMem_no());
-				session.setAttribute("name", nvo.getName());
-				session.setAttribute("infoNumber", nvo.getInfoNumber());
-				session.setAttribute("mem_image", mem_img);
+//				session.setAttribute("name", nvo.getName());
+//				session.setAttribute("infoNumber", nvo.getInfoNumber());
+//				session.setAttribute("mem_image", mem_img);
 				return nvo;
 			}
 		}
@@ -189,7 +188,7 @@ public class MemberController {
 		//프로필 사진 업로드
 		@RequestMapping(value="/upload", method=RequestMethod.POST)
 		@ResponseBody
-		private String upload(HttpSession session,HttpServletRequest request, HttpServletResponse response, MultipartFile file, @RequestParam MultipartFile imageFile, Model model) throws Exception { 
+		private String upload(HttpSession session, HttpServletRequest request, HttpServletResponse response, MultipartFile file, @RequestParam MultipartFile imageFile, Model model) throws Exception { 
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset-utf-8");
 			try {
@@ -242,18 +241,20 @@ public class MemberController {
 		//회원정보 수정
 		@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
 		@ResponseBody
-		private boolean infoUpdate(MemberVO vo, HttpSession session, Model model) throws Exception { 
+		private boolean infoUpdate(MemberVO vo, HttpSession session, HttpServletRequest request) throws Exception { 
+			vo.setEmail((String)session.getAttribute("email"));
 			System.out.println(vo);
+			System.out.println(service.infoUpdate(vo));
 			return service.infoUpdate(vo);
 		}
 		
 		//내 프로필 정보 받아오기
-		@RequestMapping(value = "myList", method = RequestMethod.GET)
+		@RequestMapping(value = "myList", method = RequestMethod.POST)
 		@ResponseBody
 		public MemberVO myList(HttpSession session, Model model, MemberVO vo) {
-			
 			String email =(String)session.getAttribute("email");
-			model.addAttribute("approvalnum", vo.getApprovalNum()).toString();
+			model.addAttribute("name", vo.getName()).toString();
+			model.addAttribute("infoNumber", vo.getInfoNumber()).toString();
 			return service.myList(email);
 		}
 }

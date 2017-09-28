@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="noteImg" data-toggle="modal" data-target="#profileModal">
+                    <a onclick="profileUpdate()" class="noteImg" data-toggle="modal" data-target="#profileModal">
                     	<img src="/memory/resources/img/indexImg/profile_hover.png" class="indexImg3">
       		        	<img src="/memory/resources/img/indexImg/profile1.png" class="indexImg4">
 	                    Profile
@@ -139,12 +139,6 @@
 				</div>
 	        </div>
             
-			<div id="profile">
-				<div class="container-fluid">
-				<%@ include file="menu/profile.jsp" %>
-				</div>
-	        </div>
-	        
 	        <div id='myDragList'>
 	        	<div class="container-fluid">
 	 		  		<%@ include file="menu/drag.jsp" %>
@@ -184,10 +178,6 @@
     </div>
     
     
-    
-    
-    
-    
     <!-- Profile Modal-->
 	<div class="modal fade" id="profileModal" role="dialog">
 		<div class="modal-dialog">
@@ -200,31 +190,18 @@
 						<i class="fa fa-user-o modal_title"></i> Profile
 					</h2>
 				</div>
-				<div class="align-center">
-						<div>
-							<img class='profile1 img-circle profile-photo' width='130px' height='130px' alt='avatar' src='/memory/data/mem_image/${mem_image}'>
-							<h2>${name}</h2>
-							<ul id="myInfoList" class="list-group">
-								<li class="list-group-item"><h4><i class="fa fa-envelope"></i>&nbsp;${email}</h4></li>
-								<c:if test="${infoNumber == 0}">
-									<li class="list-group-item"><h4><i class="fa fa-unlock fa-lg"></i>&nbsp;회원검색 허용</h4></li>
-								</c:if>
-								<c:if test="${infoNumber == 1}">
-									<li class="list-group-item"><h4><i class="fa fa-lock fa-lg"></i>&nbsp;회원검색 비허용</h4>
-								</c:if>
-							</ul>
-						</div>
-						<div>
-							<!-- <button type="button" class="btn" id="myProfile" data-dismiss="modal">비밀번호 변경</button> -->
-							<button type="button" class="btn" id="myProfile" onclick="test()">비밀번호 변경</button>
-							<button type="button" class="btn" data-dismiss="modal">닫기</button>
-							<input class="btn btn-danger pull-right" data-dismiss="modal" data-toggle="modal" data-target="#myModal_Unregister" value="탈퇴" type="button">
-						</div>
-					</div>
+				<br>
+				<div class="align-center" id="profileView">
+				</div>
+				<div class="profile-btns align-left">
+					<button type="button" class="btn btn-default" id="myProfile" onclick="pwEdit()">비밀번호 변경</button>
+					<input class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#myModal_Unregister" value="탈퇴하기" type="button">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 				</div>
 			</div>
-
 		</div>
+
 	</div>
 	
 	<!-- 탈퇴 Modal -->
@@ -241,24 +218,24 @@
 		        </div>
 		        <br>
 		        			        	
-		        <div class="modal-body" id="unregisterBody" >
+		        <div class="modal-body" id="unregisterBody">
 		          	
 		        <form name="unregisterfrm" id="unregisterfrm" action="/memory/member/unregister" method="post">       
 			    	<table>
 			    		<tr>
-			    			<div class="form-group">
-			    			탈퇴하실려면 비밀번호를 입력하세요.<br>탈퇴시 작성하신 노트,드래그,친구정보가 전부 삭제됩니다.
-			    			</div>
+			    			<td class="form-group">
+				    			탈퇴하실려면 비밀번호를 입력하세요.<br>탈퇴시 작성하신 노트,드래그,친구정보가 전부 삭제됩니다.
+			    			</td>
 			    		</tr>
 			    		<tr>
-			    			<div class="form-group">
-							    <label for="loginPassword">Password:</label>
-							    <input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
-			    			</div>
+			    			<td class="form-group">
+								<label for="loginPassword">Password:</label>
+								<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
+			    			</td>
 			    		</tr>
 					    <tr>
 					    	<td id="btns" colspan="2">
-					    		<input type="submit" value="회원탈퇴" class="btn btn-default memberOut_btns out_ok">
+					    		<input type="submit" value="탈퇴진행" class="btn btn-default memberOut_btns out_ok">
 					    	</td>
 					    	<td>
 					    	&nbsp;&nbsp;
@@ -379,7 +356,7 @@
 		$('#editorDraglist').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#editorDraglist').css('height', 'screen.innerHeight +"px"');
 	});
-    
+	
 	//로그아웃
     function logout(){
     	swal({
@@ -414,6 +391,39 @@
     	e.preventDefault();
     	$("#wrapper").toggleClass("toggled");
     });
+    
+	//프로필 화면 띄우기
+	function profileUpdate(){
+		$.ajax ({
+			url: "/memory/member/myList",
+			type: "post",
+			success : function(result){
+				$("#profileView").empty();
+				var addRow = '<a id="getImage" onclick="photoEdit()"><img class="profile1 img-circle profile-photo" width="130px" height="130px" alt="avatar" src="/memory/data/mem_image/${mem_image}"></a>';
+					addRow += '<br>';
+					addRow += '<span class="profile-name">'+result.name+'</span>';
+					addRow += '<span class="profile-editBtn">&nbsp;<i onclick="nameEdit()" class="fa fa-pencil-square" aria-hidden="true"></i></span>';
+					addRow += '<ul id="myInfoList" class="list-group">';
+					addRow += '<li class="list-group-item profile"><span class="profile-items"><i class="fa fa-envelope"></i>&nbsp;${email}</span></li>';
+					if(result.infoNumber == 0) {					
+						addRow += '<li class="list-group-item profile"><span class="profile-items">'
+						addRow += '<i class="fa fa-lock fa-lg"></i>&nbsp;회원검색 허용'
+						addRow += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+						addRow += '<a onclick="infoToggle()"><img src="/memory/resources/img/on.png"></a></span></li>';
+						localStorage.setItem("infoStatus","0");
+					}
+					if(result.infoNumber == 1) {
+						addRow += '<li class="list-group-item profile"><span class="profile-items">'
+						addRow += '<i class="fa fa-lock fa-lg"></i>&nbsp;회원검색 허용'
+						addRow += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+						addRow += '<a onclick="infoToggle()"><img src="/memory/resources/img/off.png"></a></span>';
+						localStorage.setItem("infoStatus","1");
+					}
+					addRow += '</ul>';
+					$("#profileView").append(addRow);
+				}
+		})
+	}
     
     // 메인으로 가기
     $("#indexTitle").click(function(e) {
@@ -450,29 +460,6 @@
      		$('#myDragtest').css('display', 'none');
      		$('#indexMain').css('display', '');
 	    	
-    	}
-    	if(editor_chk){
-    		editorCancelChk();
-    		if(chk_tf) {
-    			profile_menu();
-    		}
-    	} else {
-    		profile_menu();
-    	}
-    });
-    
-    //프로필로 가기
-    $("#myProfile").click(function(e) {
-     	function profile_menu(){
-     		$('#indexMain').css('display', 'none');
-     		$('#myDragList').css('display', 'none');
-     		$('#myNote').css('display', 'none');
-     		$('#mindMap').css('display', 'none');
-     		$('#friend').css('display', 'none');
-     		$('#search').css('display', 'none');
-     		$('#userList').css('display', 'none');
-     		$('#myDragtest').css('display', 'none');
-     		$('#profile').css('display', '');
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -576,33 +563,6 @@
     	}
     });
     
-    //친구찾기
-    $("#searchFriend").click(function(e) {
-    	function search_menu(){
-    		$('#indexMain').css('display', 'none');
-     		$('#profile').css('display', 'none');
-     		$('#myDragList').css('display', 'none');
-     		$('#myNote').css('display', 'none');
-     		$('#mindMap').css('display', 'none');
-     		$('#friend').css('display', 'none');
-     		$('#userList').css('display', 'none');
-     		$('#myDragtest').css('display', 'none');
-     		$('#search').css('display', '');
-    	}
-	    if(editor_chk){
-			editorCancelChk();
-			if(chk_tf) {
-				search_menu();
-			}	
-			console.log("editor: "+editor_chk);
-			console.log("chk: "+chk_tf);
-		} else {
-			search_menu();
-		}
-	    console.log("editor2: "+editor_chk);
-		console.log("chk2: "+chk_tf);
-	});
-    
     //회원목록(운영자용) 보기
     $("#user").click(function(e) {
     	function user_menu(){
@@ -680,8 +640,6 @@
  		} 
  	}
 
-    
-    
 /*  	function editorCancelChk() {
 		swal({
 			  title: '정말로 취소하시겠습니까?',
@@ -739,30 +697,8 @@
 		 	deleteNote(deleteNum);
 		} 
 	}
-	
-	
-	
-	//프로필 로직
-	function myList() {
-		$.ajax({
-			url : "/memory/member/myList",
-			type : "get",
-			success : function(result) {
-				$(result).each(function(index, item) {
-							if (item.infoNumber == 0) {
-								var addRow2 = '<input id="infoNumber" name="infoNumber" type="radio" value="0" checked="checked"> 허용&nbsp;&nbsp;&nbsp;';
-									addRow2 += '<input id="infoNumber" name="infoNumber" type="radio" value="1"> 비허용';
-							} else {
-									var addRow2 = '<input id="infoNumber" name="infoNumber" type="radio" value="0"> 허용&nbsp;&nbsp;&nbsp;';
-										addRow2 += '<input id="infoNumber" name="infoNumber" type="radio" value="1" checked="checked"> 비허용';
-								}
-									$("#infoSet").append(addRow2);
-				})
-			}
-		})
-	}
-	
-	
+
+		
 	
 	//회원찾기 로직
 	function findMember() {
@@ -832,13 +768,78 @@
 		});
     };
     
+    //
+    function photoEdit(){
+    	swal({
+    		  title: '이미지 파일 선택',
+      		  html:
+      		    '<input type="file" id="imageFile" class="swal2-input">',
+      		  showCancelButton: true,
+      		  focusConfirm: false
+    		}).then(function (file) {
+    			var data = new FormData();
+    			var files = $("#imageFile").get(0).files;
+    			if (files.length > 0) {
+    				data.append("imageFile", files[0]);
+    				}
+    			$.ajax({
+    				type: "POST",
+    				url : "/memory/member/upload",
+    				data: data,
+    				processData: false,
+    				contentType: false,
+    				success: function (result) {
+    					if(result == "error") {
+    						swal({
+    							  title: 'Warning!',
+    							  text: '이미지 파일만 업로드가 가능합니다.',
+    							  type: 'warning',
+    							  confirmButtonText: '확인'
+    							})
+    					} else if (result == "IOException") {
+    						swal({
+    							  title: 'Error!',
+    							  text: '이미지파일 업로드를 실패했습니다.',
+    							  type: 'error',
+    							  confirmButtonText: '확인'
+    							})
+    					} else {
+    					$("#getImage").html("<img class='profile1 img-circle' width='130px' height='130px' alt='avatar' src='/memory/data/mem_image/"+result+"'>");
+    					swal({
+							  title: '프로필 이미지 변경 완료',
+							  type: 'success',
+							  confirmButtonText: '확인'
+							})
+    					}
+    				},
+    				error: function(jqXhr, textStatus, errorText){
+    					swal({
+    						  title: 'Error!',
+    						  text: '프로필사진 등록을 실패했습니다.',
+    						  type: 'error',
+    						  confirmButtonText: '확인'
+    						})
+    				}
+    			})
+    		/* var reader = new FileReader
+    		  reader.onload = function (e) {
+    		    swal({
+    		      title: 'Your uploaded picture'
+    		      imageUrl: e.target.result,
+    		      imageAlt: 'The uploaded picture'
+    		    })
+    		  }
+    		  reader.readAsDataURL(file) */
+    		})
+    	}
     
-    function test(){
+    //비밀번호 변경
+    function pwEdit(){
     	swal({
     		  title: '비밀번호 변경',
     		  html:
-    		    '비밀번호 입력: <input type="password" id="swal-input1" class="swal2-input">' +
-    		    '비밀번호 확인: <input type="password" id="swal-input2" class="swal2-input">',
+    		    '새로운 비밀번호 입력 <input type="password" id="swal-input1" class="swal2-input">' +
+    		    '비밀번호 확인 <input type="password" id="swal-input2" class="swal2-input">',
     		  showCancelButton: true,
     		  focusConfirm: false
     		}).then(function () {
@@ -856,83 +857,91 @@
     				$.ajax({
     					url : "/memory/member/infoUpdate",
     					type : "POST",
-    					data : {"name" : ${name}, "email" : ${email}, "infoNumber" : ${infoNumber}, "mem_pwd" : $("#swal-input1").val()}
+    					data : {"mem_pwd" : $("#swal-input1").val()}
+    				})
+    				.done(function (result) {
+    					swal({
+  						  title: '비밀번호가 변경되었습니다.',
+  						  type: 'success',
+  						  confirmButtonText: '확인'
+  						})
+    				})
+    				.fail(function(jqXhr, textStatus, errorText){
+    					swal({
+    					  title: 'Error!',
+    					  text: '비밀번호 변경을 실패했습니다.',
+    					  type: 'error',
+    					  confirmButtonText: '확인'
+    					})
     				});
-    		  		swal("비밀번호가 변경되었습니다.")
     			}
     		}).catch(swal.noop)
     }
     
-    
-	function mem_update() {
-		//암호가 일치하지 않거나 입력되지 않았을 경우
-		var mo = document.infoModify;
-		var pw1 = document.getElementById('pwd1').value;
-		var pw2 = document.getElementById('pwd2').value;
-		if (pw2 != "") {
-			if (pw1 != pw2 || pw1 == "") {
-				swal({
-					title : 'Error!',
-					text : '비밀번호를 확인해 주세요.',
-					type : 'error',
-					confirmButtonText : '확인'
-				})
-				return;
-			}
-		} else {
-			//라디오 버튼 Name 가져오기
-			var radio_btn = document.getElementsByName("infoNumber");
-			//라디오 버튼이 체크되었나 확인하기 위한 변수
-			var infoNumber_check = 0;
-			//만약 라디오 2번버튼이 체크가 되어있다면 true
-			if (infoNumber[1].checked == true) {
-				//라디오 버튼2번이 체크되면 infoNumber_check를 1로 만들어준다.
-				infoNumber_check++;
-			}
-			if (infoNumber[0].checked == false
-					&& infoNumber[1].checked == false) {
-				swal({
-					title : 'Error!',
-					text : '공개방법을 선택해주세요.',
-					type : 'error',
-					confirmButtonText : '확인'
-				})
-				return;
-			}
-		}
-		$.ajax({
-			url : "/memory/member/infoUpdate",
-			type : "POST",
-			data : {
-				"name" : $("input[name=name]").val(),
-				"email" : $("input[name=email]").val(),
-				"mem_pwd" : $("input[name=pwd1]").val(),
-				"infoNumber" : infoNumber_check
-			},
-			success : function(result) {
-				if (result) {
-					swal({
-						title : '회원정보 수정 완료',
-						text : '회원정보가 정상적으로 수정되었습니다',
-						type : 'success',
-						confirmButtonText : '확인'
-					})
-					$("#myInfoList").empty();
-					$("#infoSet").empty();
-					myList();
-
-				} else {
-					swal({
-						title : 'Error!',
-						text : '회원정보 수정을 실패했습니다.',
-						type : 'error',
-						confirmButtonText : '확인'
-					})
-				}
-			}
-		});
-		return false;
-	};
+	//이름 변경
+	function nameEdit(){
+		swal({
+  		  title: '이름 변경',
+  		  html:
+  		    '새로운 이름을 입력 후 확인을 눌러주세요. <input id="swal-input3" class="swal2-input">',
+  		  showCancelButton: true,
+  		  focusConfirm: false
+  		}).then(function () {
+  			var name_chk = $('#swal-input3').val();
+  			if (name_chk == "") {
+  				swal({
+  					title : 'Error!',
+  					text : '이름이 입력되지 않았습니다. 다시 진행하세요.',
+  					type : 'error',
+  					confirmButtonText : '확인'
+  				})
+  				return;
+  			} else {
+  				$.ajax({
+  					url : "/memory/member/infoUpdate",
+  					type : "POST",
+  					data : {"name" : $("#swal-input3").val()}
+  				})
+  				.done(function (result) {
+  					swal({
+						  title: '이름이 변경되었습니다.',
+						  type: 'success',
+						  confirmButtonText: '확인'
+						})
+					profileUpdate();
+  				})
+  				.fail(function(jqXhr, textStatus, errorText){
+  					swal({
+  					  title: 'Error!',
+  					  text: '이름 변경을 실패했습니다.',
+  					  type: 'error',
+  					  confirmButtonText: '확인'
+  					})
+  				});
+  			}
+  		}).catch(swal.noop)
+	}
+	
+	//회원검색 공개 변경
+	function infoToggle(){
+		var infoNum = localStorage.getItem("infoStatus");
+  		$.ajax({
+  			url: "/memory/member/infoUpdate",
+  			type: "POST",
+  			data: {"infoNumber" : infoNum}
+  		})
+  		.done(function (result) {
+			profileUpdate();
+  		})
+  		.fail(function(jqXhr, textStatus, errorText){
+  			swal({
+  			  title: 'Error!',
+  			  text: '공개설정 변경을 실패했습니다.',
+  			  type: 'error',
+  			  confirmButtonText: '확인'
+  			})
+  		});
+	}
     </script>
 </body>
 </html>

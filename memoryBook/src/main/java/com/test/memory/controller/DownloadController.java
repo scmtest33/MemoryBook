@@ -36,7 +36,7 @@ public class DownloadController {
 	private FileInputStream fis;	//파일을 읽기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
 	private String FILE_PATH = "C:/data/";
-//	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
+//	private String FILE_PATH = "G:/SPRING/git/data/";
 	private String SAVE_PATH = "C:/savedata/";
 	
 	@Autowired

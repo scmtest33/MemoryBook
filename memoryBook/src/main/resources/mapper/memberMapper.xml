@@ -50,12 +50,24 @@
 	
 	<!-- 프로필 수정 -->
 	<update id="infoUpdate" parameterType="MemberVO">
-		UPDATE T_MEMBER SET NAME = #{name}, MEM_PWD = #{mem_pwd}, INFONUMBER = #{infoNumber} WHERE EMAIL = #{email}
+		UPDATE T_MEMBER SET
+		<if test='name != null '>
+			NAME = #{name}
+		</if>
+		<if test='mem_pwd != null '>
+			MEM_PWD = #{mem_pwd}
+		</if>
+		<if test='infoNumber == 0 and name == null and mem_pwd == null'>
+			INFONUMBER = 1
+		</if>
+		<if test='infoNumber == 1 and name == null and mem_pwd == null'>
+			INFONUMBER = 0
+		</if>
+			WHERE EMAIL = #{email}
 	</update>
 	
 	<!-- 회원검색 -->
 	<select id="findMember" parameterType="String" resultType="MemberVO">
-<!-- 		SELECT name, email FROM T_MEMBER WHERE NAME LIKE '%'||#{name}||'%' or EMAIL LIKE '%'||#{email}||'%' order by mem_no desc -->
 		SELECT * FROM T_MEMBER WHERE (EMAIL != #{0} and EMAIL != 'admin') AND (NAME LIKE '%'||#{1}||'%' or EMAIL LIKE '%'||#{1}||'%') AND INFONUMBER=0 order by mem_no desc
 	</select>
 	
@@ -92,7 +104,7 @@
 	
 	<!-- 자신의 정보 -->
 	<select id="myList" resultType="MemberVO">
-		SELECT * FROM T_MEMBER WHERE email = #{email}
+		SELECT NAME,MEM_IMAGE,INFONUMBER FROM T_MEMBER WHERE email = #{email}
 	</select>
 	
 	
