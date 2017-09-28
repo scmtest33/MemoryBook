@@ -93,7 +93,6 @@
 		$('#myDragList').css('display', 'none');
 		$('#myNote').css('display', '');
 		$('#noteView').css('display', 'none');
-		$('#profileModal').css('display', 'none');
 		$('#noteEditor').css('display', '');
 		editor_chk = true;
 	}

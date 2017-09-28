@@ -37,6 +37,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
+    <link href="/memory/resources/css/memory-sheet.css" rel="stylesheet">
 
 	<!-- 공용 스크립트 -->
 	<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
@@ -64,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a id="myProfile" class="noteImg">
+                    <a class="noteImg" data-toggle="modal" data-target="#profileModal">
                     	<img src="/memory/resources/img/indexImg/profile_hover.png" class="indexImg3">
       		        	<img src="/memory/resources/img/indexImg/profile1.png" class="indexImg4">
 	                    Profile
@@ -99,7 +100,8 @@
 					</a>
                 </li>
                 <li>
-                	<a id="searchFriend" class="noteImg">
+               		<a class="noteImg" data-toggle="modal" data-target="#userSearchModal">
+                	<!-- <a id="searchFriend" class="noteImg"> -->
                 	<img src="/memory/resources/img/indexImg/search_hover.png" class="indexImg13">
       		        <img src="/memory/resources/img/indexImg/search1.png" class="indexImg14">
 					    Friend Search
@@ -164,13 +166,13 @@
 	        
 			<div id='friend'>
 				<div class="container-fluid">
-			  		<%@ include file="menu/friend.jsp" %> 
+			  		<%@ include file="menu/friend.jsp" %>
 			  	</div>
 		  	</div>
 	        
 			<div id='search'>
 				<div class="container-fluid">
-			  		<%@ include file="menu/search.jsp" %>
+			  		<%-- <%@ include file="menu/search.jsp" %> --%>
 			  	</div>
 		  	</div>
 		  	
@@ -187,6 +189,125 @@
 		  	</div>
 		</div>	
     </div>
+    
+    
+    
+    
+    
+    
+    <!-- Profile Modal-->
+	<div class="modal fade" id="profileModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h2 class="modal-title">
+						<i class="fa fa-user-o modal_title"></i> Profile
+					</h2>
+				</div>
+				<div class="align-center">
+					<h1>테스트</h1>
+						<div>
+							<img class='profile1 img-circle' width='150px' height='150px' alt='avatar' src='/memory/data/mem_image/${mem_image}'>
+							<ul id="myInfoList" class="list-group">
+							</ul>
+						</div>
+						<div>
+							<button type="button" class="btn" id="myProfile" data-dismiss="modal">회원정보 수정</button>
+							<button type="button" class="btn" data-dismiss="modal">닫기</button>
+							<input class="btn btn-danger pull-right" data-dismiss="modal" data-toggle="modal" data-target="#myModal_Unregister" value="탈퇴" type="button">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<!-- 탈퇴 Modal -->
+	<div class="modal fade" id="myModal_Unregister" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content memberOut">
+		        <div class="modal-header">
+		        	<button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
+		        	<br><br>
+		        	<h4 class="modal-title outTitle" id="unregisterTitle">Memory Lane Unregister</h4>
+		        	<br>
+		        </div>
+		        <br>
+		        			        	
+		        <div class="modal-body" id="unregisterBody" >
+		          	
+		        <form name="unregisterfrm" id="unregisterfrm" action="/memory/member/unregister" method="post">       
+			    	<table>
+			    		<tr>
+			    			<div class="form-group">
+			    			탈퇴하실려면 비밀번호를 입력하세요.<br>탈퇴시 작성하신 노트,드래그,친구정보가 전부 삭제됩니다.
+			    			</div>
+			    		</tr>
+			    		<tr>
+			    			<div class="form-group">
+							    <label for="loginPassword">Password:</label>
+							    <input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
+			    			</div>
+			    		</tr>
+					    <tr>
+					    	<td id="btns" colspan="2">
+					    		<input type="submit" value="회원탈퇴" class="btn btn-default memberOut_btns out_ok">
+					    	</td>
+					    	<td>
+					    	&nbsp;&nbsp;
+					    	</td>
+						    	<td id="btns" colspan="2">
+							    <button class="btn btn-default memberModify_btns Modify_no" id="cancelBtn2" data-dismiss="modal">취소</button>
+					    	</td>
+					    </tr>
+		    		</table>
+			    </form>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+    
+	<!-- userSearch Modal-->
+	<div class="modal fade" id="userSearchModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content"> <!-- 여기가 모달 사이즈 -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h2 class="modal-title">
+						<i class="fa fa-user-o modal_title"></i> User Search
+					</h2>
+				</div>
+				<div class="align-center">
+					<div class="searchInput col-md-offset">
+						<div class="search-form">
+							<label for="search" class="sr-only">Search</label> <input type="text"
+								class="form-control" name="findId" id="findId"
+								placeholder="이름 또는 Email을 입력하세요"
+								onkeydown="javascript:if(event.keyCode == 13) searchList();">
+						</div>
+					</div>
+					<div class="btn-default noteSearch_btn" id="findBtn"
+						onclick="findMember();">
+						<img src="/memory/resources/img/search_icon.jpg">
+					</div>
+					<br>
+					<br>
+					<div id="panel"></div>
+				</div>
+			</div>
+		</div>
+	</div>    
+    
+    
+    
    
     <!-- Bootstrap core JavaScript -->
     <script src="/memory/resources/js/jquery-3.2.1.js"></script>
@@ -213,6 +334,46 @@
     	$('#indexMain').css('display', '');
 	});
     
+	// 로딩 위치 지정
+	window.onload = function () {
+		mainNoteList(); //노트 리스트
+		mainNoteList2(); //노트 리스트(마인드맵용)
+		mainDragList(); //드래그 리스트
+		makeDragList(); //글 작성창 드래그 리스트
+		getMainCategory(); //카테고리 리스트
+		getMainCategory2(); //카테고리 리스트(마인드맵용)
+		mainFriendNoteList() //친구 노트 리스트
+		getMainFriendCategory();//친구 카테고리 리스트
+		authInit();//노트 권한설정창
+		//노트 리스트 화면
+		$('#noteView').css('display', '');
+		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#noteView').css('height', 'screen.innerHeight +"px"');
+		$('#noteEditor').css('display', 'none');
+		$("#noteTitle").val("");
+		CKEDITOR.instances.ckeditor.setData("");
+		
+		//노트 에디터
+		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#editorView').css('height', 'screen.innerHeight +"px"');
+		
+	}
+
+	// 브라우저 창 크기 변화 시 위치 지정 (통합)
+	$(window).resize(function(){
+		//드래그 리스트
+		$('#myDragList').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#myDragList').css('height', 'screen.innerHeight +"px"');		
+		//노트 리스트
+		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#noteView').css('height', 'screen.innerHeight +"px"');
+		//노트 에디터
+		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#editorView').css('height', 'screen.innerHeight +"px"');
+		//에디터 드래그 리스트
+		$('#editorDraglist').css('width', '(screen.innerWidth - 420) +"px"');
+		$('#editorDraglist').css('height', 'screen.innerHeight +"px"');
+	});
     
 	//로그아웃
     function logout(){
@@ -249,49 +410,7 @@
     	$("#wrapper").toggleClass("toggled");
     });
     
-	// 로딩 위치 지정
-	window.onload = function () {
-		mainNoteList(); //노트 리스트
-		mainNoteList2(); //노트 리스트(마인드맵용)
-		mainDragList(); //드래그 리스트
-		makeDragList(); //글 작성창 드래그 리스트
-		getMainCategory(); //카테고리 리스트
-		getMainCategory2(); //카테고리 리스트(마인드맵용)
-		mainFriendNoteList() //친구 노트 리스트
-		getMainFriendCategory();//친구 카테고리 리스트
-		authInit();//노트 권한설정창
-		//노트 리스트 화면
-		$('#profileModal').css('display', '');
-		$('#noteView').css('display', '');
-		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
-		$('#noteView').css('height', 'screen.innerHeight +"px"');
-		$('#noteEditor').css('display', 'none');
-		$("#noteTitle").val("");
-		CKEDITOR.instances.ckeditor.setData("");
-		
-		//노트 에디터
-		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
-		$('#editorView').css('height', 'screen.innerHeight +"px"');
-		
-	}
-
-	// 브라우저 창 크기 변화 시 위치 지정 (통합)
-	$(window).resize(function(){
-		//드래그 리스트
-		$('#myDragList').css('width', '(screen.innerWidth - 420) +"px"');
-		$('#myDragList').css('height', 'screen.innerHeight +"px"');		
-		//노트 리스트
-		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
-		$('#noteView').css('height', 'screen.innerHeight +"px"');
-		//노트 에디터
-		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
-		$('#editorView').css('height', 'screen.innerHeight +"px"');
-		//에디터 드래그 리스트
-		$('#editorDraglist').css('width', '(screen.innerWidth - 420) +"px"');
-		$('#editorDraglist').css('height', 'screen.innerHeight +"px"');
-	});
-    
-    // 내비바 아이콘으로 열고 닫기
+    // 메인으로 가기
     $("#indexTitle").click(function(e) {
      	function profile_menu(){
      		$('#profile').css('display', 'none');
@@ -337,6 +456,7 @@
     	}
     });
     
+    //프로필로 가기
     $("#myProfile").click(function(e) {
      	function profile_menu(){
      		$('#indexMain').css('display', 'none');
@@ -359,6 +479,7 @@
     	}
     });
     
+    //드래그리스트로 가기
     $("#drag").click(function(e) {
     	function drag_menu(){
     		$('#indexMain').css('display', 'none');
@@ -381,28 +502,7 @@
     	}
     });
     
-    $("#dragtest").click(function(e) {
-    	function dragTest_menu(){
-    		$('#indexMain').css('display', 'none');
-     		$('#profile').css('display', 'none');
-     		$('#myDragList').css('display', 'none');
-     		$('#myNote').css('display', 'none');
-     		$('#mindMap').css('display', 'none');
-     		$('#friend').css('display', 'none');
-     		$('#search').css('display', 'none');
-     		$('#userList').css('display', 'none');
-     		$('#myDragtest').css('display', '');
-    	}
-    	if(editor_chk){
-    		editorCancelChk();
-    		if(chk_tf) {
-    			dragTest_menu();
-    		}
-    	} else {
-    		dragTest_menu();
-    	}
-    });
-    
+    //노트리스트 보기
     $("#note").click(function(e) {
     	function note_menu(){
     		$('#indexMain').css('display', 'none');
@@ -425,6 +525,7 @@
     	}
     });
     
+    //관계도 보기
     $("#mindmap").click(function(e) {
     	function mind_menu(){
     		$('#indexMain').css('display', 'none');
@@ -447,6 +548,7 @@
     	}
     });
     
+    //친구목록 보기
     $("#myFriend").click(function(e) {
     	function friend_menu(){
     		$('#indexMain').css('display', 'none');
@@ -469,6 +571,7 @@
     	}
     });
     
+    //친구찾기
     $("#searchFriend").click(function(e) {
     	function search_menu(){
     		$('#indexMain').css('display', 'none');
@@ -495,6 +598,7 @@
 		console.log("chk2: "+chk_tf);
 	});
     
+    //회원목록(운영자용) 보기
     $("#user").click(function(e) {
     	function user_menu(){
     		$('#indexMain').css('display', 'none');
@@ -514,6 +618,29 @@
     		}
     	} else {
     		user_menu();
+    	}
+    });
+    
+    //드래그 테스트 (운영자용)
+    $("#dragtest").click(function(e) {
+    	function dragTest_menu(){
+    		$('#indexMain').css('display', 'none');
+     		$('#profile').css('display', 'none');
+     		$('#myDragList').css('display', 'none');
+     		$('#myNote').css('display', 'none');
+     		$('#mindMap').css('display', 'none');
+     		$('#friend').css('display', 'none');
+     		$('#search').css('display', 'none');
+     		$('#userList').css('display', 'none');
+     		$('#myDragtest').css('display', '');
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			dragTest_menu();
+    		}
+    	} else {
+    		dragTest_menu();
     	}
     });
     
@@ -539,7 +666,6 @@
 	 		$('#categoryToAdd').css('display', 'none'); 
 	 		$('#Category1').css('display', 'none'); 
 	 		$('#Category2').css('display', 'none'); 
-	 		$('#profileModal').css('display', ''); 
 	 		$('#noteView').css('display', ''); 
 	 		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"'); 
 	 		$('#noteView').css('height', 'screen.innerHeight +"px"'); 
@@ -574,7 +700,6 @@
 	 		$('#categoryToAdd').css('display', 'none'); 
 	 		$('#Category1').css('display', 'none'); 
 	 		$('#Category2').css('display', 'none'); 
-	 		$('#profileModal').css('display', ''); 
 	 		$('#noteView').css('display', ''); 
 	 		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"'); 
 	 		$('#noteView').css('height', 'screen.innerHeight +"px"'); 
@@ -609,7 +734,68 @@
 		 	deleteNote(deleteNum);
 		} 
 	}
+	
+	
+	//회원찾기 로직
+	function findMember() {
+		$.ajax ({
+			url: "/memory/member/findMember",
+			type: "POST",
+			data: {
+				"findId" : $("input[name=findId]").val()
+				},
+			success : function(result) {
+						$("#panel").empty()
+						$("#searched").empty();
+						$("#findId").val("");
+						var btn;
+						$("#panel").append("<div class='panel panel-default searchResult' id='searched'></div>");
+						$(result).each(function(index, item) {
+							var addRow = '<table class="table table-filter">';
+								addRow += '<tbody><tr>';
+								addRow += '<td><div class="media">';
+								addRow += '<td><a href="#" class="media-photo"><img src="/memory/data/mem_image/'+item.mem_image+'" class="media-photo img-circle"></a></td>';
+								addRow += '<td><div class="media-body"><h4 class="userName" id="userName'+ index +'">'+ item.name + '</h4> <p class="userEmail" id="userEmail">'+ item.email +'</p></div></td>';
+								addRow += '<td class = "addFriend">' + '<img id = addF'+index+' src = "/memory/resources/img/add.png">' + '</td>';
+								addRow += '</div></td>';
+								addRow += '</tr></tbody>';
+								addRow += '</tr></table>';
+								$("#searched").append(addRow);
+							
+								$("#addF"+index).click(function(){
+								$.ajax({
+									url: "/memory/member/addFriend",
+									dataType: "json",
+									type: "post",
+									data: {"myEmail": '${email}', "friend_Email" : item.email},
+									success: function(result){
+										if(result){
+											swal({
+												  title: '친구등록 완료',
+												  text: '친구가 추가되었습니다.',
+												  type: 'success',
+												  confirmButtonText: '확인'
+												})
+											$("#panel").empty()
+											$("#searched").empty();
+											$("#friendList").empty();
+											friendList();
+										}else {
+											swal({
+												  title: 'Error!',
+												  text: '이미 등록된 친구입니다.',
+												  type: 'error',
+												  confirmButtonText: '확인'
+												})
+										}
+									}
+								});
+							});
+						});
+		    		}
+		});
+		return false;
+    };
     </script>
-
 </body>
 </html>

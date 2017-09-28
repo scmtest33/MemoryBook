@@ -107,45 +107,6 @@
 		<br><br><br>
 		<%@ include file="noteWrite.jsp" %>
 	</div>
-
-	<!-- profile modal -->
-	<div id="profileModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">설정</h4>
-				</div>
-				<div class="modal-body">
-
-					<div class="container">
-						<h2>이메일 설정</h2>
-						<br>
-						<p>보낼 이메일을 설정해주세요</p>
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="email">Email:</label> <input type="email"
-									class="form-control" id="email" placeholder="Enter email">
-							</div>
-							<div class="form-group">
-								<label for="pwd">Password:</label> <input type="password"
-									class="form-control" id="pwd" placeholder="Enter password">
-							</div>
-							<button type="submit" class="btn btn-default">설정</button>
-						</form>
-					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
 	<!-- 본문내용 끝 -->
 
 	<script>
@@ -491,7 +452,6 @@
 	// 에디터 열기
 	$("#noteWrite").click(function(e) {
 		$('#noteView').css('display', 'none');
-		$('#profileModal').css('display', 'none');
 		$('#noteEditor').css('display', '');
 		$('#noteUpdateBtn').css('display', 'none');
 		$('#noteSubmitBtn').css('display', 'block');
@@ -555,7 +515,6 @@
 	//에디터 오픈
 	function open_editor() {
 		$('#noteView').css('display', 'none');
-		$('#profileModal').css('display', 'none');
 		$('#noteEditor').css('display', '');
 		editor_chk = true;
 	}
@@ -574,7 +533,6 @@
 	function open_editorDrag() {
 		$('#myDragList').css('display', 'none');
 		$('#noteView').css('display', 'none');
-		$('#profileModal').css('display', 'none');
 		$('#noteEditor').css('display', '');
 	}
 
