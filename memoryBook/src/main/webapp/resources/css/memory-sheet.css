@@ -410,14 +410,19 @@ div.dragList img {
 }
 
 
+/* 회원검색 */
+.searchResult{
+	width: 660px;
+}
+
 /* 마인드맵 */
 div.mindMenu{
 	display: inline-block;
 	width: 230px;
 	height: 680px;
+	overflow: auto;
 }
 div.notelist{
-	overflow: auto;
 }
 div.gallery_mind {
 	margin: 5px;

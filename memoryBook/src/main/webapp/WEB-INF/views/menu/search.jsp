@@ -25,37 +25,11 @@
            </div>
       </div>
       <div class="btn-default noteSearch_btn" id="findBtn" onclick="findMember();"><img src="/memory/resources/img/search_icon.jpg"></div>
-	
-<!-- <table class="table table-hover" id="table"> -->
-	
-<!-- </table> -->
+	<br><br>
+	<div id="panel"></div>
 
-<!-- <table class="table table-striped" id="listTable"> -->
-
-<!-- </table> -->
-<div class="container" style="padding:30px;">
-	<div class="row">
-
-		<section class="content">
-<!-- 			<h1 class="pageTitle">회원 목록</h1> -->
-			<div class="col-md-8 col-md-offset-2">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="table-container">
-							<table id="table3" class="table table-filter">
-									
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		
-	</div>
-</div>
 
 <script>
-
 	//회원찾기
 	function findMember() {
 		$.ajax ({
@@ -65,20 +39,21 @@
 				"findId" : $("input[name=findId]").val()
 				},
 			success : function(result) {
-						$("#table3").empty();
+						$("#searched").empty();
 						$("#findId").val("");
 						var btn;
-// 						var Email = ${email};
+						$("#panel").append("<div class='panel panel-default searchResult' id='searched'></div>");
 						$(result).each(function(index, item) {
-							var addRow = '<tbody><tr>';
+							var addRow = '<table class="table table-filter">';
+								addRow += '<tbody><tr>';
 								addRow += '<td><div class="media">';
-// 								addRow += '<td><a href="#" class="pull-left"><img id="userPhoto'+ index +'" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo img-circle"></a></td>';
 								addRow += '<td><a href="#" class="media-photo"><img src="/memory/data/mem_image/'+item.mem_image+'" class="media-photo img-circle"></a></td>';
 								addRow += '<td><div class="media-body"><h4 class="userName" id="userName'+ index +'">'+ item.name + '</h4> <p class="userEmail" id="userEmail">'+ item.email +'</p></div></td>';
 								addRow += '<td class = "addFriend">' + '<img id = addF'+index+' src = "/memory/resources/img/add.png">' + '</td>';
 								addRow += '</div></td>';
 								addRow += '</tr></tbody>';
-								$("#table3").append(addRow);
+								addRow += '</tr></table>';
+								$("#searched").append(addRow);
 							
 								$("#addF"+index).click(function(){
 								$.ajax({
