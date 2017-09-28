@@ -42,7 +42,7 @@
 	</div>
 	<!-- 모달 끝 -->
 	<br>
-	<p class="pageTitle">FRIEND NOTE</p>
+	<p class="pageTitle">FRIEND'S NOTE</p>
 <p class="pageSubTitle">친구들은 무슨 길을 걷고 있을까요?</p>
 		
 	<button class="btn btn-success btn-lg" id="Friend_toggle">

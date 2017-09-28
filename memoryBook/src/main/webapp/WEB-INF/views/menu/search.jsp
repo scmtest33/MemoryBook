@@ -15,7 +15,7 @@
 
 <body>
 <br>
-<p class="pageTitle">FRIEND ADDITION</p>
+<p class="pageTitle">LOOKING FOR FRIEND</p>
 <p class="pageSubTitle">친구를 찾고 추가해보세요</p>
 <br>
 <!-- 검색 -->
