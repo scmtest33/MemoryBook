@@ -17,6 +17,7 @@
 <br>
 <p class="pageTitle">FRIEND ADDITION</p>
 <p class="pageSubTitle">친구를 찾고 추가해보세요</p>
+<br>
 <!-- 검색 -->
       <div class="searchInput col-md-offset">
          <div class="search-form">
