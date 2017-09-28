@@ -520,39 +520,41 @@
 	    		"email" : $("input[name=email]").val(),
 	    		"mem_pwd" : $("input[name=password]").val()
 	    		},
-	    	success: function(result) {
-	    			if(result) {
-	    				swal({
-	     					  title: '회원가입 성공',
-	     					  text: '회원가입이 완료되었습니다. 이제 로그인 하세요~',
-	     					  type: 'success',
-	     					  confirmButtonText: '확인'
-	     					})
-	 	    	    	frm.name.value = "";
-	 	    	    	frm.email.value = "";
-	 	    	    	frm.password.value = "";
-	 	    	    	frm.passwordConf.value = "";
-	 	    	    	$('#loginModal').css('display', 'block');
-	 	    	    	$('#joinModal').css('display', 'none');
-	    				$("#myModal").modal('hide');
-	     			} else {
-	     				swal({
-	     					  title: '회원가입 실패',
-	     					  text: '오류가 발생 하였습니다. 다시 시도해주세요',
-	     					  type: 'error',
-	     					  confirmButtonText: '확인'
-	     					})
-	     			}
-	     	    },
-	     	error: swal({
+	   	})
+	   	.done(function (result){
+	   		if(result) {
+				swal({
+ 					  title: '회원가입 성공',
+ 					  text: '회원가입이 완료되었습니다. 이제 로그인 하세요~',
+ 					  type: 'success',
+ 					  confirmButtonText: '확인'
+ 					})
+	    	    	frm.name.value = "";
+	    	    	frm.email.value = "";
+	    	    	frm.password.value = "";
+	    	    	frm.passwordConf.value = "";
+	    	    	$('#loginModal').css('display', 'block');
+	    	    	$('#joinModal').css('display', 'none');
+					$("#myModal").modal('hide');
+ 			} else {
+ 				swal({
+ 					  title: '회원가입 실패',
+ 					  text: '오류가 발생 하였습니다. 다시 시도해주세요',
+ 					  type: 'error',
+ 					  confirmButtonText: '확인'
+ 					})
+ 				}
+		})
+		.fail(function(){
+			swal({
 				  title: '회원가입 실패',
-					  text: '이메일이 중복되었거나, 올바르게 입력되지 않았습니다.',
-					  type: 'error',
-					  confirmButtonText: '확인'
-					})
-	     	});
-	     	return false;
-	    });
+				  text: '이메일이 중복되었거나, 올바르게 입력되지 않았습니다.',
+				  type: 'error',
+				  confirmButtonText: '확인'
+				})
+		});
+	   	return false;
+	 });
 
 		//다운로드 링크주기
 // 	    function downloadUrl(){
