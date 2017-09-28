@@ -120,7 +120,7 @@
                                 <h2 class="service-content">
                                     <strong>드래그 저장 기능</strong>
                                 </h2>
-                                <p class="service-content2">정보 검색하던 사이트에서 내가 원하는 부분만 드래그하면 저장이 가능합니다</p>
+                                <p class="service-content2">드래그 기능만으로  간편하게 텍스트와 이미지 등을 저장해 보세요 </p>
 <!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
@@ -148,9 +148,9 @@
                             <div class="service-item"><br><br><br>
                                 <img src="/memory/resources/img/mainIcon/mindmap1.png"><br><br>
                                 <h2 class="service-content">
-                                    <strong>마인드 맵 기능</strong>
+                                    <strong>다이어그램 기능</strong>
                                 </h2>
-                                <p class="service-content2">마인드맵으로 계획을 구성해 보세요</p>
+                                <p class="service-content2">노트를 한눈에 알아보기 쉽게 도식화하여  자신에게 알맞는 플랜을 만들어 보세요</p>
 <!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
@@ -451,7 +451,7 @@
 	    	    			swal({
 	    	    				  title: 'ID/PW ERROR!',
 	    	    				  text: 'ID 또는 비밀번호가 잘못 입력되었습니다.',
-	    	    				  type: 'Warning',
+	    	    				  type: 'error',
 	    	    				  confirmButtonText: '확인'
 	    	    				})
 	    	    		}
