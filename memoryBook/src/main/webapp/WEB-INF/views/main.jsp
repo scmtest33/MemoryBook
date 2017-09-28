@@ -150,7 +150,7 @@
                                 <h2 class="service-content">
                                     <strong>마인드 맵 기능</strong>
                                 </h2>
-                                <p class="service-content2">친구들과 마인드맵으로 회의, 계획을 짜보세요</p>
+                                <p class="service-content2">마인드맵으로 계획을 짜보세요</p>
 <!--                                 <a href="#" class="btn btn-light">Learn More</a> -->
                             </div>
                         </div>
@@ -271,8 +271,8 @@
                     </h4>
                     <p>서울 강남구 삼성동 COEX 4F ICT교육센터</p>
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (010) 1234-5678</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
+                        <li><i class="fa fa-phone fa-fw"></i> (010) 2570-1040</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">leemhyh@naver.com</a>
                         </li>
                     </ul>
                     <p class="text-muted">Copyright &copy; 잊지못해NotNull</p>
