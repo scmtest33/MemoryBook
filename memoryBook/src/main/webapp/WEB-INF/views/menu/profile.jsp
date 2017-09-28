@@ -13,9 +13,10 @@
 <meta name="author" content="">
 <title>Profile</title>
 </head>
-<body>
-<div class="container" style="padding-top: 60px;">
-  <h1 class="page-header">Profile</h1>
+<body><br>
+<p class="pageTitle">Profile</p>
+<p class="pageSubTitle">여러분의 소중한 정보를 확인해보세요.</p>
+<div class="container" style="padding : 0px;">
   <div class="row">
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
@@ -63,7 +64,7 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Name:</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" id="name" name="name" value="${name}" placeholder="이름을 입력해주세요" required="required">
+            <input class="form-control" type="text" id="name" name="name" placeholder="이름을 입력해주세요" required="required">
           </div>
         </div>
         <div class="form-group">
@@ -274,7 +275,7 @@
 					})
 				return;
 			}
-		} else {
+		} /* else {
 		//라디오 버튼 Name 가져오기
 		var radio_btn = document.getElementsByName("infoNumber");
 			//라디오 버튼이 체크되었나 확인하기 위한 변수
@@ -293,7 +294,7 @@
 				  confirmButtonText: '확인'
 				})
 			return;
-		}}
+		}} */
 		   	$.ajax ({
 				url: "/memory/member/infoUpdate",
 		    	type: "POST",
@@ -301,7 +302,7 @@
 		 			"name" : $("input[name=name]").val(),    			
 		    		"email" : $("input[name=email]").val(),
 		    		"mem_pwd" : $("input[name=pwd1]").val(),
-		    		"infoNumber" : infoNumber_check
+		    		"infoNumber" : $("input[name=infoNumber]:checked").val()
 		    		},
 		    	success: function(result) {
 		    			if(result) {
