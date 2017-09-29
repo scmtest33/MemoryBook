@@ -28,7 +28,7 @@
 	
 	<!-- 회원목록 -->
 	<select id="getList" resultType="MemberVO">
-		SELECT * FROM T_MEMBER WHERE email !='admin'
+		SELECT * FROM T_MEMBER WHERE email !='admin' order by mem_no desc
 	</select>
 	
 	<!-- 계정정지-->
@@ -66,9 +66,14 @@
 			WHERE EMAIL = #{email}
 	</update>
 	
-	<!-- 회원검색 -->
+	<!-- 친구검색 -->
 	<select id="findMember" parameterType="String" resultType="MemberVO">
 		SELECT * FROM T_MEMBER WHERE (EMAIL != #{0} and EMAIL != 'admin') AND (NAME LIKE '%'||#{1}||'%' or EMAIL LIKE '%'||#{1}||'%') AND INFONUMBER=0 order by mem_no desc
+	</select>
+	
+	<!-- 회원검색 -->
+	<select id="findMember2" parameterType="String" resultType="MemberVO">
+		SELECT * FROM T_MEMBER WHERE (EMAIL != #{0} and EMAIL != 'admin') AND (NAME LIKE '%'||#{1}||'%' or EMAIL LIKE '%'||#{1}||'%') order by mem_no desc
 	</select>
 	
 	<!-- 친구추가 -->

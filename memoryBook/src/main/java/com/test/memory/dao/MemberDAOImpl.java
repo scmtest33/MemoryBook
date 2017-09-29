@@ -64,6 +64,13 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
+	public ArrayList<MemberVO> findMember2(String loginEmail, String findId) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		ArrayList<MemberVO> list = mapper.findMember2(loginEmail, findId); 
+		return list;
+	}
+	
+	@Override
 	public boolean addFriend(String myEmail, FriendVO friend) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		if(friendCheck(myEmail, friend)){

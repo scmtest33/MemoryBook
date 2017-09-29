@@ -13,6 +13,7 @@ public interface MemberDAO {
 	public ArrayList<MemberVO> getList();
 	public boolean click(MemberVO vo);
 	public ArrayList<MemberVO> findMember(String loginEmail, String findId);
+	public ArrayList<MemberVO> findMember2(String loginEmail, String findId);
 	public boolean addFriend(String myEmail, FriendVO friend);
 	public boolean friendCheck(String myEmail, FriendVO friend);
 	public boolean deleteFriend(FriendVO friend);

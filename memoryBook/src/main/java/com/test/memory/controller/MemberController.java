@@ -150,6 +150,14 @@ public class MemberController {
 			return service.findMember(loginEmail, findId);
 		}
 		
+		//회원목록 검색
+		@RequestMapping(value = "findMember2", method = RequestMethod.POST)
+		@ResponseBody
+		public ArrayList<MemberVO> findMember2(HttpSession session, String findId, Model model) {
+			String loginEmail = (String)session.getAttribute("email");
+			return service.findMember2(loginEmail, findId);
+		}
+		
 		//친구추가
 		@RequestMapping(value = "addFriend", method = RequestMethod.POST)
 		@ResponseBody

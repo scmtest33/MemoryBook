@@ -270,11 +270,15 @@
 								<tr>
 									<td class="memSearch-input">
 										<input type="text" class="form-control searchInput" name="findId" id="findId"
-										 placeholder="이름 또는 Email을 입력하세요" onkeydown="javascript:if(event.keyCode == 13) searchList();">
+										 placeholder="이름 또는 Email을 입력하세요" onkeydown="javascript:if(event.keyCode == 13) findMember();">
 								 	</td>
 									<td>
 										<button class="btn-default noteSearch_btn memSearch-btn" id="findBtn" onclick="findMember();">
 										<img src="/memory/resources/img/search_icon.jpg"></button>
+									</td>
+									<td>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 									</td>
 								</tr>
 							</table>
@@ -769,7 +773,7 @@
 		});
     };
     
-    //
+    //프로필사진 수정
     function photoEdit(){
     	swal({
     		  title: '이미지 파일 선택',

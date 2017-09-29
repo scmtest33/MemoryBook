@@ -61,6 +61,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public ArrayList<MemberVO> findMember2(String loginEmail, String findId) {
+		return dao.findMember2(loginEmail, findId);
+	}
+	
+	@Override
 	public boolean addFriend(String myEmail, FriendVO friend) {
 		return dao.addFriend(myEmail, friend);
 	}
