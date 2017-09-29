@@ -101,7 +101,9 @@ public class DownloadController {
 				   + "</div>"
 				   + "</body>"
 				   + "</html>";
-		String fileName = noteTitle.replaceAll("\"", "'"); //제목 내 ""로 인한 파일 저장 오류 방지
+		String fileName = noteTitle.replaceAll("\"", "'").replaceAll("\\", "＼").replaceAll("/", "／")
+				.replaceAll(":", "：").replaceAll("*", "＊").replaceAll("?", "？").replaceAll("<", "〈")
+				.replaceAll(">", "〉").replaceAll("|", "│"); //제목 내 금지 문자로 인한 파일 저장 오류 방지
 		String filePath = savePath + "/" + fileName + ".html";
 		
 		File confirmF = new File(filePath);
@@ -211,7 +213,9 @@ public class DownloadController {
 				   + "</div>"
 				   + "</body>"
 				   + "</html>";
-		String fileName = dragTitle.replaceAll("\"", "'"); //제목 내 ""로 인한 파일 저장 오류 방지
+		String fileName = dragTitle.replaceAll("\"", "'").replaceAll("\\", "＼").replaceAll("/", "／")
+				.replaceAll(":", "：").replaceAll("*", "＊").replaceAll("?", "？").replaceAll("<", "〈")
+				.replaceAll(">", "〉").replaceAll("|", "│"); //제목 내 금지 문자로 인한 파일 저장 오류 방지
 		String filePath = savePath + "/"+ fileName + ".html";
 		File confirmF = new File(filePath);
 		if(confirmF.exists()) confirmF.delete();
