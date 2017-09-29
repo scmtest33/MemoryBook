@@ -10,30 +10,120 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>마인드맵</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.23/go-debug.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.24/go.js"></script>
+<script src="/memory/resources/js/go-debug.js"></script>
+<script src="/memory/resources/js/go.js"></script>
+<style>
+
+/* div{
+	border: 1px solid #ccc;
+} */
+#container{
+	width:1100px;
+	margin-top: 0px;
+}
+
+/* #sample{
+	
+	margin-bottom:20px;
+
+} */
+
+div.mindMenu{
+display: inline-block;
+width: 210px;
+height: 608px;
+border-style:groove;
+float: left;
+margin-bottom: 20px;
+margin-right: 20px;
+margin-top: 60px;
+overflow:auto;
+
+}
+
+
+
+#myDiagramDiv{
+
+width: 700px;
+height: 604px;
+
+float: left;
+margin-top: 60px;
+}
+
+  #co{
+
+width: 150px;
+height: 605px;
+border-style:groove;
+float:right;
+ margin-top: 61px; 
+
+}  
+
+
+.selects{
+float:left;
+}
+
+
+#tool{
+
+text-align: center;
+font-size: 2.5em;
+font-weight: bold;
+
+}
+
+#tit{
+border-style:none;
+
+font-weight: bold;
+height: 45px;
+}
+
+.btn btn-default btn-lg{
+text-align:center;
+
+
+}
+
+.mindtitle{
+width: 700px;
+height: 50px;
+float: left;
+
+margin-bottom:3px;
+
+}
+
+#toolbox{
+ margin-left: auto; 
+ margin-right: auto;
+}
+
+
+
+</style>
+
+
 
 </head>
 <body>
 	<!-- title -->
-	<div class="container show-grid" id="sample" style="padding-top: 60px;">
-		<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
-			<p class="desc_brunch">
-				<span class="part">노트가 마인드맵으로 되는 공간<br></span>
+	<div id = "container">
+	<div class="container show-grid" id="sample" style="padding-top: 17px;">
+		<p class="pageTitle">다이어그램</p>
+		<p class="pageSubTitle">자신의 계획을 표현해보세요</p>
 	</div>
 	
 	<!-- 메뉴부분 -->
-	<div class="mindMenu divCenter">
-		<div class="control">
-			<button id="NewButton" onclick="newmap()">newmap</button>
-			<button id="SaveButton" onclick="save()">Save</button>
-			<button id="LoadButton" onclick="load()">Load</button>
-			<button id="DeleteButton" onclick="deletemap()">Delete</button>
-			<div id="loadedjson"></div> <!-- 저장목록 -->
+	<div class="mindMenu divCenter" id="mindMenu">
+		
+			
 				<div class="notelist">
-					<div class="labels">
-		        		<label>카테고리</label>
-					</div>
+					
 					<div class="selects">
 			        	<form name="categorySel">
 							<select class="form-control" id="cateSel" onchange="cateSelect()">
@@ -46,13 +136,51 @@
 						</div>
 					</div>
 				</div>
-		</div>
+		
 	</div>
-
-	<!-- 마인드맵 dropZone -->
-	<div class="dropzone" id="myDiagramDiv"></div>
 	
-
+		
+	<!-- 마인드맵 dropZone -->
+	<div id="mindtitle">
+		<!-- <input id="tit" placehold="여기에 제목을 입력해 주세요"></input> -->
+	</div>
+	<div class="dropzone" id="myDiagramDiv">
+	</div>
+	<div id="co">
+	
+	
+		        		<p id = "tool">TOOL BOX</p>
+					
+	<table id="toolbox">
+	<br>
+	<br>
+	<br>
+	
+	<tr>
+	<button class="btn btn-default btn-block btn-lg" id="NewButton" onclick="Newmap()">Newmap</button>
+	</tr>
+	<br>
+	<br>
+	<br>
+	<tr>
+			<button class="btn btn-default btn-block btn-lg btn-success"  id="SaveButton" onclick="save()">Save</button>
+		</tr>
+		
+	<br>	
+	<br>	
+	<br>	
+	<tr>		
+			<button data-toggle="modal" data-target="#myModal"   class="btn btn-default btn-block btn-lg btn-primary"   id="LoadButton" onclick="load()">Load</button>
+	</tr>
+	<br>
+	<br>
+	<br>
+	<tr> <!-- 저장목록 -->
+			<button class="btn btn-default btn-block btn-lg btn-danger"  id="DeleteButton" onclick="deletemap()">Delete</button>
+			</tr>
+			 </table>	
+	</div>
+	
 
 	<!-- 노트모달 -->
 	<div class="modal fade" id="detailModal1" tabindex="-1" role="dialog">
@@ -80,6 +208,102 @@
 	</div>
 	
 	
+	<!-- 로드모달 -->
+	
+	 <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      Modal content
+		      <div class="modal-content memberLogin">
+		        <div class="modal-header">
+		          <button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
+		          <br>
+		          <br>
+		          <h4 class="modal-title loginTitle" id="memoryLaneTitle">보고싶은 마인드맵</h4>
+		          <br>
+		        </div>
+		        <br>
+		        
+		        
+		        <div id="loadedjson"></div>
+		        	<!-- <div class="modal-body joinModal" id="joinModal">
+		          	<form name="joinfrm" id="joinfrm">       
+			    	<div id="joinInfo">
+			    			<div class="form-group">
+			    			 <label for="name">name:</label>
+			    			 <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력하세요" required="" autofocus="" />
+			    			</div>
+			    			<div class="form-group">
+			    			 <label for="email">Email:</label>
+			    			 <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요" required="" autofocus="" />
+			    			 <span id="emailck"></span>
+			    			</div>
+			    			<div class="form-group">
+			    			 <label for="password">password:</label>
+			    			 <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
+			    			</div>
+			    			<div class="form-group">
+			    			 <label for="passwordConf">password check:</label>
+			    			 <input type="password" class="form-control" id="passwordConf" name="passwordConf" placeholder="비밀번호를 확인하세요" required="" autofocus="" />
+			    			 <span id="checkPwd"></span>
+			    			</div>
+			    		</div>
+			    		<table>
+			    		<tr>
+			    			<td colspan="2">&nbsp;&nbsp;</td>
+			    		</tr>
+						</table>
+						<table class="btns_align">
+			    			<td id="btns btn_space">
+							    <button id="joinBtn" class="btn btn-default join_ok join_btns">회원가입</button>   
+							    <button id="cancelBtn" class="btn btn-default join_no join_btns">취소</button>  
+			    			</td>
+			    		</tr>
+		    		</table>
+			    </form>
+		        	</div> -->
+		      <!--   	
+		        <div class="modal-body" id="loginModal" >
+		          	
+		          	
+		          	<form name="loginfrm" id="loginfrm">       
+			    	<table id="loginInfo">
+			    		<tr>
+			    			<div class="form-group">
+			    			 <label for="loginEmail">Email:</label>
+			    			 <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="Email Address" required="" autofocus="" />
+			    			</div>
+			    		</tr>
+			    		<tr>
+			    			<div class="form-group">
+							    <label for="loginPassword">Password:</label>
+							    <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Password" required=""/>
+			    			</div>
+			    		</tr>
+			    	</table>
+			    	<table class="btns_align">
+					    <tr>
+					    	<td id="btns btn_etc btn_space">
+							    <button id="loginBtn" class="btn btn-default login_ok">로그인</button>   
+							    <div id="joinFormBtn" class="btn btn-default login_no">회원가입</div>
+					    	</td>
+					    </tr>
+		    		</table>
+			    </form>
+		          <div id="googleLoginDiv" align="center" class="g-signin2 googleLogin" data-onsuccess="onSignIn"></div>
+		          
+		        </div> -->
+		      </div>
+	
+	</div>
+	
+	
+	
+	
+	
+	
+	</div> 
+	</div> <!-- 컨테이너 절대 지우지 말것 -->
 <script>
 
 
@@ -269,7 +493,7 @@ myDiagram.nodeTemplate =
         
       a(go.TextBlock,
         {
-          font: "bold 14px sans-serif",
+          font: "bold 25px sans-serif",
           stroke: '#333',
           margin:10,  // make some extra space for the shape around the text
           isMultiline: false,  // don't allow newlines in text
@@ -375,13 +599,13 @@ function nodeInfo(d) {  // Tooltip info for a node data object
       a(go.Shape,
         { strokeWidth: 2 },
         new go.Binding("stroke", "color")),
-      a(go.Shape,
+     /*  a(go.Shape,
         { toArrow: "Standard", stroke: null },
-        new go.Binding("fill", "color")),
+        new go.Binding("fill", "color")), */
         a(go.TextBlock, "연결됨\n",  // the label text
                 {
                   textAlign: "center",
-                  font: "12pt helvetica, arial, sans-serif",
+                  font: "20pt helvetica, arial, sans-serif",
                   margin: 7,
                   editable: true  // enable in-place editing
                 },
@@ -565,9 +789,9 @@ function makeNoteCards2(result) {
 		var noteContent = note.noteContent;
 		if(noteContent.indexOf('<img') != -1) {
 			var noteImgSrc = noteContent.split('src="')[1].split('"')[0];
-			html += '<figure><img class="gallery_mind" id="note'+note.noteNo+'" src="' + noteImgSrc + '" draggable="true" alt="" onclick="noteDetail2('+note.noteNo+')" ></figure>';
+			html += '<figure><img  id="note'+note.noteNo+'" src="' + noteImgSrc + '" alt="" width="270px" height="150px"draggable="true" alt="" onclick="noteDetail2('+note.noteNo+')" ></figure>';
 		} else {
-			html += '<figure><img id="note'+note.noteNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="noteDetail2('+note.noteNo+')" ></figure>';
+			html += '<figure><img id="note'+note.noteNo+'" src="/memory/resources/img/D.png" width="160" height="120" alt="" onclick="noteDetail2('+note.noteNo+')" ></figure>';
 		}
 		html += "<div class='desc'><p>" + note.noteTitle + "</p></div>";
 		html += "</div>";
@@ -575,7 +799,7 @@ function makeNoteCards2(result) {
 	}
 	if (result.length == 0) {
 		html += "<div class='gallery_mind'>";
-		html += '	<img src="/memory/resources/img/D.png" alt="" width="300px" height="200px" >';
+		html += '	<img src="/memory/resources/img/D.png" alt="" width="270px" height="150px" >';
 		html += "	<div  class='desc'><p> 노트가 없습니다. </p></div>";
 		html += "하이하이";
 		html += "</div>";
@@ -698,7 +922,7 @@ function save() {
 
 function load() {
 	var mem_no = ${memberNo};
-	
+	console.log(mem_no+"로드")
 	$.ajax({
 		type:"POST",
 		url: "/memory/mindmap/load",
@@ -719,16 +943,18 @@ function load() {
 
  function makeMindmapList(result){
 	 var html = "";
+	
 	 if(result.length != 0){
 	 for (var i = 0; i < result.length; i++) {
 
 			var map = result[i];
 			var mindnum = map.mindnum;
-			var mindname = map.mindname;
+			var md = map.mindname;
+			console.log(md+"1");
 			var mindcontent = map.mindjson;
 			//html += "<div class='loadmind' onclick='loadmindmap("+mindnum+")'>";
 		
-			html += "<div class='loaded'><li onclick='loadmindmap("+mindcontent+","+mindnum+")'>" + mindname + "</li></div>";
+			html += "<botton class='btn btn-default btn-block' data-dismiss='modal' onclick='loadmindmap("+mindcontent+","+mindnum+")'>"+md+"</botton>";
 			
 			//html += "</div>";
 
@@ -746,43 +972,73 @@ function load() {
 	 myDiagram.model = go.Model.fromJson(mindcontent);
 	 sessionStorage.setItem("num", mindnum);
 	 console.log(sessionStorage.getItem("num")+"세션입니당");
+ 
+	/*  console.log("하이하이");
+	  var htmll = "";
+	  var mindcontent = mindcontent;
+	  console.log(mindcontent);
+	  var mindnum = mindnum;
+	  var md = md;
+	  console.log(md + "맵이름");
+	 htmll = "<input id='tit'>"+md+"</input>";
+	 
+	 $("#mindtitle").html(htmll);  */
+	 
  }
  
 function deletemap(){
 	var mindn = sessionStorage.getItem("num");
 	console.log(mindn);
-	
-	$.ajax({
-		type:"POST",
-		url: "/memory/mindmap/delete",
-		data: {
+	if(mindn == null){
+		alert("삭제할 마인드맵이 없습니다.");
+		return;
+	}else{
+		var re = confirm("삭제하시겠습니까?");
+		if(re == true){
+			$.ajax({
+				type:"POST",
+				url: "/memory/mindmap/delete",
+				data: {
+					
+					'mindnum': mindn
+				},
+				
+				success: function(result){
+					if(result){
+						alert("삭제되었습니다.");
+						myDiagram.clear();
+						sessionStorage.clear();
+						load();
+					}else{
+						alert("삭제오류");
+					}
+					},
+				error: function(jqXhr, textStatus, errorText) {
+					alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+				}
+			});
 			
-			'mindnum': mindn
-		},
-		
-		success: function(result){
-			if(result){
-				alert("삭제되었습니다.");
-				myDiagram.clear();
-				load();
-			}else{
-				alert("삭제오류");
-			}
-			},
-		error: function(jqXhr, textStatus, errorText) {
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+			sessionStorage.clear();
+			
+			load();
+			
+			
+			
+		}else{
+			
+			return;
 		}
-	});
+		
+		
+	}
 	
-	sessionStorage.clear();
-	
-	load();
+		
 	
 }
  
  
  
- function newmap(){
+ function Newmap(){
 	 myDiagram.clear();
 	 sessionStorage.clear();
 	 
