@@ -122,6 +122,13 @@
 					</a>
                 </li>
                 </c:if>
+                <li>
+                	<a id="dragtest" class="noteImg">
+                	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg17">
+      		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg18">
+						DragTest
+					</a>
+                </li>
             </ul>
         </div>
 

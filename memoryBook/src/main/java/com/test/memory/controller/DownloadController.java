@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ public class DownloadController {
 	private String FILE_PATH = "C:/data/";
 //	private String FILE_PATH = "G:/SPRING/git/data/";
 	private String SAVE_PATH = "C:/savedata/";
+	private Date DATE = new Date(System.currentTimeMillis()); //현재날짜
 	
 	@Autowired
 	private NoteService service_n;
@@ -45,16 +47,18 @@ public class DownloadController {
 	@Autowired
 	private DragService service_d;
 	
+	
+	//노트 다운로드
 	@RequestMapping("/downloadNote")
 	public Map<String, String> downloadNote(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	
 		// 파일 내용 가져오기
 		int noteNo = Integer.parseInt(request.getParameter("noteNo"));
 		System.out.println("다운로드 : " + noteNo);
 		NoteVO noteVO = service_n.noteDetail(noteNo);
-		// 노트 작성한 날짜로 파일 경로 만들기 
+		// 현재 시스템 날짜로 파일 경로 만들기 
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyyMMdd");
-		String datePath = sdf.format(noteVO.getNoteRegDate());
+		String datePath = sdf.format(DATE);
+		System.out.println(noteVO.getNoteRegDate());
 		String savePath = SAVE_PATH + datePath;
 		File f = new File(savePath);
 		if (!f.exists()) f.mkdirs();
@@ -97,8 +101,9 @@ public class DownloadController {
 				   + "</div>"
 				   + "</body>"
 				   + "</html>";
-		String fileName = noteTitle + ".html";
-		String filePath = savePath + "/"+ fileName;
+		String fileName = noteTitle.replaceAll("\"", "'"); //제목 내 ""로 인한 파일 저장 오류 방지
+		String filePath = savePath + "/" + fileName + ".html";
+		
 		File confirmF = new File(filePath);
 		if(confirmF.exists()) confirmF.delete();
 		
@@ -118,9 +123,9 @@ public class DownloadController {
             fw.close();
             
             // 파일 다운로드 보내기
-            file = new File(savePath, fileName);
-            System.out.println(fileName);
-            String fileDownName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+            file = new File(filePath);
+            System.out.println(filePath);
+            String fileDownName = new String(filePath.getBytes("UTF-8"), "ISO-8859-1");
 	        response.reset();
 	    	response.setCharacterEncoding("UTF-8");
 	        response.setHeader("Content-Type","text/html;charset=UTF-8");
@@ -153,16 +158,17 @@ public class DownloadController {
 		return msg;
 	}
 	
+	
+	//드래그 다운로드
 	@RequestMapping("/downloadDrag")
 	public Map<String, String> downloadDrag(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		// 파일 내용 가져오기
 		int dragNo = Integer.parseInt(request.getParameter("dragNo"));
-		System.out.println("다운로드 : " + dragNo);
 		DragVO dragVO = service_d.dragDetail(dragNo);
-		// 노트 작성한 날짜로 파일 경로 만들기 
+		// 현재 시스템 날짜로 파일 경로 만들기 
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyyMMdd");
-		String datePath = sdf.format(dragVO.getDragRegDate());
+		String datePath = sdf.format(DATE);
 		String savePath = SAVE_PATH + datePath;
 		File f = new File(savePath);
 		if (!f.exists()) f.mkdirs();
@@ -205,8 +211,8 @@ public class DownloadController {
 				   + "</div>"
 				   + "</body>"
 				   + "</html>";
-		String fileName = dragTitle + ".html";
-		String filePath = savePath + "/"+ fileName;
+		String fileName = dragTitle.replaceAll("\"", "'"); //제목 내 ""로 인한 파일 저장 오류 방지
+		String filePath = savePath + "/"+ fileName + ".html";
 		File confirmF = new File(filePath);
 		if(confirmF.exists()) confirmF.delete();
 		
@@ -226,9 +232,8 @@ public class DownloadController {
             fw.close();
             
             // 파일 다운로드 보내기
-            file = new File(savePath, fileName);
-            System.out.println(fileName);
-            String fileDownName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+            file = new File(filePath);
+            String fileDownName = new String(filePath.getBytes("UTF-8"), "ISO-8859-1");
 	        response.reset();
 	    	response.setCharacterEncoding("UTF-8");
 	        response.setHeader("Content-Type","text/html;charset=UTF-8");

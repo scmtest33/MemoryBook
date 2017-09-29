@@ -60,6 +60,7 @@ public class NoteController {
 	@Autowired
 	private NoteService service;
 	
+	
 	//노트 작성
 	@RequestMapping("/note")
 	public Map<String, Object> note(NoteVO note, HttpSession session) throws Exception {
@@ -84,6 +85,7 @@ public class NoteController {
 		}
 		return msg;
 	}
+	
 	
 	//노트 수정
 	@RequestMapping("/noteUpdate")
@@ -112,6 +114,7 @@ public class NoteController {
 		return msg;
 	}
 	
+	
 	//노트 내 이미지 업로드
 	@RequestMapping(value="/note_img_upload", method=RequestMethod.POST)
 	public void ckeditorImageUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile file, @RequestParam MultipartFile upload) throws Exception {
@@ -125,6 +128,24 @@ public class NoteController {
 		}
 	}
 	
+	
+	//노트 삭제
+	@RequestMapping("/deleteNote")
+	public Map<String, String> deleteNote(String noteNo) throws Exception {
+		//삭제부
+		NoteVO data = service.noteDetail(Integer.parseInt(noteNo));
+		String fileName = data.getNoteContent(); //내용 데이터파일 이름추출
+		service.deleteNote(Integer.parseInt(noteNo));
+		File file = new File(FILE_PATH + fileName); //내용 데이터파일 경로
+		if(file.exists()) file.delete(); //내용 데이터파일 삭제처리
+
+		Map<String, String> msg = new HashMap<>();
+		msg.put("msg", "노트가 삭제되었습니다.");
+		return msg;
+	}
+	
+	
+	//노트 리스트
 	@RequestMapping("/noteList")
 	public List<NoteVO> noteList(HttpServletRequest request, HttpSession session) throws Exception {
 		
@@ -157,7 +178,8 @@ public class NoteController {
 		return noteList;
 	}
 	
-	//친구가 공개한 노트리스트 보기
+	
+	//친구가 공개 한 노트리스트 보기
 	@RequestMapping("/friendNoteList")
 	public List<NoteVO> friendNoteList(HttpServletRequest request) throws Exception {
 		
@@ -191,6 +213,49 @@ public class NoteController {
 		}
 		return noteList;
 	}
+	//노트 작성일 검색
+	@RequestMapping("/noteByDate")
+	public List<NoteVO> noteByDate(HttpServletRequest request, HttpSession session) throws Exception {
+		String date = request.getParameter("date");
+		int memberNo = Integer.parseInt(session.getAttribute("memberNo").toString());
+		
+		List<NoteVO> noteList = service.noteByDate(date, memberNo);
+		for(NoteVO n : noteList){
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(n.getNoteRegDate());
+			n.setNoteRegDate(cal.getTime());
+		}
+		
+		return noteList;
+	}
+	
+	
+	//노트내용 보기
+	@RequestMapping("/noteDetail")
+	public NoteVO noteDetail(String noteNo) throws Exception {
+		NoteVO n= service.noteDetail(Integer.parseInt(noteNo));
+		try{
+			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+			fis = new FileInputStream(FILE_PATH + n.getNoteContent());
+			
+			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+			ois = new ObjectInputStream(fis);
+			
+			// 오브젝트 스트림으로부터 오브젝트를 읽어 String형으로 형변환
+			String content = (String) ois.readObject();
+			n.setNoteContent(content);
+			} catch(Exception e) {
+				// e.printStackTrace();
+				System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+			} finally {
+				closeStreams();
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(n.getNoteRegDate());
+		n.setNoteRegDate(cal.getTime());
+		return n;
+	}
+	
 	
 	//노트 카테고리 리스트
 	@RequestMapping("/noteCategoryList")
@@ -225,15 +290,6 @@ public class NoteController {
 		return noteList;
 	}
 	
-	//카테고리 이름 수정
-		@RequestMapping(value="/noteCategoryUpdate", method=RequestMethod.POST)
-		public Map<String, Object> noteCategoryUpdate(CategoryVO category, HttpServletRequest request, HttpSession session) throws Exception {
-			Map<String, Object> msg = new HashMap<>();
-			category.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
-			category.setCategoryName(request.getParameter("categoryName"));
-			service.noteCategoryUpdate(category);
-			return msg;
-		}
 	
 	//친구의 노트 카테고리 리스트
 	@RequestMapping("/freindNoteCategoryList")
@@ -273,71 +329,6 @@ public class NoteController {
 		return noteList;
 	}
 	
-	//노트 작성일 검색
-	@RequestMapping("/noteByDate")
-	public List<NoteVO> noteByDate(HttpServletRequest request, HttpSession session) throws Exception {
-		String date = request.getParameter("date");
-		int memberNo = Integer.parseInt(session.getAttribute("memberNo").toString());
-		
-		List<NoteVO> noteList = service.noteByDate(date, memberNo);
-		for(NoteVO n : noteList){
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(n.getNoteRegDate());
-			n.setNoteRegDate(cal.getTime());
-		}
-		
-		return noteList;
-	}
-	
-	//노트내용 보기
-	@RequestMapping("/noteDetail")
-	public NoteVO noteDetail(String noteNo) throws Exception {
-		NoteVO n= service.noteDetail(Integer.parseInt(noteNo));
-		try{
-			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
-			fis = new FileInputStream(FILE_PATH + n.getNoteContent());
-			
-			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
-			ois = new ObjectInputStream(fis);
-			
-			// 오브젝트 스트림으로부터 오브젝트를 읽어 String형으로 형변환
-			String content = (String) ois.readObject();
-			n.setNoteContent(content);
-			} catch(Exception e) {
-				// e.printStackTrace();
-				System.out.println("[에러] 파일 읽기에 실패하였습니다.");
-			} finally {
-				closeStreams();
-		}
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(n.getNoteRegDate());
-		n.setNoteRegDate(cal.getTime());
-		return n;
-	}
-	
-	//노트 삭제
-	@RequestMapping("/deleteNote")
-	public Map<String, String> deleteNote(String noteNo) throws Exception {
-		//삭제부
-		NoteVO data = service.noteDetail(Integer.parseInt(noteNo));
-		String fileName = data.getNoteContent(); //내용 데이터파일 이름추출
-		service.deleteNote(Integer.parseInt(noteNo));
-		File file = new File(FILE_PATH + fileName); //내용 데이터파일 경로
-		if(file.exists()) file.delete(); //내용 데이터파일 삭제처리
-
-		Map<String, String> msg = new HashMap<>();
-		msg.put("msg", "노트가 삭제되었습니다.");
-		return msg;
-	}
-	
-	//카테고리 삭제
-	@RequestMapping("/deleteCategory")
-	public Map<String, String> deleteCategory(String categoryNo) throws Exception {
-		service.deleteCategory(Integer.parseInt(categoryNo));
-		Map<String, String> msg = new HashMap<>();
-		msg.put("msg", "카테고리가 삭제되었습니다.");
-		return msg;
-	}
 	
 	//카테고리 등록
 	@RequestMapping("/addCategory")
@@ -353,6 +344,28 @@ public class NoteController {
 		return msg;
 	}
 	
+	
+	//카테고리 이름 수정
+	@RequestMapping(value="/noteCategoryUpdate", method=RequestMethod.POST)
+	public Map<String, Object> noteCategoryUpdate(CategoryVO category, HttpServletRequest request, HttpSession session) throws Exception {
+		Map<String, Object> msg = new HashMap<>();
+		category.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
+		category.setCategoryName(request.getParameter("categoryName"));
+		service.noteCategoryUpdate(category);
+		return msg;
+	}
+
+
+	//카테고리 삭제
+	@RequestMapping("/deleteCategory")
+	public Map<String, String> deleteCategory(String categoryNo) throws Exception {
+		service.deleteCategory(Integer.parseInt(categoryNo));
+		Map<String, String> msg = new HashMap<>();
+		msg.put("msg", "카테고리가 삭제되었습니다.");
+		return msg;
+	}
+
+	
 	//카테고리 가져오기
 	@RequestMapping("/getCategory")
 	public Map<String, Object> getCategory(HttpServletRequest request, HttpSession session) throws Exception {
@@ -364,6 +377,7 @@ public class NoteController {
 		msg.put("categoryList", categoryList);
 		return msg;
 	}
+	
 	
 	//친구의 카테고리 가져오기
 	@RequestMapping("/getFriendCategory")
@@ -379,6 +393,7 @@ public class NoteController {
 		msg.put("friendCategory", friendCategory);
 		return msg;
 	}
+	
 	
 	//메일로 노트내용 보내기
 	@RequestMapping("/mailNote")
@@ -457,6 +472,7 @@ public class NoteController {
 		msg.put("msg", "이메일 보내기 완료");
         return msg;
     }
+	
 	
 	//파일 관련 스트림 close
 	private void closeStreams() {

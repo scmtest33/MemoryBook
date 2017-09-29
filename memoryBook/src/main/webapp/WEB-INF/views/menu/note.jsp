@@ -247,7 +247,6 @@
 	        			var note = result[i];	
 	        			var noteNo = note.noteNo;
 	        			
-	        			console.log("노트번호"+noteNo)
 	        			html += " <div class='quote-box w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' >";
 //	         			html += " <blockquote class='quote-box'>;
 	        			html += " <p class='quotation-mark' onclick='noteDetail("+note.noteNo+")'data-toggle='modal' data-target='#detailModal' > “ </p><br> ";
@@ -499,7 +498,6 @@
 		.done(function (result) {
 			appendCategory(result.categoryList);
 			var selcat = localStorage.getItem("selectedItem");
-			console.log(localStorage.getItem("selectedItem"));
 			$("#"+selcat).attr("selected", "selected");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
@@ -540,11 +538,9 @@
 	function downloadNote(noteNo){
 		var url = "/memory/download/downloadNote?noteNo=" + noteNo;
 		$("#downloadNotePath").attr("href", url);
-		console.log(noteNo);
 	}
 
 	$("#downloadNotePath").click(function(){
-		console.log(url);
 		$("#downloadNoteModal").modal('hide');
 	})
 

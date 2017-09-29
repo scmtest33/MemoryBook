@@ -62,6 +62,7 @@ public class DragController {
 	@Autowired
 	private DragService service;
 	
+	//드래그 등록
 	@RequestMapping("/registDrag")
 	public Map<String, String> registDrag(DragVO drag, HttpSession session) throws Exception {
 		// 태그 저장부
@@ -168,6 +169,8 @@ public class DragController {
 		return msg;
 	}
 	
+	
+	//드래그 리스트
 	@RequestMapping("/dragList")
 	public List<DragVO> dragList(HttpServletRequest request, HttpSession session) throws Exception {
 		DragVO drag = new DragVO();
@@ -199,7 +202,9 @@ public class DragController {
 		
 		return dragList;
 	}
-
+	
+	
+	//드래그 선택
 	@RequestMapping("/selectDrag")
 	public DragVO selectDrag(String dragNo) throws Exception {
 		DragVO n = service.selectDrag(Integer.parseInt(dragNo));
@@ -225,6 +230,8 @@ public class DragController {
 		return n;
 	}
 	
+	
+	//드래그 내용 보기
 	@RequestMapping("/dragDetail")
 	public DragVO dragDetail(String dragNo) throws Exception {
 		DragVO d = service.dragDetail(Integer.parseInt(dragNo));
@@ -249,7 +256,9 @@ public class DragController {
 		d.setDragRegDate(cal.getTime());
 		return d;
 	}
-
+	
+	
+	//드래그 삭제
 	@RequestMapping("/deleteDrag")
 	public Map<String, String> deleteNote(String dragNo) throws Exception {
 		DragVO data = service.selectDrag(Integer.parseInt(dragNo));
@@ -262,6 +271,8 @@ public class DragController {
 		return msg;
 	}
 	
+	
+	//드래그 내용 메일로 보내기
 	@RequestMapping("/mailDrag")
 	public Map<String, Object> mailDrag(HttpServletRequest request, HttpSession m_session) throws Exception{
 	    //메일발송 데이터 입력
@@ -338,6 +349,7 @@ public class DragController {
 		msg.put("msg", "이메일 보내기 완료");
         return msg;
     }
+	
 	
 	//파일 관련 스트림 close
 	private void closeStreams() {
