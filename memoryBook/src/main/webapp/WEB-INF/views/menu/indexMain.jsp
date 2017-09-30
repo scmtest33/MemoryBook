@@ -62,7 +62,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img src="/memory/resources/img/road14.jpg" style="width:100%;">
+        <img src="/memory/resources/img/road/road5.jpg" style="width:100%;">
 		  <div class="carousel-caption">
 		    <p class="sayHi">Hi, Good Day<p>
 		    <p class="sayHi3">this is</p>
@@ -71,7 +71,7 @@
       </div>
 
       <div class="item">
-        <img src="/memory/resources/img/road10.jpg" style="width:100%; ">
+        <img src="/memory/resources/img/road/road6.jpg" style="width:100%; ">
     	<div class="carousel-caption">
 		    <p class="sayHi">Hi, Good Day<p>
 		    <p class="sayHi3">this is</p>
@@ -80,7 +80,7 @@
       </div>
     
       <div class="item">
-        <img src="/memory/resources/img/road16.jpg" style="width:100%; ">
+        <img src="/memory/resources/img/road/road7.jpg" style="width:100%; ">
         <div class="carousel-caption">
 		    <p class="sayHi">Hi, Good Day<p>
 		    <p class="sayHi3">this is</p>

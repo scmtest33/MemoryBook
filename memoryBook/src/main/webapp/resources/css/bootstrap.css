@@ -6294,7 +6294,7 @@ button.close {
   position: relative;
   width: 100%;
   overflow: hidden;
-  height: 758px;
+  height: 100%;
   padding-left: -10px;
   margin: 0px;
 }
