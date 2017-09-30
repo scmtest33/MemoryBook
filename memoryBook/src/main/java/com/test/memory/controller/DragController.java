@@ -123,6 +123,8 @@ public class DragController {
 			fos = new FileOutputStream(FILE_PATH + FileName);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(value);
+			drag.setDragContent(FileName);
+			System.out.println("저장완료");
 		} catch (Exception e) { // 오류발생시 취소하면서 저장된 데이터 및 리스트 삭제
 			// e.printStackTrace();
 			for (int i = 0; i < IMG_FILE.size(); i++) {
@@ -133,11 +135,10 @@ public class DragController {
 			if(data_File.exists()) data_File.delete(); //해당 데이터파일 삭제처리
 			IMG_FILE.clear();
 			IMG_REF.clear();
+			drag.setDragContent(null);
 			System.out.println("[에러] 데이터 파일 쓰기 실패");
 		} finally {
 			closeStreams();
-			drag.setDragContent(FileName);
-			System.out.println("저장완료");
 		}
 
 		// drag url추출부
