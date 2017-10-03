@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>Memory Lane</title>
     
     <!-- Favicon -->
 	<link rel="shortcut icon" href="/memory/resources/img/memory.ico">
@@ -39,7 +39,7 @@
     <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
     <link href="/memory/resources/css/memory-sheet.css" rel="stylesheet">
 
-	<!-- 공용 스크립트 -->
+	<!-- Common Script -->
 	<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
 	<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
 	<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a onclick="profileUpdate()" class="noteImg" data-toggle="modal" data-target="#profileModal">
+                    <a id="myProfile" onclick="profileUpdate()" class="noteImg" data-toggle="modal" data-target="#profileModal">
                     	<img src="/memory/resources/img/indexImg/profile_hover.png" class="indexImg3">
       		        	<img src="/memory/resources/img/indexImg/profile1.png" class="indexImg4">
 	                    Profile
@@ -100,10 +100,10 @@
 					</a>
                 </li>
                 <li>
-               		<a class="noteImg" data-toggle="modal" data-target="#userSearchModal">
+               		<a id="searchFriend" class="noteImg" data-toggle="modal" data-target="#userSearchModal">
                 	<img src="/memory/resources/img/indexImg/search_hover.png" class="indexImg13">
       		        <img src="/memory/resources/img/indexImg/search1.png" class="indexImg14">
-					    Friend Search
+					    User Search
 					</a>
                 </li>
                 <li>
@@ -122,13 +122,6 @@
 					</a>
                 </li>
                 </c:if>
-                <li>
-                	<a id="dragtest" class="noteImg">
-                	<img src="/memory/resources/img/indexImg/admin_hover.png" class="indexImg17">
-      		        <img src="/memory/resources/img/indexImg/admin1.png" class="indexImg18">
-						DragTest
-					</a>
-                </li>
             </ul>
         </div>
 
@@ -136,7 +129,7 @@
         <div id="page-content-wrapper" class="page-content-wrapper">
 <!--             <div class="container-fluid"> -->
 <!--                 <h1>Memory Lane</h1> -->
-<%--                 <p>${name}님 This is main screen.</p> --%>
+<%--                 <p>${name}様 This is main screen.</p> --%>
 <!--                 <a class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
 <!--             </div> -->
             
@@ -175,12 +168,6 @@
 			  		<%@ include file="manager/userList.jsp" %>
 			  	</div>
 		  	</div>
-		  	
-			<div id='myDragtest'>
-				<div class="container-fluid">
-			  		<%@ include file="menu/drag_test.jsp" %>
-			  	</div>
-		  	</div>
 		</div>	
     </div>
     
@@ -201,17 +188,17 @@
 				<div class="align-center" id="profileView">
 				</div>
 				<div class="profile-btns align-left">
-					<button type="button" class="btn btn-default" id="myProfile" onclick="pwEdit()">비밀번호 변경</button>
-					<input class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#myModal_Unregister" value="탈퇴하기" type="button">
+					<button type="button" class="btn btn-default" onclick="pwEdit()">パスワード更新</button>
+					<button type="button" class="btn btn-default" id="myProfile" data-dismiss="modal" data-toggle="modal" data-target="#myModal_Unregister">退会</button>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">閉める</button>
 				</div>
 			</div>
 		</div>
 
 	</div>
 	
-	<!-- 탈퇴 Modal -->
+	<!-- 退会Modal -->
 	<div class="modal fade" id="myModal_Unregister" role="dialog">
 		    <div class="modal-dialog">
 		    
@@ -231,24 +218,27 @@
 			    	<table>
 			    		<tr>
 			    			<td class="form-group">
-				    			탈퇴하실려면 비밀번호를 입력하세요.<br>탈퇴시 작성하신 노트,드래그,친구정보가 전부 삭제됩니다.
+				    			退会したいなら、パスワードを入力してください。
+				    			<br>
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<td class="form-group">
+				    			※退会すれば全ての情報とデーターが削除されます。
+				    			<br>
 			    			</td>
 			    		</tr>
 			    		<tr>
 			    			<td class="form-group">
 								<label for="loginPassword">Password:</label>
-								<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
+								<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="パスワードを入力してください。" required="required"/>
+			    				<br>
 			    			</td>
 			    		</tr>
 					    <tr>
-					    	<td id="btns" colspan="2">
-					    		<input type="submit" value="탈퇴진행" class="btn btn-default memberOut_btns out_ok">
-					    	</td>
-					    	<td>
-					    	&nbsp;&nbsp;
-					    	</td>
-						    	<td id="btns" colspan="2">
-							    <button class="btn btn-default memberModify_btns Modify_no" id="cancelBtn2" data-dismiss="modal">취소</button>
+					    	<td id="btns">
+					    		<input type="submit" value="退会する" class="btn btn-default memberOut_btns out_ok">
+							    <button class="btn btn-default memberModify_btns Modify_no" id="cancelBtn2" data-dismiss="modal">キャンセル</button>
 					    	</td>
 					    </tr>
 		    		</table>
@@ -263,7 +253,7 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content memSearch-size"> <!-- 여기가 모달 사이즈 -->
+			<div class="modal-content memSearch-size"> <!-- ここがモーダルサイズ -->
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h2 class="modal-title">
@@ -277,15 +267,15 @@
 								<tr>
 									<td class="memSearch-input">
 										<input type="text" class="form-control searchInput" name="findId" id="findId"
-										 placeholder="이름 또는 Email을 입력하세요" onkeydown="javascript:if(event.keyCode == 13) findMember();">
+										 placeholder="名前又はメールアドレスを入力してください。" onkeydown="javascript:if(event.keyCode == 13) findMember();">
 								 	</td>
 									<td>
 										<button class="btn-default noteSearch_btn memSearch-btn" id="findBtn" onclick="findMember();">
 										<img src="/memory/resources/img/search_icon.jpg"></button>
 									</td>
 									<td>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button" class="btn btn-default" data-dismiss="modal">閉める</button>
 									</td>
 								</tr>
 							</table>
@@ -309,11 +299,11 @@
 
     <!-- Menu Toggle Script -->
     <script>
-    var editor_chk = false; //드래그 입력시 에디터 on/off여부 체크
-    var chk_tf; //메뉴 이동시 에디터 체크
-    var note_Chk; //에디터 모드 구분 (노트/드래그)
+    var editor_chk = false; //ドラッグ入力するとき、エディターon/offチェック
+    var chk_tf; //メニュー移動するとき、エディターチェック
+    var note_Chk; //エディターモード区分 (ノート/ドラッグ)
 
-    //index들어왔을때 초기화면
+    //index初期画面
     $(function(){
     	$('#myDragList').css('display', 'none');
     	$('#myNote').css('display', 'none');
@@ -327,18 +317,18 @@
     	$('#indexMain').css('display', '');
 	});
     
-	// 로딩 위치 지정
+	// ローディング位置指定
 	window.onload = function () {
-		mainNoteList(); //노트 리스트
-		mainNoteList2(); //노트 리스트(마인드맵용)
-		mainDragList(); //드래그 리스트
-		makeDragList(); //글 작성창 드래그 리스트
-		getMainCategory(); //카테고리 리스트
-		getMainCategory2(); //카테고리 리스트(마인드맵용)
-		mainFriendNoteList() //친구 노트 리스트
-		getMainFriendCategory();//친구 카테고리 리스트
-		authInit();//노트 권한설정창
-		//노트 리스트 화면
+		mainNoteList(); //ノートリスト
+		mainNoteList2(); //ノートリスト(関係図用)
+		mainDragList(); //ドラッグ リスト
+		makeDragList(); //エディター内のドラッグリスト
+		getMainCategory(); //カテゴリーリスト
+		getMainCategory2(); //カテゴリーリスト(関係図用)
+		mainFriendNoteList() //友達のノート リスト
+		getMainFriendCategory();//友達のカテゴリーリスト
+		authInit();//ノート権限設定
+		//ノートリスト画面
 		$('#noteView').css('display', '');
 		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#noteView').css('height', 'screen.innerHeight +"px"');
@@ -346,38 +336,38 @@
 		$("#noteTitle").val("");
 		CKEDITOR.instances.ckeditor.setData("");
 		
-		//노트 에디터
+		//ノート 에디터
 		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#editorView').css('height', 'screen.innerHeight +"px"');
 		
 	}
 
-	// 브라우저 창 크기 변화 시 위치 지정 (통합)
+	// ブラウザ画面サイズが変化する時の位置指定
 	$(window).resize(function(){
-		//드래그 리스트
+		//ドラッグリスト
 		$('#myDragList').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#myDragList').css('height', 'screen.innerHeight +"px"');		
-		//노트 리스트
+		//ノートリスト
 		$('#noteView').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#noteView').css('height', 'screen.innerHeight +"px"');
-		//노트 에디터
+		//ノートエディター
 		$('#editorView').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#editorView').css('height', 'screen.innerHeight +"px"');
-		//에디터 드래그 리스트
+		//エディター内のドラッグリスト
 		$('#editorDraglist').css('width', '(screen.innerWidth - 420) +"px"');
 		$('#editorDraglist').css('height', 'screen.innerHeight +"px"');
 	});
 	
-	//로그아웃
+	//ログアウト
     function logout(){
     	swal({
-    		  title: '정말로 로그아웃 하시겠습니까?',
+    		  title: '本当にログアウトしますか。',
     		  type: 'question',
     		  showCancelButton: true,
     		  confirmButtonColor: '#3085d6',
     		  cancelButtonColor: '#d33',
-    		  confirmButtonText: '네',
-    		  cancelButtonText: '아니오',
+    		  confirmButtonText: 'はい',
+    		  cancelButtonText: 'いいえ',
     		  confirmButtonClass: 'btn btn-success',
     		  cancelButtonClass: 'btn btn-danger',
     		  buttonsStyling: false
@@ -387,7 +377,7 @@
     		})
     }
     
-  //모달 취소버튼
+  //Modalキャンセルボタン
      $("#cancleBtn").click(function (){
     	location.href='/memory/index';
     }); 
@@ -403,7 +393,7 @@
     	$("#wrapper").toggleClass("toggled");
     });
     
-	//프로필 화면 띄우기
+	//Profile更新
 	function profileUpdate(){
 		$.ajax ({
 			url: "/memory/member/myList",
@@ -419,15 +409,15 @@
 					addRow += '<li class="list-group-item profile"><span class="profile-items"><i class="fa fa-envelope"></i>&nbsp;${email}</span></li>';
 					if(result.infoNumber == 0) {					
 						addRow += '<li class="list-group-item profile"><span class="profile-items">'
-						addRow += '<i class="fa fa-lock fa-lg"></i>&nbsp;회원검색 허용'
-						addRow += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+						addRow += '<i class="fa fa-lock fa-lg"></i>&nbsp;会員検索許容'
+						addRow += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
 						addRow += '<a onclick="infoToggle()"><img src="/memory/resources/img/on.png"></a></span></li>';
 						localStorage.setItem("infoStatus","0");
 					}
 					if(result.infoNumber == 1) {
 						addRow += '<li class="list-group-item profile"><span class="profile-items">'
-						addRow += '<i class="fa fa-lock fa-lg"></i>&nbsp;회원검색 허용'
-						addRow += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+						addRow += '<i class="fa fa-lock fa-lg"></i>&nbsp;会員検索許容'
+						addRow += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
 						addRow += '<a onclick="infoToggle()"><img src="/memory/resources/img/off.png"></a></span>';
 						localStorage.setItem("infoStatus","1");
 					}
@@ -437,7 +427,7 @@
 		})
 	}
     
-    // 메인으로 가기
+    //メインページへ
     $("#indexTitle").click(function(e) {
      	function profile_menu(){
      		$('#profile').css('display', 'none');
@@ -483,7 +473,7 @@
     	}
     });
     
-    //드래그리스트로 가기
+    //ドラッグリストページへ
     $("#drag").click(function(e) {
     	function drag_menu(){
     		$('#indexMain').css('display', 'none');
@@ -506,7 +496,7 @@
     	}
     });
     
-    //노트리스트 보기
+    //ノートリストページへ
     $("#note").click(function(e) {
     	function note_menu(){
     		$('#indexMain').css('display', 'none');
@@ -529,7 +519,7 @@
     	}
     });
     
-    //관계도 보기
+    //関係図ページへ
     $("#mindmap").click(function(e) {
     	function mind_menu(){
     		$('#indexMain').css('display', 'none');
@@ -552,7 +542,7 @@
     	}
     });
     
-    //친구목록 보기
+    //友達ページへ
     $("#myFriend").click(function(e) {
     	function friend_menu(){
     		$('#indexMain').css('display', 'none');
@@ -575,7 +565,7 @@
     	}
     });
     
-    //회원목록(운영자용) 보기
+    //会員管理ページへ(only admin)
     $("#user").click(function(e) {
     	function user_menu(){
     		$('#indexMain').css('display', 'none');
@@ -598,7 +588,7 @@
     	}
     });
     
-    //드래그 테스트 (운영자용)
+    //ドラッグtest(only admin)
     $("#dragtest").click(function(e) {
     	function dragTest_menu(){
     		$('#indexMain').css('display', 'none');
@@ -621,7 +611,7 @@
     	}
     });
     
-    //인덱스 메뉴 이미지 호버
+    //index menu image hover
     $(function(){
     	$(".noteImg").hover(function(){
     	     $("img",this).eq(1).stop().fadeToggle(500);
@@ -630,10 +620,10 @@
     	});
     });
     
-    //에티터 작동중 취소여부 확인 (noteWrite.jsp에도 연동되어 같이 적용됨)
+    //エディター作動中キャンセルチェック
      function editorCancelChk() { 
  		var chk; 
- 		chk = confirm("정말로 취소하시겠습니까?"); 
+ 		chk = confirm("本当にキャンセルしますか。"); 
  		if(chk) { 
 	 		editor_chk = false; 
 	 		$("#noteTitle").val(''); 
@@ -654,14 +644,14 @@
 
 /*  	function editorCancelChk() {
 		swal({
-			  title: '정말로 취소하시겠습니까?',
-			  text: '취소시 글 내용은 저장되지 않습니다.',
+			  title: '本当にキャンセルしますか。',
+			  text: 'キャンセルするなら、作成した内容はセーブしせん。',
 			  type: 'warning',
 			  showCancelButton: true,
 			  confirmButtonColor: '#3085d6',
 			  cancelButtonColor: '#d33',
-			  confirmButtonText: '네',
-			  cancelButtonText: '아니오',
+			  confirmButtonText: 'はい',
+			  cancelButtonText: 'いいえ',
 			  confirmButtonClass: 'swal2-confirm btn btn-success',
 			  cancelButtonClass: 'swal2-cancel btn btn-danger',
 			  buttonsStyling: false
@@ -685,17 +675,17 @@
 			   });
 	} */
     
-	// 드롭 허용
+	// ドロップ許容
 	function allowDrop(ev) {
 		ev.preventDefault(); 
 		}
 
-	// 드래그 이벤트
+	// ドラッグイベント
 	function drag(ev) { 
 		ev.dataTransfer.setData("text", ev.target.id); 
 		} 
 
-	// 노트 및 드래그 삭제 드랍 이벤트
+	// ノートやドラッグ削除ドロップイベント
 	function drop(ev) {
 		ev.preventDefault();
 		var deleteId = ev.dataTransfer.getData("text"); 
@@ -712,7 +702,7 @@
 
 		
 	
-	//회원찾기 로직
+	//会員検索
 	function findMember() {
 		$.ajax ({
 			url: "/memory/member/findMember",
@@ -727,9 +717,9 @@
 						var btn;
 						if(result.length <= 0){
 							swal({
-								  title: '검색결과가 없습니다.',
+								  title: '検索結果がありません。',
 								  type: 'info',
-								  confirmButtonText: '확인'
+								  confirmButtonText: 'OK'
 								})
 						} else {
 						$("#panel").append("<div class='panel panel-default searchResult' id='searched'></div>");
@@ -754,10 +744,10 @@
 									success: function(result){
 										if(result){
 											swal({
-												  title: '친구등록 완료',
-												  text: '친구가 추가되었습니다.',
+												  title: '友達申請完了',
+												  text: '友達が申請を受諾すれば、登録が完了されます。',
 												  type: 'success',
-												  confirmButtonText: '확인'
+												  confirmButtonText: 'OK'
 												})
 											$("#panel").empty()
 											$("#searched").empty();
@@ -766,9 +756,9 @@
 										}else {
 											swal({
 												  title: 'Error!',
-												  text: '이미 등록된 친구입니다.',
+												  text: 'すでに登録されている友達です。',
 												  type: 'error',
-												  confirmButtonText: '확인'
+												  confirmButtonText: 'OK'
 												})
 										}
 									}
@@ -780,10 +770,10 @@
 		});
     };
     
-    //프로필사진 수정
+    //プロフィールイメージ訂正
     function photoEdit(){
     	swal({
-    		  title: '이미지 파일 선택',
+    		  title: 'イメージファイル選択',
       		  html:
       		    '<input type="file" id="imageFile" class="swal2-input">',
       		  showCancelButton: true,
@@ -804,32 +794,32 @@
     					if(result == "error") {
     						swal({
     							  title: 'Warning!',
-    							  text: '이미지 파일만 업로드가 가능합니다.',
+    							  text: 'イメージファイルのみアップロードができます。',
     							  type: 'warning',
-    							  confirmButtonText: '확인'
+    							  confirmButtonText: 'OK'
     							})
     					} else if (result == "IOException") {
     						swal({
     							  title: 'Error!',
-    							  text: '이미지파일 업로드를 실패했습니다.',
+    							  text: 'イメージアップロードを失敗しました。',
     							  type: 'error',
-    							  confirmButtonText: '확인'
+    							  confirmButtonText: 'OK'
     							})
     					} else {
     					$("#getImage").html("<img class='profile1 profile-photo' width='130px' height='130px' alt='avatar' src='/memory/data/mem_image/"+result+"'>");
     					swal({
-							  title: '프로필 이미지 변경 완료',
+							  title: 'Profileイメージ更新完了',
 							  type: 'success',
-							  confirmButtonText: '확인'
+							  confirmButtonText: 'OK'
 							})
     					}
     				},
     				error: function(jqXhr, textStatus, errorText){
     					swal({
     						  title: 'Error!',
-    						  text: '프로필사진 등록을 실패했습니다.',
+    						  text: 'Profileイメージ更新を失敗しました。',
     						  type: 'error',
-    						  confirmButtonText: '확인'
+    						  confirmButtonText: 'OK'
     						})
     				}
     			})
@@ -845,13 +835,13 @@
     		})
     	}
     
-    //비밀번호 변경
+    //パスワード更新
     function pwEdit(){
     	swal({
-    		  title: '비밀번호 변경',
+    		  title: 'パスワード更新',
     		  html:
-    		    '새로운 비밀번호 입력 <input type="password" id="swal-input1" class="swal2-input">' +
-    		    '비밀번호 확인 <input type="password" id="swal-input2" class="swal2-input">',
+    		    '新しいパスワード入力 <input type="password" id="swal-input1" class="swal2-input">' +
+    		    'パスワード確認 <input type="password" id="swal-input2" class="swal2-input">',
     		  showCancelButton: true,
     		  focusConfirm: false
     		}).then(function () {
@@ -860,9 +850,9 @@
     			if (pw1 != pw2 || pw1 == "") {
     				swal({
     					title : 'Error!',
-    					text : '비밀번호를 확인해 주세요.',
+    					text : 'パスワードを確認してください。',
     					type : 'error',
-    					confirmButtonText : '확인'
+    					confirmButtonText : 'OK'
     				})
     				return;
     			} else {
@@ -873,29 +863,29 @@
     				})
     				.done(function (result) {
     					swal({
-  						  title: '비밀번호가 변경되었습니다.',
+  						  title: 'パスワードが更新されました。',
   						  type: 'success',
-  						  confirmButtonText: '확인'
+  						  confirmButtonText: 'OK'
   						})
     				})
     				.fail(function(jqXhr, textStatus, errorText){
     					swal({
     					  title: 'Error!',
-    					  text: '비밀번호 변경을 실패했습니다.',
+    					  text: 'パスワード更新を失敗しました。',
     					  type: 'error',
-    					  confirmButtonText: '확인'
+    					  confirmButtonText: 'OK'
     					})
     				});
     			}
     		}).catch(swal.noop)
     }
     
-	//이름 변경
+	//名前更新
 	function nameEdit(){
 		swal({
-  		  title: '이름 변경',
+  		  title: '名前更新',
   		  html:
-  		    '새로운 이름을 입력 후 확인을 눌러주세요. <input id="swal-input3" class="swal2-input">',
+  		    '新しい名前を入力してください。 <input id="swal-input3" class="swal2-input">',
   		  showCancelButton: true,
   		  focusConfirm: false
   		}).then(function () {
@@ -903,9 +893,9 @@
   			if (name_chk == "") {
   				swal({
   					title : 'Error!',
-  					text : '이름이 입력되지 않았습니다. 다시 진행하세요.',
+  					text : '名前が入力されませんでした。',
   					type : 'error',
-  					confirmButtonText : '확인'
+  					confirmButtonText : 'OK'
   				})
   				return;
   			} else {
@@ -916,25 +906,25 @@
   				})
   				.done(function (result) {
   					swal({
-						  title: '이름이 변경되었습니다.',
+						  title: '名前が更新されました。',
 						  type: 'success',
-						  confirmButtonText: '확인'
+						  confirmButtonText: 'OK'
 						})
 					profileUpdate();
   				})
   				.fail(function(jqXhr, textStatus, errorText){
   					swal({
   					  title: 'Error!',
-  					  text: '이름 변경을 실패했습니다.',
+  					  text: '名前更新を失敗しました。',
   					  type: 'error',
-  					  confirmButtonText: '확인'
+  					  confirmButtonText: 'OK'
   					})
   				});
   			}
   		}).catch(swal.noop)
 	}
 	
-	//회원검색 공개 변경
+	//会員検索公開許容設定
 	function infoToggle(){
 		var infoNum = localStorage.getItem("infoStatus");
   		$.ajax({
@@ -948,9 +938,9 @@
   		.fail(function(jqXhr, textStatus, errorText){
   			swal({
   			  title: 'Error!',
-  			  text: '공개설정 변경을 실패했습니다.',
+  			  text: '公開許容設定変更を失敗しました。',
   			  type: 'error',
-  			  confirmButtonText: '확인'
+  			  confirmButtonText: 'OK'
   			})
   		});
 	}
