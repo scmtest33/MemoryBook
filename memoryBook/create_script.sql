@@ -60,7 +60,7 @@ create table T_MINDMAP(
 mindnum number(3) constraint T_MINDMAP_mindnum_PK PRIMARY KEY,
 mindname varchar2(1000) constraint T_MINDMAP_mindname_NN not null,
 mindjson varchar2(4000) constraint T_MINDMAP_mindjson_NN not null,
-mem_no number(6) constraint T_MINDMAP_mem_no_FK references T_MEMBER(mem_no)
+mem_no number(6) constraint T_MINDMAP_mem_no_FK references T_MEMBER(mem_no) on delete cascade
 );
 
 --시퀀스
